@@ -206,7 +206,6 @@ Since this velocity as well as the choice of $T$ is arbitrary we define a charac
 \end{equation}
 where we use the wavelength $\lambda$ as a characteristic distance and $t_0(30^{\circ})$ as a characteristic time scale.
 Important to note is that $t_0$ is sensitive to the contact angle, and decreases with increasing angle.
-Thus choosing the highest contact angle for the characteristic time scale means $t_0$ 
 
 \subsection{Numerical system}
 As outlined in Sec.~\ref{subsec:LBM} we simulate the evolution of the thin film with a lattice Boltzmann method.
@@ -248,7 +247,7 @@ In Fig.~\ref{fig:handtheta} we show $h(\mathbf{x},t)$ as surface plot and $\thet
 Subsequent simulations allow for $v_{\theta} \ne 0$.  
 Based on $v_{\theta}$ we can modify the morphology of the dewetting film, in both the intermediate transition regime as well as the late time state.
 
-\subsection{Early time behaviour}\label{subsec:earlyT}
+\subsection{Film rupture}\label{subsec:earlyT}
 Starting with Eq.~(\ref{eq:hinitial}) we have by definition an unstable film that will rupture.
 Taking into account the addition of the wettability gradient we know that fluid will accumulate in regions of high surface energies or small contact angles.
 This is shown in Fig.~\ref{fig:handtheta}, where all droplets are in a region of small contact angles.
@@ -276,15 +275,55 @@ Clearly one can observe the dip in \ref{fig:evolutin_deltah}(a) as the initial p
 This behaviour however is only pronounced for the time independent pattern and the smallest $v_{\theta}$ we use.
 Thus the film is not spinodally dewetting but rather nucleating in regions of high contact angles.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.48\textwidth]{Figures/Rupture_times.pdf}
+    \caption{Collection of rupture times $\tau_r$ grouped according to the substrate pattern.
+    On the x-axis we display the three wavelengths we considere, while on the y-axis we show the time normalized with $t_0(30^{\circ})$.
+    Results are grouped by their pattern, such (lin., sin.) is given by ($\theta_2$, $\theta_1$).
+    }
+    \label{fig:rupture_times}
+\end{figure}
 Interestingly we observe a correlation between the rupture time ($\tau_r$) and the speed ($v_{\theta}$) as well as the wavelength ($\lambda$) of the pattern.
+Where $\tau_r =\exists~\mathbf{x}:h \le h_{\text{pre.}}$ and $h_{\text{pre.}}$ is the height of the precursor film.
 In agreement with previous studies on time dependent wettability we observe a stabilizing effect due to $v_{\theta}$~\cite{suman2006dynamics}.
+Which can be seen in Fig.~\ref{fig:evolutin_deltah} as large velocities shift the curves to the right and therefore to later times.
+Concerning the pattern we observe the shorter the wavelength the stronger the gradient.
+Thus the rupture time is inverse proportional to the patterns wavelength, as shown in Fig.~\ref{fig:rupture_times}.
+At first glance surprisingly $\theta_1$ yields shorter rupture times than $\theta_2$.
+We attribute this to the gradient of pattern, as  
+\begin{equation}\label{eq:grad_theta}
+    \nabla\theta_i(\mathbf{x},t) \propto \begin{cases}
+    \pm C \quad i=2 \\
+    \cos(\mathbf{x},t) \quad i=1
+    \end{cases},
+\end{equation}
+with $C$ being a constant.
 
-\subsection{Intermediate times}\label{subsec:interT}
-After the initial rupture of the film we observe that the dewetting is driven by $\theta(\mathbf{x},t)$.
+\begin{figure}
+    \centering
+    \includegraphics[width = 0.48\textwidth]{Figures/fit_rt.pdf}
+    \caption{Rupture times for different wavelengths and a time independent pattern.
+    The full line is a linear fit.}
+    \label{fig:fit_rt}
+\end{figure}
+Given the time independent patter we take a closer look into the dependence of the wavelength in Fig~\ref{fig:fit_rt}.
+As stated above the film placed on $\theta_1$ is less stable and ruptures earlier.
+Using a linear fit 
+\begin{equation}\label{eq:lin_fit}
+    y(x) = kx + d,
+\end{equation}
+we observe a slope $k = 4.6\cdot 10^{-3}$ for $\theta_1$ and $k= 5.4\cdot 10^{-3}$ for $\theta_2$.
+After the initial rupture events we see, based on $v_{\theta}$, the development of non droplet morphologies. 
+
+\subsection{Morphologies}\label{subsec:interT}
+In the following we discuss how the moving pattern affects the morphology of the retracting film.
+Besides other measures we like to emphasise the relation between $v_{\theta}$ and films dewetting morphology.
+We use Minkovsky functionals to analyze our data, this is done with the software \textbf{papaya2}~\cite{Schaller2020}. 
 
 
-
-\subsection{Long time behaviour}\label{subsec:lateT}
+\subsection{Stability}\label{subsec:lateT}
+As a last point of Sec.~\ref{sec:results} we want to quantify the long time stability of the morphologies we observe.
 
 \section{Summary and Conclusions}\label{sec:sum_conclu}
 
