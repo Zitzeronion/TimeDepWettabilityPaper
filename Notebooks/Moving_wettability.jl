@@ -126,11 +126,26 @@ Both will help us understanding what actually happens and give us an effective m
 
 # ╔═╡ 378cfcd0-8349-11eb-1ad0-8939849c2c1e
 begin
+	"""
+		t0()
+	
+	Defines a characteristic time value for a contact angle of 30 degs and other parameters.
+	"""
+	function t0(;hᵦ=0.07, γ=0.01, μ=1/6, θ=1/6)
+		qsq = hᵦ * (1 - cospi(θ)) * (2 - 3 * hᵦ) 
+		charT = 3 * μ / (γ * qsq^2)
+
+		return charT
+	end
+	
 	# Isoperimetric ratio
 	all_data[!, "isoperi_ratio"] .= 4π .* all_data.area ./ all_data.perim
 	
 	# Anisotropy index
 	all_data[!, "anisotro_ind"] .= (1 .- all_data.q2) ./ (1 .+ all_data.q2)
+	
+	# Normalized time
+	all_data[!, "t_norm"] .= all_data.timestep .* 5000 ./ t0() 
 end
 
 # ╔═╡ f5076320-834b-11eb-3d3d-0380c1997163
@@ -145,32 +160,143 @@ Therefor we define a filtering function that is based on the macro `@linq` of th
 Turns out this is not trivial!
 
 The first few columns contain more infromation than we need, especially $q_4$ to $q_8$ are not relevant right now. However $q_2$ is of much interest, as it helps to qunatize what is a rivulet and what is a droplet state.
+
+#### Data $\lambda = 1$, $v_n = 0$, threshold=15, pattern=sine
+Yes there are just 998 *datapoints*, this is due to some abiguity in papaya2 when it comes to time step **10** and time step **100**. Had no time to look into this yet.
 "
 
-# ╔═╡ 5cfcab60-859b-11eb-108d-79737ea1e5b0
-
-"""		
-	filter_df()
-
-Filters a dataframe `df` for specific input and output arguments.
-"""
-function filter_df(;df=all_data, out1=:q2, out2=:isoperi_ratio, out3=:anisotro_ind, lam=1, thresh=15, vel=0.0, pattern=1.0)
-	@linq df |>
+# ╔═╡ 0ed0c180-834b-11eb-3f40-b1243e850675
+begin
+	lam = 1
+	thresh = 15
+	vel = 0.0
+	vel_cont = 0.1
+	pat = 1
+	filtered = @linq all_data |>
 		where(:threshold .== thresh) |>
 		where(:lambda .== lam) |>
 		where(:vel_norm .== vel) |>
-		where(:pattern .== pattern) |>
-		select(q2 = out1, out2, out3)
-		return df
+		where(:pattern .== pat) |>
+		select(:q2, :q3, :isoperi_ratio, :anisotro_ind, :t_norm)
+	
+	filtered2 = @linq all_data |>
+		where(:threshold .== thresh) |>
+		where(:lambda .== lam) |>
+		where(:vel_norm .== vel_cont) |>
+		where(:pattern .== pat) |>
+		select(:q2, :q3, :isoperi_ratio, :anisotro_ind, :t_norm)
 end
 
-# ╔═╡ 0ed0c180-834b-11eb-3f40-b1243e850675
-@linq all_data |>
-	where(:threshold .== 15) |>
-    where(:lambda .== 2) |>
-	where(:vel_norm .== 0.0) |>
-	where(:pattern .== 1.0) |>
-    select(q2=:q2, :isoperi_ratio, :anisotro_ind)
+# ╔═╡ 56e7d3e2-859f-11eb-26ec-996629c4b3d1
+begin
+	step = 25
+    scatter(filtered.t_norm[1:step:end],
+        filtered.q2[1:step:end],
+        m = (0.5, [:circle], 10),
+        xlabel="t/t0",
+        ylabel="Data",
+        label="q2_0",
+        legendfontsize = 10,
+        tickfont = (12, "Arial"),
+        guidefont = (18, "Arial"),
+        legend = :bottomright,
+        # bg = RGB(0.2, 0.2, 0.2),
+    )
+	scatter!(filtered2.t_norm[1:step:end],
+        filtered2.q2[1:step:end],
+        m = (0.5, [:circle], 10),
+        xlabel="t/t0",
+        ylabel="Data",
+        label="q2_1",
+        legendfontsize = 10,
+        tickfont = (12, "Arial"),
+        guidefont = (18, "Arial"),
+        legend = :bottomright,
+        # bg = RGB(0.2, 0.2, 0.2),
+    )
+	scatter!(filtered.t_norm[1:step:end],
+        filtered.anisotro_ind[1:step:end],
+        m = (0.5, [:h], 10),
+        xlabel="t/t0",
+        ylabel="Data",
+        label="beta 02 1 0",
+        legendfontsize = 10,
+        tickfont = (12, "Arial"),
+        guidefont = (18, "Arial"),
+        legend = :bottomright,
+        # bg = RGB(0.2, 0.2, 0.2),
+    )
+	scatter!(filtered2.t_norm[1:step:end],
+        filtered2.anisotro_ind[1:step:end],
+        m = (0.5, [:h], 10),
+        xlabel="t/t0",
+        ylabel="Data",
+        label="beta 02 1 1",
+        legendfontsize = 10,
+        tickfont = (12, "Arial"),
+        guidefont = (18, "Arial"),
+        legend = :bottomright,
+        # bg = RGB(0.2, 0.2, 0.2),
+    )
+end
+
+# ╔═╡ edbffab0-85a2-11eb-1928-690f7101c1ff
+begin
+	scatter(filtered.t_norm[1:step:end],
+		filtered.isoperi_ratio[1:step:end] ./ (512*512),
+        m = (0.5, [:star5], 10),
+        xlabel="t/t0",
+        ylabel="Data",
+        label="Q_0",
+        legendfontsize = 10,
+        tickfont = (12, "Arial"),
+        guidefont = (18, "Arial"),
+        legend = :bottomright,
+        # bg = RGB(0.2, 0.2, 0.2),
+    )
+	scatter!(filtered2.t_norm[1:step:end],
+		filtered2.isoperi_ratio[1:step:end] ./ (512*512),
+        m = (0.5, [:star5], 10),
+        xlabel="t/t0",
+        ylabel="Data",
+        label="Q_1",
+        legendfontsize = 10,
+        tickfont = (12, "Arial"),
+        guidefont = (18, "Arial"),
+        legend = :topright,
+        # bg = RGB(0.2, 0.2, 0.2),
+		ylim = (0, 0.02)
+    )
+end
+
+# ╔═╡ e1feb1d0-85a7-11eb-0f66-dd1f03ccd405
+begin
+	scatter(filtered.t_norm[1:step:end],
+		filtered.q3[1:step:end] ./ (512*512),
+        m = (0.5, [:star5], 10),
+        xlabel="t/t0",
+        ylabel="Data",
+        label="q3_0",
+        legendfontsize = 10,
+        tickfont = (12, "Arial"),
+        guidefont = (18, "Arial"),
+        legend = :bottomright,
+        # bg = RGB(0.2, 0.2, 0.2),
+    )
+	scatter!(filtered2.t_norm[1:step:end],
+		filtered2.q3[1:step:end] ./ (512*512),
+        m = (0.5, [:star5], 10),
+        xlabel="t/t0",
+        ylabel="Data",
+        label="q3_1",
+        legendfontsize = 10,
+        tickfont = (12, "Arial"),
+        guidefont = (18, "Arial"),
+        legend = :topright,
+        # bg = RGB(0.2, 0.2, 0.2),
+		# ylim = (0, 0.02)
+    )
+end
 
 # ╔═╡ Cell order:
 # ╟─3a80dbae-59b8-11eb-11c8-1b4ed01e73f5
@@ -188,6 +314,8 @@ end
 # ╠═322eae40-8575-11eb-2e84-291311788da2
 # ╟─268c8790-8284-11eb-0511-e367b9211e74
 # ╠═378cfcd0-8349-11eb-1ad0-8939849c2c1e
-# ╠═f5076320-834b-11eb-3d3d-0380c1997163
-# ╠═5cfcab60-859b-11eb-108d-79737ea1e5b0
+# ╟─f5076320-834b-11eb-3d3d-0380c1997163
 # ╠═0ed0c180-834b-11eb-3f40-b1243e850675
+# ╠═56e7d3e2-859f-11eb-26ec-996629c4b3d1
+# ╠═edbffab0-85a2-11eb-1928-690f7101c1ff
+# ╠═e1feb1d0-85a7-11eb-0f66-dd1f03ccd405
