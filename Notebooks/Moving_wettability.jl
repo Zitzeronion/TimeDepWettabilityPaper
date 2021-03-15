@@ -146,6 +146,9 @@ begin
 	
 	# Normalized time
 	all_data[!, "t_norm"] .= all_data.timestep .* 5000 ./ t0() 
+	
+	# Save it to disc
+	CSV.write("Data_with_t0_Q_beta.csv", all_data)
 end
 
 # ╔═╡ f5076320-834b-11eb-3d3d-0380c1997163
