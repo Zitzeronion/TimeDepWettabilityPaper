@@ -36,10 +36,7 @@ The substrate pattern type the wavelength which is 512 for 1, 256 for 2 and 171 
 """
 
 # ╔═╡ 3e139540-7b6b-11eb-0671-c5e4c87e6b21
-begin
-	data="E:\\JuliaStuff\\Data_PhD\\Moving_wet_time\\rupture_times_new_df.csv"
-	Rupture_frame = DataFrame(CSV.File(data)) 
-end
+df_rup_times = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/rupture_times_new_df.csv?inline=false").body) |> DataFrame
 
 # ╔═╡ 57585d80-7b6e-11eb-18b3-339ab0f601af
 md" ### Distribution of rupture times"
@@ -47,9 +44,9 @@ md" ### Distribution of rupture times"
 # ╔═╡ 83464630-7b6b-11eb-0611-2bffbe393b19
 begin
 	# We make use of this to get a logarithmic plot
-	Rupture_frame.velocities = Rupture_frame.velocities .+ 0.0001
+	df_rup_times.velocities = df_rup_times.velocities .+ 0.0001
     # Plotting the data
-    @df Rupture_frame scatter(
+    @df df_rup_times scatter(
         :velocities,
         :rupture_times,
         group = :lambda,
@@ -144,13 +141,35 @@ md" Now there are two more columns, one is called `isoperi_ratio` and the other 
 For convinience we need to filter the data, as we can only compare parts to the data.
 Therefor we define a filtering function that is based on the macro `@linq` of the [DataFramesMeta](https://github.com/JuliaData/DataFramesMeta.jl) library.
 
+**WIP** 
+Turns out this is not trivial!
 
+The first few columns contain more infromation than we need, especially $q_4$ to $q_8$ are not relevant right now. However $q_2$ is of much interest, as it helps to qunatize what is a rivulet and what is a droplet state.
 "
+
+# ╔═╡ 5cfcab60-859b-11eb-108d-79737ea1e5b0
+
+"""		
+	filter_df()
+
+Filters a dataframe `df` for specific input and output arguments.
+"""
+function filter_df(;df=all_data, out1=:q2, out2=:isoperi_ratio, out3=:anisotro_ind, lam=1, thresh=15, vel=0.0, pattern=1.0)
+	@linq df |>
+		where(:threshold .== thresh) |>
+		where(:lambda .== lam) |>
+		where(:vel_norm .== vel) |>
+		where(:pattern .== pattern) |>
+		select(q2 = out1, out2, out3)
+		return df
+end
 
 # ╔═╡ 0ed0c180-834b-11eb-3f40-b1243e850675
 @linq all_data |>
-	where(:threshold .< 20) |>
+	where(:threshold .== 15) |>
     where(:lambda .== 2) |>
+	where(:vel_norm .== 0.0) |>
+	where(:pattern .== 1.0) |>
     select(q2=:q2, :isoperi_ratio, :anisotro_ind)
 
 # ╔═╡ Cell order:
@@ -170,4 +189,5 @@ Therefor we define a filtering function that is based on the macro `@linq` of th
 # ╟─268c8790-8284-11eb-0511-e367b9211e74
 # ╠═378cfcd0-8349-11eb-1ad0-8939849c2c1e
 # ╠═f5076320-834b-11eb-3d3d-0380c1997163
+# ╠═5cfcab60-859b-11eb-108d-79737ea1e5b0
 # ╠═0ed0c180-834b-11eb-3f40-b1243e850675
