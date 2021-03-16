@@ -91,18 +91,6 @@ Sine_data = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_
 # ╔═╡ f6d13570-8281-11eb-0f64-771e22a6b27d
 Triangle_data = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/Linear_waves_data.csv?inline=false").body) |> DataFrame
 
-# ╔═╡ e4e0cb50-8574-11eb-1038-89de80870697
-md"### Two for one
-Now out of those two we make just a single one, they can be differentiated with their column `pattern` which is **1 in case of sine** and **2 in case of linear**
-"
-
-# ╔═╡ 322eae40-8575-11eb-2e84-291311788da2
-begin
-	all_data = DataFrame()
-	all_data = vcat(all_data, Sine_data)
-	all_data = vcat(all_data, Triangle_data)
-end
-
 # ╔═╡ 268c8790-8284-11eb-0511-e367b9211e74
 md"
 #### 1.01 Analysis of data 😵
@@ -122,34 +110,36 @@ and
 Q = \frac{4\pi A}{P^2} \qquad\text{... isoperimetric ratio}.
 ```
 Both will help us understanding what actually happens and give us an effective measure to seperate the rivulet states from droplet states 💦.
+
+
+Lastly we add as well the normalized time t/t₀ to the dataframe.
+Since this already done, we just need to load it in from web like the others.
+The definition of t₀ can be found below, it's computed mostly from simulation constants.
+```math
+t₀ = 3μ/γh₀³q₀⁴,
+```
+with q₀ being
+```math
+q₀² = Π'(h₀)/2,
+```
+where Π(h) is the disjoining pressure functional. 
 "
 
 # ╔═╡ 378cfcd0-8349-11eb-1ad0-8939849c2c1e
-begin
-	"""
-		t0()
+"""
+	t0()
 	
-	Defines a characteristic time value for a contact angle of 30 degs and other parameters.
-	"""
-	function t0(;hᵦ=0.07, γ=0.01, μ=1/6, θ=1/6)
+Defines a characteristic time value for a contact angle of 30 degs and other parameters.
+"""
+function t0(;hᵦ=0.07, γ=0.01, μ=1/6, θ=1/6)
 		qsq = hᵦ * (1 - cospi(θ)) * (2 - 3 * hᵦ) 
 		charT = 3 * μ / (γ * qsq^2)
 
 		return charT
-	end
-	
-	# Isoperimetric ratio
-	all_data[!, "isoperi_ratio"] .= 4π .* all_data.area ./ all_data.perim
-	
-	# Anisotropy index
-	all_data[!, "anisotro_ind"] .= (1 .- all_data.q2) ./ (1 .+ all_data.q2)
-	
-	# Normalized time
-	all_data[!, "t_norm"] .= all_data.timestep .* 5000 ./ t0() 
-	
-	# Save it to disc
-	CSV.write("Data_with_t0_Q_beta.csv", all_data)
 end
+
+# ╔═╡ a13e4120-8641-11eb-0c7b-b366d42b115c
+all_data = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/Data_with_t0_Q_beta.csv?inline=false").body) |> DataFrame
 
 # ╔═╡ f5076320-834b-11eb-3d3d-0380c1997163
 md" Now there are two more columns, one is called `isoperi_ratio` and the other one `anisotro_ind` for the isoperimetric ratio and the anisotropy index respectively.
@@ -173,21 +163,21 @@ begin
 	lam = 1
 	thresh = 15
 	vel = 0.0
-	vel_cont = 0.1
+	vel_cont = 1.0
 	pat = 1
 	filtered = @linq all_data |>
 		where(:threshold .== thresh) |>
 		where(:lambda .== lam) |>
 		where(:vel_norm .== vel) |>
 		where(:pattern .== pat) |>
-		select(:q2, :q3, :isoperi_ratio, :anisotro_ind, :t_norm)
+		select(:q2, :q3, :q4, :q5, :q6, :q7, :q8, :isoperi_ratio, :anisotro_ind, :t_norm)
 	
 	filtered2 = @linq all_data |>
 		where(:threshold .== thresh) |>
 		where(:lambda .== lam) |>
 		where(:vel_norm .== vel_cont) |>
 		where(:pattern .== pat) |>
-		select(:q2, :q3, :isoperi_ratio, :anisotro_ind, :t_norm)
+		select(:q2, :q3, :q4, :q5, :q6, :q7, :q8, :isoperi_ratio, :anisotro_ind, :t_norm)
 end
 
 # ╔═╡ 56e7d3e2-859f-11eb-26ec-996629c4b3d1
@@ -218,11 +208,11 @@ begin
         # bg = RGB(0.2, 0.2, 0.2),
     )
 	scatter!(filtered.t_norm[1:step:end],
-        filtered.anisotro_ind[1:step:end],
+        filtered.q4[1:step:end],
         m = (0.5, [:h], 10),
         xlabel="t/t0",
         ylabel="Data",
-        label="beta 02 1 0",
+        label="q4_0",
         legendfontsize = 10,
         tickfont = (12, "Arial"),
         guidefont = (18, "Arial"),
@@ -230,17 +220,90 @@ begin
         # bg = RGB(0.2, 0.2, 0.2),
     )
 	scatter!(filtered2.t_norm[1:step:end],
-        filtered2.anisotro_ind[1:step:end],
+        filtered2.q4[1:step:end],
         m = (0.5, [:h], 10),
         xlabel="t/t0",
         ylabel="Data",
-        label="beta 02 1 1",
+        label="q4_1",
         legendfontsize = 10,
         tickfont = (12, "Arial"),
         guidefont = (18, "Arial"),
         legend = :bottomright,
         # bg = RGB(0.2, 0.2, 0.2),
     )
+	scatter!(filtered.t_norm[1:step:end],
+        filtered.q6[1:step:end],
+        m = (0.5, [:star5], 10),
+        xlabel="t/t0",
+        ylabel="Data",
+        label="q6_0",
+        legendfontsize = 10,
+        tickfont = (12, "Arial"),
+        guidefont = (18, "Arial"),
+        legend = :bottomright,
+        # bg = RGB(0.2, 0.2, 0.2),
+    )
+	scatter!(filtered2.t_norm[1:step:end],
+        filtered2.q6[1:step:end],
+        m = (0.5, [:star5], 10),
+        xlabel="t/t0",
+        ylabel="Data",
+        label="q6_1",
+        legendfontsize = 10,
+        tickfont = (12, "Arial"),
+        guidefont = (18, "Arial"),
+        legend = :bottomright,
+        # bg = RGB(0.2, 0.2, 0.2),
+    )
+	scatter!(filtered.t_norm[1:step:end],
+        filtered.q8[1:step:end],
+        m = (0.5, [:star7], 10),
+        xlabel="t/t0",
+        ylabel="Data",
+        label="q8_0",
+        legendfontsize = 10,
+        tickfont = (12, "Arial"),
+        guidefont = (18, "Arial"),
+        legend = :bottomright,
+        # bg = RGB(0.2, 0.2, 0.2),
+    )
+	scatter!(filtered2.t_norm[1:step:end],
+        filtered2.q8[1:step:end],
+        m = (0.5, [:star7], 10),
+        xlabel="t/t0",
+        ylabel="Data",
+        label="q8_1",
+        legendfontsize = 10,
+        tickfont = (12, "Arial"),
+        guidefont = (18, "Arial"),
+        legend = :topright,
+        # bg = RGB(0.2, 0.2, 0.2),
+    )
+	# scatter!(filtered.t_norm[1:step:end],
+	# filtered.anisotro_ind[1:step:end],
+	# m = (0.5, [:h], 10),
+	# xlabel="t/t0",
+	# ylabel="Data",
+	# label="beta 02 1 0",
+	# legendfontsize = 10,
+	# tickfont = (12, "Arial"),
+	# guidefont = (18, "Arial"),
+	# legend = :bottomright,
+	# # bg = RGB(0.2, 0.2, 0.2),
+	# )
+	# scatter!(filtered2.t_norm[1:step:end],
+	# filtered2.anisotro_ind[1:step:end],
+	# m = (0.5, [:h], 10),
+	# xlabel="t/t0",
+	# ylabel="Data",
+	# label="beta 02 1 1",
+	# legendfontsize = 10,
+	# tickfont = (12, "Arial"),
+	# guidefont = (18, "Arial"),
+	# legend = :bottomright,
+	# # bg = RGB(0.2, 0.2, 0.2),
+	# )
+	
 end
 
 # ╔═╡ edbffab0-85a2-11eb-1928-690f7101c1ff
@@ -313,10 +376,9 @@ end
 # ╟─751f6650-7ce1-11eb-3bfe-a1f01e765cf4
 # ╠═d8a75470-7ce2-11eb-356d-63c3da69b9f0
 # ╠═f6d13570-8281-11eb-0f64-771e22a6b27d
-# ╟─e4e0cb50-8574-11eb-1038-89de80870697
-# ╠═322eae40-8575-11eb-2e84-291311788da2
 # ╟─268c8790-8284-11eb-0511-e367b9211e74
 # ╠═378cfcd0-8349-11eb-1ad0-8939849c2c1e
+# ╠═a13e4120-8641-11eb-0c7b-b366d42b115c
 # ╟─f5076320-834b-11eb-3d3d-0380c1997163
 # ╠═0ed0c180-834b-11eb-3f40-b1243e850675
 # ╠═56e7d3e2-859f-11eb-26ec-996629c4b3d1
