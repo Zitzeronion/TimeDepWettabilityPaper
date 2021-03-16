@@ -12,9 +12,23 @@ md"""
 # Switchable substrate with moving wettability
 
 We analyze the interaction between an undulated thin film and a moving substrate pattern.
+To put it simply what we mean with moving substrate pattern is nothing more than
+```math
+∂ₓθ(x,t) ≠ 0 \quad\text{and}\quad ∂ₜθ(x,t) ≠ 0.
+```
 
-First some dependencies have to be loaded, [DataFrames](https://github.com/JuliaData/DataFrames.jl/tree/master) and [CSV](https://github.com/JuliaData/CSV.jl/tree/master) for the clean display of data, [Plots](https://github.com/JuliaPlots/Plots.jl) and [StatsPlots](https://github.com/JuliaPlots/StatsPlots.jl) for plotting, and [HTTP](https://github.com/JuliaWeb/HTTP.jl) for loading the data from web. 
+This, however does not mean that the substrate itself has a velocity.
+We still require that the films velocity at the film solid interface has to vanish, such a **no-slip** boundary condition.
+Any flow that is generated is therefor only due to the change of the pattern.
+
+## Dependencies
+
+First some dependencies have to be loaded, [DataFrames](https://github.com/JuliaData/DataFrames.jl/tree/master) and [CSV](https://github.com/JuliaData/CSV.jl/tree/master) for the clean display of data, [Plots](https://github.com/JuliaPlots/Plots.jl) and [StatsPlots](https://github.com/JuliaPlots/StatsPlots.jl) for plotting, and [HTTP](https://github.com/JuliaWeb/HTTP.jl) for loading the data from web.
+For the analysis of the our data we need some way to scan efficiently through the `DataFrames`, for this reason we include [DataFramesMeta](https://github.com/JuliaData/DataFramesMeta.jl) and make heavy use of the `@linq` macro.
 """
+
+# ╔═╡ 4ebc1620-865a-11eb-1e0d-cd2669b2acad
+
 
 # ╔═╡ 0ec47530-59b9-11eb-0c49-2b70d7e37d4d
 md"""
@@ -306,6 +320,9 @@ begin
 	
 end
 
+# ╔═╡ 3de90bb0-8654-11eb-1d63-6324f3d13170
+
+
 # ╔═╡ edbffab0-85a2-11eb-1928-690f7101c1ff
 begin
 	scatter(filtered.t_norm[1:step:end],
@@ -365,13 +382,14 @@ begin
 end
 
 # ╔═╡ Cell order:
-# ╟─3a80dbae-59b8-11eb-11c8-1b4ed01e73f5
+# ╠═3a80dbae-59b8-11eb-11c8-1b4ed01e73f5
 # ╠═f5c0cd40-59b8-11eb-1ade-234f67f7efab
-# ╟─0ec47530-59b9-11eb-0c49-2b70d7e37d4d
+# ╠═4ebc1620-865a-11eb-1e0d-cd2669b2acad
+# ╠═0ec47530-59b9-11eb-0c49-2b70d7e37d4d
 # ╠═3e139540-7b6b-11eb-0671-c5e4c87e6b21
 # ╟─57585d80-7b6e-11eb-18b3-339ab0f601af
 # ╠═83464630-7b6b-11eb-0611-2bffbe393b19
-# ╟─77b24122-7b6b-11eb-2036-41d8d55f985a
+# ╠═77b24122-7b6b-11eb-2036-41d8d55f985a
 # ╠═598d0cd2-59b9-11eb-0a8b-a1938e2c3c43
 # ╟─751f6650-7ce1-11eb-3bfe-a1f01e765cf4
 # ╠═d8a75470-7ce2-11eb-356d-63c3da69b9f0
@@ -382,5 +400,6 @@ end
 # ╟─f5076320-834b-11eb-3d3d-0380c1997163
 # ╠═0ed0c180-834b-11eb-3f40-b1243e850675
 # ╠═56e7d3e2-859f-11eb-26ec-996629c4b3d1
+# ╠═3de90bb0-8654-11eb-1d63-6324f3d13170
 # ╠═edbffab0-85a2-11eb-1928-690f7101c1ff
 # ╠═e1feb1d0-85a7-11eb-0f66-dd1f03ccd405
