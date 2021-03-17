@@ -12,8 +12,8 @@ This, however does not mean that the substrate itself has a velocity.
 We still require that the films velocity at the film solid interface has to vanish, such a **no-slip** boundary condition.
 Any flow that is generated is therefor only due to the change of the pattern.
 
-![]("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Figures/angle_early.png?inline=false" =320x)
-![]("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Figures/angle_later.png?inline=false" =320x)
+![]("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Figures/angle_early.png?inline=false")
+![]("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Figures/angle_later.png?inline=false")
 
 ## Dependencies
 
