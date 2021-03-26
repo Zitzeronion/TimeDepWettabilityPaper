@@ -1,4 +1,4 @@
-pattern,lambda,velocities,N_clusters,A_clusters,t/t0
+pattern,lambda,velocities,N_clusters,A_clusters,time
 sine,1,0.0,1,"[[0, 262144]]",0.028180393659594506
 sine,1,0.0,1,"[[0, 262144]]",0.05636078731918901
 sine,1,0.0,1,"[[0, 262144]]",0.08454118097878352
