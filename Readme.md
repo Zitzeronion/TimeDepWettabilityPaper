@@ -55,3 +55,25 @@ The file can be load with the following julia command,
 ```julia
 df_delta_h = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/height_differences.csv?inline=false").body) |> DataFrame
 ```
+
+Okay the file got 24000 entries, which is consistent with our enumeration.
+
+Now we want to dig into the data.
+First thing we can easily access is the influence of the **wavelenght** λₜ (we use subscript t because it renders while θ does not) of the pattern.
+
+Below we plot the **Δh** for the three wavelengths 512, 256 & 171. 
+As expected the stability (sharp jump in Δh) will reduce with decreasing wavelenght.
+
+### No Pattern velocity
+
+Again concerning the plot below we can learn that the maximal height difference is corrolated with the pattern.
+If the wavelength is similar to the full pattern we generate **two** droplets in the region of minimal contact angle.
+The same idea applies for the other wavelengths as well, if there are **eight** contact angle minimia we create eight stabel droplets.
+With the shortest wavelenght we observe **eighteen** stabel droplets.
+
+To put this in math, two spherical cap shaped droplet with a given volumen of fluid have a well defined height *h*
+```math
+V = R³π/3(2+\cos(θ))(1-\cos(θ))²,
+```
+where $V$ is the volume and $R$ the radius of the sphere the spherical is cut from.
+Lastly $θ$ is the contact angle the cap has with the substrate.

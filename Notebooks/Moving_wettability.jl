@@ -59,7 +59,7 @@ Lastly there is usually a *time step* (Δt) associated with the data, in some ca
 
 ### Actual data
 
-Below a **CSV** file is loaded which contains the Δh information.
+Below a **CSV** file is loaded which contains the Δh information and stored in DataFrame formate as `df_delta_h`.
 A quick sanity check is to count the number of lines in the file.
 For every simulation we save 1000 columns of heigth data, therefore
 ```math
@@ -67,10 +67,93 @@ N = 1000 × Nₚ × Nᵩ × Nᵥ ≝ 24000,
 ```
 because we have 2 patterns, 3 wavelenghts (Nᵩ) and 4 velocities.
 
+A second csv file is loaded as well to get the data for the clusters.
+Clusters in this sense are droplets or isolated regions of liquid.
+This can be found in `df_clusters` where *N_clusters* is the number of disconncted fluid regions and *A_clusters* is a list that stores the respective area of the cluster. 
+In the first row *N_clusters* = 1 which means the fluid is simply connected. 
+The *A_clusters* column measures the dry phase as first element followed by the area of the disjoint clusters.
+Since there is just one cluster and no dry phase *A_clusters* = [0, 512²].
 "
 
 # ╔═╡ 12901690-8684-11eb-2978-3f4b6f0d0fc4
 df_delta_h = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/height_differences.csv?inline=false").body) |> DataFrame
+
+# ╔═╡ 61793e10-8e47-11eb-3bf4-cd92fdcc2a1d
+df_clusters = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/Clusters.csv?inline=false").body) |> DataFrame
+
+# ╔═╡ e4395f40-870a-11eb-3c7f-435231c70f87
+md"Okay the file got 24000 entries, which is consistent with our enumeration.
+
+Now we want to dig into the data.
+First thing we can easily access is the influence of the **wavelenght** λₜ (we use subscript t because it renders while θ does not) of the pattern.
+
+Below we plot the **Δh** for the three wavelengths 512, 256 & 171. 
+As expected the stability (sharp jump in Δh) will reduce with decreasing wavelenght.
+
+### No Pattern velocity
+
+Again concerning the plot below we can learn that the maximal height difference is corrolated with the pattern.
+If the wavelength is similar to the full pattern we generate **two** droplets in the region of minimal contact angle.
+The same idea applies for the other wavelengths as well, if there are **eight** contact angle minimia we create eight stabel droplets.
+With the shortest wavelenght we observe **eighteen** stabel droplets.
+
+To put this in math, two spherical cap shaped droplet with a given volumen of fluid have a well defined height *h*
+```math
+V = R³π/3(2+\cos(θ))(1-\cos(θ))²,
+```
+where $V$ is the volume and $R$ the radius of the sphere the spherical is cut from.
+Lastly $θ$ is the contact angle the cap has with the substrate.
+"
+
+# ╔═╡ 5f6d7ba0-870c-11eb-0deb-c97951b5eaeb
+begin
+	# Data λ = 512, v = 0, pattern = sine
+	lam1_sin_v0 = @linq df_delta_h |>
+		where(:lambda .== 1) |>
+		where(:pattern .== "sine") |>
+		where(:velocities .== 0.0) |>
+		select(:h_mins, :h_max, :dh, :time)
+	# Data λ = 256, v = 0, pattern = sine
+	lam2_sin_v0 = @linq df_delta_h |>
+		where(:lambda .== 2) |>
+		where(:pattern .== "sine") |>
+		where(:velocities .== 0.0) |>
+		select(:h_mins, :h_max, :dh, :time)
+	# Data λ = 171, v = 0, pattern = sine
+	lam3_sin_v0 = @linq df_delta_h |>
+		where(:lambda .== 3) |>
+		where(:pattern .== "sine") |>
+		where(:velocities .== 0.0) |>
+		select(:h_mins, :h_max, :dh, :time)
+	s1 = plot(lam1_sin_v0.time, lam1_sin_v0.dh, label="lam = 512", xlabel="t/t0", ylabel="dh")
+	plot!(lam2_sin_v0.time, lam2_sin_v0.dh, label="lam = 256")
+	plot!(lam3_sin_v0.time, lam3_sin_v0.dh, label="lam = 171")
+	
+	# Data λ = 512, v = 0, pattern = sine
+	C_lam1_sin_v0 = @linq df_clusters |>
+		where(:lambda .== 1) |>
+		where(:pattern .== "sine") |>
+		where(:velocities .== 0.0) |>
+		select(:N_clusters, :A_clusters, :time)
+	# Data λ = 256, v = 0, pattern = sine
+	C_lam2_sin_v0 = @linq df_clusters |>
+		where(:lambda .== 2) |>
+		where(:pattern .== "sine") |>
+		where(:velocities .== 0.0) |>
+		select(:N_clusters, :A_clusters, :time)
+	# Data λ = 171, v = 0, pattern = sine
+	C_lam3_sin_v0 = @linq df_clusters |>
+		where(:lambda .== 3) |>
+		where(:pattern .== "sine") |>
+		where(:velocities .== 0.0) |>
+		select(:N_clusters, :A_clusters, :time)
+	s2 = plot(lam1_sin_v0.time, C_lam1_sin_v0.N_clusters, label="lam = 512", xlabel="t/t0", ylabel="Clusters")
+	plot!(lam2_sin_v0.time, C_lam2_sin_v0.N_clusters, label="lam = 256")
+	plot!(lam3_sin_v0.time, C_lam3_sin_v0.N_clusters, label="lam = 171")
+	
+	
+	plot(s1, s2)
+end
 
 # ╔═╡ 0ec47530-59b9-11eb-0c49-2b70d7e37d4d
 md"""
@@ -438,7 +521,10 @@ end
 # ╠═f5c0cd40-59b8-11eb-1ade-234f67f7efab
 # ╟─4ebc1620-865a-11eb-1e0d-cd2669b2acad
 # ╠═12901690-8684-11eb-2978-3f4b6f0d0fc4
-# ╟─0ec47530-59b9-11eb-0c49-2b70d7e37d4d
+# ╠═61793e10-8e47-11eb-3bf4-cd92fdcc2a1d
+# ╠═e4395f40-870a-11eb-3c7f-435231c70f87
+# ╠═5f6d7ba0-870c-11eb-0deb-c97951b5eaeb
+# ╠═0ec47530-59b9-11eb-0c49-2b70d7e37d4d
 # ╠═3e139540-7b6b-11eb-0671-c5e4c87e6b21
 # ╟─57585d80-7b6e-11eb-18b3-339ab0f601af
 # ╠═83464630-7b6b-11eb-0611-2bffbe393b19
