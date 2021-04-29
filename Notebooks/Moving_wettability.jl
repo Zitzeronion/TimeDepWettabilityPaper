@@ -1,11 +1,11 @@
 ### A Pluto.jl notebook ###
-# v0.12.21
+# v0.14.4
 
 using Markdown
 using InteractiveUtils
 
 # ╔═╡ f5c0cd40-59b8-11eb-1ade-234f67f7efab
-using DataFrames, CSV, Plots, StatsPlots, HTTP, DataFramesMeta
+using DataFrames, CSV, Plots, HTTP, DataFramesMeta, Query
 
 # ╔═╡ 3a80dbae-59b8-11eb-11c8-1b4ed01e73f5
 md"
@@ -37,6 +37,10 @@ md"
 First some dependencies have to be loaded, [DataFrames](https://github.com/JuliaData/DataFrames.jl/tree/master) and [CSV](https://github.com/JuliaData/CSV.jl/tree/master) for the clean display of data, [Plots](https://github.com/JuliaPlots/Plots.jl) and [StatsPlots](https://github.com/JuliaPlots/StatsPlots.jl) for plotting, and [HTTP](https://github.com/JuliaWeb/HTTP.jl) for loading the data from web.
 For the analysis of the our data we need some way to scan efficiently through the `DataFrames`, for this reason we include [DataFramesMeta](https://github.com/JuliaData/DataFramesMeta.jl) and make heavy use of the `@linq` macro.
 "
+
+# ╔═╡ dc6948b9-7769-45c3-aed2-c5cc5e47ca1e
+# Plots default fonts and font sizes, could add colors as well
+# default(titlefont = (20, "Arial"), legendfontsize = (18, "Arial"), guidefont = (18, "Arial"), tickfont = (16, "Arial"))
 
 # ╔═╡ 4ebc1620-865a-11eb-1e0d-cd2669b2acad
 md"## Height tracking
@@ -87,73 +91,279 @@ md"Okay the file got 24000 entries, which is consistent with our enumeration.
 Now we want to dig into the data.
 First thing we can easily access is the influence of the **wavelenght** λₜ (we use subscript t because it renders while θ does not) of the pattern.
 
-Below we plot the **Δh** for the three wavelengths 512, 256 & 171. 
+Below we plot the **Δh** and **Nᵨ** the number of clusters for the three wavelengths 512, 256 & 171. 
 As expected the stability (sharp jump in Δh) will reduce with decreasing wavelenght.
-
-### No Pattern velocity
-
-Again concerning the plot below we can learn that the maximal height difference is corrolated with the pattern.
-If the wavelength is similar to the full pattern we generate **two** droplets in the region of minimal contact angle.
-The same idea applies for the other wavelengths as well, if there are **eight** contact angle minimia we create eight stabel droplets.
-With the shortest wavelenght we observe **eighteen** stabel droplets.
-
-To put this in math, two spherical cap shaped droplet with a given volumen of fluid have a well defined height *h*
-```math
-V = R³π/3(2+\cos(θ))(1-\cos(θ))²,
-```
-where $V$ is the volume and $R$ the radius of the sphere the spherical is cut from.
-Lastly $θ$ is the contact angle the cap has with the substrate.
 "
 
-# ╔═╡ 5f6d7ba0-870c-11eb-0deb-c97951b5eaeb
-begin
-	# Data λ = 512, v = 0, pattern = sine
-	lam1_sin_v0 = @linq df_delta_h |>
-		where(:lambda .== 1) |>
-		where(:pattern .== "sine") |>
-		where(:velocities .== 0.0) |>
-		select(:h_mins, :h_max, :dh, :time)
-	# Data λ = 256, v = 0, pattern = sine
-	lam2_sin_v0 = @linq df_delta_h |>
-		where(:lambda .== 2) |>
-		where(:pattern .== "sine") |>
-		where(:velocities .== 0.0) |>
-		select(:h_mins, :h_max, :dh, :time)
-	# Data λ = 171, v = 0, pattern = sine
-	lam3_sin_v0 = @linq df_delta_h |>
-		where(:lambda .== 3) |>
-		where(:pattern .== "sine") |>
-		where(:velocities .== 0.0) |>
-		select(:h_mins, :h_max, :dh, :time)
-	s1 = plot(lam1_sin_v0.time, lam1_sin_v0.dh, label="lam = 512", xlabel="t/t0", ylabel="dh")
-	plot!(lam2_sin_v0.time, lam2_sin_v0.dh, label="lam = 256")
-	plot!(lam3_sin_v0.time, lam3_sin_v0.dh, label="lam = 171")
-	
-	# Data λ = 512, v = 0, pattern = sine
-	C_lam1_sin_v0 = @linq df_clusters |>
-		where(:lambda .== 1) |>
-		where(:pattern .== "sine") |>
-		where(:velocities .== 0.0) |>
-		select(:N_clusters, :A_clusters, :time)
-	# Data λ = 256, v = 0, pattern = sine
-	C_lam2_sin_v0 = @linq df_clusters |>
-		where(:lambda .== 2) |>
-		where(:pattern .== "sine") |>
-		where(:velocities .== 0.0) |>
-		select(:N_clusters, :A_clusters, :time)
-	# Data λ = 171, v = 0, pattern = sine
-	C_lam3_sin_v0 = @linq df_clusters |>
-		where(:lambda .== 3) |>
-		where(:pattern .== "sine") |>
-		where(:velocities .== 0.0) |>
-		select(:N_clusters, :A_clusters, :time)
-	s2 = plot(lam1_sin_v0.time, C_lam1_sin_v0.N_clusters, label="lam = 512", xlabel="t/t0", ylabel="Clusters")
-	plot!(lam2_sin_v0.time, C_lam2_sin_v0.N_clusters, label="lam = 256")
-	plot!(lam3_sin_v0.time, C_lam3_sin_v0.N_clusters, label="lam = 171")
-	
-	
-	plot(s1, s2)
+# ╔═╡ 9f546962-2798-4452-befa-883326271887
+@recipe function f(::Type{Val{:samplemarkers}}, x, y, z; step = 10)
+    n = length(y)
+    sx, sy = x[1:step:n], y[1:step:n]
+    # add an empty series with the correct type for legend markers
+    @series begin
+        seriestype := :path
+        markershape --> :auto
+        x := [Inf]
+        y := [Inf]
+    end
+    # add a series for the line
+    @series begin
+        primary := false # no legend entry
+        markershape := :none # ensure no markers
+        seriestype := :path
+        seriescolor := get(plotattributes, :seriescolor, :auto)
+        x := x
+        y := y
+    end
+    # return  a series for the sampled markers
+    primary := false
+    seriestype := :scatter
+    markershape --> :auto
+    x := sx
+    y := sy
 end
+
+# ╔═╡ b6b8f109-ab0b-4a9e-a82e-7f510f1c8974
+md"
+### No Pattern velocity
+
+Concerning the plot above we can learn that the maximal height difference is corrolated with the pattern.
+If the wavelength is similar to the full pattern we generate **two** droplets in the region of minimal contact angle.
+The same idea applies to the other wavelengths. 
+If there are **eight** contact angle minimia we create eight stabel droplets.
+With the shortest wavelenght we observe **eighteen** stabel droplets.
+
+To put this in math, we know that the droplets will be of spherical cap shape.
+By measuring the maximal height *hₘ* as well as the base area  of the cap (the area of the clusters) we can compute all other relevant parameters, e.g. the contact angle θ at the three phase contact line or the volume of the droplet.
+The equations are as follows
+```math
+r = \sqrt{\frac{A_{\text{base}}}{\pi}},
+```
+where we approximate the base as a circle.
+The volume of a droplet can than be computed using the height *hₘ* and *r* as
+```math
+V = \frac{1}{6}\pi h (3r^2 + h^2).
+```
+
+The surface area of the cap can be computed using
+```math
+A = \pi(r^2 + h^2).
+```
+Another helpful relation links the sphere radius $R$ with the cap radius $r$ as
+```math
+R = \frac{r^2 + h^2}{2h}.
+```
+This helps finding the contact angle which can be compute according to
+```math
+\theta = \cos^{-1}\left(1 - \frac{A}{2\pi R^2}\right),
+```
+upon inserting $A$ and $R$ we find a relation for θ that only depends on $r$ and $h$ 
+```math
+\theta = \cos^{-1}\left(1 - \frac{2h^2}{r^2 + h^2}\right).
+```
+
+Below we take just a small section of the full data and consider only **λ=512** with **sine pattern** and no pattern velocity **vₜ=0** .
+There we take a look a the height difference Δh and the base area to calculate the droplets contact angle.
+
+"
+
+# ╔═╡ 3be4828d-01f7-4450-8133-a429bb59ed62
+h_lam1_sine_v0 = @linq df_delta_h |>
+	where(:velocities .== 0.0) |>
+	where(:lambda .== 3) |>
+	where(:pattern .== "sine") |>
+	select(:h_mins, :h_max, :dh)
+
+# ╔═╡ 5eb88736-3ea8-458e-8091-58319ad37dc1
+clust_lam1_sine_v0 = @linq df_clusters |>
+		where(:velocities .== 0.0) |>
+		where(:lambda .== 1) |>
+		where(:pattern .== "sine") |>
+		select(:N_clusters, :A_clusters)
+
+# ╔═╡ 6e719113-62d9-4119-a2aa-160b8854134a
+md"
+The function below computes the droplets surface area, volume and contact angle based on the wetted area and Δh.
+"
+
+# ╔═╡ 081746e8-25b1-4c55-99ce-fd7e38dd9fe4
+"""
+	drop_stats(area, height)
+
+Function to compute the droplet volume, surface area and contact angle.
+
+Based on the height and the base surface area the spherical caps volume, surface area and contact angle are computed.
+"""
+function drop_stats(area, height)
+	rad = sqrt(area/π)
+	R = (rad^2 + height^2)/(2*height)
+	vol = 1/6*π*height*(3*rad^2 + height^2)
+	
+	s_area = π*(rad^2 + height^2)
+	
+	angle = acos(1 - (2*height^2/(rad^2 + height^2)))
+	
+	return vol, s_area, rad2deg(angle), angle
+end
+
+# ╔═╡ 3ac50706-59e0-473f-85ef-558afce47549
+drop_lam1_sine_v0 = drop_stats(5129, h_lam1_sine_v0.dh[end])
+# drop_lam1_sine_v0 = drop_stats(5023, h_lam1_sine_v0.dh[end])
+
+# ╔═╡ 479b39f9-8650-468c-a67e-c699fd00a7fa
+md"
+So what should we expect and what do we get?
+Assuming that all of the fluids volume is accumulated inside the droplets we can, based on the contact angle, calculate the droplets height and compare it with our measurements.
+This is done in the tabel below, where theory θ is a guess,
+
+| λ    | theory h | measurement h | theory θ | measurement θ | error h | 
+|---   |--------- | ------------- | -------- | ------------- | ------- |
+|  L   | 11.3     | 10.8          | 15       | 14            | 0.5     |
+| L/2  | 7.1      | 7.4           | 15       | 16            | 0.3     |  
+| L/3  | 5.4      | 5.9           | 15       | 17            | 0.4     |
+
+The theoretical assumptions and our measurements are not that far off.
+In fact there is quite a good agreement between simulation and theory.
+
+Okay that was a lot of checking for the consistency of the default state.
+The droplet radii and contact angles seem to be at least not way of.
+
+Here again a much nicer plot of the vₜ = 0 case for the three wavelenghts λ
+"
+
+# ╔═╡ 79d92592-f849-4083-81ef-35502939deda
+begin	
+	# Split the data into seperate arrays
+	h_lam1_v0 = @linq df_delta_h |>
+		where(:velocities .== 0) |>
+		where(:lambda .== 1) |>
+		where(:pattern .== "sine") |>
+		select(:dh, :time)
+	h_lam2_v0 = @linq df_delta_h |>
+		where(:velocities .== 0) |>
+		where(:lambda .== 2) |>
+		where(:pattern .== "sine") |>
+		select(:dh, :time)
+	h_lam3_v0 = @linq df_delta_h |>
+		where(:velocities .== 0) |>
+		where(:lambda .== 3) |>
+		where(:pattern .== "sine") |>
+		select(:dh, :time)
+	# A global time axis, all simulation did run up to roughly 30t₀
+	x_time = h_lam1_v0.time
+	# Restructure them into a single array for easier plotting
+	h_v0_all_lam = zeros(length(h_lam1_v0.dh), 3)
+	h_v0_all_lam[:,1] .= h_lam1_v0.dh
+	h_v0_all_lam[:,2] .= h_lam2_v0.dh
+	h_v0_all_lam[:,3] .= h_lam3_v0.dh
+	# Some cosmetics
+	mks_v0 = [:circle :rect :star5]
+	labs_v0 = ["λ=L" "λ=L/2" "λ=L/3"]
+	# The plot
+	v0_plot =  plot(x_time, 				# x-axis
+		       h_v0_all_lam,     			# y-axis 
+		       label=labs_v0, 				# labels
+		       xlabel="t/t₀", 				# x-axis label
+		       ylabel="Δh",					# y-axis label
+			   w = 3, 						# line width
+			   st = :samplemarkers, 		# some recipy stuff
+		       step = 50, 					# density of markers
+			   marker = (8, mks_v0, 0.6),	# marker size
+			   legendfontsize = 10,			# legend font size
+               tickfont = (12, "Arial"),	# tick font and size
+               guidefont = (18, "Arial"),	# label font and size
+			   grid = :none,				# grid variable
+			   legend=:bottomright)			# legend position
+	hline!([10.78], line = (4, :dash, 0.5, palette(:default)[1]), label="")
+	hline!([7.4], line = (4, :dash, 0.5, palette(:default)[2]), label="")
+	hline!([5.9], line = (4, :dash, 0.5, palette(:default)[3]), label="")
+end
+
+# ╔═╡ 3d56e346-49b8-4e86-b43d-2d812c94c072
+savefig(v0_plot, "..\\Figures\\v0_dh_sine_with_const.pdf")
+
+# ╔═╡ fafe381e-0baf-40c1-b127-67b7f8c1a902
+begin
+	c_v0_all_lam = zeros(length(x_time), 3)
+	for i in 1:3
+		C_lam_sin_v0 = @linq df_clusters |>
+			where(:velocities .== 0) |>
+			where(:lambda .== i) |>
+			where(:pattern .== "sine") |>
+			select(:N_clusters, :A_clusters)
+		c_v0_all_lam[:,i] .= C_lam_sin_v0.N_clusters
+	end
+	
+	# Some cosmetics
+	mks_v0_c = [:circle :rect :star5]
+	labs_v0_c = ["λ=L" "λ=L/2" "λ=L/3"]
+	# The plot
+	c_v0_plot = plot(x_time,		 		# x-axis
+		       c_v0_all_lam,     			# y-axis     
+		       label=labs_v0_c, 			# labels
+		       xlabel="t/t₀", 				# x-axis label
+		       ylabel="N",					# y-axis label
+			   w = 3, 						# line width
+			   st = :samplemarkers, 		# some recipy stuff
+		       step = 50, 					# density of markers
+			   marker = (8, mks_v0_c, 0.6),	# marker size
+			   legendfontsize = 10,			# legend font size
+               tickfont = (12, "Arial"),	# tick font and size
+               guidefont = (18, "Arial"),	# label font and size
+			   grid = :none,				# grid variable
+			   legend=:topright)			# legend position
+	hline!([2], line = (4, :dash, 0.5, palette(:default)[1]), label="")
+	hline!([8], line = (4, :dash, 0.5, palette(:default)[2]), label="")
+	hline!([18], line = (4, :dash, 0.5, palette(:default)[3]), label="")
+end
+
+# ╔═╡ cc64aa01-953e-49fd-8301-9be1f244437d
+savefig(c_v0_plot, "..\\Figures\\v0_clusters_sine.png")
+
+# ╔═╡ e82faaad-5278-4d8f-982b-fca335bbd006
+md"
+### Pattern velocity vₜ > 0
+
+Now comes the fun part we start looking into the case where the substates pattern θ(x) becomes θ(x,t).
+We start by taking a single wavelength and check the differences as a function of time.
+First though for a nice data display we use a plots recipy taken from [here](https://github.com/JuliaPlots/Plots.jl/issues/2523).
+"
+
+# ╔═╡ 6a5f4405-f63c-4fff-b692-e2bbe396ed7a
+begin
+	lam1_sin_all_v = zeros(length(x_time), 4)
+	for v in enumerate([0 0.1 1 10])
+		lam1_sin_vx = @linq df_delta_h |>
+			where(:velocities .== v[2]) |>
+			where(:lambda .== 1) |>
+			where(:pattern .== "sine") |>
+			select(:dh, :time)
+		lam1_sin_all_v[:,v[1]] .= lam1_sin_vx.dh
+	end
+	
+	# Some cosmetics
+	mks_lam1= [:circle :rect :star5 :diamond]
+	labs_lam1 = ["0v₀" "0.1v₀" "1v₀" "10v₀"]
+	# The plot
+	fig_lam1 = plot(x_time, 						# x-axis
+		            lam1_sin_all_v,     			# y-axis     
+		            label=labs_lam1, 				# labels
+		            xlabel="t/t₀", 					# x-axis label
+		            ylabel="Δh",					# y-axis label
+			        w = 3, 							# line width
+			        st = :samplemarkers, 			# some recipy stuff
+		            step = 50, 						# density of markers
+			        marker = (8, mks_lam1, 0.6),	# marker size
+			        legendfontsize = 10,			# legend font size
+                    # tickfont = (12, "Arial"),		# tick font and size
+                    # guidefont = (18, "Arial"),	# label font and size
+			        grid = :none,					# grid variable
+			        legend=:bottomright)			# legend position
+end
+
+# ╔═╡ bb659f3a-0a01-4f40-81ce-a8c13a34250b
+# Here the command to save the figure
+savefig(fig_lam1, "..\\Figures\\better_dh_t.png")
 
 # ╔═╡ 0ec47530-59b9-11eb-0c49-2b70d7e37d4d
 md"""
@@ -178,28 +388,92 @@ The substrate pattern type the wavelength which is 512 for 1, 256 for 2 and 171 
 df_rup_times = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/rupture_times_new_df.csv?inline=false").body) |> DataFrame
 
 # ╔═╡ 57585d80-7b6e-11eb-18b3-339ab0f601af
-md" ### Distribution of rupture times"
+md" ### Distribution of rupture times
+
+First we like to analyse the stability of the film, thus how long does it the take the film to rupture.
+Since it is a spinodally dewetting system we know that it will rupture.
+On top of that we have a wettability gradient θ(x) which generates a flow.
+
+Previous research have found a stabilizing effect due to a time dependency on θ(x,t).
+This is what we are going to take a look at in the next few plots.
+
+First we look at the tᵣ, which is short for rupture time, against the substrate velocity.
+This is displayed in the plot below.
+Second we take a look at tᵣ versus vₜ, the pattern velocity.
+In the last plot we collect this data in a single 3d scatter plot.
+
+"
+
+# ╔═╡ d2fba1b6-bcd4-457e-82e1-3c9fa2922ba4
+begin
+	
+	rts_sine = zeros(4,3)
+	for i in 1:3
+		hmm = []
+		for v in enumerate([0.0 0.1 1.0 10.0])
+			dummy = @linq df_rup_times |>
+			where(:velocities .== v[2]) |>
+			where(:lambda .== i) |>
+			where(:pattern .== "sine") |>
+			select(:rupture_times)
+			push!(hmm, dummy.rupture_times[1])
+			
+		end
+		rts_sine[:,i] .= hmm
+	end
+	vels = [0.0, 0.1, 1.0, 10.0]
+	lambdas = [1, 0.5, 1/3]
+	labels_lam = ["λ=L" "λ=L/2" "λ=L/3"]
+	labels_vel = ["v=0" "v=0.1v₀" "v=1v₀" "v=10v₀"]
+	# Plotting the data
+	scatter(vels, 
+		    rts_sine,
+		    marker = (8, mks_lam1, 0.6),
+			label=labels_lam, 				# labels
+		    )
+end
 
 # ╔═╡ 83464630-7b6b-11eb-0611-2bffbe393b19
 begin
-	# We make use of this to get a logarithmic plot
-	df_rup_times.velocities = df_rup_times.velocities .+ 0.0001
-    # Plotting the data
-    @df df_rup_times scatter(
-        :velocities,
-        :rupture_times,
-        group = :lambda,
-        m = (0.5, [:h :star7 :circle], 10),
-        xlabel="v/v0",
-        ylabel="t/t0",
-        axis=:log,
-        legendfontsize = 10,
-        tickfont = (12, "Arial"),
-        guidefont = (18, "Arial"),
-        legend = :bottomright,
-        # bg = RGB(0.2, 0.2, 0.2),
-    )
+	rts_sine2 = permutedims(rts_sine,(2,1))
+	scatter(lambdas, 
+		    rts_sine2,
+		    marker = (8, :auto, 0.6),
+			label=labels_vel, 				# labels
+			legend=:bottomright,
+		    )
 end
+
+# ╔═╡ 8d9c7750-90a4-11eb-2b94-536b29526c8d
+# begin
+# 	# We make use of this to get a logarithmic plot
+# 	df_rup_times[!, "wave_len"] = 512 ./ df_rup_times.lambda 
+# 	lam1_sine_v0 = @linq df_rup_times |>
+# 		where(:velocities .== 0.0001) |>
+# 		where(:lambda .== 1) |>
+# 		where(:pattern .== "sine") |>
+# 		select(:rupture_times)
+
+#     # Plotting the data
+#     scatter(
+#         df_rup_times.velocities,
+# 		df_rup_times.lambda,
+#         df_rup_times.rupture_times,
+#         m = (0.5, [:h :star7 :circle], 10),
+#         xlabel="v/v0",
+#         ylabel="lambda",
+# 		zlabel="t/t0",
+#         # axis=:log,
+#         legendfontsize = 10,
+#         tickfont = (12, "Arial"),
+#         guidefont = (18, "Arial"),
+#         legend = :topright,
+#         # bg = RGB(0.2, 0.2, 0.2),
+#     )
+# end
+
+# ╔═╡ db935ef0-90b9-11eb-16c0-7702a2d7679a
+df_rup_times
 
 # ╔═╡ 77b24122-7b6b-11eb-2036-41d8d55f985a
 md"""
@@ -514,20 +788,47 @@ begin
     )
 end
 
+# ╔═╡ 75d4d05d-0154-4ae7-9708-0ad8f16ee1d2
+function vol_try(V, θ)
+	h = cbrt((3V*(1-cos(deg2rad(θ))))/(π*(2+cos(deg2rad(θ)))))
+	return h
+end
+
+# ╔═╡ 09738b09-e9fa-4e1c-ac1c-7188dffae796
+vol_try(512^2/8, 16)
+
 # ╔═╡ Cell order:
 # ╟─3a80dbae-59b8-11eb-11c8-1b4ed01e73f5
 # ╟─1151bf70-865e-11eb-044e-6d28c3bfce41
 # ╟─11851990-8660-11eb-29a3-553867ba8c75
 # ╠═f5c0cd40-59b8-11eb-1ade-234f67f7efab
+# ╠═dc6948b9-7769-45c3-aed2-c5cc5e47ca1e
 # ╟─4ebc1620-865a-11eb-1e0d-cd2669b2acad
 # ╠═12901690-8684-11eb-2978-3f4b6f0d0fc4
 # ╠═61793e10-8e47-11eb-3bf4-cd92fdcc2a1d
-# ╠═e4395f40-870a-11eb-3c7f-435231c70f87
-# ╠═5f6d7ba0-870c-11eb-0deb-c97951b5eaeb
-# ╠═0ec47530-59b9-11eb-0c49-2b70d7e37d4d
+# ╟─e4395f40-870a-11eb-3c7f-435231c70f87
+# ╠═9f546962-2798-4452-befa-883326271887
+# ╟─b6b8f109-ab0b-4a9e-a82e-7f510f1c8974
+# ╠═3be4828d-01f7-4450-8133-a429bb59ed62
+# ╠═5eb88736-3ea8-458e-8091-58319ad37dc1
+# ╟─6e719113-62d9-4119-a2aa-160b8854134a
+# ╠═081746e8-25b1-4c55-99ce-fd7e38dd9fe4
+# ╠═3ac50706-59e0-473f-85ef-558afce47549
+# ╟─479b39f9-8650-468c-a67e-c699fd00a7fa
+# ╠═79d92592-f849-4083-81ef-35502939deda
+# ╠═3d56e346-49b8-4e86-b43d-2d812c94c072
+# ╠═fafe381e-0baf-40c1-b127-67b7f8c1a902
+# ╠═cc64aa01-953e-49fd-8301-9be1f244437d
+# ╟─e82faaad-5278-4d8f-982b-fca335bbd006
+# ╠═6a5f4405-f63c-4fff-b692-e2bbe396ed7a
+# ╠═bb659f3a-0a01-4f40-81ce-a8c13a34250b
+# ╟─0ec47530-59b9-11eb-0c49-2b70d7e37d4d
 # ╠═3e139540-7b6b-11eb-0671-c5e4c87e6b21
 # ╟─57585d80-7b6e-11eb-18b3-339ab0f601af
+# ╠═d2fba1b6-bcd4-457e-82e1-3c9fa2922ba4
 # ╠═83464630-7b6b-11eb-0611-2bffbe393b19
+# ╠═8d9c7750-90a4-11eb-2b94-536b29526c8d
+# ╠═db935ef0-90b9-11eb-16c0-7702a2d7679a
 # ╠═77b24122-7b6b-11eb-2036-41d8d55f985a
 # ╠═598d0cd2-59b9-11eb-0a8b-a1938e2c3c43
 # ╟─751f6650-7ce1-11eb-3bfe-a1f01e765cf4
@@ -542,3 +843,5 @@ end
 # ╠═3de90bb0-8654-11eb-1d63-6324f3d13170
 # ╠═edbffab0-85a2-11eb-1928-690f7101c1ff
 # ╠═e1feb1d0-85a7-11eb-0f66-dd1f03ccd405
+# ╠═75d4d05d-0154-4ae7-9708-0ad8f16ee1d2
+# ╠═09738b09-e9fa-4e1c-ac1c-7188dffae796
