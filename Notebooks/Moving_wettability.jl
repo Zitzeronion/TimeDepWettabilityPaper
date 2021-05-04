@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.14.4
+# v0.14.5
 
 using Markdown
 using InteractiveUtils
@@ -39,8 +39,12 @@ For the analysis of the our data we need some way to scan efficiently through th
 "
 
 # ╔═╡ dc6948b9-7769-45c3-aed2-c5cc5e47ca1e
-# Plots default fonts and font sizes, could add colors as well
-# default(titlefont = (20, "Arial"), legendfontsize = (18, "Arial"), guidefont = (18, "Arial"), tickfont = (16, "Arial"))
+begin
+	# Plots default fonts and font sizes, could add colors as well
+	leg_size = 12
+	tick_size = 14
+	label_size = 18
+end
 
 # ╔═╡ 4ebc1620-865a-11eb-1e0d-cd2669b2acad
 md"## Height tracking
@@ -260,20 +264,21 @@ begin
 	mks_v0 = [:circle :rect :star5]
 	labs_v0 = ["λ=L" "λ=L/2" "λ=L/3"]
 	# The plot
-	v0_plot =  plot(x_time, 				# x-axis
-		       h_v0_all_lam,     			# y-axis 
-		       label=labs_v0, 				# labels
-		       xlabel="t/t₀", 				# x-axis label
-		       ylabel="Δh",					# y-axis label
-			   w = 3, 						# line width
-			   st = :samplemarkers, 		# some recipy stuff
-		       step = 50, 					# density of markers
-			   marker = (8, mks_v0, 0.6),	# marker size
-			   legendfontsize = 10,			# legend font size
-               tickfont = (12, "Arial"),	# tick font and size
-               guidefont = (18, "Arial"),	# label font and size
-			   grid = :none,				# grid variable
-			   legend=:bottomright)			# legend position
+	v0_plot = plot(x_time, 							# x-axis
+		       h_v0_all_lam,     					# y-axis 
+		       label=labs_v0, 						# labels
+		       xlabel="t/t₀", 						# x-axis label
+		       ylabel="Δh",							# y-axis label
+			   w = 3, 								# line width
+			   st = :samplemarkers, 				# some recipy stuff
+		       step = 50, 							# density of markers
+			   marker = (8, mks_v0, 0.6),			# marker size
+			   legendfontsize = leg_size,			# legend font size
+               tickfont = (tick_size, "Arial"),		# tick font and size
+               guidefont = (label_size, "Arial"),	# label font and size
+			   grid = :none,						# grid variable
+			   legend=:bottomright)					# legend position
+	# Lines that indicate some assumption
 	hline!([10.78], line = (4, :dash, 0.5, palette(:default)[1]), label="")
 	hline!([7.4], line = (4, :dash, 0.5, palette(:default)[2]), label="")
 	hline!([5.9], line = (4, :dash, 0.5, palette(:default)[3]), label="")
@@ -298,27 +303,28 @@ begin
 	mks_v0_c = [:circle :rect :star5]
 	labs_v0_c = ["λ=L" "λ=L/2" "λ=L/3"]
 	# The plot
-	c_v0_plot = plot(x_time,		 		# x-axis
-		       c_v0_all_lam,     			# y-axis     
-		       label=labs_v0_c, 			# labels
-		       xlabel="t/t₀", 				# x-axis label
-		       ylabel="N",					# y-axis label
-			   w = 3, 						# line width
-			   st = :samplemarkers, 		# some recipy stuff
-		       step = 50, 					# density of markers
-			   marker = (8, mks_v0_c, 0.6),	# marker size
-			   legendfontsize = 10,			# legend font size
-               tickfont = (12, "Arial"),	# tick font and size
-               guidefont = (18, "Arial"),	# label font and size
-			   grid = :none,				# grid variable
-			   legend=:topright)			# legend position
+	c_v0_plot = plot(x_time,		 				# x-axis
+		       c_v0_all_lam,     					# y-axis     
+		       label=labs_v0_c, 					# labels
+		       xlabel="t/t₀", 						# x-axis label
+		       ylabel="N",							# y-axis label
+			   w = 3, 								# line width
+			   st = :samplemarkers, 				# some recipy stuff
+		       step = 50, 							# density of markers
+			   marker = (8, mks_v0_c, 0.6),			# marker size
+			   legendfontsize = leg_size,			# legend font size
+               tickfont = (tick_size, "Arial"),		# tick font and size
+               guidefont = (label_size, "Arial"),	# label font and size
+			   grid = :none,						# grid variable
+			   legend=:topright)					# legend position
+	# Theory
 	hline!([2], line = (4, :dash, 0.5, palette(:default)[1]), label="")
 	hline!([8], line = (4, :dash, 0.5, palette(:default)[2]), label="")
 	hline!([18], line = (4, :dash, 0.5, palette(:default)[3]), label="")
 end
 
 # ╔═╡ cc64aa01-953e-49fd-8301-9be1f244437d
-savefig(c_v0_plot, "..\\Figures\\v0_clusters_sine.png")
+savefig(c_v0_plot, "..\\Figures\\v0_clusters_sine.pdf")
 
 # ╔═╡ e82faaad-5278-4d8f-982b-fca335bbd006
 md"
@@ -343,27 +349,27 @@ begin
 	
 	# Some cosmetics
 	mks_lam1= [:circle :rect :star5 :diamond]
-	labs_lam1 = ["0v₀" "0.1v₀" "1v₀" "10v₀"]
+	labs_lam1 = ["vₜ=0" "vₜ=0.1v₀" "vₜ=1v₀" "vₜ=10v₀"]
 	# The plot
-	fig_lam1 = plot(x_time, 						# x-axis
-		            lam1_sin_all_v,     			# y-axis     
-		            label=labs_lam1, 				# labels
-		            xlabel="t/t₀", 					# x-axis label
-		            ylabel="Δh",					# y-axis label
-			        w = 3, 							# line width
-			        st = :samplemarkers, 			# some recipy stuff
-		            step = 50, 						# density of markers
-			        marker = (8, mks_lam1, 0.6),	# marker size
-			        legendfontsize = 10,			# legend font size
-                    # tickfont = (12, "Arial"),		# tick font and size
-                    # guidefont = (18, "Arial"),	# label font and size
-			        grid = :none,					# grid variable
-			        legend=:bottomright)			# legend position
+	fig_lam1 = plot(x_time, 							# x-axis
+		            lam1_sin_all_v,     				# y-axis     
+		            label=labs_lam1, 					# labels
+		            xlabel="t/t₀", 						# x-axis label
+		            ylabel="Δh",						# y-axis label
+			        w = 3, 								# line width
+			        st = :samplemarkers, 				# some recipy stuff
+		            step = 50, 							# density of markers
+			        marker = (8, :auto, 0.6),			# marker size
+			        legendfontsize = leg_size,			# legend font size
+                    tickfont = (tick_size, "Arial"),	# tick font and size
+                    guidefont = (label_size, "Arial"),	# label font and size
+			        grid = :none,						# grid variable
+			        legend=:bottomright)				# legend position
 end
 
 # ╔═╡ bb659f3a-0a01-4f40-81ce-a8c13a34250b
 # Here the command to save the figure
-savefig(fig_lam1, "..\\Figures\\better_dh_t.png")
+savefig(fig_lam1, "..\\Figures\\dh_t_lam1_all_v.pdf")
 
 # ╔═╡ 0ec47530-59b9-11eb-0c49-2b70d7e37d4d
 md"""
@@ -394,13 +400,23 @@ First we like to analyse the stability of the film, thus how long does it the ta
 Since it is a spinodally dewetting system we know that it will rupture.
 On top of that we have a wettability gradient θ(x) which generates a flow.
 
+For this project we generated two patterns.
+The first one is a sine wave pattern given as
+```math
+ \theta_1(x,y) = \theta_0 + \delta\theta\left[\sin\left(\frac{2\pi i x}{\lambda}\right)\sin\left(\frac{2\pi j y}{\lambda}\right)\right], 
+```
+where $i$ and $j$ are wavenumbers.
+In this work we use $i = j \in(1,2,3)$.
+On the other hand we use a triangle wave given as 
+```math
+\theta_2(x,y) = \theta_0 + \frac{2\delta\theta}{\pi}\left[\sin^{-1}\left(\sin\left(\frac{2\pi i x}{\lambda}\right)\right)\sin^{-1}\left(\sin\left(\frac{2\pi j y}{\lambda}\right)\right)\right].
+```
+
 Previous research have found a stabilizing effect due to a time dependency on θ(x,t).
 This is what we are going to take a look at in the next few plots.
 
-First we look at the tᵣ, which is short for rupture time, against the substrate velocity.
+First we look at the τᵣ, the rupture time, against the substrates pattern wavelength λ for pattern $\theta_1$.
 This is displayed in the plot below.
-Second we take a look at tᵣ versus vₜ, the pattern velocity.
-In the last plot we collect this data in a single 3d scatter plot.
 
 "
 
@@ -426,54 +442,152 @@ begin
 	labels_lam = ["λ=L" "λ=L/2" "λ=L/3"]
 	labels_vel = ["v=0" "v=0.1v₀" "v=1v₀" "v=10v₀"]
 	# Plotting the data
-	scatter(vels, 
-		    rts_sine,
-		    marker = (8, mks_lam1, 0.6),
-			label=labels_lam, 				# labels
+	scatter(vels,								# x-data 
+		    rts_sine,							# y-data
+			xlabel="v/v₀",						# x-label
+			ylabel="τᵣ/t₀",						# y-label
+			# yaxis=:log,						# yaxis scaling
+		    marker = (8, :auto, 0.6),			# markers(size, symbol, α)
+			label=labels_lam, 					# labels
+			legendfontsize = leg_size,			# legend font size
+            tickfont = (tick_size, "Arial"),	# tick font and size
+            guidefont = (label_size, "Arial"),	# label font and size
+			grid = :none,						# grid variable
+			legend=:right,						# legend position
 		    )
 end
+
+# ╔═╡ fd0ed361-6317-48aa-b01e-34613db17ed1
+md" To see if there some scaling law we can display the graph as a loglog like graph
+
+But we need to modify the x-axis as it contains zero.
+We know that the vₜ = 0.1v₀ ≈ 15000 Δt, adding a zero would mean the pattern is update about every 150k time steps.
+Since the simulation is running for 5×10⁶ Δt we use instead of 0 -> 0.001"
+
+# ╔═╡ b11ddc3c-0820-4cc3-b7e1-c67407a87685
+begin
+	v_scale = [0.001, 0.1, 1.0, 10.0]
+	scatter(v_scale,							# x-data 
+		    rts_sine,							# y-data
+			xlabel="v/v₀",						# x-label
+			ylabel="τᵣ/t₀",						# y-label
+			yaxis=:log,							# yaxis scaling
+			xaxis=:log,							# xaxis scaling
+		    marker = (8, :auto, 0.6),			# markers(size, symbol, α)
+			label=labels_lam, 					# labels
+			legendfontsize = leg_size,			# legend font size
+            tickfont = (tick_size, "Arial"),	# tick font and size
+            guidefont = (label_size, "Arial"),	# label font and size
+			grid = :none,						# grid variable
+			legend=:left,						# legend position
+		    )
+end
+
+# ╔═╡ 4117f552-f93d-4de4-819b-d1e352a9e182
+md"In the next cell below we do not resolve the rupture time as a function of velocity but as a function of wavelength λ.
+This of course means that we have now 4 points instead of three and only three x-values.
+
+With this plot however it is much clearer that a pattern velocity has a stabilizing effect on the thin film.
+The message is that the film on static contact angle field ruptures first."
 
 # ╔═╡ 83464630-7b6b-11eb-0611-2bffbe393b19
 begin
+	# Shift velocity with wavelength dependency
 	rts_sine2 = permutedims(rts_sine,(2,1))
-	scatter(lambdas, 
-		    rts_sine2,
-		    marker = (8, :auto, 0.6),
-			label=labels_vel, 				# labels
-			legend=:bottomright,
+	# Plot the shifted data
+	scatter(lambdas, 							# x-data
+		    rts_sine2,							# y-data
+			xlabel="λ",							# xaxis label
+			ylabel="τᵣ/t₀",						# yaxis label
+		    marker = (8, :auto, 0.6),			# markers
+			label=labels_vel, 					# labels
+			legendfontsize = leg_size,			# legend font size
+            tickfont = (tick_size, "Arial"),	# tick font and size
+            guidefont = (label_size, "Arial"),	# label font and size
+			grid = :none,						# grid variable
+			legend=:topleft,					# legend position
 		    )
 end
 
-# ╔═╡ 8d9c7750-90a4-11eb-2b94-536b29526c8d
-# begin
-# 	# We make use of this to get a logarithmic plot
-# 	df_rup_times[!, "wave_len"] = 512 ./ df_rup_times.lambda 
-# 	lam1_sine_v0 = @linq df_rup_times |>
-# 		where(:velocities .== 0.0001) |>
-# 		where(:lambda .== 1) |>
-# 		where(:pattern .== "sine") |>
-# 		select(:rupture_times)
+# ╔═╡ c9ee5190-d362-43f9-94e7-de9b395d55fb
+md"Here as well we check for some kind of scaling law that means we transform the axis to be displayed as log-scaled"
 
-#     # Plotting the data
-#     scatter(
-#         df_rup_times.velocities,
-# 		df_rup_times.lambda,
-#         df_rup_times.rupture_times,
-#         m = (0.5, [:h :star7 :circle], 10),
-#         xlabel="v/v0",
-#         ylabel="lambda",
-# 		zlabel="t/t0",
-#         # axis=:log,
-#         legendfontsize = 10,
-#         tickfont = (12, "Arial"),
-#         guidefont = (18, "Arial"),
-#         legend = :topright,
-#         # bg = RGB(0.2, 0.2, 0.2),
-#     )
-# end
+# ╔═╡ fff30b64-d5bb-41df-91bc-ebb2492981ec
+rts_save = scatter(lambdas,							# x-data 
+		rts_sine2,							# y-data
+	    xlabel="λ",							# xaxis label
+		ylabel="τᵣ/t₀",						# yaxis label
+		xaxis=:log,							# xaxis scaling
+		yaxis=:log,							# yaxis scaling
+		marker = (8, :auto, 0.6),			# markers
+		label=labels_vel, 					# labels
+		legendfontsize = leg_size,			# legend font size
+        tickfont = (tick_size, "Arial"),	# tick font and size
+        guidefont = (label_size, "Arial"),	# label font and size
+		grid = :none,						# grid variable
+		legend=:topleft,					# legend position
+		    )
 
-# ╔═╡ db935ef0-90b9-11eb-16c0-7702a2d7679a
-df_rup_times
+# ╔═╡ 13eaf81b-3e3c-4678-a644-0d6aa5629188
+savefig(rts_save, "..\\Figures\\rupture_time.pdf")
+
+# ╔═╡ 9d84d4e2-d81d-4874-a656-8ff2624a7f1d
+md"### Linear pattern
+Besides the sine wave pattern we have data on a linear pattern as well.
+"
+
+# ╔═╡ 7344c1d9-5d87-4b4d-8264-3043b162c49f
+begin
+	
+	rts_lin = zeros(4,3)
+	for i in 1:3
+		hmm = []
+		for v in enumerate([0.0 0.1 1.0 10.0])
+			dummy = @linq df_rup_times |>
+			where(:velocities .== v[2]) |>
+			where(:lambda .== i) |>
+			where(:pattern .== "linear") |>
+			select(:rupture_times)
+			push!(hmm, dummy.rupture_times[1])
+			
+		end
+		rts_lin[:,i] .= hmm
+	end
+	
+	# Plotting the data
+	scatter(vels,								# x-data 
+		    rts_lin,							# y-data
+			xlabel="v/v₀",						# x-label
+			ylabel="τᵣ/t₀",						# y-label
+			# yaxis=:log,						# yaxis scaling
+		    marker = (8, :auto, 0.6),			# markers(size, symbol, α)
+			label=labels_lam, 					# labels
+			legendfontsize = leg_size,			# legend font size
+            tickfont = (tick_size, "Arial"),	# tick font and size
+            guidefont = (label_size, "Arial"),	# label font and size
+			grid = :none,						# grid variable
+			legend=:right,						# legend position
+		    )
+end
+
+# ╔═╡ 4227b4c1-8629-4062-b9d7-1c87b522c761
+begin
+	# Shift velocity with wavelength dependency
+	rts_lin2 = permutedims(rts_lin,(2,1))
+	# Plot the shifted data
+	scatter(lambdas, 							# x-data
+		    rts_lin2,							# y-data
+			xlabel="λ",							# xaxis label
+			ylabel="τᵣ/t₀",						# yaxis label
+		    marker = (8, :auto, 0.6),			# markers
+			label=labels_vel, 					# labels
+			legendfontsize = leg_size,			# legend font size
+            tickfont = (tick_size, "Arial"),	# tick font and size
+            guidefont = (label_size, "Arial"),	# label font and size
+			grid = :none,						# grid variable
+			legend=:topleft,					# legend position
+		    )
+end
 
 # ╔═╡ 77b24122-7b6b-11eb-2036-41d8d55f985a
 md"""
@@ -499,10 +613,14 @@ Both files are uploaded to the `jugit` repository of the time dependent wettabil
 
 
 # ╔═╡ d8a75470-7ce2-11eb-356d-63c3da69b9f0
-Sine_data = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/Sine_waves_data.csv?inline=false").body) |> DataFrame
+# Data that has been computed
+# ===========================
+# Sine_data = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/Sine_waves_data.csv?inline=false").body) |> DataFrame
 
 # ╔═╡ f6d13570-8281-11eb-0f64-771e22a6b27d
-Triangle_data = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/Linear_waves_data.csv?inline=false").body) |> DataFrame
+# Data that has been computed
+# ===========================
+# Triangle_data = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/Linear_waves_data.csv?inline=false").body) |> DataFrame
 
 # ╔═╡ 268c8790-8284-11eb-0511-e367b9211e74
 md"
@@ -529,11 +647,11 @@ Lastly we add as well the normalized time t/t₀ to the dataframe.
 Since this already done, we just need to load it in from web like the others.
 The definition of t₀ can be found below, it's computed mostly from simulation constants.
 ```math
-t₀ = 3μ/γh₀³q₀⁴,
+t₀ = \frac{3μ}{γh₀³q₀⁴},
 ```
 with q₀ being
 ```math
-q₀² = Π'(h₀)/2,
+q₀² = \frac{Π'(h₀)}{2},
 ```
 where Π(h) is the disjoining pressure functional. 
 "
@@ -567,235 +685,330 @@ Turns out this is not trivial!
 
 The first few columns contain more infromation than we need, especially $q_4$ to $q_8$ are not relevant right now. However $q_2$ is of much interest, as it helps to qunatize what is a rivulet and what is a droplet state.
 
-#### Data $\lambda = 1$, $v_n = 0$, threshold=15, pattern=sine
+#### Data $\lambda = 1$, $v_{\theta} = 0$, threshold=15, pattern=sine
 Yes there are just 998 *datapoints*, this is due to some abiguity in papaya2 when it comes to time step **10** and time step **100**. Had no time to look into this yet.
 "
 
-# ╔═╡ 0ed0c180-834b-11eb-3f40-b1243e850675
+# ╔═╡ b4879bcc-51de-46fc-892b-c2bcf44e21b3
 begin
 	lam = 1
 	thresh = 15
 	vel = 0.0
 	vel_cont = 1.0
 	pat = 1
-	filtered = @linq all_data |>
+	l1_sin_0 = @linq all_data |>
 		where(:threshold .== thresh) |>
 		where(:lambda .== lam) |>
 		where(:vel_norm .== vel) |>
 		where(:pattern .== pat) |>
 		select(:q2, :q3, :q4, :q5, :q6, :q7, :q8, :isoperi_ratio, :anisotro_ind, :t_norm)
-	
-	filtered2 = @linq all_data |>
-		where(:threshold .== thresh) |>
-		where(:lambda .== lam) |>
-		where(:vel_norm .== vel_cont) |>
-		where(:pattern .== pat) |>
-		select(:q2, :q3, :q4, :q5, :q6, :q7, :q8, :isoperi_ratio, :anisotro_ind, :t_norm)
 end
 
-# ╔═╡ 56e7d3e2-859f-11eb-26ec-996629c4b3d1
+# ╔═╡ a02e45b0-bc1b-4210-9f2f-ae72ed92357b
+md"Since the set with no pattern velocity is not instructive, as the dewetting is unidirectional we take a look something more interesting.
+
+In the following we plot the series of q₂ values for the three wavelenghts based on their substrate velocity.
+What we expect is that the lingament or rivulet states show a strong q₂ component."
+
+# ╔═╡ 0ed0c180-834b-11eb-3f40-b1243e850675
 begin
-	step = 25
-    scatter(filtered.t_norm[1:step:end],
-        filtered.q2[1:step:end],
-        m = (0.5, [:circle], 10),
-        xlabel="t/t0",
-        ylabel="Data",
-        label="q2_0",
-        legendfontsize = 10,
-        tickfont = (12, "Arial"),
-        guidefont = (18, "Arial"),
-        legend = :bottomright,
-        # bg = RGB(0.2, 0.2, 0.2),
-    )
-	scatter!(filtered2.t_norm[1:step:end],
-        filtered2.q2[1:step:end],
-        m = (0.5, [:circle], 10),
-        xlabel="t/t0",
-        ylabel="Data",
-        label="q2_1",
-        legendfontsize = 10,
-        tickfont = (12, "Arial"),
-        guidefont = (18, "Arial"),
-        legend = :bottomright,
-        # bg = RGB(0.2, 0.2, 0.2),
-    )
-	scatter!(filtered.t_norm[1:step:end],
-        filtered.q4[1:step:end],
-        m = (0.5, [:h], 10),
-        xlabel="t/t0",
-        ylabel="Data",
-        label="q4_0",
-        legendfontsize = 10,
-        tickfont = (12, "Arial"),
-        guidefont = (18, "Arial"),
-        legend = :bottomright,
-        # bg = RGB(0.2, 0.2, 0.2),
-    )
-	scatter!(filtered2.t_norm[1:step:end],
-        filtered2.q4[1:step:end],
-        m = (0.5, [:h], 10),
-        xlabel="t/t0",
-        ylabel="Data",
-        label="q4_1",
-        legendfontsize = 10,
-        tickfont = (12, "Arial"),
-        guidefont = (18, "Arial"),
-        legend = :bottomright,
-        # bg = RGB(0.2, 0.2, 0.2),
-    )
-	scatter!(filtered.t_norm[1:step:end],
-        filtered.q6[1:step:end],
-        m = (0.5, [:star5], 10),
-        xlabel="t/t0",
-        ylabel="Data",
-        label="q6_0",
-        legendfontsize = 10,
-        tickfont = (12, "Arial"),
-        guidefont = (18, "Arial"),
-        legend = :bottomright,
-        # bg = RGB(0.2, 0.2, 0.2),
-    )
-	scatter!(filtered2.t_norm[1:step:end],
-        filtered2.q6[1:step:end],
-        m = (0.5, [:star5], 10),
-        xlabel="t/t0",
-        ylabel="Data",
-        label="q6_1",
-        legendfontsize = 10,
-        tickfont = (12, "Arial"),
-        guidefont = (18, "Arial"),
-        legend = :bottomright,
-        # bg = RGB(0.2, 0.2, 0.2),
-    )
-	scatter!(filtered.t_norm[1:step:end],
-        filtered.q8[1:step:end],
-        m = (0.5, [:star7], 10),
-        xlabel="t/t0",
-        ylabel="Data",
-        label="q8_0",
-        legendfontsize = 10,
-        tickfont = (12, "Arial"),
-        guidefont = (18, "Arial"),
-        legend = :bottomright,
-        # bg = RGB(0.2, 0.2, 0.2),
-    )
-	scatter!(filtered2.t_norm[1:step:end],
-        filtered2.q8[1:step:end],
-        m = (0.5, [:star7], 10),
-        xlabel="t/t0",
-        ylabel="Data",
-        label="q8_1",
-        legendfontsize = 10,
-        tickfont = (12, "Arial"),
-        guidefont = (18, "Arial"),
-        legend = :topright,
-        # bg = RGB(0.2, 0.2, 0.2),
-    )
-	# scatter!(filtered.t_norm[1:step:end],
-	# filtered.anisotro_ind[1:step:end],
-	# m = (0.5, [:h], 10),
-	# xlabel="t/t0",
-	# ylabel="Data",
-	# label="beta 02 1 0",
-	# legendfontsize = 10,
-	# tickfont = (12, "Arial"),
-	# guidefont = (18, "Arial"),
-	# legend = :bottomright,
-	# # bg = RGB(0.2, 0.2, 0.2),
-	# )
-	# scatter!(filtered2.t_norm[1:step:end],
-	# filtered2.anisotro_ind[1:step:end],
-	# m = (0.5, [:h], 10),
-	# xlabel="t/t0",
-	# ylabel="Data",
-	# label="beta 02 1 1",
-	# legendfontsize = 10,
-	# tickfont = (12, "Arial"),
-	# guidefont = (18, "Arial"),
-	# legend = :bottomright,
-	# # bg = RGB(0.2, 0.2, 0.2),
-	# )
-	
+	q2_data_lam1 = zeros(998, 4)
+	for i in enumerate([0.0 0.1 1.0 10.0])
+		filtered = @linq all_data |>
+			where(:threshold .== thresh) |>
+			where(:lambda .== lam) |>
+			where(:vel_norm .== i[2]) |>
+			where(:pattern .== pat) |>
+			select(:q2, :q3, :q4, :q5, :q6, :q7, :q8, :isoperi_ratio, :anisotro_ind, :t_norm)
+		replace!(filtered.q2, NaN => 0.0)
+		q2_data_lam1[:, i[1]] = filtered.q2
+	end
+	plot(l1_sin_0.t_norm,		 			# x-axis
+		 q2_data_lam1,	     				# y-axis     
+		 label=labs_lam1, 					# labels
+		 xlabel="t/t₀", 					# x-axis label
+		 ylabel="q₂",						# y-axis label
+		 w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+		 legendfontsize = leg_size,			# legend font size
+         tickfont = (tick_size, "Arial"),	# tick font and size
+         guidefont = (label_size, "Arial"),	# label font and size
+	     grid = :none,						# grid variable
+		 legend=:topright)				    # legend position
 end
 
-# ╔═╡ 3de90bb0-8654-11eb-1d63-6324f3d13170
-md"#### Simple moving average
+# ╔═╡ f40c617d-ce54-4788-bd23-bd8462469b11
+begin
+	q2_data_lam2 = zeros(998, 4)
+	for i in enumerate([0.0 0.1 1.0 10.0])
+		filtered = @linq all_data |>
+			where(:threshold .== thresh) |>
+			where(:lambda .== 2) |>
+			where(:vel_norm .== i[2]) |>
+			where(:pattern .== pat) |>
+			select(:q2, :q3, :q4, :q5, :q6, :q7, :q8, :isoperi_ratio, :anisotro_ind, :t_norm)
+		replace!(filtered.q2, NaN => 0.0)
+		q2_data_lam1[:, i[1]] = filtered.q2
+	end
+	q2_lam2_plot = plot(l1_sin_0.t_norm,		 			# x-axis
+		 q2_data_lam1,	     				# y-axis     
+		 label=labs_lam1, 					# labels
+		 xlabel="t/t₀", 					# x-axis label
+		 ylabel="q₂",						# y-axis label
+		 w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+		 legendfontsize = leg_size,			# legend font size
+         tickfont = (tick_size, "Arial"),	# tick font and size
+         guidefont = (label_size, "Arial"),	# label font and size
+	     grid = :none,						# grid variable
+		 legend=:topright)					# legend position
+end
 
-To clean the noise of the data it is useful to take the moving average instead of just the data.
+# ╔═╡ ee710208-b363-42b3-b811-efed2dc963a9
+savefig(q2_lam2_plot, "..\\Figures\\q2_lam2_MSM.pdf")
+
+# ╔═╡ 920e803d-f050-4854-834b-21f0ad94e8b1
+begin
+	q2_data_lam3 = zeros(998, 4)
+	for i in enumerate([0.0 0.1 1.0 10.0])
+		filtered = @linq all_data |>
+			where(:threshold .== thresh) |>
+			where(:lambda .== 3) |>
+			where(:vel_norm .== i[2]) |>
+			where(:pattern .== pat) |>
+			select(:q2, :q3, :q4, :q5, :q6, :q7, :q8, :isoperi_ratio, :anisotro_ind, :t_norm)
+		replace!(filtered.q2, NaN => 0.0)
+		q2_data_lam1[:, i[1]] = filtered.q2
+	end
+	q2_lam3_plot = plot(l1_sin_0.t_norm,		 			# x-axis
+		 q2_data_lam1,	     				# y-axis     
+		 label=labs_lam1, 					# labels
+		 xlabel="t/t₀", 					# x-axis label
+		 ylabel="q₂",						# y-axis label
+		 w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+		 legendfontsize = leg_size,			# legend font size
+         tickfont = (tick_size, "Arial"),	# tick font and size
+         guidefont = (label_size, "Arial"),	# label font and size
+	     grid = :none,						# grid variable
+		 legend=:topright)					# legend position
+end
+
+# ╔═╡ 0ebaff68-636c-4d98-95ee-0d770aaf5499
+savefig(q2_lam3_plot, "..\\Figures\\q2_lam3_MSM.pdf")
+
+# ╔═╡ 0067688c-d991-4071-940f-73a8609c356c
+md"Just to for the check we look if q₃ is as well elevated"
+
+# ╔═╡ 1f4ec6d2-d458-4760-a3b6-4f41348dd178
+begin
+	q3_data_lam1 = zeros(998, 4)
+	for i in enumerate([0.0 0.1 1.0 10.0])
+		filtered = @linq all_data |>
+			where(:threshold .== thresh) |>
+			where(:lambda .== lam) |>
+			where(:vel_norm .== i[2]) |>
+			where(:pattern .== pat) |>
+			select(:q2, :q3, :isoperi_ratio, :anisotro_ind, :t_norm)
+		replace!(filtered.q3, NaN => 0.0)
+		q3_data_lam1[:, i[1]] = filtered.q3
+	end
+	plot(l1_sin_0.t_norm,		 			# x-axis
+		 q3_data_lam1,	     				# y-axis     
+		 label=labs_lam1, 					# labels
+		 xlabel="t/t₀", 					# x-axis label
+		 ylabel="q₃",						# y-axis label
+		 w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+		 legendfontsize = leg_size,			# legend font size
+         tickfont = (tick_size, "Arial"),	# tick font and size
+         guidefont = (label_size, "Arial"),	# label font and size
+	     grid = :none,						# grid variable
+		 legend=:topright)					# legend position
+end
+
+# ╔═╡ b45279f3-05f5-4933-a08c-8e7e4b5c7ce5
+begin
+	q3_data_lam2 = zeros(998, 4)
+	for i in enumerate([0.0 0.1 1.0 10.0])
+		filtered = @linq all_data |>
+			where(:threshold .== thresh) |>
+			where(:lambda .== 2) |>
+			where(:vel_norm .== i[2]) |>
+			where(:pattern .== pat) |>
+			select(:q2, :q3, :isoperi_ratio, :anisotro_ind, :t_norm)
+		replace!(filtered.q3, NaN => 0.0)
+		q3_data_lam2[:, i[1]] = filtered.q3
+	end
+	q3_lam2 = plot(l1_sin_0.t_norm,		 			# x-axis
+		 q3_data_lam2,	     				# y-axis     
+		 label=labs_lam1, 					# labels
+		 xlabel="t/t₀", 					# x-axis label
+		 ylabel="q₃",						# y-axis label
+		 w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+		 legendfontsize = leg_size,			# legend font size
+         tickfont = (tick_size, "Arial"),	# tick font and size
+         guidefont = (label_size, "Arial"),	# label font and size
+	     grid = :none,						# grid variable
+		 legend=:topright)					# legend position
+end
+
+# ╔═╡ 8682aebe-44ee-4a06-a245-3863f9b8b090
+savefig(q3_lam2, "..\\Figures\\q3_lam2.pdf")
+
+# ╔═╡ fcae1759-26d7-4bd6-b46e-f4a84d3b366c
+begin
+	q3_data_lam3 = zeros(998, 4)
+	for i in enumerate([0.0 0.1 1.0 10.0])
+		filtered = @linq all_data |>
+			where(:threshold .== thresh) |>
+			where(:lambda .== 3) |>
+			where(:vel_norm .== i[2]) |>
+			where(:pattern .== pat) |>
+			select(:q2, :q3,:isoperi_ratio, :anisotro_ind, :t_norm)
+		replace!(filtered.q3, NaN => 0.0)
+		q3_data_lam3[:, i[1]] = filtered.q3
+	end
+	plot(l1_sin_0.t_norm,		 			# x-axis
+		 q3_data_lam3,	     				# y-axis     
+		 label=labs_lam1, 					# labels
+		 xlabel="t/t₀", 					# x-axis label
+		 ylabel="q₃",						# y-axis label
+		 w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+		 legendfontsize = leg_size,			# legend font size
+         tickfont = (tick_size, "Arial"),	# tick font and size
+         guidefont = (label_size, "Arial"),	# label font and size
+	     grid = :none,						# grid variable
+		 legend=:top)						# legend position
+end
+
+# ╔═╡ dfc66579-f6f6-443e-aa42-3ecf7fe8f8cf
+md"The classics of topology is the isoperimetric ratio
+
+```math
+Q = \frac{4πA}{P^2}.
+```
+
+Let's have a look at this quantity
 "
-function SMA(arg; nums=5)
-	moving_average = zeros(length(arg)÷nums)
-	for i in 1:nums
-		sum(arg[i*1:5])
-end
 
-# ╔═╡ edbffab0-85a2-11eb-1928-690f7101c1ff
+# ╔═╡ 388f9c8a-4723-4056-a329-732591a70077
 begin
-	scatter(filtered.t_norm[1:step:end],
-		filtered.isoperi_ratio[1:step:end] ./ (512*512),
-        m = (0.5, [:star5], 10),
-        xlabel="t/t0",
-        ylabel="Data",
-        label="Q_0",
-        legendfontsize = 10,
-        tickfont = (12, "Arial"),
-        guidefont = (18, "Arial"),
-        legend = :bottomright,
-        # bg = RGB(0.2, 0.2, 0.2),
-    )
-	scatter!(filtered2.t_norm[1:step:end],
-		filtered2.isoperi_ratio[1:step:end] ./ (512*512),
-        m = (0.5, [:star5], 10),
-        xlabel="t/t0",
-        ylabel="Data",
-        label="Q_1",
-        legendfontsize = 10,
-        tickfont = (12, "Arial"),
-        guidefont = (18, "Arial"),
-        legend = :topright,
-        # bg = RGB(0.2, 0.2, 0.2),
-		ylim = (0, 0.02)
-    )
+	Q_lam1 = zeros(998, 4)
+	for i in enumerate([0.0 0.1 1.0 10.0])
+		filtered = @linq all_data |>
+			where(:threshold .== thresh) |>
+			where(:lambda .== 1) |>
+			where(:vel_norm .== i[2]) |>
+			where(:pattern .== pat) |>
+			select(:isoperi_ratio, :anisotro_ind, :t_norm)
+		replace!(filtered.isoperi_ratio, Inf => 1.0)
+		Q_lam1[:, i[1]] = filtered.isoperi_ratio
+	end
+	
+	norm_lam1 = Q_lam1[end, 1]
+	
+	plot(l1_sin_0.t_norm,		 			# x-axis
+		Q_lam1 ./ norm_lam1,		     	# y-axis, normed
+		 label=labs_lam1, 					# labels
+		 xlabel="t/t₀", 					# x-axis label
+		 ylabel="Q/Q₀",						# y-axis label
+		 ylim=(0.6, 1.25),
+		 # yaxis=:log,
+		 # xaxis=:log,
+		 w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+		 legendfontsize = leg_size,			# legend font size
+         tickfont = (tick_size, "Arial"),	# tick font and size
+         guidefont = (label_size, "Arial"),	# label font and size
+	     grid = :none,						# grid variable
+		 legend=:bottomright)						# legend position
 end
 
-# ╔═╡ e1feb1d0-85a7-11eb-0f66-dd1f03ccd405
+# ╔═╡ c457ddb6-e0af-49c2-bfc4-a8014bd12fbb
 begin
-	scatter(filtered.t_norm[1:step:end],
-		filtered.q3[1:step:end] ./ (512*512),
-        m = (0.5, [:star5], 10),
-        xlabel="t/t0",
-        ylabel="Data",
-        label="q3_0",
-        legendfontsize = 10,
-        tickfont = (12, "Arial"),
-        guidefont = (18, "Arial"),
-        legend = :bottomright,
-        # bg = RGB(0.2, 0.2, 0.2),
-    )
-	scatter!(filtered2.t_norm[1:step:end],
-		filtered2.q3[1:step:end] ./ (512*512),
-        m = (0.5, [:star5], 10),
-        xlabel="t/t0",
-        ylabel="Data",
-        label="q3_1",
-        legendfontsize = 10,
-        tickfont = (12, "Arial"),
-        guidefont = (18, "Arial"),
-        legend = :topright,
-        # bg = RGB(0.2, 0.2, 0.2),
-		# ylim = (0, 0.02)
-    )
+	Q_lam2 = zeros(998, 4)
+	for i in enumerate([0.0 0.1 1.0 10.0])
+		filtered = @linq all_data |>
+			where(:threshold .== thresh) |>
+			where(:lambda .== 2) |>
+			where(:vel_norm .== i[2]) |>
+			where(:pattern .== pat) |>
+			select(:isoperi_ratio, :anisotro_ind, :t_norm)
+		replace!(filtered.isoperi_ratio, Inf => 1.0)
+		Q_lam2[:, i[1]] = filtered.isoperi_ratio
+	end
+	# Droplet state vₜ = 0 
+	norm_lam2 = Q_lam2[end, 1]
+	
+	plot(l1_sin_0.t_norm,		 			# x-axis
+		 Q_lam2 ./ norm_lam2,	     		# y-axis     
+		 label=labs_lam1, 					# labels
+		 xlabel="t/t₀", 					# x-axis label
+		 ylabel="Q/Q₀",						# y-axis label
+		 # yaxis=:log,
+		 ylim = (0.5, 1.5),
+		 w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+		 legendfontsize = leg_size,			# legend font size
+         tickfont = (tick_size, "Arial"),	# tick font and size
+         guidefont = (label_size, "Arial"),	# label font and size
+	     grid = :none,						# grid variable
+		 legend=:bottomright)				# legend position
 end
 
-# ╔═╡ 75d4d05d-0154-4ae7-9708-0ad8f16ee1d2
-function vol_try(V, θ)
-	h = cbrt((3V*(1-cos(deg2rad(θ))))/(π*(2+cos(deg2rad(θ)))))
-	return h
+# ╔═╡ e15b167a-b50a-4431-8a3b-a2a06341c1ea
+begin
+	Q_lam3 = zeros(998, 4)
+	for i in enumerate([0.0 0.1 1.0 10.0])
+		filtered = @linq all_data |>
+			where(:threshold .== thresh) |>
+			where(:lambda .== 3) |>
+			where(:vel_norm .== i[2]) |>
+			where(:pattern .== pat) |>
+			select(:isoperi_ratio, :anisotro_ind, :t_norm)
+		replace!(filtered.isoperi_ratio, Inf => 1.0)
+		Q_lam3[:, i[1]] = filtered.isoperi_ratio
+	end
+	
+	# Droplet state vₜ = 0 
+	norm_lam3 = Q_lam3[end, 1]
+	# Plot 
+	plot(l1_sin_0.t_norm,		 			# x-axis
+		 Q_lam3 ./ norm_lam3,	     		# y-axis     
+		 label=labs_lam1, 					# labels
+		 xlabel="t/t₀", 					# x-axis label
+		 ylabel="Q/Q₀",						# y-axis label
+		 # yaxis=:log,
+		 ylim = (0.75,1.5),
+		 w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+		 legendfontsize = leg_size,			# legend font size
+         tickfont = (tick_size, "Arial"),	# tick font and size
+         guidefont = (label_size, "Arial"),	# label font and size
+	     grid = :none,						# grid variable
+		 legend=:bottomright)						# legend position
 end
-
-# ╔═╡ 09738b09-e9fa-4e1c-ac1c-7188dffae796
-vol_try(512^2/8, 16)
 
 # ╔═╡ Cell order:
 # ╟─3a80dbae-59b8-11eb-11c8-1b4ed01e73f5
@@ -826,22 +1039,38 @@ vol_try(512^2/8, 16)
 # ╠═3e139540-7b6b-11eb-0671-c5e4c87e6b21
 # ╟─57585d80-7b6e-11eb-18b3-339ab0f601af
 # ╠═d2fba1b6-bcd4-457e-82e1-3c9fa2922ba4
+# ╟─fd0ed361-6317-48aa-b01e-34613db17ed1
+# ╠═b11ddc3c-0820-4cc3-b7e1-c67407a87685
+# ╟─4117f552-f93d-4de4-819b-d1e352a9e182
 # ╠═83464630-7b6b-11eb-0611-2bffbe393b19
-# ╠═8d9c7750-90a4-11eb-2b94-536b29526c8d
-# ╠═db935ef0-90b9-11eb-16c0-7702a2d7679a
-# ╠═77b24122-7b6b-11eb-2036-41d8d55f985a
+# ╟─c9ee5190-d362-43f9-94e7-de9b395d55fb
+# ╠═fff30b64-d5bb-41df-91bc-ebb2492981ec
+# ╠═13eaf81b-3e3c-4678-a644-0d6aa5629188
+# ╠═9d84d4e2-d81d-4874-a656-8ff2624a7f1d
+# ╠═7344c1d9-5d87-4b4d-8264-3043b162c49f
+# ╠═4227b4c1-8629-4062-b9d7-1c87b522c761
+# ╟─77b24122-7b6b-11eb-2036-41d8d55f985a
 # ╠═598d0cd2-59b9-11eb-0a8b-a1938e2c3c43
 # ╟─751f6650-7ce1-11eb-3bfe-a1f01e765cf4
 # ╠═d8a75470-7ce2-11eb-356d-63c3da69b9f0
 # ╠═f6d13570-8281-11eb-0f64-771e22a6b27d
 # ╟─268c8790-8284-11eb-0511-e367b9211e74
-# ╠═378cfcd0-8349-11eb-1ad0-8939849c2c1e
+# ╟─378cfcd0-8349-11eb-1ad0-8939849c2c1e
 # ╠═a13e4120-8641-11eb-0c7b-b366d42b115c
 # ╟─f5076320-834b-11eb-3d3d-0380c1997163
+# ╠═b4879bcc-51de-46fc-892b-c2bcf44e21b3
+# ╟─a02e45b0-bc1b-4210-9f2f-ae72ed92357b
 # ╠═0ed0c180-834b-11eb-3f40-b1243e850675
-# ╠═56e7d3e2-859f-11eb-26ec-996629c4b3d1
-# ╠═3de90bb0-8654-11eb-1d63-6324f3d13170
-# ╠═edbffab0-85a2-11eb-1928-690f7101c1ff
-# ╠═e1feb1d0-85a7-11eb-0f66-dd1f03ccd405
-# ╠═75d4d05d-0154-4ae7-9708-0ad8f16ee1d2
-# ╠═09738b09-e9fa-4e1c-ac1c-7188dffae796
+# ╠═f40c617d-ce54-4788-bd23-bd8462469b11
+# ╠═ee710208-b363-42b3-b811-efed2dc963a9
+# ╠═920e803d-f050-4854-834b-21f0ad94e8b1
+# ╠═0ebaff68-636c-4d98-95ee-0d770aaf5499
+# ╟─0067688c-d991-4071-940f-73a8609c356c
+# ╠═1f4ec6d2-d458-4760-a3b6-4f41348dd178
+# ╠═b45279f3-05f5-4933-a08c-8e7e4b5c7ce5
+# ╠═8682aebe-44ee-4a06-a245-3863f9b8b090
+# ╠═fcae1759-26d7-4bd6-b46e-f4a84d3b366c
+# ╟─dfc66579-f6f6-443e-aa42-3ecf7fe8f8cf
+# ╠═388f9c8a-4723-4056-a329-732591a70077
+# ╠═c457ddb6-e0af-49c2-bfc4-a8014bd12fbb
+# ╠═e15b167a-b50a-4431-8a3b-a2a06341c1ea
