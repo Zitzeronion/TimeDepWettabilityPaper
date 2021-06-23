@@ -1,14 +1,11 @@
 ### A Pluto.jl notebook ###
-# v0.14.4
+# v0.14.5
 
 using Markdown
 using InteractiveUtils
 
 # ╔═╡ 337c79a0-a814-11eb-17c1-edcc877c1d00
 using DataFrames, CSV, Plots, HTTP, DataFramesMeta, Query
-
-# ╔═╡ 2c53ffd9-ff67-4018-b07c-45c778abae09
-default(titlefont = (20, "Arial"), legendfontsize = (18, "Arial"), guidefont = (18, "Arial"), tickfont = (16, "Arial"))
 
 # ╔═╡ bf40b942-92b6-4488-8a08-ce4c88b13a57
 df_delta_h = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/height_differences.csv?inline=false").body) |> DataFrame
@@ -289,7 +286,6 @@ end
 
 # ╔═╡ Cell order:
 # ╠═337c79a0-a814-11eb-17c1-edcc877c1d00
-# ╠═2c53ffd9-ff67-4018-b07c-45c778abae09
 # ╠═bf40b942-92b6-4488-8a08-ce4c88b13a57
 # ╠═55bd1b7e-592d-4ff5-8fe7-a1a87a4522ad
 # ╠═b3237aee-707e-4a88-9ead-784b8e553b97

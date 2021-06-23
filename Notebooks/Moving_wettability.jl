@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.14.5
+# v0.14.8
 
 using Markdown
 using InteractiveUtils
@@ -285,7 +285,7 @@ begin
 end
 
 # ╔═╡ 3d56e346-49b8-4e86-b43d-2d812c94c072
-savefig(v0_plot, "..\\Figures\\v0_dh_sine_with_const.pdf")
+savefig(v0_plot, "..\\Figures\\v0_dh_sine_with_const.svg")
 
 # ╔═╡ fafe381e-0baf-40c1-b127-67b7f8c1a902
 begin
@@ -324,7 +324,7 @@ begin
 end
 
 # ╔═╡ cc64aa01-953e-49fd-8301-9be1f244437d
-savefig(c_v0_plot, "..\\Figures\\v0_clusters_sine.pdf")
+savefig(c_v0_plot, "..\\Figures\\v0_clusters_sine.svg")
 
 # ╔═╡ e82faaad-5278-4d8f-982b-fca335bbd006
 md"
@@ -369,7 +369,7 @@ end
 
 # ╔═╡ bb659f3a-0a01-4f40-81ce-a8c13a34250b
 # Here the command to save the figure
-savefig(fig_lam1, "..\\Figures\\dh_t_lam1_all_v.pdf")
+savefig(fig_lam1, "..\\Figures\\dh_t_lam1_all_v.svg")
 
 # ╔═╡ 0ec47530-59b9-11eb-0c49-2b70d7e37d4d
 md"""
@@ -529,7 +529,7 @@ rts_save = scatter(lambdas,							# x-data
 		    )
 
 # ╔═╡ 13eaf81b-3e3c-4678-a644-0d6aa5629188
-savefig(rts_save, "..\\Figures\\rupture_time.pdf")
+savefig(rts_save, "..\\Figures\\rupture_time.svg")
 
 # ╔═╡ 9d84d4e2-d81d-4874-a656-8ff2624a7f1d
 md"### Linear pattern
@@ -736,16 +736,49 @@ begin
          tickfont = (tick_size, "Arial"),	# tick font and size
          guidefont = (label_size, "Arial"),	# label font and size
 	     grid = :none,						# grid variable
+		 title="Sine λ=1",
+		 legend=:topright)				    # legend position
+end
+
+# ╔═╡ affe8679-f56c-4564-b6c9-d4e17f890a12
+begin
+	wave_here = 3
+	q2_data_lam1_lin = zeros(998, 4)
+	for i in enumerate([0.0 0.1 1.0 10.0])
+		filtered = @linq all_data |>
+			where(:threshold .== thresh) |>
+			where(:lambda .== wave_here) |>
+			where(:vel_norm .== i[2]) |>
+			where(:pattern .== 2.0) |>
+			select(:q2, :q3, :q4, :q5, :q6, :q7, :q8, :isoperi_ratio, :anisotro_ind, :t_norm)
+		replace!(filtered.q2, NaN => 0.0)
+		q2_data_lam1_lin[:, i[1]] = filtered.q2
+	end
+	plot(l1_sin_0.t_norm,		 			# x-axis
+		 q2_data_lam1_lin,	     				# y-axis     
+		 label=labs_lam1, 					# labels
+		 xlabel="t/t₀", 					# x-axis label
+		 ylabel="q₂",						# y-axis label
+		 w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+		 legendfontsize = leg_size,			# legend font size
+         tickfont = (tick_size, "Arial"),	# tick font and size
+         guidefont = (label_size, "Arial"),	# label font and size
+	     grid = :none,						# grid variable
+		 title="Lin. λ=$(wave_here)",
 		 legend=:topright)				    # legend position
 end
 
 # ╔═╡ f40c617d-ce54-4788-bd23-bd8462469b11
 begin
+	lh = 2
 	q2_data_lam2 = zeros(998, 4)
 	for i in enumerate([0.0 0.1 1.0 10.0])
 		filtered = @linq all_data |>
 			where(:threshold .== thresh) |>
-			where(:lambda .== 2) |>
+			where(:lambda .== lh) |>
 			where(:vel_norm .== i[2]) |>
 			where(:pattern .== pat) |>
 			select(:q2, :q3, :q4, :q5, :q6, :q7, :q8, :isoperi_ratio, :anisotro_ind, :t_norm)
@@ -765,6 +798,7 @@ begin
          tickfont = (tick_size, "Arial"),	# tick font and size
          guidefont = (label_size, "Arial"),	# label font and size
 	     grid = :none,						# grid variable
+		 title="Sine λ=$(lh)",
 		 legend=:topright)					# legend position
 end
 
@@ -797,6 +831,7 @@ begin
          tickfont = (tick_size, "Arial"),	# tick font and size
          guidefont = (label_size, "Arial"),	# label font and size
 	     grid = :none,						# grid variable
+		 title="Sine λ=3",
 		 legend=:topright)					# legend position
 end
 
@@ -832,6 +867,7 @@ begin
          tickfont = (tick_size, "Arial"),	# tick font and size
          guidefont = (label_size, "Arial"),	# label font and size
 	     grid = :none,						# grid variable
+		 title="Sine λ=1",
 		 legend=:topright)					# legend position
 end
 
@@ -861,11 +897,12 @@ begin
          tickfont = (tick_size, "Arial"),	# tick font and size
          guidefont = (label_size, "Arial"),	# label font and size
 	     grid = :none,						# grid variable
+		 # title="Sine λ=2",
 		 legend=:topright)					# legend position
 end
 
 # ╔═╡ 8682aebe-44ee-4a06-a245-3863f9b8b090
-savefig(q3_lam2, "..\\Figures\\q3_lam2.pdf")
+savefig(q3_lam2, "..\\Figures\\q3_lam2.svg")
 
 # ╔═╡ fcae1759-26d7-4bd6-b46e-f4a84d3b366c
 begin
@@ -893,6 +930,7 @@ begin
          tickfont = (tick_size, "Arial"),	# tick font and size
          guidefont = (label_size, "Arial"),	# label font and size
 	     grid = :none,						# grid variable
+		 title="Sine λ=3",
 		 legend=:top)						# legend position
 end
 
@@ -1010,6 +1048,44 @@ begin
 		 legend=:bottomright)						# legend position
 end
 
+# ╔═╡ 24520c51-e2ee-46c8-9290-cd0ee586a571
+md"### Maxima of q₂
+
+Since we have a lot of data it is not always helpful to show more.
+One simple but hopefully insightful metric is the maximal value of q₂
+```math
+	q_2 = \frac{|\psi_2|}{\psi_0},
+```
+where we take the maximum of the time dependent value.
+
+" 
+
+# ╔═╡ b20a43cf-873b-4c9d-a78b-9c447bfdd5cf
+begin
+	max_q2s = zeros(3,4)
+	for ll in [1, 2, 3]
+		for i in enumerate([0 0.1 1.0 10.0])
+			filtered = @linq all_data |>
+				where(:threshold .== thresh) |>
+				where(:lambda .== ll) |>
+				where(:vel_norm .== i[2]) |>
+				where(:pattern .== pat) |>
+				select(:q2)
+			replace!(filtered.q2, NaN => 0.0)
+			max_q2s[ll, i[1]] = maximum(filtered.q2)
+		end
+	end
+	wa = [1,1,1,1,2,2,2,2,3,3,3,3]
+	vss = repeat([0, 0.1, 1, 10],3)
+	p1 = scatter(wa[1:4], vss[1:4], max_q2s[1,:], xlabel="λ", ylabel="vₜ", zlabel="maxᵪ")
+	scatter!(wa[5:8], vss[5:8], max_q2s[2,:])
+	scatter!(wa[8:12], vss[8:12], max_q2s[3,:])
+	
+end
+
+# ╔═╡ 544a78ed-074b-47ee-965f-0f5d72ec82aa
+max_q2s
+
 # ╔═╡ Cell order:
 # ╟─3a80dbae-59b8-11eb-11c8-1b4ed01e73f5
 # ╟─1151bf70-865e-11eb-044e-6d28c3bfce41
@@ -1052,8 +1128,8 @@ end
 # ╟─77b24122-7b6b-11eb-2036-41d8d55f985a
 # ╠═598d0cd2-59b9-11eb-0a8b-a1938e2c3c43
 # ╟─751f6650-7ce1-11eb-3bfe-a1f01e765cf4
-# ╠═d8a75470-7ce2-11eb-356d-63c3da69b9f0
-# ╠═f6d13570-8281-11eb-0f64-771e22a6b27d
+# ╟─d8a75470-7ce2-11eb-356d-63c3da69b9f0
+# ╟─f6d13570-8281-11eb-0f64-771e22a6b27d
 # ╟─268c8790-8284-11eb-0511-e367b9211e74
 # ╟─378cfcd0-8349-11eb-1ad0-8939849c2c1e
 # ╠═a13e4120-8641-11eb-0c7b-b366d42b115c
@@ -1061,6 +1137,7 @@ end
 # ╠═b4879bcc-51de-46fc-892b-c2bcf44e21b3
 # ╟─a02e45b0-bc1b-4210-9f2f-ae72ed92357b
 # ╠═0ed0c180-834b-11eb-3f40-b1243e850675
+# ╠═affe8679-f56c-4564-b6c9-d4e17f890a12
 # ╠═f40c617d-ce54-4788-bd23-bd8462469b11
 # ╠═ee710208-b363-42b3-b811-efed2dc963a9
 # ╠═920e803d-f050-4854-834b-21f0ad94e8b1
@@ -1074,3 +1151,6 @@ end
 # ╠═388f9c8a-4723-4056-a329-732591a70077
 # ╠═c457ddb6-e0af-49c2-bfc4-a8014bd12fbb
 # ╠═e15b167a-b50a-4431-8a3b-a2a06341c1ea
+# ╠═24520c51-e2ee-46c8-9290-cd0ee586a571
+# ╠═b20a43cf-873b-4c9d-a78b-9c447bfdd5cf
+# ╠═544a78ed-074b-47ee-965f-0f5d72ec82aa
