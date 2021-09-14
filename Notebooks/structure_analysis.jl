@@ -5,11 +5,14 @@ using Markdown
 using InteractiveUtils
 
 # ╔═╡ 3832de4e-a82b-11eb-08b3-0184778c8ef7
-using DataFrames, CSV, Plots, HTTP, DataFramesMeta, Query
+using DataFrames, CSV, Plots, HTTP, DataFramesMeta, Query, JDF
 
 # ╔═╡ 7488404c-a534-4096-a0ea-c927acf352b4
 # Plots default fonts and font sizes, could add colors as well
-default(titlefont = (20, "Arial"), legendfontsize = (18, "Arial"), guidefont = (18, "Arial"), tickfont = (16, "Arial"))
+# default(titlefont = (20, "Arial"), legendfontsize = (18, "Arial"), guidefont = (18, "Arial"), tickfont = (16, "Arial"))
+
+# ╔═╡ 715db181-d61f-4460-80c1-fa72d9e51847
+pwd()
 
 # ╔═╡ 8dbd5bc3-008f-4704-9ca0-b7ee4632a932
 @recipe function f(::Type{Val{:samplemarkers}}, x, y, z; step = 10)
@@ -42,8 +45,174 @@ end
 # ╔═╡ 8549e36b-a0a2-42d2-a7f1-6ebbf9ebe5df
 all_data = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/Data_with_t0_Q_beta.csv?inline=false").body) |> DataFrame
 
+# ╔═╡ 32f54d38-2b4d-4da0-b9f5-1a1c92654922
+lam2_vel2 =  DataFrame(JDF.load("E:\\JuliaStuff\\Data_PhD\\Minkovski_analysis\\Minkovski_sine_2_v2.jdf"))
+
+# ╔═╡ 13cf24d2-dd89-4393-a89a-dcc7f1eef101
+lam2_vel2_new =  DataFrame(JDF.load("E:\\JuliaStuff\\Data_PhD\\Minkovski_analysis\\Minkovski_sine_4_v2.jdf"))
+
+# ╔═╡ 5d8b33f1-8bef-4d48-b607-8e883588fdda
+function t0(;hᵦ=0.07, γ=0.01, μ=1/6, θ=1/6)
+    qsq = hᵦ * (1 - cospi(θ)) * (2 - 3 * hᵦ) 
+    charT = 3 * μ / (γ * qsq^2)
+
+    return charT
+end
+
+# ╔═╡ 36d5635e-f33c-4639-8f2b-63089f153bbb
+function df_polish(df::DataFrame)
+	len = size(df)[1]
+	df[!, :vel_norm] = zeros(len)
+	df[!, :isoperi_ratio] = zeros(len)
+	df[!, :anisotro_ind] = zeros(len)
+	df[!, :t_norm] = zeros(len)
+	for i in 1:len
+		if Int(df.velocity[i]) == 49
+			dfvel_norm[i] = 10
+		elseif Int(df.velocity[i]) == 490
+			if df.lambda[i] == 1
+				df.vel_norm[i] = 1
+			elseif df.lambda[i] == 2
+				df.vel_norm[i] = 2
+			end
+		elseif Int(df.velocity[i]) == 245
+			df.vel_norm[i] = 4
+		elseif Int(df.velocity[i]) == 164
+			df.vel_norm[i] = 6
+		elseif Int(df.velocity[i]) == 123
+			df.vel_norm[i] = 8
+		elseif Int(df.velocity[i]) == 4900
+			df.vel_norm[i] = 0.1
+		elseif Int(df.velocity[i]) == 98
+			df.vel_norm[i] = 10
+		elseif Int(df.velocity[i]) == 980
+			df.vel_norm[i] = 1
+		elseif Int(df.velocity[i]) == 9802
+			df.vel_norm[i] = 0.1
+		elseif Int(df.velocity[i]) == 147
+			df.vel_norm[i] = 10
+		elseif Int(df.velocity[i]) == 1470
+			df.vel_norm[i] = 1
+		elseif Int(df.velocity[i]) == 14702
+			df.vel_norm[i] = 0.1
+		end
+		df.isoperi_ratio[i] = 4π*df.area[i]/df.perim[i]
+		df.anisotro_ind[i] = (1-df.q2[i]) / (1+df.q2[i])
+		df.t_norm[i] = df.timestep[i] * 5000 / t0()
+	end
+	return df
+end
+
+# ╔═╡ 40cecc8e-2d07-4a10-b668-d50db2dfd1fe
+lam2vel2 = df_polish(lam2_vel2)
+
+# ╔═╡ 2a31eb29-2553-4e64-b27a-44f1875198f2
+lam2vel2468 = df_polish(lam2_vel2_new)
+
+# ╔═╡ 84c279cd-72fd-4513-91ca-764b9d012807
+combined = vcat(all_data, lam2vel2468)
+
+# ╔═╡ 27ef18b9-b9c8-4bdf-8e95-73c88346aaad
+CSV.write("E:\\timedependent_wettability\\Data_CSV\\morph_data_with_l2_v-2-4-6-8.csv", combined)
+
+# ╔═╡ cb8ddc00-481b-4ee4-ab3f-dfff43dd23e2
+lam2vel2.velocity[2900:2920]
+
+# ╔═╡ 9d35366c-2789-4dec-9821-e26c1e730e92
+begin
+	l2_v2 = @linq lam2vel2468 |>
+			where(:threshold .== 15) |>
+			where(:lambda .== 2.0) |>
+			where(:velocity .== 490.0) |>
+			# where(:pattern .== 1) |>
+			select(:q2, :q3, :q4, :t_norm)
+	replace!(l2_v2.q2, NaN => 0.0)
+	l2_v4 = @linq lam2vel2468 |>
+			where(:threshold .== 15) |>
+			where(:lambda .== 2.0) |>
+			where(:velocity .== 245.0) |>
+			# where(:pattern .== 1) |>
+			select(:q2, :q3, :q4, :t_norm)
+	replace!(l2_v4.q2, NaN => 0.0)
+	l2_v6 = @linq lam2vel2468 |>
+			where(:threshold .== 15) |>
+			where(:lambda .== 2.0) |>
+			where(:velocity .== 164.0) |>
+			# where(:pattern .== 1) |>
+			select(:q2, :q3, :q4, :t_norm)
+	replace!(l2_v6.q2, NaN => 0.0)
+	l2_v8 = @linq lam2vel2468 |>
+			where(:threshold .== 15) |>
+			where(:lambda .== 2.0) |>
+			where(:velocity .== 123.0) |>
+			# where(:pattern .== 1) |>
+			select(:q2, :q3, :q4, :t_norm)
+	replace!(l2_v8.q2, NaN => 0.0)
+	stability_plot = plot(l2_v2.t_norm, l2_v2.q2, label="v=2v₀")
+	plot!(l2_v2.t_norm, l2_v4.q2, label="v=4v₀")
+	plot!(l2_v2.t_norm, l2_v6.q2, label="v=6v₀")
+	plot!(l2_v2.t_norm, l2_v8.q2, label="v=8v₀")
+	
+	
+end
+
+# ╔═╡ ebc6d193-64ba-4332-ae18-840778cc9674
+savefig(stability_plot, "..\\Figures\\q2_lam2_vel_2_4_6_8.pdf")
+
+# ╔═╡ f9affa2d-b34e-468f-b79f-58a51136de72
+all_data_new = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/Data_with_lam2_vel-2-4-6-8.csv?inline=false").body) |> DataFrame
+
+# ╔═╡ ae00a920-37f7-4612-b311-8b8ca9419b6c
+begin
+	lam = 1
+	thresh = 15
+	vel = 0.0
+	vel_cont = 1.0
+	pat = 1
+	l1_sin_0 = @linq all_data |>
+		where(:threshold .== thresh) |>
+		where(:lambda .== lam) |>
+		where(:vel_norm .== vel) |>
+		where(:pattern .== pat) |>
+		select(:q2, :q3, :q4, :q5, :q6, :q7, :q8, :isoperi_ratio, :anisotro_ind, :t_norm)
+end
+
+# ╔═╡ 7847d309-d6b4-48ce-8504-25aeb00dce45
+begin
+	labs_vels = ["vₜ=0" "vₜ=0.1v₀" "vₜ=1v₀" "vₜ=10v₀"]
+	lh = 2
+	q2_data_lam2 = zeros(998, 4)
+	t_data = zeros(998)
+	for i in enumerate([0.0 0.1 1.0 10.0])
+		filtered = @linq all_data |>
+			where(:threshold .== thresh) |>
+			where(:lambda .== lh) |>
+			where(:vel_norm .== i[2]) |>
+			where(:pattern .== pat) |>
+			select(:q2, :q3, :q4, :q5, :q6, :q7, :q8, :isoperi_ratio, :anisotro_ind, :t_norm)
+		replace!(filtered.q2, NaN => 0.0)
+		t_data = filtered.t_norm
+		q2_data_lam2[:, i[1]] = filtered.q2
+	end
+	q2_lam2_plot = plot(l1_sin_0.t_norm,		 			# x-axis
+		 q2_data_lam2,	     				# y-axis     
+		 label=labs_vels, 					# labels
+		 xlabel="t/t₀", 					# x-axis label
+		 ylabel="q₂",						# y-axis label
+		 w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+		 legendfontsize = 18,			# legend font size
+         tickfont = (16, "Arial"),	# tick font and size
+         guidefont = (18, "Arial"),	# label font and size
+	     grid = :none,						# grid variable
+		 title="Sine λ=$(lh)",
+		 legend=:topright)					# legend position
+end
+
 # ╔═╡ f59adb20-e6cb-4108-8da8-e491238a287d
-scatter(1:10, 10:20)
+
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -52,6 +221,7 @@ CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 DataFramesMeta = "1313f7d8-7da2-5740-9ea0-a2ca25f37964"
 HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
+JDF = "babc3d20-cd49-4f60-a736-a8f9c08892d3"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 Query = "1a8c2f83-1ff3-5112-b086-8aa67b057ba1"
 
@@ -60,6 +230,7 @@ CSV = "~0.9.1"
 DataFrames = "~1.2.2"
 DataFramesMeta = "~0.9.1"
 HTTP = "~0.9.14"
+JDF = "~0.4.4"
 Plots = "~1.21.3"
 Query = "~1.0.0"
 """
@@ -83,6 +254,24 @@ uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
 [[Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
+[[Blosc]]
+deps = ["Blosc_jll"]
+git-tree-sha1 = "84cf7d0f8fd46ca6f1b3e0305b4b4a37afe50fd6"
+uuid = "a74b3585-a348-5f62-a45c-50e91977d574"
+version = "0.7.0"
+
+[[Blosc_jll]]
+deps = ["Artifacts", "JLLWrappers", "Libdl", "Lz4_jll", "Pkg", "Zlib_jll", "Zstd_jll"]
+git-tree-sha1 = "e747dac84f39c62aff6956651ec359686490134e"
+uuid = "0b7ba130-8d10-5ba8-a3d6-c5182647fed9"
+version = "1.21.0+0"
+
+[[BufferedStreams]]
+deps = ["Compat", "Test"]
+git-tree-sha1 = "5d55b9486590fdda5905c275bb21ce1f0754020f"
+uuid = "e1450e63-4bb3-523b-b2a4-4ffa8c0fd77d"
+version = "1.0.0"
+
 [[Bzip2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "19a35467a82e236ff51bc17a3a44b69ef35185a2"
@@ -100,6 +289,12 @@ deps = ["Artifacts", "Bzip2_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll",
 git-tree-sha1 = "f2202b55d816427cd385a9a4f3ffb226bee80f99"
 uuid = "83423d85-b0ee-5818-9007-b63ccbeb887a"
 version = "1.16.1+0"
+
+[[CategoricalArrays]]
+deps = ["DataAPI", "Future", "JSON", "Missings", "Printf", "RecipesBase", "Statistics", "StructTypes", "Unicode"]
+git-tree-sha1 = "1562002780515d2573a4fb0c3715e4e57481075e"
+uuid = "324d7699-5711-5eae-9e2f-1d82baa6b597"
+version = "0.10.0"
 
 [[Chain]]
 git-tree-sha1 = "cac464e71767e8a04ceee82a889ca56502795705"
@@ -212,6 +407,11 @@ deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "b3bfd02e98aedfa5cf885665493c5598c350cd2f"
 uuid = "2e619515-83b5-522b-bb60-26c02a35a201"
 version = "2.2.10+0"
+
+[[ExprTools]]
+git-tree-sha1 = "b7e3d17636b348f005f11040025ae8c6f645fe92"
+uuid = "e2ba6199-217a-4e67-a87a-7c52f15ade04"
+version = "0.1.6"
 
 [[FFMPEG]]
 deps = ["FFMPEG_jll"]
@@ -355,6 +555,12 @@ git-tree-sha1 = "a3f24677c21f5bbe9d2a714f95dcd58337fb2856"
 uuid = "82899510-4779-5014-852e-03e436cf321d"
 version = "1.0.0"
 
+[[JDF]]
+deps = ["Blosc", "BufferedStreams", "CategoricalArrays", "DataAPI", "Missings", "PooledArrays", "Serialization", "StatsBase", "Tables", "TimeZones", "WeakRefStrings"]
+git-tree-sha1 = "19c1dc0ab41471719f13ba01102671dbce2899f6"
+uuid = "babc3d20-cd49-4f60-a736-a8f9c08892d3"
+version = "0.4.4"
+
 [[JLLWrappers]]
 deps = ["Preferences"]
 git-tree-sha1 = "642a199af8b68253517b80bd3bfd17eb4e84df6e"
@@ -395,6 +601,10 @@ deps = ["Formatting", "InteractiveUtils", "LaTeXStrings", "MacroTools", "Markdow
 git-tree-sha1 = "a4b12a1bd2ebade87891ab7e36fdbce582301a92"
 uuid = "23fbe1c1-3f47-55db-b15f-69d7ec21a316"
 version = "0.15.6"
+
+[[LazyArtifacts]]
+deps = ["Artifacts", "Pkg"]
+uuid = "4af54fe1-eca0-43a8-85a7-787d91b784e3"
 
 [[LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
@@ -470,6 +680,12 @@ uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 [[Logging]]
 uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
 
+[[Lz4_jll]]
+deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
+git-tree-sha1 = "5d494bc6e85c4c9b626ee0cab05daa4085486ab1"
+uuid = "5ced341a-0733-55b8-9ab6-a4889d929147"
+version = "1.9.3+0"
+
 [[MacroTools]]
 deps = ["Markdown", "Random"]
 git-tree-sha1 = "5a5bc6bf062f0f95e62d0fe0a2d99699fed82dd9"
@@ -503,6 +719,12 @@ version = "1.0.1"
 
 [[Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
+
+[[Mocking]]
+deps = ["ExprTools"]
+git-tree-sha1 = "748f6e1e4de814b101911e64cc12d83a6af66782"
+uuid = "78c3b35d-d492-501b-9361-3d52fe80e533"
+version = "0.7.2"
 
 [[MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
@@ -716,6 +938,12 @@ git-tree-sha1 = "f41020e84127781af49fc12b7e92becd7f5dd0ba"
 uuid = "09ab397b-f2b6-538f-b94a-2f83cf4a842a"
 version = "0.6.2"
 
+[[StructTypes]]
+deps = ["Dates", "UUIDs"]
+git-tree-sha1 = "8445bf99a36d703a09c601f9a57e2f83000ef2ae"
+uuid = "856f2bd8-1eba-4b0a-8007-ebc267875bd4"
+version = "1.7.3"
+
 [[TOML]]
 deps = ["Dates"]
 uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
@@ -751,6 +979,12 @@ uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
 [[Test]]
 deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
 uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[[TimeZones]]
+deps = ["Dates", "Future", "LazyArtifacts", "Mocking", "Pkg", "Printf", "RecipesBase", "Serialization", "Unicode"]
+git-tree-sha1 = "6c9040665b2da00d30143261aea22c7427aada1c"
+uuid = "f269a46b-ccf7-5d73-abea-4c690281aa53"
+version = "1.5.7"
 
 [[TranscodingStreams]]
 deps = ["Random", "Test"]
@@ -990,8 +1224,23 @@ version = "0.9.1+5"
 # ╔═╡ Cell order:
 # ╠═3832de4e-a82b-11eb-08b3-0184778c8ef7
 # ╠═7488404c-a534-4096-a0ea-c927acf352b4
-# ╠═8dbd5bc3-008f-4704-9ca0-b7ee4632a932
+# ╠═715db181-d61f-4460-80c1-fa72d9e51847
+# ╟─8dbd5bc3-008f-4704-9ca0-b7ee4632a932
 # ╠═8549e36b-a0a2-42d2-a7f1-6ebbf9ebe5df
+# ╠═32f54d38-2b4d-4da0-b9f5-1a1c92654922
+# ╠═13cf24d2-dd89-4393-a89a-dcc7f1eef101
+# ╠═5d8b33f1-8bef-4d48-b607-8e883588fdda
+# ╠═36d5635e-f33c-4639-8f2b-63089f153bbb
+# ╠═40cecc8e-2d07-4a10-b668-d50db2dfd1fe
+# ╠═2a31eb29-2553-4e64-b27a-44f1875198f2
+# ╠═84c279cd-72fd-4513-91ca-764b9d012807
+# ╠═27ef18b9-b9c8-4bdf-8e95-73c88346aaad
+# ╠═cb8ddc00-481b-4ee4-ab3f-dfff43dd23e2
+# ╠═9d35366c-2789-4dec-9821-e26c1e730e92
+# ╠═ebc6d193-64ba-4332-ae18-840778cc9674
+# ╠═f9affa2d-b34e-468f-b79f-58a51136de72
+# ╠═ae00a920-37f7-4612-b311-8b8ca9419b6c
+# ╠═7847d309-d6b4-48ce-8504-25aeb00dce45
 # ╠═f59adb20-e6cb-4108-8da8-e491238a287d
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
