@@ -115,8 +115,13 @@ combined = vcat(all_data, lam2vel2468)
 # ╔═╡ 27ef18b9-b9c8-4bdf-8e95-73c88346aaad
 CSV.write("E:\\timedependent_wettability\\Data_CSV\\morph_data_with_l2_v-2-4-6-8.csv", combined)
 
-# ╔═╡ cb8ddc00-481b-4ee4-ab3f-dfff43dd23e2
-lam2vel2.velocity[2900:2920]
+# ╔═╡ f91f9a43-5eb6-4299-8dca-a4da6ac977db
+@linq lam2vel2468 |>
+			where(:threshold .== 15) |>
+			where(:lambda .== 2.0) |>
+			where(:velocity .== 245.0) |>
+			# where(:pattern .== 1) |>
+			select(:q2, :q3, :q4, :t_norm)
 
 # ╔═╡ 9d35366c-2789-4dec-9821-e26c1e730e92
 begin
@@ -159,9 +164,6 @@ end
 # ╔═╡ ebc6d193-64ba-4332-ae18-840778cc9674
 savefig(stability_plot, "..\\Figures\\q2_lam2_vel_2_4_6_8.pdf")
 
-# ╔═╡ f9affa2d-b34e-468f-b79f-58a51136de72
-all_data_new = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/Data_with_lam2_vel-2-4-6-8.csv?inline=false").body) |> DataFrame
-
 # ╔═╡ ae00a920-37f7-4612-b311-8b8ca9419b6c
 begin
 	lam = 1
@@ -169,7 +171,7 @@ begin
 	vel = 0.0
 	vel_cont = 1.0
 	pat = 1
-	l1_sin_0 = @linq all_data |>
+	l1_sin_0 = @linq combined |>
 		where(:threshold .== thresh) |>
 		where(:lambda .== lam) |>
 		where(:vel_norm .== vel) |>
@@ -212,7 +214,142 @@ begin
 end
 
 # ╔═╡ f59adb20-e6cb-4108-8da8-e491238a287d
+md"## Stability of the rivulet structures
 
+The stability of these structures is measured in terms of a time.
+Their metastability leads necessary to a pure droplet state and `q₂` is sensitive to that breakup.
+Therefore whenever `q₂` is below the threshold the rivulet has been broken.
+
+This is what is measured in the following.
+"
+
+# ╔═╡ 2cd5c9ce-1689-427d-8eaa-eda548a64764
+begin
+	# The first data set 
+	for i in enumerate([0.0 0.1 1.0 10.0])
+		filtered = @linq all_data |>
+			where(:threshold .== thresh) |>
+			where(:lambda .== lh) |>
+			where(:vel_norm .== i[2]) |>
+			where(:pattern .== pat) |>
+			select(:q2, :q3, :q4, :q5, :q6, :q7, :q8, :isoperi_ratio, :anisotro_ind, :t_norm)
+		replace!(filtered.q2, NaN => 0.0)
+		t_data = filtered.t_norm
+		q2_data_lam2[:, i[1]] = filtered.q2
+	end
+	# The new data set with v = 2, 4, 6, 8
+	labs_vels_2 = ["vₜ=2v₀" "vₜ=4v₀" "vₜ=6v₀" "vₜ=8v₀"]
+	q2_data_lam2_other = zeros(993, 4)
+	t_data_other = zeros(993,4)
+	for i in enumerate([2.0 4.0 6.0 8.0])
+		filtered = @linq combined |>
+			where(:threshold .== thresh) |>
+			where(:lambda .== lh) |>
+			where(:vel_norm .== i[2]) |>
+			where(:pattern .== pat) |>
+			select(:q2, :q3, :q4, :q5, :q6, :q7, :q8, :isoperi_ratio, :anisotro_ind, :t_norm)
+		replace!(filtered.q2, NaN => 0.0)
+		t_data_other[:, i[1]] = filtered.t_norm
+		q2_data_lam2_other[:, i[1]] = filtered.q2
+	end
+	more_lines = plot(l1_sin_0.t_norm,		 			# x-axis
+		 q2_data_lam2,	     				# y-axis     
+		 label=labs_vels, 					# labels
+		 xlabel="t/t₀", 					# x-axis label
+		 ylabel="q₂",						# y-axis label
+		 w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+		 legendfontsize = 18,			# legend font size
+         tickfont = (16, "Arial"),	# tick font and size
+         guidefont = (18, "Arial"),	# label font and size
+	     grid = :none,						# grid variable
+		 title="Sine λ=$(lh)",
+		 # legend=:outertopright				# legend position
+		 )
+	plot!(t_data_other,		 			# x-axis
+		 q2_data_lam2_other,	     				# y-axis     
+		 label=labs_vels_2, 					# labels
+		 # xlabel="t/t₀", 					# x-axis label
+		 # ylabel="q₂",						# y-axis label
+		 w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+		 # legendfontsize = 18,			# legend font size
+		 # tickfont = (16, "Arial"),	# tick font and size
+		 # guidefont = (18, "Arial"),	# label font and size
+		 # grid = :none,						# grid variable
+		 # title="Sine λ=$(lh)",
+		 legend=false
+		)
+	hline!([0.625],  line = (3, :dash, 0.6, [:black]), label="stability")
+end
+
+# ╔═╡ 5cafdf48-4466-4c14-9f9b-d36b41899ce1
+savefig(stability_plot, "..\\Figures\\q2_lam2_all_vels.pdf")
+
+# ╔═╡ 353e0bfb-9537-482b-ac9d-cb017172c051
+begin
+	stab_data = zeros(710, 9)
+	for i in enumerate([0.0 0.1 1.0 2.0 4.0 6.0 8.0 10.0])
+		df = @linq combined |>
+			where(:threshold .== thresh) |>
+			where(:lambda .== lh) |>
+			where(:vel_norm .== i[2]) |>
+			where(:pattern .== pat) |>
+			where(25 .> :t_norm .> 5.0) |>
+			select(:q2, :vel_norm, :t_norm)
+		replace!(df.q2, NaN => 0.0)
+		stab_data[:, i[1]] = df.q2
+		stab_data[:, 9] = df.t_norm
+	end
+end
+
+# ╔═╡ fa414817-8a45-49b0-bee1-d5b240892d23
+begin
+	stab_df = DataFrame()
+	stab_df[!, :v00] = stab_data[:,1] 	
+	stab_df[!, :v01] = stab_data[:,2] 
+	stab_df[!, :v10] = stab_data[:,3] 	
+	stab_df[!, :v20] = stab_data[:,4] 	
+	stab_df[!, :v40] = stab_data[:,5] 	
+	stab_df[!, :v60] = stab_data[:,6] 	
+	stab_df[!, :v80] = stab_data[:,7]
+	stab_df[!, :vX0] = stab_data[:,8] 	
+	stab_df[!, :time] = stab_data[:,9] 	
+end
+
+# ╔═╡ 949c47f5-da23-40ab-9afc-179701e25ff0
+begin
+	t_stab = zeros(8)
+	size(stab_df[(0.622 .<= stab_df[!, :v00] .<= 0.628), [:v00, :time]])
+	for i in enumerate([:v00 :v01 :v10 :v20 :v40 :v60 :v80 :vX0])
+		if size(stab_df[(0.620 .<= stab_df[!, i[2]] .<= 0.630), [i[2], :time]])[1] > 0
+			t_stab[i[1]] = stab_df[(0.620 .<= stab_df[!, i[2]] .<= 0.630), [i[2], :time]][1,2]
+		else
+			t_stab[i[1]] = 0
+		end
+	end
+end
+
+# ╔═╡ e6274bde-2b48-4d6e-bf32-e7f0a1f19aab
+stab_plot = scatter([0.0, 0.1, 1.0, 2.0, 4.0, 6.0, 8.0, 10.0], 
+	 t_stab,
+	 xlabel="vₜ",
+	 ylabel="t/t₀",
+	 label="failur time",
+	 markersize = 11,
+     legend=:bottomright,
+	 legendfontsize = 12,			# legend font size
+     tickfont = (16, "Arial"),	# tick font and size
+     guidefont = (18, "Arial"),	# label font and size
+	 grid = :none,						# grid variable
+)
+
+# ╔═╡ a257abae-80c8-43ed-b665-93c85f2b8389
+savefig(stability_plot, "..\\Figures\\stab_lig_lam2.pdf")
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1235,12 +1372,18 @@ version = "0.9.1+5"
 # ╠═2a31eb29-2553-4e64-b27a-44f1875198f2
 # ╠═84c279cd-72fd-4513-91ca-764b9d012807
 # ╠═27ef18b9-b9c8-4bdf-8e95-73c88346aaad
-# ╠═cb8ddc00-481b-4ee4-ab3f-dfff43dd23e2
+# ╠═f91f9a43-5eb6-4299-8dca-a4da6ac977db
 # ╠═9d35366c-2789-4dec-9821-e26c1e730e92
 # ╠═ebc6d193-64ba-4332-ae18-840778cc9674
-# ╠═f9affa2d-b34e-468f-b79f-58a51136de72
 # ╠═ae00a920-37f7-4612-b311-8b8ca9419b6c
 # ╠═7847d309-d6b4-48ce-8504-25aeb00dce45
-# ╠═f59adb20-e6cb-4108-8da8-e491238a287d
+# ╟─f59adb20-e6cb-4108-8da8-e491238a287d
+# ╠═2cd5c9ce-1689-427d-8eaa-eda548a64764
+# ╠═5cafdf48-4466-4c14-9f9b-d36b41899ce1
+# ╠═353e0bfb-9537-482b-ac9d-cb017172c051
+# ╠═fa414817-8a45-49b0-bee1-d5b240892d23
+# ╠═949c47f5-da23-40ab-9afc-179701e25ff0
+# ╠═e6274bde-2b48-4d6e-bf32-e7f0a1f19aab
+# ╠═a257abae-80c8-43ed-b665-93c85f2b8389
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
