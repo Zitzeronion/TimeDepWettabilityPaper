@@ -349,7 +349,7 @@ stab_plot = scatter([0.0, 0.1, 1.0, 2.0, 4.0, 6.0, 8.0, 10.0],
 )
 
 # ╔═╡ a257abae-80c8-43ed-b665-93c85f2b8389
-savefig(stability_plot, "..\\Figures\\stab_lig_lam2.pdf")
+savefig(stab_plot, "..\\Figures\\stab_lig_lam2.pdf")
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
