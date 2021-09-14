@@ -335,7 +335,9 @@ begin
 end
 
 # ╔═╡ e6274bde-2b48-4d6e-bf32-e7f0a1f19aab
-stab_plot = scatter([0.0, 0.1, 1.0, 2.0, 4.0, 6.0, 8.0, 10.0], 
+begin
+	vel_set = [0.0, 0.1, 1.0, 2.0, 4.0, 6.0, 8.0, 10.0]
+	stab_plot = scatter(vel_set, 
 	 t_stab,
 	 xlabel="vₜ",
 	 ylabel="t/t₀",
@@ -346,10 +348,20 @@ stab_plot = scatter([0.0, 0.1, 1.0, 2.0, 4.0, 6.0, 8.0, 10.0],
      tickfont = (16, "Arial"),	# tick font and size
      guidefont = (18, "Arial"),	# label font and size
 	 grid = :none,						# grid variable
-)
+	)
+end
 
 # ╔═╡ a257abae-80c8-43ed-b665-93c85f2b8389
-savefig(stab_plot, "..\\Figures\\stab_lig_lam2.pdf")
+# savefig(stab_plot, "..\\Figures\\stab_lig_lam2.pdf")
+
+# ╔═╡ 4b7abc3d-a8ef-4c6c-903b-be4cea379c02
+begin
+	fitrange = collect(0.0:0.01:10.0)
+	plot!(fitrange, 2 .* log2.(80 .* fitrange), label="ln")
+	plot!(fitrange, 0.2 .* sqrt.(2000 .* fitrange), label="1/2")
+	plot!(fitrange, 2 .* cbrt.(200 .* fitrange), label="1/3")
+	plot!(fitrange, 2.5 .* (400 .* fitrange).^(1/4), label="1/4")
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1385,5 +1397,6 @@ version = "0.9.1+5"
 # ╠═949c47f5-da23-40ab-9afc-179701e25ff0
 # ╠═e6274bde-2b48-4d6e-bf32-e7f0a1f19aab
 # ╠═a257abae-80c8-43ed-b665-93c85f2b8389
+# ╠═4b7abc3d-a8ef-4c6c-903b-be4cea379c02
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
