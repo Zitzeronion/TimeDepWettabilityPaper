@@ -43,13 +43,10 @@ pwd()
 end
 
 # ╔═╡ 8549e36b-a0a2-42d2-a7f1-6ebbf9ebe5df
-all_data = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/Data_with_t0_Q_beta.csv?inline=false").body) |> DataFrame
+all_data = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/Data_with_t0_Q_beta.csv").body) |> DataFrame
 
 # ╔═╡ 32f54d38-2b4d-4da0-b9f5-1a1c92654922
-lam2_vel2 =  DataFrame(JDF.load("E:\\JuliaStuff\\Data_PhD\\Minkovski_analysis\\Minkovski_sine_2_v2.jdf"))
-
-# ╔═╡ 13cf24d2-dd89-4393-a89a-dcc7f1eef101
-lam2_vel2_new =  DataFrame(JDF.load("E:\\JuliaStuff\\Data_PhD\\Minkovski_analysis\\Minkovski_sine_4_v2.jdf"))
+combined = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/morph_data_with_l2_v-2-4-6-8.csv").body) |> DataFrame
 
 # ╔═╡ 5d8b33f1-8bef-4d48-b607-8e883588fdda
 function t0(;hᵦ=0.07, γ=0.01, μ=1/6, θ=1/6)
@@ -103,20 +100,11 @@ function df_polish(df::DataFrame)
 	return df
 end
 
-# ╔═╡ 40cecc8e-2d07-4a10-b668-d50db2dfd1fe
-lam2vel2 = df_polish(lam2_vel2)
-
-# ╔═╡ 2a31eb29-2553-4e64-b27a-44f1875198f2
-lam2vel2468 = df_polish(lam2_vel2_new)
-
-# ╔═╡ 84c279cd-72fd-4513-91ca-764b9d012807
-combined = vcat(all_data, lam2vel2468)
-
 # ╔═╡ 27ef18b9-b9c8-4bdf-8e95-73c88346aaad
 CSV.write("E:\\timedependent_wettability\\Data_CSV\\morph_data_with_l2_v-2-4-6-8.csv", combined)
 
 # ╔═╡ f91f9a43-5eb6-4299-8dca-a4da6ac977db
-@linq lam2vel2468 |>
+@linq combined |>
 			where(:threshold .== 15) |>
 			where(:lambda .== 2.0) |>
 			where(:velocity .== 245.0) |>
@@ -125,28 +113,28 @@ CSV.write("E:\\timedependent_wettability\\Data_CSV\\morph_data_with_l2_v-2-4-6-8
 
 # ╔═╡ 9d35366c-2789-4dec-9821-e26c1e730e92
 begin
-	l2_v2 = @linq lam2vel2468 |>
+	l2_v2 = @linq combined |>
 			where(:threshold .== 15) |>
 			where(:lambda .== 2.0) |>
 			where(:velocity .== 490.0) |>
 			# where(:pattern .== 1) |>
 			select(:q2, :q3, :q4, :t_norm)
 	replace!(l2_v2.q2, NaN => 0.0)
-	l2_v4 = @linq lam2vel2468 |>
+	l2_v4 = @linq combined |>
 			where(:threshold .== 15) |>
 			where(:lambda .== 2.0) |>
 			where(:velocity .== 245.0) |>
 			# where(:pattern .== 1) |>
 			select(:q2, :q3, :q4, :t_norm)
 	replace!(l2_v4.q2, NaN => 0.0)
-	l2_v6 = @linq lam2vel2468 |>
+	l2_v6 = @linq combined |>
 			where(:threshold .== 15) |>
 			where(:lambda .== 2.0) |>
 			where(:velocity .== 164.0) |>
 			# where(:pattern .== 1) |>
 			select(:q2, :q3, :q4, :t_norm)
 	replace!(l2_v6.q2, NaN => 0.0)
-	l2_v8 = @linq lam2vel2468 |>
+	l2_v8 = @linq combined |>
 			where(:threshold .== 15) |>
 			where(:lambda .== 2.0) |>
 			where(:velocity .== 123.0) |>
@@ -288,7 +276,8 @@ begin
 end
 
 # ╔═╡ 5cafdf48-4466-4c14-9f9b-d36b41899ce1
-savefig(stability_plot, "..\\Figures\\q2_lam2_all_vels.pdf")
+# savefig(more_lines, "..\\Figures\\q2_lam2_all_vels.pdf")
+savefig(more_lines, "../Figures/q2_lam2_all_vels.pdf")
 
 # ╔═╡ 353e0bfb-9537-482b-ac9d-cb017172c051
 begin
@@ -337,10 +326,12 @@ end
 # ╔═╡ e6274bde-2b48-4d6e-bf32-e7f0a1f19aab
 begin
 	vel_set = [0.0, 0.1, 1.0, 2.0, 4.0, 6.0, 8.0, 10.0]
-	stab_plot = scatter(vel_set, 
-	 t_stab,
+	stab_plot = scatter(vel_set[2:8], 
+	 t_stab[2:8],
 	 xlabel="vₜ",
 	 ylabel="t/t₀",
+	 xaxis=:log,
+	 # yaxis=:log,
 	 label="failur time",
 	 markersize = 11,
      legend=:bottomright,
@@ -353,6 +344,7 @@ end
 
 # ╔═╡ a257abae-80c8-43ed-b665-93c85f2b8389
 # savefig(stab_plot, "..\\Figures\\stab_lig_lam2.pdf")
+savefig(stab_plot, "../Figures/stab_lig_semilog.pdf")
 
 # ╔═╡ 4b7abc3d-a8ef-4c6c-903b-be4cea379c02
 begin
@@ -1377,12 +1369,8 @@ version = "0.9.1+5"
 # ╟─8dbd5bc3-008f-4704-9ca0-b7ee4632a932
 # ╠═8549e36b-a0a2-42d2-a7f1-6ebbf9ebe5df
 # ╠═32f54d38-2b4d-4da0-b9f5-1a1c92654922
-# ╠═13cf24d2-dd89-4393-a89a-dcc7f1eef101
 # ╠═5d8b33f1-8bef-4d48-b607-8e883588fdda
 # ╠═36d5635e-f33c-4639-8f2b-63089f153bbb
-# ╠═40cecc8e-2d07-4a10-b668-d50db2dfd1fe
-# ╠═2a31eb29-2553-4e64-b27a-44f1875198f2
-# ╠═84c279cd-72fd-4513-91ca-764b9d012807
 # ╠═27ef18b9-b9c8-4bdf-8e95-73c88346aaad
 # ╠═f91f9a43-5eb6-4299-8dca-a4da6ac977db
 # ╠═9d35366c-2789-4dec-9821-e26c1e730e92
