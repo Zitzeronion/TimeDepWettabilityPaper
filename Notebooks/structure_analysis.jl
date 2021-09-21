@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.16.0
+# v0.16.1
 
 using Markdown
 using InteractiveUtils
@@ -326,19 +326,21 @@ end
 # ╔═╡ e6274bde-2b48-4d6e-bf32-e7f0a1f19aab
 begin
 	vel_set = [0.0, 0.1, 1.0, 2.0, 4.0, 6.0, 8.0, 10.0]
-	stab_plot = scatter(vel_set[2:8], 
-	 t_stab[2:8],
-	 xlabel="vₜ",
+	stab_plot = scatter(vel_set, #[2:8] 
+	 t_stab, #[2:8]
+	 xlabel="vₜ/v₀",
 	 ylabel="t/t₀",
-	 xaxis=:log,
+	 # xaxis=:log,
 	 # yaxis=:log,
-	 label="failur time",
+	 label="failure time",
 	 markersize = 11,
      legend=:bottomright,
 	 legendfontsize = 12,			# legend font size
      tickfont = (16, "Arial"),	# tick font and size
      guidefont = (18, "Arial"),	# label font and size
 	 grid = :none,						# grid variable
+	 xlims=(-0.5, 11),
+	 ylims=(-0.5, 22),
 	)
 end
 
@@ -349,10 +351,85 @@ savefig(stab_plot, "../Figures/stab_lig_semilog.pdf")
 # ╔═╡ 4b7abc3d-a8ef-4c6c-903b-be4cea379c02
 begin
 	fitrange = collect(0.0:0.01:10.0)
+	scatter(vel_set, #[2:8] 
+	 t_stab, #[2:8]
+	 xlabel="vₜ/v₀",
+	 ylabel="t/t₀",
+	 # xaxis=:log,
+	 # yaxis=:log,
+	 label="failure time",
+	 markersize = 11,
+     legend=:bottomright,
+	 legendfontsize = 12,			# legend font size
+     tickfont = (16, "Arial"),	# tick font and size
+     guidefont = (18, "Arial"),	# label font and size
+	 grid = :none,						# grid variable
+	 xlims=(-0.5, 11),
+	 ylims=(-0.5, 22),
+	)
 	plot!(fitrange, 2 .* log2.(80 .* fitrange), label="ln")
 	plot!(fitrange, 0.2 .* sqrt.(2000 .* fitrange), label="1/2")
 	plot!(fitrange, 2 .* cbrt.(200 .* fitrange), label="1/3")
 	plot!(fitrange, 2.5 .* (400 .* fitrange).^(1/4), label="1/4")
+	# plot!(xlims=(0.08, 12))
+end
+
+# ╔═╡ 17febf60-5b42-4ad7-a506-c6695b3af76a
+pwd()
+
+# ╔═╡ 1dad7f3b-c91d-4141-b288-e8ab050316ef
+df_lig_lam2 = DataFrame(CSV.File("..\\Data_CSV\\lig_lam_2_delta_h.csv"))
+
+# ╔═╡ 308fb6fc-2ca2-4db2-afdd-61bbddc53717
+begin
+	lig_deltas = zeros(1000, 9)
+	for i in enumerate([0.0 0.1 1.0 2.0 4.0 6.0 8.0 10])
+		lig_v = @linq df_lig_lam2 |>
+		 	where(:velocities .== i[2]) |>
+		 	select(:Lig_delta, :time)
+		lig_deltas[:, i[1]] .= lig_v.Lig_delta
+		if i[1] == 1
+			lig_deltas[:,9] .= lig_v.time
+		end
+	end
+end
+
+# ╔═╡ 7255922b-0361-4975-9435-9353d1ed553d
+begin
+	vnames = ["vₜ=0" "vₜ=0.1v₀" "vₜ=1v₀" "vₜ=2v₀" "vₜ=4v₀" "vₜ=6v₀" "vₜ=8v₀" "vₜ=10v₀"]
+	lig_delth = plot(lig_deltas[:,9], lig_deltas[:,1], label=vnames[1])
+	# plot!(lig_deltas[:,9], lig_deltas[:,2], label=vnames[2])
+	plot!(lig_deltas[:,9], lig_deltas[:,3], label=vnames[3])
+	plot!(lig_deltas[:,9], lig_deltas[:,4], label=vnames[4])
+	plot!(lig_deltas[:,9], lig_deltas[:,5], label=vnames[5])
+	plot!(lig_deltas[:,9], lig_deltas[:,6], label=vnames[6])
+	plot!(lig_deltas[:,9], lig_deltas[:,7], label=vnames[7])
+	plot!(lig_deltas[:,9], lig_deltas[:,8], label=vnames[8])
+	plot!(yaxis=:log)
+	plot!(legend=:bottomright)
+	plot!(xlims=(2,25))
+	plot!(ylims=(0.7,12))
+end
+
+# ╔═╡ 49d51bff-8d7e-4385-bf97-6993f6c7ef80
+savefig(lig_delth, "..\\Figures\\delta_h_ligaments.pdf")
+
+# ╔═╡ 7f8b8dc1-f58d-45cc-8042-aa86c1533536
+begin
+	vel_numer = [980 490 245 164 123 98]
+	vel_norms = [1 2 4 6 8 10] 
+	plot(lig_deltas[:,9], lig_deltas[:,1], label=vnames[1])
+	# plot!(lig_deltas[:,9], lig_deltas[:,2], label=vnames[2])
+	plot!(lig_deltas[:,9], lig_deltas[:,3] .* 1 , label=vnames[3])
+	plot!(lig_deltas[:,9] , lig_deltas[:,4] .* cbrt(2) , label=vnames[4])
+	plot!(lig_deltas[:,9] , lig_deltas[:,5] .* cbrt(4) , label=vnames[5])
+	plot!(lig_deltas[:,9] , lig_deltas[:,6] .* cbrt(6) , label=vnames[6])
+	plot!(lig_deltas[:,9] , lig_deltas[:,7] .* cbrt(8) , label=vnames[7])
+	plot!(lig_deltas[:,9] , lig_deltas[:,8] .* cbrt(10), label=vnames[8])
+	plot!(yaxis=:log)
+	plot!(legend=:bottomright)
+	# plot!(xlims=(2,25))
+	# plot!(ylims=(0.7,12))
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -1386,5 +1463,11 @@ version = "0.9.1+5"
 # ╠═e6274bde-2b48-4d6e-bf32-e7f0a1f19aab
 # ╠═a257abae-80c8-43ed-b665-93c85f2b8389
 # ╠═4b7abc3d-a8ef-4c6c-903b-be4cea379c02
+# ╠═17febf60-5b42-4ad7-a506-c6695b3af76a
+# ╠═1dad7f3b-c91d-4141-b288-e8ab050316ef
+# ╠═308fb6fc-2ca2-4db2-afdd-61bbddc53717
+# ╠═7255922b-0361-4975-9435-9353d1ed553d
+# ╠═49d51bff-8d7e-4385-bf97-6993f6c7ef80
+# ╠═7f8b8dc1-f58d-45cc-8042-aa86c1533536
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
