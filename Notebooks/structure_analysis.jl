@@ -352,7 +352,7 @@ begin
 	plot!(fitrange, 2 .* log2.(80 .* fitrange), label="ln")
 	plot!(fitrange, 0.2 .* sqrt.(2000 .* fitrange), label="1/2")
 	plot!(fitrange, 2 .* cbrt.(200 .* fitrange), label="1/3")
-	plot!(fitrange, 2.5 .* (400 .* fitrange).^(1/4), label="1/4")
+	plot!(fitrange, 2.5 .* (400 .* fitrange).^(1/4), xlims = (0.1, 12), ylims = (0.1, 25), label="1/4")
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
