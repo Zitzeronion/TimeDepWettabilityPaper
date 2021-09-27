@@ -5,7 +5,7 @@ using Markdown
 using InteractiveUtils
 
 # ╔═╡ 3832de4e-a82b-11eb-08b3-0184778c8ef7
-using DataFrames, CSV, Plots, HTTP, DataFramesMeta, Query, JDF, LsqFit
+using DataFrames, CSV, Plots, HTTP, DataFramesMeta, Query, LsqFit
 
 # ╔═╡ 7488404c-a534-4096-a0ea-c927acf352b4
 # Plots default fonts and font sizes, could add colors as well
@@ -58,6 +58,9 @@ all_data = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_w
 
 # ╔═╡ 32f54d38-2b4d-4da0-b9f5-1a1c92654922
 combined = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/morph_data_with_l2_v-2-4-6-8.csv").body) |> DataFrame
+
+# ╔═╡ cf78fc68-3c53-4907-b7f5-a27807dfece6
+linear_vel = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/Direction_x_lam_2.csv").body) |> DataFrame
 
 # ╔═╡ 5d8b33f1-8bef-4d48-b607-8e883588fdda
 function t0(;hᵦ=0.07, γ=0.01, μ=1/6, θ=1/6)
@@ -213,6 +216,67 @@ begin
 	     grid = :none,						# grid variable
 		 title="Sine λ=$(lh)",
 		 legend=:topright)					# legend position
+end
+
+# ╔═╡ 3854a45f-efd2-4ba6-8f18-6909587799f5
+begin 
+	t_he = zeros(992)
+	q2s_lin = zeros(992, 4)
+	for i in enumerate([0.1, 1.0, 10.0])
+		lin_vel_01 = @linq linear_vel |>
+			where(:threshold .== thresh) |>
+			where(:vel_norm .== i[2]) |>
+			select(:q2, :t_norm)
+		t_he .= lin_vel_01.t_norm
+		replace!(lin_vel_01.q2, NaN => 0.0)
+		q2s_lin[:, i[1]] = lin_vel_01.q2
+		
+	end
+	plot_lin = plot(l1_sin_0.t_norm,
+					l1_sin_0.q2,
+					label=labs_vels, 					# labels
+		 			xlabel="t/t₀", 					# x-axis label
+		 			ylabel="q₂",
+		 w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+		 legendfontsize = 18,			# legend font size
+         tickfont = (16, "Arial"),	# tick font and size
+         guidefont = (18, "Arial"),	# label font and size
+	     grid = :none,						# grid variable
+		 title="Sine λ=$(lh)",
+		 legend=:topright)
+	plot!(t_he,
+		  q2s_lin[:,1],
+		  label=labs_vels[2],
+		  w = 3, 							# line width
+		  st = :samplemarkers, 				# some recipy stuff
+		  step = 50, 						# density of markers
+		  marker = (8, :auto, 0.6))
+	plot!(t_he,
+		  q2s_lin[:,2],
+		  label=labs_vels[3],
+		  w = 3, 							# line width
+		  st = :samplemarkers, 				# some recipy stuff
+		  step = 50, 						# density of markers
+		  marker = (8, :auto, 0.6))
+	plot!(t_he,
+		  q2s_lin[:,3],
+		  label=labs_vels[4],
+		  w = 3, 							# line width
+		  st = :samplemarkers, 				# some recipy stuff
+		  step = 50, 						# density of markers
+		  marker = (8, :auto, 0.6))
+end
+
+# ╔═╡ 417b81f3-ff68-4f84-b02e-ca58a9c48d1c
+begin
+	if os
+		savefig(plot_lin, "../Figures/q2_lam2_x-update.pdf")		
+	else
+		savefig(plot_lin, "..\\Figures\\q2_lam2_x-update.pdf")
+	end
 end
 
 # ╔═╡ f59adb20-e6cb-4108-8da8-e491238a287d
@@ -463,7 +527,7 @@ end
 begin
 	eu = 500
 	ed = 40
-	ve = 5
+	ve = 8
 	m(t, p) = p[1] * exp.(p[2] * t)
 	p0 = [0.5, 0.5]
 	fit = curve_fit(m, lig_deltas[:,9][ed:eu], lig_deltas[:,ve][ed:eu], p0)
@@ -472,10 +536,47 @@ end
 # ╔═╡ 1ca14c1c-0de6-44b6-9772-04cc74593a1e
 begin
 	
-	plot(lig_deltas[:,9] , lig_deltas[:,ve], label=vnames[ve])
-	plot!(lig_deltas[:,9][50:end], m(lig_deltas[:,9][50:end], fit.param), w=3, label="fit")
-	plot!(ylims=(0, 12))
+	some_plot = plot(lig_deltas[:,9] , 
+		 lig_deltas[:,ve], 
+		 label=vnames[ve],
+	     ylabel="Δh",
+	     xlabel="t/t₀",
+	 	 # label="failure time",
+	 	 markersize = 11,
+     	 legend=:bottomright,
+	 	 legendfontsize = 12,			# legend font size
+         tickfont = (16, "Arial"),	# tick font and size
+         guidefont = (18, "Arial"),	# label font and size
+	     grid = :none,	)
+	plot!(lig_deltas[:,9][10:end], m(lig_deltas[:,9][10:end], fit.param), w=3, label="fit")
+	plot!(ylims=(0.1, 12))
+	plot!(xlims=(1, 30), axis=:log)
 end
+
+# ╔═╡ d169d3ba-97a3-475c-8a52-bc9dbcbdfb00
+if os
+	savefig(some_plot, "../Figures/delta_h_with_fit.pdf")
+else
+	savefig(some_plot, "..\\Figures\\delta_h_with_fit.pdf")
+end
+
+# ╔═╡ 44619084-90a2-4fdd-8431-7978ba7f19b8
+scatter(vel_set, #[2:8] 
+	 t_stab, #[2:8]
+	 xlabel="vₜ/v₀",
+	 ylabel="t/t₀",
+	 # xaxis=:log,
+	 # yaxis=:log,
+	 label="failure time",
+	 markersize = 11,
+     legend=:bottomright,
+	 legendfontsize = 12,			# legend font size
+     tickfont = (16, "Arial"),	# tick font and size
+     guidefont = (18, "Arial"),	# label font and size
+	 grid = :none,						# grid variable
+	 xlims=(-0.5, 11),
+	 ylims=(-0.5, 22),
+	)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -484,7 +585,6 @@ CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 DataFramesMeta = "1313f7d8-7da2-5740-9ea0-a2ca25f37964"
 HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
-JDF = "babc3d20-cd49-4f60-a736-a8f9c08892d3"
 LsqFit = "2fda8390-95c7-5789-9bda-21331edee243"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 Query = "1a8c2f83-1ff3-5112-b086-8aa67b057ba1"
@@ -494,7 +594,6 @@ CSV = "~0.9.1"
 DataFrames = "~1.2.2"
 DataFramesMeta = "~0.9.1"
 HTTP = "~0.9.14"
-JDF = "~0.4.4"
 LsqFit = "~0.12.1"
 Plots = "~1.21.3"
 Query = "~1.0.0"
@@ -525,24 +624,6 @@ uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
 [[Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
-[[Blosc]]
-deps = ["Blosc_jll"]
-git-tree-sha1 = "84cf7d0f8fd46ca6f1b3e0305b4b4a37afe50fd6"
-uuid = "a74b3585-a348-5f62-a45c-50e91977d574"
-version = "0.7.0"
-
-[[Blosc_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl", "Lz4_jll", "Pkg", "Zlib_jll", "Zstd_jll"]
-git-tree-sha1 = "e747dac84f39c62aff6956651ec359686490134e"
-uuid = "0b7ba130-8d10-5ba8-a3d6-c5182647fed9"
-version = "1.21.0+0"
-
-[[BufferedStreams]]
-deps = ["Compat", "Test"]
-git-tree-sha1 = "5d55b9486590fdda5905c275bb21ce1f0754020f"
-uuid = "e1450e63-4bb3-523b-b2a4-4ffa8c0fd77d"
-version = "1.0.0"
-
 [[Bzip2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "19a35467a82e236ff51bc17a3a44b69ef35185a2"
@@ -560,12 +641,6 @@ deps = ["Artifacts", "Bzip2_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll",
 git-tree-sha1 = "f2202b55d816427cd385a9a4f3ffb226bee80f99"
 uuid = "83423d85-b0ee-5818-9007-b63ccbeb887a"
 version = "1.16.1+0"
-
-[[CategoricalArrays]]
-deps = ["DataAPI", "Future", "JSON", "Missings", "Printf", "RecipesBase", "Statistics", "StructTypes", "Unicode"]
-git-tree-sha1 = "1562002780515d2573a4fb0c3715e4e57481075e"
-uuid = "324d7699-5711-5eae-9e2f-1d82baa6b597"
-version = "0.10.0"
 
 [[Chain]]
 git-tree-sha1 = "cac464e71767e8a04ceee82a889ca56502795705"
@@ -714,11 +789,6 @@ deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "b3bfd02e98aedfa5cf885665493c5598c350cd2f"
 uuid = "2e619515-83b5-522b-bb60-26c02a35a201"
 version = "2.2.10+0"
-
-[[ExprTools]]
-git-tree-sha1 = "b7e3d17636b348f005f11040025ae8c6f645fe92"
-uuid = "e2ba6199-217a-4e67-a87a-7c52f15ade04"
-version = "0.1.6"
 
 [[FFMPEG]]
 deps = ["FFMPEG_jll"]
@@ -890,12 +960,6 @@ git-tree-sha1 = "a3f24677c21f5bbe9d2a714f95dcd58337fb2856"
 uuid = "82899510-4779-5014-852e-03e436cf321d"
 version = "1.0.0"
 
-[[JDF]]
-deps = ["Blosc", "BufferedStreams", "CategoricalArrays", "DataAPI", "Missings", "PooledArrays", "Serialization", "StatsBase", "Tables", "TimeZones", "WeakRefStrings"]
-git-tree-sha1 = "19c1dc0ab41471719f13ba01102671dbce2899f6"
-uuid = "babc3d20-cd49-4f60-a736-a8f9c08892d3"
-version = "0.4.4"
-
 [[JLLWrappers]]
 deps = ["Preferences"]
 git-tree-sha1 = "642a199af8b68253517b80bd3bfd17eb4e84df6e"
@@ -936,10 +1000,6 @@ deps = ["Formatting", "InteractiveUtils", "LaTeXStrings", "MacroTools", "Markdow
 git-tree-sha1 = "a4b12a1bd2ebade87891ab7e36fdbce582301a92"
 uuid = "23fbe1c1-3f47-55db-b15f-69d7ec21a316"
 version = "0.15.6"
-
-[[LazyArtifacts]]
-deps = ["Artifacts", "Pkg"]
-uuid = "4af54fe1-eca0-43a8-85a7-787d91b784e3"
 
 [[LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
@@ -1027,12 +1087,6 @@ git-tree-sha1 = "91aa1442e63a77f101aff01dec5a821a17f43922"
 uuid = "2fda8390-95c7-5789-9bda-21331edee243"
 version = "0.12.1"
 
-[[Lz4_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
-git-tree-sha1 = "5d494bc6e85c4c9b626ee0cab05daa4085486ab1"
-uuid = "5ced341a-0733-55b8-9ab6-a4889d929147"
-version = "1.9.3+0"
-
 [[MacroTools]]
 deps = ["Markdown", "Random"]
 git-tree-sha1 = "5a5bc6bf062f0f95e62d0fe0a2d99699fed82dd9"
@@ -1066,12 +1120,6 @@ version = "1.0.1"
 
 [[Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
-
-[[Mocking]]
-deps = ["ExprTools"]
-git-tree-sha1 = "748f6e1e4de814b101911e64cc12d83a6af66782"
-uuid = "78c3b35d-d492-501b-9361-3d52fe80e533"
-version = "0.7.2"
 
 [[MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
@@ -1349,12 +1397,6 @@ git-tree-sha1 = "f41020e84127781af49fc12b7e92becd7f5dd0ba"
 uuid = "09ab397b-f2b6-538f-b94a-2f83cf4a842a"
 version = "0.6.2"
 
-[[StructTypes]]
-deps = ["Dates", "UUIDs"]
-git-tree-sha1 = "8445bf99a36d703a09c601f9a57e2f83000ef2ae"
-uuid = "856f2bd8-1eba-4b0a-8007-ebc267875bd4"
-version = "1.7.3"
-
 [[SuiteSparse]]
 deps = ["Libdl", "LinearAlgebra", "Serialization", "SparseArrays"]
 uuid = "4607b0f0-06f3-5cda-b6b1-a6196a1729e9"
@@ -1394,12 +1436,6 @@ uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
 [[Test]]
 deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
 uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
-
-[[TimeZones]]
-deps = ["Dates", "Future", "LazyArtifacts", "Mocking", "Pkg", "Printf", "RecipesBase", "Serialization", "Unicode"]
-git-tree-sha1 = "6c9040665b2da00d30143261aea22c7427aada1c"
-uuid = "f269a46b-ccf7-5d73-abea-4c690281aa53"
-version = "1.5.7"
 
 [[TranscodingStreams]]
 deps = ["Random", "Test"]
@@ -1644,6 +1680,7 @@ version = "0.9.1+5"
 # ╟─8dbd5bc3-008f-4704-9ca0-b7ee4632a932
 # ╠═8549e36b-a0a2-42d2-a7f1-6ebbf9ebe5df
 # ╠═32f54d38-2b4d-4da0-b9f5-1a1c92654922
+# ╠═cf78fc68-3c53-4907-b7f5-a27807dfece6
 # ╠═5d8b33f1-8bef-4d48-b607-8e883588fdda
 # ╟─36d5635e-f33c-4639-8f2b-63089f153bbb
 # ╠═f91f9a43-5eb6-4299-8dca-a4da6ac977db
@@ -1651,6 +1688,8 @@ version = "0.9.1+5"
 # ╠═ebc6d193-64ba-4332-ae18-840778cc9674
 # ╠═ae00a920-37f7-4612-b311-8b8ca9419b6c
 # ╠═7847d309-d6b4-48ce-8504-25aeb00dce45
+# ╠═3854a45f-efd2-4ba6-8f18-6909587799f5
+# ╠═417b81f3-ff68-4f84-b02e-ca58a9c48d1c
 # ╟─f59adb20-e6cb-4108-8da8-e491238a287d
 # ╠═2cd5c9ce-1689-427d-8eaa-eda548a64764
 # ╠═5cafdf48-4466-4c14-9f9b-d36b41899ce1
@@ -1668,5 +1707,7 @@ version = "0.9.1+5"
 # ╠═7f8b8dc1-f58d-45cc-8042-aa86c1533536
 # ╠═5f21923d-5ae3-466b-a5a4-cc607f5d7b0c
 # ╠═1ca14c1c-0de6-44b6-9772-04cc74593a1e
+# ╠═d169d3ba-97a3-475c-8a52-bc9dbcbdfb00
+# ╠═44619084-90a2-4fdd-8431-7978ba7f19b8
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
