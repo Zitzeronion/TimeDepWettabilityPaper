@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.16.1
+# v0.17.0
 
 using Markdown
 using InteractiveUtils
@@ -419,7 +419,8 @@ begin
 	 legendfontsize = 12,			# legend font size
      tickfont = (16, "Arial"),	# tick font and size
      guidefont = (18, "Arial"),	# label font and size
-	 grid = :none,						# grid variable
+	 grid = :none,  			# grid variable
+	 # xaxis=:log,
 	 xlims=(-0.5, 11),
 	 ylims=(-0.5, 22),
 	)
@@ -592,10 +593,13 @@ else
 end
 
 # ╔═╡ 44619084-90a2-4fdd-8431-7978ba7f19b8
-her_lig = scatter(vel_set, #[2:8] 
+begin
+	her_lig = plot(0.01:0.01:30, 0.01:0.01:30, line = (:steppre, :dot, :arrow, 0.0, 0, :red), label="", xaxis = :log)
+	scatter!(vel_set, #[2:8] 
 	 t_stab, #[2:8]
 	 xlabel="vₜ/v₀",
 	 ylabel="τ",
+	 color=palette(:default)[1],
 	 # xaxis=:log,
 	 # yaxis=:log,
 	 label=" failure time",
@@ -605,9 +609,10 @@ her_lig = scatter(vel_set, #[2:8]
      tickfont = (28, "Arial"),	# tick font and size
      guidefont = (30, "Arial"),	# label font and size
 	 grid = :none,						# grid variable
-	 xlims=(-0.5, 11),
-	 ylims=(-0.5, 22),
+	 xlims=(0.8, 11),
+	 ylims=(9, 21),
 	)
+end
 
 # ╔═╡ 4f4a1ef5-c270-4d75-a2e2-0b2c14af4727
 if os
