@@ -258,8 +258,8 @@ begin
 		 st = :samplemarkers, 				# some recipy stuff
 		 step = 50, 						# density of markers
 		 marker = (8, :auto, 0.6),			# marker size
-		 legendfontsize = 17,			# legend font size
-         tickfont = (16, "Arial"),	# tick font and size
+		 legendfontsize = 14,			# legend font size
+         tickfont = (14, "Arial"),	# tick font and size
          guidefont = (18, "Arial"),	# label font and size
 	     grid = :none,						# grid variable
 		 # title="Sine λ=$(lh)",
@@ -293,7 +293,6 @@ begin
 		savefig(plot_lin, "../Figures/q2_lam2_x-update.svg")		
 	else
 		savefig(plot_lin, "..\\Figures\\q2_lam2_x-update.svg")
-		savefig(q2_lam2_plot, "..\\Figures\\q2_lam2_dia-update.svg")
 	end
 end
 
@@ -437,7 +436,8 @@ begin
 	 legendfontsize = 12,			# legend font size
      tickfont = (16, "Arial"),	# tick font and size
      guidefont = (18, "Arial"),	# label font and size
-	 grid = :none,						# grid variable
+	 grid = :none,  			# grid variable
+	 # xaxis=:log,
 	 xlims=(-0.5, 11),
 	 ylims=(-0.5, 22),
 	)
@@ -502,25 +502,56 @@ end
 # ╔═╡ 7255922b-0361-4975-9435-9353d1ed553d
 begin
 	vnames = ["vₜ=0" "vₜ=0.1v₀" "vₜ=1v₀" "vₜ=2v₀" "vₜ=4v₀" "vₜ=6v₀" "vₜ=8v₀" "vₜ=10v₀"]
-	lig_delth = plot(lig_deltas[:,9], lig_deltas[:,1], label=vnames[1])
-	# plot!(lig_deltas[:,9], lig_deltas[:,2], label=vnames[2])
-	plot!(lig_deltas[:,9], lig_deltas[:,3], label=vnames[3])
-	plot!(lig_deltas[:,9], lig_deltas[:,4], label=vnames[4])
-	plot!(lig_deltas[:,9], lig_deltas[:,5], label=vnames[5])
-	plot!(lig_deltas[:,9], lig_deltas[:,6], label=vnames[6])
-	plot!(lig_deltas[:,9], lig_deltas[:,7], label=vnames[7])
-	plot!(lig_deltas[:,9], lig_deltas[:,8], label=vnames[8])
+	lig_delth = plot(lig_deltas[:,9], lig_deltas[:,1], label=vnames[1],
+		             w = 3, 							# line width
+		             st = :samplemarkers, 				# some recipy stuff
+		             step = 50, 						# density of markers
+		             marker = (8, :auto, 0.6),			# marker size
+	)
+	plot!(lig_deltas[:,9], lig_deltas[:,2], label=vnames[2],
+	      w = 3, 							# line width
+		  st = :samplemarkers, 				# some recipy stuff
+		  step = 50, 						# density of markers
+		  marker = (8, :auto, 0.6),			# marker size
+	)
+	plot!(lig_deltas[:,9], lig_deltas[:,3], label=vnames[3],
+		  w = 3, 							# line width
+		  st = :samplemarkers, 				# some recipy stuff
+		  step = 50, 						# density of markers
+		  marker = (8, :auto, 0.6),			# marker size
+		 )
+	plot!(lig_deltas[:,9], lig_deltas[:,4], label=vnames[4],
+		  w = 3, 							# line width
+		  st = :samplemarkers, 				# some recipy stuff
+		  step = 50, 						# density of markers
+		   marker = (8, :auto, 0.6),			# marker size
+		  )
+	# plot!(lig_deltas[:,9], lig_deltas[:,5], label=vnames[5])
+	# plot!(lig_deltas[:,9], lig_deltas[:,6], label=vnames[6])
+	# plot!(lig_deltas[:,9], lig_deltas[:,7], label=vnames[7])
+	plot!(lig_deltas[:,9], lig_deltas[:,8], label=vnames[8],
+				w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+				)
 	plot!(yaxis=:log)
 	plot!(legend=:bottomright)
 	plot!(xlims=(2,25))
-	plot!(ylims=(0.7,12))
+	plot!(ylims=(0.7,12),ylabel="Δh",
+	 xlabel="t/t₀",
+     legend=:none,
+	 legendfontsize = 12,			# legend font size
+     tickfont = (16, "Arial"),	# tick font and size
+     guidefont = (18, "Arial"),	# label font and size
+	 grid = :none,)
 end
 
 # ╔═╡ 49d51bff-8d7e-4385-bf97-6993f6c7ef80
 if os
-	savefig(lig_delth, "../Figures/delta_h_ligaments.pdf")
+	savefig(lig_delth, "../Figures/delta_h_ligaments.svg")
 else
-	savefig(lig_delth, "..\\Figures\\delta_h_ligaments.pdf")
+	savefig(lig_delth, "..\\Figures\\delta_h_ligaments.svg")
 end
 
 # ╔═╡ 7f8b8dc1-f58d-45cc-8042-aa86c1533536
@@ -545,7 +576,7 @@ end
 begin
 	eu = 500
 	ed = 40
-	ve = 8
+	ve = 3
 	m(t, p) = p[1] * exp.(p[2] * t)
 	p0 = [0.5, 0.5]
 	fit = curve_fit(m, lig_deltas[:,9][ed:eu], lig_deltas[:,ve][ed:eu], p0)
@@ -573,28 +604,39 @@ end
 
 # ╔═╡ d169d3ba-97a3-475c-8a52-bc9dbcbdfb00
 if os
-	savefig(some_plot, "../Figures/delta_h_with_fit.pdf")
+	savefig(some_plot, "../Figures/delta_h_with_fit.svg")
 else
-	savefig(some_plot, "..\\Figures\\delta_h_with_fit.pdf")
+	savefig(some_plot, "..\\Figures\\delta_h_with_fit.svg")
 end
 
 # ╔═╡ 44619084-90a2-4fdd-8431-7978ba7f19b8
-scatter_failur_time = scatter([comp_Gamma(χ=0), comp_Gamma(χ=0.1), comp_Gamma(χ=1), comp_Gamma(χ=2), comp_Gamma(χ=4), comp_Gamma(χ=6), comp_Gamma(χ=8), comp_Gamma(χ=10)], #[2:8] 
+begin
+	her_lig = plot(0.01:0.01:30, 0.01:0.01:30, line = (:steppre, :dot, :arrow, 0.0, 0, :red), label="", xaxis = :log)
+	scatter!(vel_set, #[2:8] 
 	 t_stab, #[2:8]
-	 xlabel="Γ",
+	 xlabel="vₜ/v₀",
 	 ylabel="τ",
+	 color=palette(:default)[1],
 	 # xaxis=:log,
 	 # yaxis=:log,
-	 label="failure time",
-	 markersize = 11,
-     legend=:bottomright,
-	 legendfontsize = 12,			# legend font size
-     tickfont = (16, "Arial"),	# tick font and size
-     guidefont = (18, "Arial"),	# label font and size
+	 label=" failure time",
+	 markersize = 22,
+     legend=(:bottomright),
+	 legendfontsize = 28,			# legend font size
+     tickfont = (28, "Arial"),	# tick font and size
+     guidefont = (30, "Arial"),	# label font and size
 	 grid = :none,						# grid variable
-	 xlims=(-0.5, 18),
-	 ylims=(-0.5, 22),
+	 xlims=(0.8, 11),
+	 ylims=(9, 21),
 	)
+end
+
+# ╔═╡ 4f4a1ef5-c270-4d75-a2e2-0b2c14af4727
+if os
+	savefig(her_lig, "../Figures/r_lig.svg")
+else
+	savefig(her_lig, "..\\Figures\\r_lig.svg")
+end
 
 # ╔═╡ ff0fb161-4a6a-4fc7-b921-755b07b99c73
 if os
@@ -1782,7 +1824,6 @@ version = "0.9.1+5"
 # ╠═1ca14c1c-0de6-44b6-9772-04cc74593a1e
 # ╠═d169d3ba-97a3-475c-8a52-bc9dbcbdfb00
 # ╠═44619084-90a2-4fdd-8431-7978ba7f19b8
-# ╠═ff0fb161-4a6a-4fc7-b921-755b07b99c73
-# ╠═8267c6da-1b57-452a-933b-c78b2f8222e5
+# ╠═4f4a1ef5-c270-4d75-a2e2-0b2c14af4727
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

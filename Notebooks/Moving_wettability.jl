@@ -38,6 +38,10 @@ First some dependencies have to be loaded, [DataFrames](https://github.com/Julia
 For the analysis of the our data we need some way to scan efficiently through the `DataFrames`, for this reason we include [DataFramesMeta](https://github.com/JuliaData/DataFramesMeta.jl) and make heavy use of the `@linq` macro.
 "
 
+# ╔═╡ ef095297-b5e5-4d75-b667-3d4b00556dc2
+md"Some constants used for plotting.
+Mainly to keep the font sizes consistent throughout the notebook"
+
 # ╔═╡ dc6948b9-7769-45c3-aed2-c5cc5e47ca1e
 begin
 	# Plots default fonts and font sizes, could add colors as well
@@ -46,6 +50,26 @@ begin
 	label_size = 18
 	γ = 0.01
 	
+end
+
+# ╔═╡ 75baa263-a65d-4966-8d6d-9f9811e600aa
+md"### Saving figures
+
+- Windows, lots of `\\`
+- Linux, use `/` instead
+
+In the cell below we ask for the operating system to save the figures accordingly.
+"
+
+# ╔═╡ 318f997c-282c-4049-8c18-2316a603d8ea
+# Need this for plotting purposes
+begin
+	os = true
+	if Sys.iswindows()
+		os = false
+	elseif Sys.islinux()
+		os = true
+	end
 end
 
 # ╔═╡ 4ebc1620-865a-11eb-1e0d-cd2669b2acad
@@ -268,6 +292,7 @@ begin
 	# The plot
 	v0_plot = plot(x_time, 							# x-axis
 		       h_v0_all_lam,     					# y-axis 
+			   ylims=(-4, 12),
 		       label=labs_v0, 						# labels
 		       xlabel="t/t₀", 						# x-axis label
 		       ylabel="Δh",							# y-axis label
@@ -279,7 +304,7 @@ begin
                tickfont = (tick_size, "Arial"),		# tick font and size
                guidefont = (label_size, "Arial"),	# label font and size
 			   grid = :none,						# grid variable
-			   legend=:bottomright)					# legend position
+			   legend=:none)					# legend position
 	# Lines that indicate some assumption
 	hline!([10.78], line = (4, :dash, 0.5, palette(:default)[1]), label="")
 	hline!([7.4], line = (4, :dash, 0.5, palette(:default)[2]), label="")
@@ -287,7 +312,11 @@ begin
 end
 
 # ╔═╡ 3d56e346-49b8-4e86-b43d-2d812c94c072
-savefig(v0_plot, "..\\Figures\\v0_dh_sine_with_const.svg")
+if os
+	savefig(v0_plot, "../Figures/v0_dh_sine_with_const.svg")
+else
+	savefig(v0_plot, "..\\Figures\\v0_dh_sine_with_const.svg")
+end
 
 # ╔═╡ fafe381e-0baf-40c1-b127-67b7f8c1a902
 begin
@@ -326,7 +355,11 @@ begin
 end
 
 # ╔═╡ cc64aa01-953e-49fd-8301-9be1f244437d
-savefig(c_v0_plot, "..\\Figures\\v0_clusters_sine.svg")
+if os
+	savefig(c_v0_plot, "../Figures/v0_clusters_sine.svg")
+else
+	savefig(c_v0_plot, "..\\Figures\\v0_clusters_sine.svg")
+end
 
 # ╔═╡ e82faaad-5278-4d8f-982b-fca335bbd006
 md"
@@ -371,7 +404,11 @@ end
 
 # ╔═╡ bb659f3a-0a01-4f40-81ce-a8c13a34250b
 # Here the command to save the figure
-savefig(fig_lam1, "..\\Figures\\dh_t_lam1_all_v.svg")
+if os
+	savefig(fig_lam1, "../Figures/dh_t_lam1_all_v.svg")
+else
+	savefig(fig_lam1, "..\\Figures\\dh_t_lam1_all_v.svg")
+end
 
 # ╔═╡ 0ec47530-59b9-11eb-0c49-2b70d7e37d4d
 md"""
@@ -2035,17 +2072,20 @@ version = "0.9.1+5"
 # ╟─1151bf70-865e-11eb-044e-6d28c3bfce41
 # ╟─11851990-8660-11eb-29a3-553867ba8c75
 # ╠═f5c0cd40-59b8-11eb-1ade-234f67f7efab
+# ╟─ef095297-b5e5-4d75-b667-3d4b00556dc2
 # ╠═dc6948b9-7769-45c3-aed2-c5cc5e47ca1e
+# ╟─75baa263-a65d-4966-8d6d-9f9811e600aa
+# ╟─318f997c-282c-4049-8c18-2316a603d8ea
 # ╟─4ebc1620-865a-11eb-1e0d-cd2669b2acad
 # ╠═12901690-8684-11eb-2978-3f4b6f0d0fc4
 # ╠═61793e10-8e47-11eb-3bf4-cd92fdcc2a1d
 # ╟─e4395f40-870a-11eb-3c7f-435231c70f87
-# ╠═9f546962-2798-4452-befa-883326271887
+# ╟─9f546962-2798-4452-befa-883326271887
 # ╟─b6b8f109-ab0b-4a9e-a82e-7f510f1c8974
 # ╠═3be4828d-01f7-4450-8133-a429bb59ed62
 # ╠═5eb88736-3ea8-458e-8091-58319ad37dc1
 # ╟─6e719113-62d9-4119-a2aa-160b8854134a
-# ╠═081746e8-25b1-4c55-99ce-fd7e38dd9fe4
+# ╟─081746e8-25b1-4c55-99ce-fd7e38dd9fe4
 # ╠═3ac50706-59e0-473f-85ef-558afce47549
 # ╟─479b39f9-8650-468c-a67e-c699fd00a7fa
 # ╠═79d92592-f849-4083-81ef-35502939deda
