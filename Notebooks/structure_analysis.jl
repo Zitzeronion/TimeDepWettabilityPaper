@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.16.1
+# v0.17.0
 
 using Markdown
 using InteractiveUtils
@@ -68,6 +68,22 @@ function t0(;hᵦ=0.07, γ=0.01, μ=1/6, θ=1/6)
     charT = 3 * μ / (γ * qsq^2)
 
     return charT
+end
+
+# ╔═╡ fc5e7388-1ca7-41ed-82ec-b3d8640c9c1a
+function q0q0(;hᵦ=0.07, γ=0.01, μ=1/6, θ=1/6)
+    qsq = hᵦ * (1 - cospi(θ)) * (2 - 3 * hᵦ) 
+    charT = 3 * μ / (γ * qsq^2)
+
+    return qsq
+end
+
+# ╔═╡ 974cb417-3d5a-4c99-94b4-2306444ff4f4
+function comp_Gamma(; λ=256, χ=0.1)
+	q² = q0q0()
+	gam = 3λ*χ*1.0^3*q²^2/((π/6)^3)
+	return gam
+	
 end
 
 # ╔═╡ 36d5635e-f33c-4639-8f2b-63089f153bbb
@@ -186,7 +202,8 @@ end
 
 # ╔═╡ 7847d309-d6b4-48ce-8504-25aeb00dce45
 begin
-	labs_vels = ["vₜ=0" "vₜ=0.1v₀" "vₜ=1v₀" "vₜ=10v₀"]
+	Gammas = [comp_Gamma(χ=0), comp_Gamma(χ=0.1), comp_Gamma(χ=1), comp_Gamma(χ=10)]
+	labs_vels = ["Γ=0" "Γ=$(round(Gammas[2]; sigdigits=2))" "Γ=$(round(Gammas[3]; sigdigits=2))" "Γ=$(round(Gammas[4]; sigdigits=2))"]
 	lh = 2
 	q2_data_lam2 = zeros(998, 4)
 	t_data = zeros(998)
@@ -210,11 +227,11 @@ begin
 		 st = :samplemarkers, 				# some recipy stuff
 		 step = 50, 						# density of markers
 		 marker = (8, :auto, 0.6),			# marker size
-		 legendfontsize = 18,			# legend font size
+		 legendfontsize = 17,			# legend font size
          tickfont = (16, "Arial"),	# tick font and size
          guidefont = (18, "Arial"),	# label font and size
 	     grid = :none,						# grid variable
-		 title="Sine λ=$(lh)",
+		 # title="Sine λ=$(lh)",
 		 legend=:topright)					# legend position
 end
 
@@ -241,11 +258,11 @@ begin
 		 st = :samplemarkers, 				# some recipy stuff
 		 step = 50, 						# density of markers
 		 marker = (8, :auto, 0.6),			# marker size
-		 legendfontsize = 18,			# legend font size
+		 legendfontsize = 17,			# legend font size
          tickfont = (16, "Arial"),	# tick font and size
          guidefont = (18, "Arial"),	# label font and size
 	     grid = :none,						# grid variable
-		 title="Sine λ=$(lh)",
+		 # title="Sine λ=$(lh)",
 		 legend=:topright)
 	plot!(t_he,
 		  q2s_lin[:,1],
@@ -273,9 +290,10 @@ end
 # ╔═╡ 417b81f3-ff68-4f84-b02e-ca58a9c48d1c
 begin
 	if os
-		savefig(plot_lin, "../Figures/q2_lam2_x-update.pdf")		
+		savefig(plot_lin, "../Figures/q2_lam2_x-update.svg")		
 	else
-		savefig(plot_lin, "..\\Figures\\q2_lam2_x-update.pdf")
+		savefig(plot_lin, "..\\Figures\\q2_lam2_x-update.svg")
+		savefig(q2_lam2_plot, "..\\Figures\\q2_lam2_dia-update.svg")
 	end
 end
 
@@ -561,10 +579,10 @@ else
 end
 
 # ╔═╡ 44619084-90a2-4fdd-8431-7978ba7f19b8
-scatter(vel_set, #[2:8] 
+scatter_failur_time = scatter([comp_Gamma(χ=0), comp_Gamma(χ=0.1), comp_Gamma(χ=1), comp_Gamma(χ=2), comp_Gamma(χ=4), comp_Gamma(χ=6), comp_Gamma(χ=8), comp_Gamma(χ=10)], #[2:8] 
 	 t_stab, #[2:8]
-	 xlabel="vₜ/v₀",
-	 ylabel="t/t₀",
+	 xlabel="Γ",
+	 ylabel="τ",
 	 # xaxis=:log,
 	 # yaxis=:log,
 	 label="failure time",
@@ -574,9 +592,62 @@ scatter(vel_set, #[2:8]
      tickfont = (16, "Arial"),	# tick font and size
      guidefont = (18, "Arial"),	# label font and size
 	 grid = :none,						# grid variable
-	 xlims=(-0.5, 11),
+	 xlims=(-0.5, 18),
 	 ylims=(-0.5, 22),
 	)
+
+# ╔═╡ ff0fb161-4a6a-4fc7-b921-755b07b99c73
+if os
+	savefig(scatter_failur_time, "../Figures/failur_times_over_Gamma.svg")
+else
+	savefig(scatter_failur_time, "..\\Figures\\failur_times_over_Gamma.svg")
+	#savefig(some_plot, "..\\Figures\\failur_times_over_Gamma.svg")
+end
+
+# ╔═╡ 8267c6da-1b57-452a-933b-c78b2f8222e5
+begin
+	lig_new = plot(lig_deltas[:,9], lig_deltas[:,1], 
+		 w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+		 legendfontsize = 18,			# legend font size
+         tickfont = (16, "Arial"),	# tick font and size
+         guidefont = (18, "Arial"),	# label font and size
+	     grid = :none
+	)
+	plot!(lig_deltas[:,9], lig_deltas[:,2], 
+		 w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+		 legendfontsize = 18,			# legend font size
+         tickfont = (16, "Arial"),	# tick font and size
+         guidefont = (18, "Arial"),	# label font and size
+	     grid = :none
+	)
+	# plot!(lig_deltas[:,9], lig_deltas[:,3], label=vnames[3])
+	# plot!(lig_deltas[:,9], lig_deltas[:,4], label=vnames[4])
+	# plot!(lig_deltas[:,9], lig_deltas[:,5], label=vnames[5])
+	# plot!(lig_deltas[:,9], lig_deltas[:,6], label=vnames[6])
+	# plot!(lig_deltas[:,9], lig_deltas[:,7], label=vnames[7])
+	plot!(lig_deltas[:,9], lig_deltas[:,8], 
+	     w = 3, 							# line width
+		 st = :samplemarkers, 				# some recipy stuff
+		 step = 50, 						# density of markers
+		 marker = (8, :auto, 0.6),			# marker size
+		 legendfontsize = 18,			# legend font size
+         tickfont = (16, "Arial"),	# tick font and size
+         guidefont = (18, "Arial"),	# label font and size
+	     grid = :none
+	)
+	plot!(yaxis=:log)
+	plot!(legend=:none)
+	#plot!(legend=:bottomright)
+	plot!(xlims=(2,25))
+	plot!(ylims=(0.7,12))
+end 
+
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -862,9 +933,9 @@ uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
 
 [[GLFW_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libglvnd_jll", "Pkg", "Xorg_libXcursor_jll", "Xorg_libXi_jll", "Xorg_libXinerama_jll", "Xorg_libXrandr_jll"]
-git-tree-sha1 = "dba1e8614e98949abfa60480b13653813d8f0157"
+git-tree-sha1 = "0c603255764a1fa0b61752d2bec14cfbd18f7fe8"
 uuid = "0656b61e-2033-5cc2-a64a-77c0f6c09b89"
-version = "3.3.5+0"
+version = "3.3.5+1"
 
 [[GR]]
 deps = ["Base64", "DelimitedFiles", "GR_jll", "HTTP", "JSON", "Libdl", "LinearAlgebra", "Pkg", "Printf", "Random", "Serialization", "Sockets", "Test", "UUIDs"]
@@ -1682,6 +1753,8 @@ version = "0.9.1+5"
 # ╠═32f54d38-2b4d-4da0-b9f5-1a1c92654922
 # ╠═cf78fc68-3c53-4907-b7f5-a27807dfece6
 # ╠═5d8b33f1-8bef-4d48-b607-8e883588fdda
+# ╠═fc5e7388-1ca7-41ed-82ec-b3d8640c9c1a
+# ╠═974cb417-3d5a-4c99-94b4-2306444ff4f4
 # ╟─36d5635e-f33c-4639-8f2b-63089f153bbb
 # ╠═f91f9a43-5eb6-4299-8dca-a4da6ac977db
 # ╠═9d35366c-2789-4dec-9821-e26c1e730e92
@@ -1709,5 +1782,7 @@ version = "0.9.1+5"
 # ╠═1ca14c1c-0de6-44b6-9772-04cc74593a1e
 # ╠═d169d3ba-97a3-475c-8a52-bc9dbcbdfb00
 # ╠═44619084-90a2-4fdd-8431-7978ba7f19b8
+# ╠═ff0fb161-4a6a-4fc7-b921-755b07b99c73
+# ╠═8267c6da-1b57-452a-933b-c78b2f8222e5
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
