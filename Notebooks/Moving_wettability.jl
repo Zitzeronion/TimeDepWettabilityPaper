@@ -38,38 +38,14 @@ First some dependencies have to be loaded, [DataFrames](https://github.com/Julia
 For the analysis of the our data we need some way to scan efficiently through the `DataFrames`, for this reason we include [DataFramesMeta](https://github.com/JuliaData/DataFramesMeta.jl) and make heavy use of the `@linq` macro.
 "
 
-# ╔═╡ ef095297-b5e5-4d75-b667-3d4b00556dc2
-md"Some constants used for plotting.
-Mainly to keep the font sizes consistent throughout the notebook"
-
 # ╔═╡ dc6948b9-7769-45c3-aed2-c5cc5e47ca1e
 begin
 	# Plots default fonts and font sizes, could add colors as well
 	leg_size = 12
 	tick_size = 14
 	label_size = 18
+	# And surface tension
 	γ = 0.01
-	
-end
-
-# ╔═╡ 75baa263-a65d-4966-8d6d-9f9811e600aa
-md"### Saving figures
-
-- Windows, lots of `\\`
-- Linux, use `/` instead
-
-In the cell below we ask for the operating system to save the figures accordingly.
-"
-
-# ╔═╡ 318f997c-282c-4049-8c18-2316a603d8ea
-# Need this for plotting purposes
-begin
-	os = true
-	if Sys.iswindows()
-		os = false
-	elseif Sys.islinux()
-		os = true
-	end
 end
 
 # ╔═╡ 4ebc1620-865a-11eb-1e0d-cd2669b2acad
@@ -292,7 +268,6 @@ begin
 	# The plot
 	v0_plot = plot(x_time, 							# x-axis
 		       h_v0_all_lam,     					# y-axis 
-			   ylims=(-4, 12),
 		       label=labs_v0, 						# labels
 		       xlabel="t/t₀", 						# x-axis label
 		       ylabel="Δh",							# y-axis label
@@ -304,11 +279,34 @@ begin
                tickfont = (tick_size, "Arial"),		# tick font and size
                guidefont = (label_size, "Arial"),	# label font and size
 			   grid = :none,						# grid variable
-			   legend=:none)					# legend position
+			   legend=:bottomright)					# legend position
 	# Lines that indicate some assumption
 	hline!([10.78], line = (4, :dash, 0.5, palette(:default)[1]), label="")
 	hline!([7.4], line = (4, :dash, 0.5, palette(:default)[2]), label="")
 	hline!([5.9], line = (4, :dash, 0.5, palette(:default)[3]), label="")
+end
+
+# ╔═╡ f92a3bdf-2209-47be-8881-2a0567607b80
+md"In the following we want to print our findings to some, preferably, `.svg` file. 
+Important this format is vector and can be modified quite easily with e.g. *Inkscape*.
+Additionally all fonts can be printed with svg output while the pdf format eats up some special characters, such as θ.
+
+Independent of the operating system plots should be stored within the repo files.
+That is why we ask the what operating system we are on.
+- Windows: lots of `\\`
+- Linux: only on `/`
+
+Which is done before we save the first plot."
+
+# ╔═╡ e156c4d1-279f-4073-aa21-5840b8554482
+# Need this for plotting purposes
+begin
+	os = true
+	if Sys.iswindows()
+		os = false
+	elseif Sys.islinux()
+		os = true
+	end
 end
 
 # ╔═╡ 3d56e346-49b8-4e86-b43d-2d812c94c072
@@ -368,6 +366,7 @@ md"
 Now comes the fun part we start looking into the case where the substates pattern θ(x) becomes θ(x,t).
 We start by taking a single wavelength and check the differences as a function of time.
 First though for a nice data display we use a plots recipy taken from [here](https://github.com/JuliaPlots/Plots.jl/issues/2523).
+This recipy allows to have the very convenient `markevery` function in plots, similar to the one used in *Pythons Matplotlib*
 "
 
 # ╔═╡ 6a5f4405-f63c-4fff-b692-e2bbe396ed7a
@@ -414,8 +413,16 @@ end
 md"""
 ### Rupture times
 
-First we take a look at the rupture times $\tau_r$.
-For this we have to load a '.csv' file and import as a dataframe.
+After the initial checking of the stationary pattern we take a look at the rupture times $\tau_r$.
+So far we have confirmed that the pattern minima enumerate the number of droplets after dewetting and the height of the stationary droplets are in the range where we expect them.
+
+The rupture times have been computed using the time resolved height data.
+We define the rupture as
+```math
+\tau_r = min_t\{h(x,t) \le h_{\ast}\},
+```
+and save to a file.
+We can simply load a '.csv' file and import it as a dataframe.
 
 The file contains:
 
@@ -568,11 +575,15 @@ rts_save = scatter(lambdas,							# x-data
 		    )
 
 # ╔═╡ 13eaf81b-3e3c-4678-a644-0d6aa5629188
-savefig(rts_save, "..\\Figures\\rupture_time.svg")
+if os
+	savefig(rts_save, "../Figures/rupture_time.svg")
+else
+	savefig(rts_save, "..\\Figures\\rupture_time.svg")
+end
 
 # ╔═╡ 9d84d4e2-d81d-4874-a656-8ff2624a7f1d
 md"### Linear pattern
-Besides the sine wave pattern we have data on a linear pattern as well.
+Besides the sine wave pattern we have data on a linear pattern as well using the θ₂ pattern.
 "
 
 # ╔═╡ 7344c1d9-5d87-4b4d-8264-3043b162c49f
@@ -627,6 +638,15 @@ begin
 			legend=:topleft,					# legend position
 		    )
 end
+
+# ╔═╡ 17da9ce0-e748-4bb3-aed4-f33da671aa48
+md"However we still like to know a little more, concerning the wavelength λ we only got 4 points. 
+
+That is why there is more data conerning the rupture time with smaller wavelengths.
+Loading the data is as simple as above, with the `HTTP` and `DataFrames` packages."
+
+# ╔═╡ df5a3c48-f994-4a84-beca-f079420a1bbf
+df_rup_more_lam = CSV.File(HTTP.get("https://jugit.fz-juelich.de/s.zitz/timedependent_wettability/-/raw/master/Data_CSV/Rupture_data_sin_pattern_multiple_lambda.csv?inline=false").body) |> DataFrame
 
 # ╔═╡ 77b24122-7b6b-11eb-2036-41d8d55f985a
 md"""
@@ -2072,10 +2092,7 @@ version = "0.9.1+5"
 # ╟─1151bf70-865e-11eb-044e-6d28c3bfce41
 # ╟─11851990-8660-11eb-29a3-553867ba8c75
 # ╠═f5c0cd40-59b8-11eb-1ade-234f67f7efab
-# ╟─ef095297-b5e5-4d75-b667-3d4b00556dc2
 # ╠═dc6948b9-7769-45c3-aed2-c5cc5e47ca1e
-# ╟─75baa263-a65d-4966-8d6d-9f9811e600aa
-# ╟─318f997c-282c-4049-8c18-2316a603d8ea
 # ╟─4ebc1620-865a-11eb-1e0d-cd2669b2acad
 # ╠═12901690-8684-11eb-2978-3f4b6f0d0fc4
 # ╠═61793e10-8e47-11eb-3bf4-cd92fdcc2a1d
@@ -2088,12 +2105,14 @@ version = "0.9.1+5"
 # ╟─081746e8-25b1-4c55-99ce-fd7e38dd9fe4
 # ╠═3ac50706-59e0-473f-85ef-558afce47549
 # ╟─479b39f9-8650-468c-a67e-c699fd00a7fa
-# ╠═79d92592-f849-4083-81ef-35502939deda
+# ╟─79d92592-f849-4083-81ef-35502939deda
+# ╟─f92a3bdf-2209-47be-8881-2a0567607b80
+# ╟─e156c4d1-279f-4073-aa21-5840b8554482
 # ╠═3d56e346-49b8-4e86-b43d-2d812c94c072
-# ╠═fafe381e-0baf-40c1-b127-67b7f8c1a902
+# ╟─fafe381e-0baf-40c1-b127-67b7f8c1a902
 # ╠═cc64aa01-953e-49fd-8301-9be1f244437d
 # ╟─e82faaad-5278-4d8f-982b-fca335bbd006
-# ╠═6a5f4405-f63c-4fff-b692-e2bbe396ed7a
+# ╟─6a5f4405-f63c-4fff-b692-e2bbe396ed7a
 # ╠═bb659f3a-0a01-4f40-81ce-a8c13a34250b
 # ╟─0ec47530-59b9-11eb-0c49-2b70d7e37d4d
 # ╠═3e139540-7b6b-11eb-0671-c5e4c87e6b21
@@ -2106,9 +2125,11 @@ version = "0.9.1+5"
 # ╟─c9ee5190-d362-43f9-94e7-de9b395d55fb
 # ╠═fff30b64-d5bb-41df-91bc-ebb2492981ec
 # ╠═13eaf81b-3e3c-4678-a644-0d6aa5629188
-# ╠═9d84d4e2-d81d-4874-a656-8ff2624a7f1d
+# ╟─9d84d4e2-d81d-4874-a656-8ff2624a7f1d
 # ╠═7344c1d9-5d87-4b4d-8264-3043b162c49f
 # ╠═4227b4c1-8629-4062-b9d7-1c87b522c761
+# ╟─17da9ce0-e748-4bb3-aed4-f33da671aa48
+# ╠═df5a3c48-f994-4a84-beca-f079420a1bbf
 # ╟─77b24122-7b6b-11eb-2036-41d8d55f985a
 # ╠═598d0cd2-59b9-11eb-0a8b-a1938e2c3c43
 # ╟─751f6650-7ce1-11eb-3bfe-a1f01e765cf4

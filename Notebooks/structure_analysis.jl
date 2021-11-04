@@ -502,30 +502,30 @@ end
 # ╔═╡ 7255922b-0361-4975-9435-9353d1ed553d
 begin
 	vnames = ["vₜ=0" "vₜ=0.1v₀" "vₜ=1v₀" "vₜ=2v₀" "vₜ=4v₀" "vₜ=6v₀" "vₜ=8v₀" "vₜ=10v₀"]
-	lig_delth = plot(lig_deltas[:,9], lig_deltas[:,1], label=vnames[1],
+	lig_delth = plot(lig_deltas[:,9], lig_deltas[:,3], label=vnames[1],
 		             w = 3, 							# line width
 		             st = :samplemarkers, 				# some recipy stuff
 		             step = 50, 						# density of markers
 		             marker = (8, :auto, 0.6),			# marker size
 	)
-	plot!(lig_deltas[:,9], lig_deltas[:,2], label=vnames[2],
+	plot!(lig_deltas[:,9], lig_deltas[:,4], label=vnames[2],
 	      w = 3, 							# line width
 		  st = :samplemarkers, 				# some recipy stuff
 		  step = 50, 						# density of markers
 		  marker = (8, :auto, 0.6),			# marker size
 	)
-	plot!(lig_deltas[:,9], lig_deltas[:,3], label=vnames[3],
-		  w = 3, 							# line width
-		  st = :samplemarkers, 				# some recipy stuff
-		  step = 50, 						# density of markers
-		  marker = (8, :auto, 0.6),			# marker size
-		 )
-	plot!(lig_deltas[:,9], lig_deltas[:,4], label=vnames[4],
-		  w = 3, 							# line width
-		  st = :samplemarkers, 				# some recipy stuff
-		  step = 50, 						# density of markers
-		   marker = (8, :auto, 0.6),			# marker size
-		  )
+	# plot!(lig_deltas[:,9], lig_deltas[:,1], label=vnames[3],
+	# 	  w = 3, 							# line width
+	# 	  st = :samplemarkers, 				# some recipy stuff
+	# 	  step = 50, 						# density of markers
+	# 	  marker = (8, :auto, 0.6),			# marker size
+	# 	 )
+	# plot!(lig_deltas[:,9], lig_deltas[:,4], label=vnames[4],
+	# 	  w = 3, 							# line width
+	# 	  st = :samplemarkers, 				# some recipy stuff
+	# 	  step = 50, 						# density of markers
+	# 	   marker = (8, :auto, 0.6),			# marker size
+	# 	  )
 	# plot!(lig_deltas[:,9], lig_deltas[:,5], label=vnames[5])
 	# plot!(lig_deltas[:,9], lig_deltas[:,6], label=vnames[6])
 	# plot!(lig_deltas[:,9], lig_deltas[:,7], label=vnames[7])
@@ -535,9 +535,10 @@ begin
 		 step = 50, 						# density of markers
 		 marker = (8, :auto, 0.6),			# marker size
 				)
-	plot!(yaxis=:log)
+	plot!(yaxis=:log, yticks=([0.7, 1, 2, 5, 8, 10, 12], ["0.7", "1", "2", "5", "8", "10", "12"]))
 	plot!(legend=:bottomright)
 	plot!(xlims=(2,25))
+	hline!(fill(7.3, length(lig_deltas[:,9])) , c=:black, line=(:dash, 3))
 	plot!(ylims=(0.7,12),ylabel="Δh",
 	 xlabel="t/t₀",
      legend=:none,
@@ -616,15 +617,16 @@ begin
 	 t_stab, #[2:8]
 	 xlabel="vₜ/v₀",
 	 ylabel="τ",
+	 xticks=([1, 2, 5, 8, 10], ["1", "2", "5", "8", "10"]),
 	 color=palette(:default)[1],
 	 # xaxis=:log,
 	 # yaxis=:log,
-	 label=" failure time",
-	 markersize = 22,
-     legend=(:bottomright),
-	 legendfontsize = 28,			# legend font size
-     tickfont = (28, "Arial"),	# tick font and size
-     guidefont = (30, "Arial"),	# label font and size
+	 label=("failure time"),
+	 markersize = 16,
+     legend=(:topleft),
+	 legendfontsize = 16,			# legend font size
+     tickfont = (16, "Arial"),	# tick font and size
+     guidefont = (18, "Arial"),	# label font and size
 	 grid = :none,						# grid variable
 	 xlims=(0.8, 11),
 	 ylims=(9, 21),
@@ -637,59 +639,6 @@ if os
 else
 	savefig(her_lig, "..\\Figures\\r_lig.svg")
 end
-
-# ╔═╡ ff0fb161-4a6a-4fc7-b921-755b07b99c73
-if os
-	savefig(scatter_failur_time, "../Figures/failur_times_over_Gamma.svg")
-else
-	savefig(scatter_failur_time, "..\\Figures\\failur_times_over_Gamma.svg")
-	#savefig(some_plot, "..\\Figures\\failur_times_over_Gamma.svg")
-end
-
-# ╔═╡ 8267c6da-1b57-452a-933b-c78b2f8222e5
-begin
-	lig_new = plot(lig_deltas[:,9], lig_deltas[:,1], 
-		 w = 3, 							# line width
-		 st = :samplemarkers, 				# some recipy stuff
-		 step = 50, 						# density of markers
-		 marker = (8, :auto, 0.6),			# marker size
-		 legendfontsize = 18,			# legend font size
-         tickfont = (16, "Arial"),	# tick font and size
-         guidefont = (18, "Arial"),	# label font and size
-	     grid = :none
-	)
-	plot!(lig_deltas[:,9], lig_deltas[:,2], 
-		 w = 3, 							# line width
-		 st = :samplemarkers, 				# some recipy stuff
-		 step = 50, 						# density of markers
-		 marker = (8, :auto, 0.6),			# marker size
-		 legendfontsize = 18,			# legend font size
-         tickfont = (16, "Arial"),	# tick font and size
-         guidefont = (18, "Arial"),	# label font and size
-	     grid = :none
-	)
-	# plot!(lig_deltas[:,9], lig_deltas[:,3], label=vnames[3])
-	# plot!(lig_deltas[:,9], lig_deltas[:,4], label=vnames[4])
-	# plot!(lig_deltas[:,9], lig_deltas[:,5], label=vnames[5])
-	# plot!(lig_deltas[:,9], lig_deltas[:,6], label=vnames[6])
-	# plot!(lig_deltas[:,9], lig_deltas[:,7], label=vnames[7])
-	plot!(lig_deltas[:,9], lig_deltas[:,8], 
-	     w = 3, 							# line width
-		 st = :samplemarkers, 				# some recipy stuff
-		 step = 50, 						# density of markers
-		 marker = (8, :auto, 0.6),			# marker size
-		 legendfontsize = 18,			# legend font size
-         tickfont = (16, "Arial"),	# tick font and size
-         guidefont = (18, "Arial"),	# label font and size
-	     grid = :none
-	)
-	plot!(yaxis=:log)
-	plot!(legend=:none)
-	#plot!(legend=:bottomright)
-	plot!(xlims=(2,25))
-	plot!(ylims=(0.7,12))
-end 
-
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
