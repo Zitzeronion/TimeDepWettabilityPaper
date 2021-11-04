@@ -502,13 +502,13 @@ end
 # ╔═╡ 7255922b-0361-4975-9435-9353d1ed553d
 begin
 	vnames = ["vₜ=0" "vₜ=0.1v₀" "vₜ=1v₀" "vₜ=2v₀" "vₜ=4v₀" "vₜ=6v₀" "vₜ=8v₀" "vₜ=10v₀"]
-	lig_delth = plot(lig_deltas[:,9], lig_deltas[:,3], label=vnames[1],
+	lig_delth = plot(lig_deltas[:,9], lig_deltas[:,3], label=vnames[3],
 		             w = 3, 							# line width
 		             st = :samplemarkers, 				# some recipy stuff
 		             step = 50, 						# density of markers
 		             marker = (8, :auto, 0.6),			# marker size
 	)
-	plot!(lig_deltas[:,9], lig_deltas[:,4], label=vnames[2],
+	plot!(lig_deltas[:,9], lig_deltas[:,4], label=vnames[4],
 	      w = 3, 							# line width
 		  st = :samplemarkers, 				# some recipy stuff
 		  step = 50, 						# density of markers
@@ -529,11 +529,13 @@ begin
 	# plot!(lig_deltas[:,9], lig_deltas[:,5], label=vnames[5])
 	# plot!(lig_deltas[:,9], lig_deltas[:,6], label=vnames[6])
 	# plot!(lig_deltas[:,9], lig_deltas[:,7], label=vnames[7])
-	plot!(lig_deltas[:,9], lig_deltas[:,8], label=vnames[8],
-				w = 3, 							# line width
-		 st = :samplemarkers, 				# some recipy stuff
-		 step = 50, 						# density of markers
-		 marker = (8, :auto, 0.6),			# marker size
+	plot!(lig_deltas[:,9], 
+		  lig_deltas[:,8], 
+		  label=vnames[8],
+		  w = 3, 							# line width
+		  st = :samplemarkers, 				# some recipy stuff
+		  step = 50, 						# density of markers
+		  marker = (8, :auto, 0.6),			# marker size
 				)
 	plot!(yaxis=:log, yticks=([0.7, 1, 2, 5, 8, 10, 12], ["0.7", "1", "2", "5", "8", "10", "12"]))
 	plot!(legend=:bottomright)
@@ -924,9 +926,9 @@ uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
 
 [[GLFW_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libglvnd_jll", "Pkg", "Xorg_libXcursor_jll", "Xorg_libXi_jll", "Xorg_libXinerama_jll", "Xorg_libXrandr_jll"]
-git-tree-sha1 = "0c603255764a1fa0b61752d2bec14cfbd18f7fe8"
+git-tree-sha1 = "dba1e8614e98949abfa60480b13653813d8f0157"
 uuid = "0656b61e-2033-5cc2-a64a-77c0f6c09b89"
-version = "3.3.5+1"
+version = "3.3.5+0"
 
 [[GR]]
 deps = ["Base64", "DelimitedFiles", "GR_jll", "HTTP", "JSON", "Libdl", "LinearAlgebra", "Pkg", "Printf", "Random", "Serialization", "Sockets", "Test", "UUIDs"]
