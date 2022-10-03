@@ -1,0 +1,223 @@
+Dear Prof. Dr. Harting,
+
+This manuscript has been reviewed by our referees. A critique from the
+reports appears below. Based on this we judge that the work probably
+warrants publication in some form, but does not meet the Physical
+Review Letters criteria of impact, innovation, and interest.
+
+The paper, with revision as appropriate, might be suitable for
+publication in one of the topical Physical Review journals or Physical
+Review Research. The editors of that journal will make the decision on
+publication, and may seek further review. However, our complete file
+is available.
+
+In choosing the journal, please be aware that Physical Review Research
+is a fully open access publication and, thus, article publication
+charges would apply.
+
+If you transfer this manuscript, be sure to include the usual response
+to all referee comments and a summary of revisions made.
+
+Yours sincerely,
+
+Saad E. Hebboul
+Associate Editor
+Physical Review Letters
+Email: prl@aps.org
+https://journals.aps.org/prl/
+Follow us on Twitter @PhysRevLett
+
+NEWS FROM THE PHYSICAL REVIEW JOURNALS
+
+PRX Energy is now open for submissions
+https://go.aps.org/3lNdIqK
+
+P.S. For future reference, your paper is also too long for a Letter;
+    see appended form.
+
+
+WORD COUNT
+
+  The guidelines used to determine the word count can be found at
+  http://journals.aps.org/authors/length-guide
+
+
+ Figure   Aspect Ratio   Wide?   Word Equivalent
+    1         1.73         No        106
+    2         1.46         No        122
+    3         1.46         No        122
+    4         1.29         No        136
+    5         1.38         No        128
+
+WORD COUNT SUMMARY
+   Note: Text word count excludes title, abstract, byline, PACS,
+         receipt date, acknowledgments, and references.
+
+             Text word count   2960
+       Equations word equiv.    208
+         Figures word equiv.    614
+          Tables word equiv.      0
+                             ------
+                      TOTAL    3782 (Maximum length is 3750)
+
+----------------------------------------------------------------------
+Report of Referee A -- LM17723/Zitz
+----------------------------------------------------------------------
+
+This manuscript describes some numerical simulations and theory on the
+dewetting of surfaces with temporally changing wettability. The
+subject is of interest, but I am not convinced this manuscript
+describes the type of progress that merits publication in PRL. Besides
+that, I am unable to follow most of the arguments made with respect to
+the disjoining pressure. For me, one needs to integrate the disjoining
+pressure to arrive at an effective interface potential, and I do not
+really know how to go from the effective interface potential to the
+surface tension. The equation (3) therefore merits much more
+discussion. The same holds for the time scale. The viscous time scale
+is well defined, but necessitates a length scale in addition to the
+capillary velocity. It is unclear why the authors choose the length
+scale that they use in the paper. Subsequently, they replace the
+surface tension by a complicated partial derivative of the disjoining
+pressure; here the same remark as above holds. Incidentally, for a
+'normal' fluid such as water, the capillary velocity is ~70m/s, so
+that very, very rapidly the fluid inertia becomes important. This is
+indeed what one usually observes for the formation or coalescence of
+drops, so that at the very least this should be discussed and the
+Reynolds number calculated.
+
+In addition, there is a lot of old literature that relates the
+dewetting to the disjoining pressure, and shows that the nucleation of
+a hole in a wetting film is much more difficult than the nucleation of
+such a wetting film; there are experiments on this by Rutledge and
+Taborek, theory by Schick and Taborek and Bausch, Blossey and Indekeu.
+
+The explanations also lack a discussion on time, length, and energy
+scales. I have no clue what the values mean ' the numerical values, in
+LB units, are set to \gamma= 0.01 and  \mu = 1/6. What is the
+disjoining pressure due to? Van der Waals forces? How thick is the
+precursor film, and why should the disjoining pressure be zero there?
+Is there any comparison with experiments possible/feasible?
+
+In summary, this is perhaps an interesting manuscript, but it is for
+the moment not suitable for PRL. Perhaps it could be made suitable by
+a thorough revision.
+
+----------------------------------------------------------------------
+Report of Referee B -- LM17723/Zitz
+----------------------------------------------------------------------
+
+In this manuscript the authors study the dewetting patterns of a
+substrate whose wetting properties are space and time modulated by a
+sinusoidal wave. This is a very relevant topic with a large number of
+potential applications. A large body of work has been done on the
+morphology of structured patterns but far less work has been done for
+the case where the pattern properties are time dependent. The work is
+carried out with expertise and the conclusions are interesting, so I
+have currently a favorable opinion on this work. However, a number of
+important issues need to be clarified before the paper can be
+accepted.
+
+Model:
+
+My major concern relates the model used in the study. Particularly, I
+see two important issues that need clarification:
+
+i. The model disjoining pressure, Eq. 3 with a tail decaying as the
+inverse squared power seems odd. I am more familiar with the expected
+van der Waals tail with a decay as the inverse cube power. Is there
+any reason for this choice? ii. The second major concern refers to the
+choice of slip length. The authors study a fluid-substrate model that
+has a thin film equilibrium thickness of 0.07 length units, but the
+slip length is one unit, hence about 10 times larger than the
+equilibrium film thickness. This seems unexpected, in view of the
+small contact angle chosen for the system. Could the authors justify
+this choice?
+
+A number of other issues:
+
+1. The relevance of the manuscript relies on the significance of the
+substrate's switchable properties. Particularly, it is assumed that
+the wetting properties can be modulated on space but also on time. The
+authors have mentioned in the introduction that this can be
+potentially done. However, it would be desirable that the authors
+relate their model of switchable substrate with some specific
+experimental realization, where the actual length and time scales are
+mentioned.
+
+2. An important parameter in the problem is the wave-vector q0, which
+sets the correlation length in the problem. The authors should state
+what the actual value is relative to either the average film height,
+of the wave-length of modulations. Is there any reason to give the
+wave-length of modulations in units of the system size, i.e., are the
+results subject to finite size effects? Otherwise it appears more
+meaningful to describe the modulations in units of q0 or the
+equilibrium film thickness.
+
+3. The thin film equation relies on a local approximation for the
+interface potential and disjoining pressure. Notice that to first
+order in non-local effects, the surface tension entering the thin film
+equation adopts a film thickness dependence which could potentially
+affect the dynamics. Particularly, as far as the parallel correlation
+length q0 is referred, the non-local effects provide an upper bound
+equal to the inverse bulk correlation length. This could be a
+significant effect in polymer thin films (c.f. Benet et al. jpc-c 118,
+22079, 2014 and the related discussion on dynamical effects Pahlavan
+et al., jfm, 845, 642, 2018).
+
+----------------------------------------------------------------------
+Report of Referee C -- LM17723/Zitz
+----------------------------------------------------------------------
+
+I have read the manuscript LM17723 by Zitz, Scagliarini, and Harting.
+The manuscript addresses the behavior of a dewetting liquid film on a
+substrate where the contact angle varies in time and is non-uniform;
+specifically, it is characterized by a checkerboard pattern. The
+authors study the problem numerically and they also provide a number
+of scaling results, and their main finding is the formation of
+transient rivulets under suitable conditions.
+
+The study seems scientifically sound, the results are credible, and
+the manuscript is clearly written. The topic may be potentially
+relevant for microfluidic and related applications journals, e.g.,
+Physical Review E or Physical Review Fluids. However, I feel that the
+results presented lack a sufficient breadth and impact so as to
+warrant publication in Physical Review Letters - provided that one has
+a suitable substrate, I do not see how would the transport of a fluid
+by way of transient rivulets surpass the transport by way of droplets
+in practice - and thus I cannot recommend the manuscript for
+publication.
+
+The core of the manuscript is a numerical study which includes a
+number of model parameters and specific choices of their values, say
+\theta_0, \delta\theta, \delta, h_0, the square pattern itself, the
+orientation of the velocity of the contact angle, etc. Naturally,
+these choices need to be made, but drawing conclusions from just a few
+sets is, in my opinion, premature. For example, I imagine that the
+rivulets will not form if \delta\theta were too small, or too small
+relative to \theta_0. The authors focused on the importance of the
+speed of the pattern and on its wavelength but they left most other
+parameters fixed to a single value, the reasons for their choice being
+unclear.
+
+Also unclear is how does the substrate patterning scale 2\pi/q_\theta
+compare with the scale of homogeneous dewetting 2\pi/q_0. This is an
+important question because the behavior of the film will likely depend
+very much on the ratio of these two scales. I tried hard to understand
+whether the different cases of \lambda discussed in the paper agree
+with 2\pi/q_0 but I was unable to do so. How would the film behave if
+the dynamics of the film were controlled primarily by spinodal
+dewetting and not by the contact-angle pattern? At the same time, if
+the two characteristic lengthscales (= that of the spinodal dewetting
+and that of the patterned substrate) are suitably synchronized,
+perhaps rivulets can be rendered permanent rather than transient? Or
+is the dewetting, once initiated, immanently irreversible even for a
+time-dependent contact-angle pattern like the one studied in LM17723?
+
+Many of the numerical results are supported by scaling estimates. I
+like these arguments, but the agreement is hardly convincing. For
+example, the linear and the square scaling laws in Fig. 2 each cover a
+small range (much less than a tenfold variation) and so it is hard to
+see whether they really apply. The same goes for the rivulet lifetime
+in Fig. 5 where the trend is OK but most likely a scaling law
+different from log(v\theta) would do as well in the range of \tau_riv
+covered by the numerical data.

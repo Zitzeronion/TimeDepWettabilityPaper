@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.17.1
+# v0.19.9
 
 using Markdown
 using InteractiveUtils
@@ -502,36 +502,23 @@ end
 # ╔═╡ 7255922b-0361-4975-9435-9353d1ed553d
 begin
 	vnames = ["vₜ=0" "vₜ=0.1v₀" "vₜ=1v₀" "vₜ=2v₀" "vₜ=4v₀" "vₜ=6v₀" "vₜ=8v₀" "vₜ=10v₀"]
-	lig_delth = plot(lig_deltas[:,9], lig_deltas[:,3], label=vnames[3],
+	Gnames =  ["Γ=0" "Γ=0.15" "Γ=1.5" "Γ=3.0" "Γ=6.0" "Γ=9.0" "Γ=12.0" "Γ=15.0"]
+	lig_delth = plot(lig_deltas[:,9], lig_deltas[:,3], label=Gnames[3],
 		             w = 3, 							# line width
 		             st = :samplemarkers, 				# some recipy stuff
 		             step = 50, 						# density of markers
 		             marker = (8, :auto, 0.6),			# marker size
 	)
-	plot!(lig_deltas[:,9], lig_deltas[:,4], label=vnames[4],
+	plot!(lig_deltas[:,9], lig_deltas[:,4], label=Gnames[4],
 	      w = 3, 							# line width
 		  st = :samplemarkers, 				# some recipy stuff
 		  step = 50, 						# density of markers
 		  marker = (8, :auto, 0.6),			# marker size
 	)
-	# plot!(lig_deltas[:,9], lig_deltas[:,1], label=vnames[3],
-	# 	  w = 3, 							# line width
-	# 	  st = :samplemarkers, 				# some recipy stuff
-	# 	  step = 50, 						# density of markers
-	# 	  marker = (8, :auto, 0.6),			# marker size
-	# 	 )
-	# plot!(lig_deltas[:,9], lig_deltas[:,4], label=vnames[4],
-	# 	  w = 3, 							# line width
-	# 	  st = :samplemarkers, 				# some recipy stuff
-	# 	  step = 50, 						# density of markers
-	# 	   marker = (8, :auto, 0.6),			# marker size
-	# 	  )
-	# plot!(lig_deltas[:,9], lig_deltas[:,5], label=vnames[5])
-	# plot!(lig_deltas[:,9], lig_deltas[:,6], label=vnames[6])
-	# plot!(lig_deltas[:,9], lig_deltas[:,7], label=vnames[7])
+	
 	plot!(lig_deltas[:,9], 
 		  lig_deltas[:,8], 
-		  label=vnames[8],
+		  label=Gnames[8],
 		  w = 3, 							# line width
 		  st = :samplemarkers, 				# some recipy stuff
 		  step = 50, 						# density of markers
@@ -635,11 +622,35 @@ begin
 	)
 end
 
+# ╔═╡ 2771ac86-18fa-4e50-8813-a162a5ea01fd
+begin
+	here_lig = plot(0.01:0.01:30, 0.01:0.01:30, line = (:steppre, :dot, :arrow, 0.0, 0, :red), label="", xaxis = :log
+	)
+	scatter!(vel_set .* 1.5, #[2:8] 
+	 t_stab, #[2:8]
+	 xlabel="Γ",
+	 ylabel="τ",
+	 xticks=([1, 2, 5, 10, 15, 20], ["1", "2", "5", "10", "15", "20"]),
+	 color=palette(:default)[1],
+	 # xaxis=:log,
+	 # yaxis=:log,
+	 label="",
+	 markersize = 16,
+     legend=(:topleft),
+	 legendfontsize = 16,			# legend font size
+     tickfont = (16, "Arial"),	# tick font and size
+     guidefont = (18, "Arial"),	# label font and size
+	 grid = :none,						# grid variable
+	 xlims=(1, 20),
+	 ylims=(9, 21),
+	)
+end
+
 # ╔═╡ 4f4a1ef5-c270-4d75-a2e2-0b2c14af4727
 if os
 	savefig(her_lig, "../Figures/r_lig.svg")
 else
-	savefig(her_lig, "..\\Figures\\r_lig.svg")
+	savefig(here_lig, "..\\Figures\\r_lig.svg")
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -702,9 +713,9 @@ version = "0.9.1"
 
 [[Cairo_jll]]
 deps = ["Artifacts", "Bzip2_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "JLLWrappers", "LZO_jll", "Libdl", "Pixman_jll", "Pkg", "Xorg_libXext_jll", "Xorg_libXrender_jll", "Zlib_jll", "libpng_jll"]
-git-tree-sha1 = "f2202b55d816427cd385a9a4f3ffb226bee80f99"
+git-tree-sha1 = "4b859a208b2397a7a623a03449e4636bdb17bcf2"
 uuid = "83423d85-b0ee-5818-9007-b63ccbeb887a"
-version = "1.16.1+0"
+version = "1.16.1+1"
 
 [[Chain]]
 git-tree-sha1 = "cac464e71767e8a04ceee82a889ca56502795705"
@@ -839,7 +850,7 @@ uuid = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
 version = "0.8.5"
 
 [[Downloads]]
-deps = ["ArgTools", "LibCURL", "NetworkOptions"]
+deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 
 [[EarCut_jll]]
@@ -871,6 +882,9 @@ deps = ["Dates", "Mmap", "Printf", "Test", "UUIDs"]
 git-tree-sha1 = "0f5e8d0cb91a6386ba47bd1527b240bd5725fbae"
 uuid = "48062228-2e41-5def-b9a4-89aafe57970f"
 version = "0.9.10"
+
+[[FileWatching]]
+uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
 [[FillArrays]]
 deps = ["LinearAlgebra", "Random", "SparseArrays", "Statistics"]
@@ -956,9 +970,9 @@ version = "0.21.0+0"
 
 [[Glib_jll]]
 deps = ["Artifacts", "Gettext_jll", "JLLWrappers", "Libdl", "Libffi_jll", "Libiconv_jll", "Libmount_jll", "PCRE_jll", "Pkg", "Zlib_jll"]
-git-tree-sha1 = "7bf67e9a481712b3dbe9cb3dac852dc4b1162e02"
+git-tree-sha1 = "a32d672ac2c967f3deb8a81d828afc739c838a06"
 uuid = "7746bdde-850d-59dc-9ae8-88ece973131d"
-version = "2.68.3+0"
+version = "2.68.3+2"
 
 [[Graphite2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -979,9 +993,9 @@ version = "0.9.14"
 
 [[HarfBuzz_jll]]
 deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "Graphite2_jll", "JLLWrappers", "Libdl", "Libffi_jll", "Pkg"]
-git-tree-sha1 = "8a954fed8ac097d5be04921d595f741115c1b2ad"
+git-tree-sha1 = "129acf094d168394e80ee1dc4bc06ec835e510a3"
 uuid = "2e76f6c2-a576-52d4-95c1-20adfe4de566"
-version = "2.8.1+0"
+version = "2.8.1+1"
 
 [[IfElse]]
 git-tree-sha1 = "28e837ff3e7a6c3cdb252ce49fb412c8eb3caeef"
@@ -1048,6 +1062,12 @@ git-tree-sha1 = "f6250b16881adf048549549fba48b1161acdac8c"
 uuid = "c1c5ebd0-6772-5130-a774-d5fcae4a789d"
 version = "3.100.1+0"
 
+[[LERC_jll]]
+deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
+git-tree-sha1 = "bf36f528eec6634efc60d7ec062008f171071434"
+uuid = "88015f11-f218-50d7-93a8-a6af411a945d"
+version = "3.0.0+1"
+
 [[LZO_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "e5b909bcf985c5e2605737d2ce278ed791b89be6"
@@ -1086,9 +1106,9 @@ uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
 
 [[Libffi_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
-git-tree-sha1 = "761a393aeccd6aa92ec3515e428c26bf99575b3b"
+git-tree-sha1 = "0b4a5d71f3e5200a7dff793393e09dfc2d874290"
 uuid = "e9f186c6-92d2-5b65-8a66-fee21dc1b490"
-version = "3.2.2+0"
+version = "3.2.2+1"
 
 [[Libgcrypt_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libgpg_error_jll", "Pkg"]
@@ -1121,10 +1141,10 @@ uuid = "4b2f31a3-9ecc-558c-b454-b3730dcb73e9"
 version = "2.35.0+0"
 
 [[Libtiff_jll]]
-deps = ["Artifacts", "JLLWrappers", "JpegTurbo_jll", "Libdl", "Pkg", "Zlib_jll", "Zstd_jll"]
-git-tree-sha1 = "340e257aada13f95f98ee352d316c3bed37c8ab9"
+deps = ["Artifacts", "JLLWrappers", "JpegTurbo_jll", "LERC_jll", "Libdl", "Pkg", "Zlib_jll", "Zstd_jll"]
+git-tree-sha1 = "c9551dd26e31ab17b86cbd00c2ede019c08758eb"
 uuid = "89763e89-9b03-5906-acba-b20f662cd828"
-version = "4.3.0+0"
+version = "4.3.0+1"
 
 [[Libuuid_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -1133,7 +1153,7 @@ uuid = "38a345b3-de98-5d2b-a5d3-14cd9215e700"
 version = "2.36.0+0"
 
 [[LinearAlgebra]]
-deps = ["Libdl"]
+deps = ["Libdl", "libblastrampoline_jll"]
 uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 
 [[LogExpFunctions]]
@@ -1204,9 +1224,13 @@ uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
 
 [[Ogg_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
-git-tree-sha1 = "7937eda4681660b4d6aeeecc2f7e1c81c8ee4e2f"
+git-tree-sha1 = "887579a3eb005446d514ab7aeac5d1d027658b8f"
 uuid = "e7412a2a-1a6e-54c0-be00-318e2571c051"
-version = "1.3.5+0"
+version = "1.3.5+1"
+
+[[OpenBLAS_jll]]
+deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
+uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
 
 [[OpenLibm_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -1311,9 +1335,9 @@ uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 
 [[Qt5Base_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Fontconfig_jll", "Glib_jll", "JLLWrappers", "Libdl", "Libglvnd_jll", "OpenSSL_jll", "Pkg", "Xorg_libXext_jll", "Xorg_libxcb_jll", "Xorg_xcb_util_image_jll", "Xorg_xcb_util_keysyms_jll", "Xorg_xcb_util_renderutil_jll", "Xorg_xcb_util_wm_jll", "Zlib_jll", "xkbcommon_jll"]
-git-tree-sha1 = "ad368663a5e20dbb8d6dc2fddeefe4dae0781ae8"
+git-tree-sha1 = "c6c0f690d0cc7caddb74cef7aa847b824a16b256"
 uuid = "ea2cea3b-5b76-57ae-a6ef-0a8af62496e1"
-version = "5.15.3+0"
+version = "5.15.3+1"
 
 [[QuadGK]]
 deps = ["DataStructures", "LinearAlgebra"]
@@ -1338,7 +1362,7 @@ deps = ["InteractiveUtils", "Markdown", "Sockets", "Unicode"]
 uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
 
 [[Random]]
-deps = ["Serialization"]
+deps = ["SHA", "Serialization"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 
 [[RecipesBase]]
@@ -1691,6 +1715,10 @@ git-tree-sha1 = "5982a94fcba20f02f42ace44b9894ee2b140fe47"
 uuid = "0ac62f75-1d6f-5e53-bd7c-93b484bb37c0"
 version = "0.15.1+0"
 
+[[libblastrampoline_jll]]
+deps = ["Artifacts", "Libdl", "OpenBLAS_jll"]
+uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
+
 [[libfdk_aac_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "daacc84a041563f965be61859a36e17c4e4fcd55"
@@ -1705,9 +1733,9 @@ version = "1.6.38+0"
 
 [[libvorbis_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Ogg_jll", "Pkg"]
-git-tree-sha1 = "c45f4e40e7aafe9d086379e5578947ec8b95a8fb"
+git-tree-sha1 = "b910cb81ef3fe6e78bf6acee440bda86fd6ae00c"
 uuid = "f27f6e37-5d2b-51aa-960f-b287f2bc3b7a"
-version = "1.3.7+0"
+version = "1.3.7+1"
 
 [[nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -1775,6 +1803,7 @@ version = "0.9.1+5"
 # ╠═1ca14c1c-0de6-44b6-9772-04cc74593a1e
 # ╠═d169d3ba-97a3-475c-8a52-bc9dbcbdfb00
 # ╠═44619084-90a2-4fdd-8431-7978ba7f19b8
+# ╠═2771ac86-18fa-4e50-8813-a162a5ea01fd
 # ╠═4f4a1ef5-c270-4d75-a2e2-0b2c14af4727
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

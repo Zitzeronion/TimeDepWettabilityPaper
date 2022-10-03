@@ -1,0 +1,3 @@
+Wetting of surfaces holds a crucial interest for diverse technological and societal areas, from nanotechnology to contagion dynamics. We propose the usage of substrates with time-varying wettability as a novel tool to solve a critical problem, namely the control of dewetting morphologies. We employed a new numerical method, able to handle unprecedented system sizes in this context. 
+We unveiled the existence of a droplet-to-rivulet transition determined by the substrate adaptation rate. 
+Our work paves, therefore, a new avenue in the application of simulations to study the complex dynamics of thin liquid films over switchable and adaptive substrates.

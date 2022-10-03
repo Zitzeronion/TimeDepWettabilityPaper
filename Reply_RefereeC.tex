@@ -1,0 +1,261 @@
+\documentclass[12pt,english]{article}
+
+\usepackage{natbib}
+
+\usepackage{graphics,graphicx,dcolumn,bm,fleqn,epic,eepic,float}
+\usepackage{amssymb,amsmath,multirow,rotate,rotating,color}
+\usepackage[utf8]{inputenc}
+
+\usepackage[english]{babel}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+%\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\tikzset{fontscale/.style = {font=\relsize{#1}}}
+\usetikzlibrary{calc}
+\makeatother
+
+\newcommand{\figref}[1]{Fig.~\ref{fig:#1}}
+\newcommand{\eqnref}[1]{Eq.~(\ref{eq:#1})}
+\newcommand{\ts}{\textsuperscript}
+
+\definecolor{tuered}{RGB}{214,0,74}
+
+\newcommand{\todo}[1]{\textbf{\textcolor{tuered}{ TODO: #1}}}
+
+\newcommand{\vectornorm}[1]{\left|\left|#1\right|\right|}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\hat{\vec{#1}}}
+\newcommand{\tensor}[1]{\mathbf{#1}}
+
+\definecolor{pyblue}{HTML}{1F77B4}
+\definecolor{pyorange}{HTML}{FF7F0C}
+\definecolor{pygreen}{HTML}{2CA02C}
+\definecolor{pyred}{HTML}{D62728}
+
+\newcommand{\JH}[1]{\textcolor{blue}{JH: #1}}
+\begin{document}
+
+% The referee PDF has been generated from r239 -- 'make referee' command.
+
+
+\section*{Reply to Referee C}
+We thank the Referee for his/her report on our manuscript.
+We are glad to read that he/she finds the study scientifically sound and credible and 
+the manuscript well written. Based on his/her important remarks, we have 
+prepared a revised version which we hope will be more convincing also for what concerns
+its impact and interest for the readership of Physical Review Letters.
+Hereafter detailed answers to the various questions raised are reported. All changes 
+in the text are edited in red colour, for the sake of clarity.
+
+\begin{itemize}
+
+\item[ \textbf{\underline{Comment 1.}}]
+{ 
+However, I feel that the
+results presented lack a sufficient breadth and impact so as to
+warrant publication in Physical Review Letters - provided that one has
+a suitable substrate, I do not see how would the transport of a fluid
+by way of transient rivulets surpass the transport by way of droplets
+in practice.
+}
+
+\item[ \textbf{{Answer}}]
+{ 
+We say nowhere that the rivulets would transport fluid more efficiently. Actually 
+we do not talk about transport at all. The focus, here, is not on sliding or similar force-driven processes, but 
+on dewetting and, in particular, on the different dewetting {\it morphologies}. 
+It is true, on the other hand, that rivulets are metastable, but, as 
+we showed, their lifetime can be extended increasing the pattern speed
+(therefore enabling treatment, e.g. curing, of the substrate to 
+fix a given pattern).
+Concerning the breadth and impact to warrant publication in Physical Review Letter, as we think we stressed extensively in the introduction,
+the problem of controlling dewetting, besides being of fundamental interest in Fluid Dynamics (which represents an important part of the 
+PRL readership), it is crucially relevant for applications in 
+nanoprinting (including printable electronics). 
+This is witnessed by the various publications in PRL on this and closely related problems. To cite but a few recent ones: J.C. Fern\'andez-Toledano et al, "How wettability controls nanoprinting",
+{\it Phys. Rev. Lett.} {\bf 124} 224503 (2020); A.A. Pahlavan et al,
+"Evaporation of binary-mixture liquid droplets: the formation of picoliter pancakelike shapes", {\it Phys. Rev. Lett.} {\bf 127}, 024501 (2021); C. Clavaud et al, "Modification of the fluctuation dynamics of ultrathin wetting films", {\it Phys. Rev. Lett.} {\bf 126}, 228004 (2021).
+\JH{We have to make sure to strongly doubt the competence of Ref C in the letter to the editor! I guess this will be the only chance for us to get the paper through/}
+}
+
+
+\item[ \textbf{\underline{Comment 2.}}]
+{ 
+The core of the manuscript is a numerical study which includes a
+number of model parameters and specific choices of their values, say
+$\theta_0$, $ \delta \theta$, $\delta$, $h_0$, 
+the square pattern itself, the
+orientation of the velocity of the contact angle, etc. Naturally,
+these choices need to be made, but drawing conclusions from just a few
+sets is, in my opinion, premature.
+For example, I imagine that the rivulets will not form if $\delta\theta$ were too small, or too small relative to $\theta_0$. 
+The authors focused on the importance of the speed of the pattern and on its wavelength but they left most other parameters fixed to a single value, the reasons for their choice being unclear.
+}
+
+\item[ \textbf{{Answer}}]
+{ 
+The Referee is right. Indeed there are of course several parameters 
+that may influence the physics of the problem. In this (first) contribution, though,
+our aim is to single out the factor determining the novel effect found (the 
+droplet-rivulet duality), namely
+the pattern time dependence (and, hence, the 'wave' speed). 
+One may expect of course that there is a dependence on $\delta \theta$ and $\theta_0$, but this would apply to the static case. 
+A systematic study of the full parameter space would then deserve a dedicated, 
+extended, work that goes somehow beyond the goal of the present paper and a typical PRL contribution.
+Nevertheless, we agree with the Referee that it is appropriate to add further details, therefore we commented in the text 
+on the choice of the checkerboard pattern and of $\theta_0$ and we have added 
+results at changing $\delta \theta$ in a Supplemental Material section.
+
+{\bf ANDREA: Stefan, we do have these data, right? I think to remember that you ran the simulations}
+
+%The observation of the referee is correct.
+%Indeed, the difference in contact angle amounts to a net force on the liquid.
+%This force can be large enough to actuate %droplets~\cite{doi:10.1021/acs.langmuir.5b02335}.
+
+%The thin film equation is valid only in the regime where $\theta \ll \pi/2$.
+%Choosing $\theta_0 = 20^{\circ}$ and a $\Delta\theta$ of the same magnitude %therefore ensures that we are well within the predictability of our model.
+%Therefore we find that our value of $\theta_0$ is a good compromise to satisfying %the constraints.
+
+%Most of our results are given in terms of $t_0$ and $q_0$.
+%Both contain parameters we choose to set up our numerical experiments. 
+%We supply an equation to calculate them and have no evidence to believe that our theoretical assumptions are incorrect.
+%Could the referee please elaborate why he/she thinks we overlook something?
+
+%\textcolor{pyorange}{Stefan}: I would put the results we have from the x-only %velocity run here.
+%They kind a answer what happens if $\Delta\theta$ becomes larger (rivulets life for %a very short amount of time only).
+}
+
+\item[ \textbf{\underline{Comment 3.}}]
+{ 
+Also unclear is how does the substrate patterning scale $2\pi/q_\theta$ compare with the scale of homogeneous dewetting $2\pi/q_0$.
+I tried hard to understand whether the different cases of $\lambda$ discussed in the paper agree with $2\pi/q_0$ but I was unable to do so. 
+How would the film behave if the dynamics of the film were controlled primarily by spinodal dewetting and not by the contact-angle pattern?
+At the same time, if the two characteristic lengthscales ($=$ that of the spinodal dewetting and that of the patterned substrate) are suitably synchronized, perhaps rivulets can be rendered permanent rather than transient? Or is the dewetting, once initiated, immanently irreversible even for a
+time-dependent contact-angle pattern like the one studied in LM17723?
+}
+
+\item[ \textbf{{Answer}}]
+{
+We apologize for having lacked thoroughness not providing the numerical 
+value of $q_0$ (of which we reported the expression, though) to compare with the 
+other characteristic scales. Plugging in the values of $\Theta = \theta_0 + \delta \theta$, 
+$h_0$ and $h_{\ast}$ we get $q_0 \approx 0.13 h_0^{-1}$, whence 
+$\lambda_0 = 2\pi/q_0 \approx 50 h_0$, so it corresponds approximately to the 
+shortest pattern wavelength considered. The pattern-driven instability overwhelms the spinodal instability because it is active even on an initially
+flat film 
+(i.e., where the initial perturbation $|\delta h_0| \rightarrow 0$) 
+\cite{KonnurPRL2000,KarguptaLangmuir2000,KarguptaPRL2001}; ideally one would need to have a vanishing 
+contact angle mismatch in order to see the spinodal dewetting, namely $\delta \theta \sim \delta h_0/h_0$,
+which is also somehow obvious, but it would eventually deprive the pattern of meaning. 
+The emergence of rivulets is observed even for $\lambda \approx \lambda_0$, as we show in a new figure
+(in the Supplemental Material), but their nature is still metastable. 
+
+{\bf ANDREA: Stefan your input is needed here, too. Did you make the simulations/figures, with the 
+properly defined $\Gamma$ for $\lambda \approx 2 \pi/q_0$?}
+}
+%We are sorry for creating confusion with the choice of our variables.
+%Let us call $\lambda_0 = 2\pi/q_0$ and rephrase Eq.~(11) in terms of $\lambda_0$ %using $v_0^{\ast}$,
+%\begin{equation*}
+%    v_0^{\ast} = \frac{\lambda_0}{t_0}, 
+%\end{equation*}
+%computing $\Gamma$ in terms of $v_0^{\ast}$ yields
+%\begin{equation*}
+%    \Gamma = \frac{v_0^{\ast}}{U_{\theta}} = \frac{6\pi h_0^3 q_0^3}{\Theta^3}.
+%\end{equation*}
+%Setting this result equal with Eq.~(11) in the manuscript we have
+%\begin{equation*}
+%    \frac{\chi 3\lambda h_0^3 q_0^4}{\Theta^3} = \frac{6\pi h_0^3 q_0^3}{\Theta^3},
+%\end{equation*}
+%with most of the terms canceling
+%\begin{equation*}
+%    \lambda = \frac{2\pi}{q_0\chi}, 
+%\end{equation*}
+%which in fact state that if the wavelength $\chi^{-1}2\pi/q_0 < \lambda$ rivulets %should form. 
+%}
+
+%\item[ \textbf{\underline{Comment 4.}}]
+%{ 
+%How would the film behave if the dynamics of the film were controlled primarily by %spinodal dewetting and not by the contact-angle pattern?
+%}
+
+%\item[ \textbf{{Answer}}]
+%{ 
+%We thank the referee for raising this question.
+%The straightforward answer is we can reproduce the structure factor of a spinodally %dewetting thin film which is given by
+%\begin{equation*}
+%    S(q,t) = S_0 e^{2\omega(q)t},
+%\end{equation*}
+%where is $S_0$ is a constant factor and 
+%\begin{equation*}
+%    \omega(q) = \frac{1}{t_0}\left[2\left(\frac{q}{q_0}\right)^2 - %\left(\frac{q}{q_0}\right)^4\right],
+%\end{equation*}
+%}
+%which can be found in ref.~\cite{PhysRevE.104.034801}, Fig~1.
+%After the generation of droplets, we observe a coarsening scaling according to a %powerlaw.
+
+%\item[ \textbf{\underline{Comment 5.}}]
+%{ 
+%At the same time, if the two characteristic lengthscales ($=$ that of the spinodal %dewetting and that of the patterned substrate) are suitably synchronized, perhaps %rivulets can be rendered permanent rather than transient? Or is the dewetting, once %initiated, immanently irreversible even for a
+%time-dependent contact-angle pattern like the one studied in LM17723?
+%}
+
+%\item[ \textbf{{Answer}}]
+%{ 
+%This is an interesting comment.
+%To our understanding, this is not the case as shown in Fig.~5 of the manuscript.
+%We observe a saturation like effect for high pattern velocity.
+%Independent of the velocities, the rivulet admits a varicose instability, which %within our study was not possible to overcome.
+%We hypothesize that another substrate pattern could ensure indefinite rivulet %stability.
+%However as we do not have an intuition, testing N-patterns would be beyond the scope %of this work.
+
+%For further details on the scale synchronization, we would point towards the answer %to Comment 4.
+%}
+
+\item[ \textbf{\underline{Comment 4.}}]
+{ 
+Many of the numerical results are supported by scaling estimates. I
+like these arguments, but the agreement is hardly convincing. For
+example, the linear and the square scaling laws in Fig. 2 each cover a
+small range (much less than a tenfold variation) and so it is hard to
+see whether they really apply. 
+The same goes for the rivulet lifetime in Fig. 5 where the trend is OK but most likely a scaling law different from $\log(v_{\theta})$ would do as well in the range of $\tau_{riv}$ covered by the numerical data.
+}
+
+\item[ \textbf{{Answer}}]
+{ 
+We are well aware that the parameter ranges are not too wide, but 
+of course our method (as any other) has to cope with limitations. 
+For example, the range of achievable wavelengths is limited from below 
+by the need to stay in the lubrication regime, and from above by the size of the system (i.e. by computing resources). We could actually increase the system size and thus push further the upper limit of $\lambda$, but this would only extend the $\lambda^2$ scaling range. {\bf ANDREA: May we try one run on a bigger 
+system? Being 1d it shouldn't take too long, should it? It would be also interesting to try a smaller $\Theta$: my handwaving argument on comparing times tells that it should extend a bit the linear, $\sim \lambda$,  scaling range.}
+As for the rivulet lifetimes, analogously, for reasons intrinsic to the stability of the numerical method, much higher pattern speeds cannot be reached 
+(in particular one has to comply with the condition $\Gamma \ll 5 \times 10^2$).
+We tend to disagree, instead, with the comment that any other scaling 
+law would be equivalently good. Essentially because the logarithm scaling is 
+not a fit, it is the result of a derivation based on plausible theoretical arguments, that 
+is 'OK' with the numerical data.
+We think, anyhow, that the Referees' concerns are legitimate and we have, therefore, added 
+comments of caution about the scaling laws in the revised text.
+Let us remark, though, that even in real microfluidic systems, 
+one cannot expect too wild (and wide) variation of lengths and velocities.
+In fact, we would be glad if our pioneering study might motivate further work 
+in this direction, hopefully confirming our findings on an extended parameter 
+range. Of course, that is more likely to happen if our message is conveyed
+by a contribution in a high impact journal such as PRL. 
+}
+
+\end{itemize}
+
+\bibliographystyle{abbrv}
+\bibliography{Ref}
+
+\end{document}
