@@ -67,8 +67,8 @@ The equation (3) therefore merits much more discussion.
 {
 We did not give, in fact, any particular argument with respect to the disjoining pressure, since 
 we assumed that it is a very well established concept employed in any theoretical and computational study of thin liquid film hydrodynamics in the lubrication approximation framework.
-We acknowledge, though, that our assumption was probably erroneous and we give some more explanation. 
-First of all, there is no need (and no way) to go from the disjoining pressure (or the interface potential) to the surface tension, since the two quantities carry complementary physical information. 
+We also assumed that an equation like Eq.(3) (now Eq.(2)), which is approximately twenty-five years old \cite{SCHWARTZ1998173,Mitlin94}, did not deserve a lengthy discussion.
+However, our assumptions were probably erroneous and, therefore, we give, here, some more explanation. 
 Let us, first, make a step back and underline a fundamental difference between the physics of {\it one free interface} and that of a {\it film}:
 the latter is a layer of liquid confined between {\it two} interfaces. When the two interfaces are brought close enough to each other (the layer is thin), they interact.
 The disjoining pressure stems from this interaction. Thermodynamically, it represents minus the derivative of the free energy difference, per unit surface, between 
@@ -88,7 +88,6 @@ and both are required to determine the dynamics of dewetting.
 Of course, on the other hand, the disjoining pressure depends also on the surface tension, which appears, in fact, in its expression (3). 
 We think, though, that part of the confusion might be due to the fact that we do not define the symbol of the surface tension at its first occurrence, but only later. 
 We have now fixed this and we apologize for it.
-\JH{Do we need to change more in the paper?}
 }
 
 \item[ \textbf{\underline{Comment 2.}}] 
@@ -105,23 +104,23 @@ disjoining pressure; here the same remark as above holds.
 We apologize if we have not been thorough in the discussion of the relevant scales, which indeed deserves some clarification. 
 Thin film hydrodynamics is an intrinsically multiscale phenomenon, whereby there are at least two characteristic length scales: the mean film thickness (let us call it $h_0$)
 and an horizontal length scale $\ell$ (which in our case can be, for example, the pattern wavelength, $\lambda$), where, typically $h_0 \ll \ell$. We chose to use the mean 
-film thickness as a scale, because it is the only relevant length that is common to all the simulations.
+film thickness as a scale, because it is a relevant length that is common to all the simulations.
 In the same spirit, we chose as a reference time $t_0(\theta)$, which is not exactly the capillary time (though being related to it). 
 $t_0$, as we explain in the text, is, in fact, the characteristic time of growth of the most unstable mode in the spinodal dewetting on a homogeneous
 substrate of contact angle $\theta$. In spite of the substrate being patterned in our case, it is possible to define an effective $t_0$ in terms 
-of the highest contact angle on the pattern, which is what determines the fastest instability, i.e. $t_0(\Theta)$, where 
-$\Theta=\mbox{max}_{\mathbf{x}}\{\theta(\mathbf{x})\}= \theta_0 + \delta \theta$. We deem the so defined characteristic time as an appropriate scale,
+of, e.g., the mean contact angle on the pattern, i.e. $t_0(\theta_0)$. 
+We deem the so defined characteristic time as an appropriate scale,
 since it does not depend on the pattern wavelength and speed. Actually, one can see that it captures well the time scales of the dewetting process
 from figure 2, where it is shown that the rupture times are of the order of fraction to units of $t_0$.
 We recognize, on the other hand that in this perspective the choice of $v_0 = \lambda/t_0$ as a reference velocity looks a bit awkward.
-A more natural candidate would be, indeed, $v_0=h_0/t_0$. We have therefore decided to use the latter in the revised version of the manuscript.
+A more natural candidate would be, indeed, $v_0=\lambda_s/t_0$, where $\lambda_s$ is the spinodal 
+characteristic length corresponding to $\theta_0$. We have therefore decided to use the latter in the revised version of the manuscript.
 We have also rephrased the corresponding paragraph in the {\it Method} section as follows: \\
 
-\textcolor{red}{Hereafter, lengths and time scales will be expressed, respectively, in units of the mean film height, $h_0$ (which is constant in time, due to mass conservation), and of $t_0 = \frac{3\mu}{\gamma h_0^3 q_0^4}$, the inverse growth rate of the most unstable mode, whose wavenumber is $q_0$, of a spinodally dewetting film. On a uniform substrate, with constant contact angle $\theta^{(u)}$, the wavenumber reads 
-$(q^{(u)}_0)^2 = h_{\ast}^{-2}(1-\cos \theta^{(u)})f^{\prime}(h_0/h_{\ast})$ \cite{Mecke_2005,PhysRevE.100.023108}; in our patterned case, we define 
-$q_0^2=h_{\ast}^{-2}(1-\cos\Theta)f^{\prime}(h_0/h_{\ast})$, where 
-$\Theta = \max_{\mathbf{x}} \theta(\mathbf{x}) = \theta_0 + \delta \theta$.
-A velocity scale also then naturally arises, namely $v_0 = h_0/t_0$.}
+\textcolor{red}{Lengths and time scales will be expressed, respectively, in units of the mean film height, $h_0$ (which is constant in time, due to mass conservation), and of $t_0 = \frac{3\mu}{\gamma h_0^3 q_0^4}$, the inverse growth rate of the most unstable mode, whose wavenumber is $q_0$, of a spinodally dewetting film. On a uniform substrate, with constant contact angle $\theta^{(u)}$, the wavenumber reads 
+$(q^{(u)}_0)^2 = h_{\ast}^{-2}(1-\cos \theta^{(u)})f^{\prime}(h_0/h_{\ast})$ \cite{Mecke_2005,PhysRevE.100.023108}. In our patterned case, we define 
+$q_0^2=h_{\ast}^{-2}(1-\cos\theta_0)f^{\prime}(h_0/h_{\ast})$.
+Correspondingly, we choose as a velocity scale $v_0 = \lambda_s/t_0$, where $\lambda_s = 2\pi/q_0$.}
 
 }
 
@@ -149,10 +148,10 @@ working fluids are in general much more viscous than water (e.g., polymeric liqu
 the characteristic velocity even smaller.
 For the dewetting of a millimetric film of micrometric thickness reatracting into a single droplet, for instance, experiments have measured that 
 the typical velocity is $\sim 1 \mbox{mm}/\mbox{s}$, which gives a Reynolds number $Re \approx 10^{-3}$ \cite{Edwards2016}. 
-In our problem, there are two relevant characteristic velocities: the capillary velocity, $U_{\text{cap}}$, and 
-the pattern speed, $v_{\theta}$. When their ratio $\Gamma = v_{\theta}/U_{\text{cap}} < 1$, the capillary 
-velocity dominates and fixes the Reynolds number which can be, then, evaluated as 
-$Re = U_{\text{cap}}h_0/\nu$ \cite{RevModPhys.69.931}, whereas for $\Gamma > 1$, $Re = v_{\theta} h_0/\nu$. 
+In our problem, there are two relevant characteristic velocities: the retraction speed, 
+$U_{\Theta}$, and 
+the pattern speed, $v_{\theta}$. When their ratio $\Gamma = v_{\theta}/U_{\Theta} < 1$, the retraction speed dominates and fixes the Reynolds number which can be, then, evaluated as 
+$Re = U_{\Theta}h_0/\nu$ \cite{RevModPhys.69.931}, whereas for $\Gamma > 1$, $Re = v_{\theta} h_0/\nu$. 
 In any case, the Reynolds number stays always below $\approx 0.2$.
 We have added the following comment at the end of the {\it Method} section:\\
 
@@ -184,13 +183,9 @@ I have no clue what the values mean ``the numerical values, in LB units, are set
 
 \item[ \textbf{{Answer}}]
 {
-We agree that giving the values of surface tension and dynamic viscosity 
-in lattice Boltzmann units was not particularly insightful and could, on 
-the contrary, be misleading, so we have removed the reference to them.
-\JH{But shouldn't we list them somewhere to make sure the paper is reproducible?}
-Concerning length and time scales, as we have discussed in Comment 2, 
-they are made dimensionless 
-with the mean film height and the characteristic time $t_0$. These two quantities 
+Length and time scales, as discussed in Comment 2 and as mentioned also in the original version of the manuscript, 
+are made dimensionless with the mean film height and the characteristic time $t_0$. 
+These two quantities 
 have a clear physical meaning and can, therefore, be used to compare with 
 experimental setups. In particular, the expression of $t_0$, through its dependence 
 on $q_0$ (the wavenumber of the most unstable mode) contains the details 
@@ -212,7 +207,32 @@ $$
 and it can be seen that indeed film rupture occurs within time 
 scales of the order of $t_0$ ($\approx 2 t_0$) \cite{becker2003complex}.
 We have reported these comments on comparison with actual experimental 
-values in the new version of the paper.
+values in the new version of the paper as follows:\\
+\\
+\textcolor{red}{To give a flavour of how to compare with actual experimental systems, let us notice
+first that the expression of $t_0$ depends on the disjoining pressure (through its dependence 
+ $q_0 = \sqrt{\frac{1}{2\gamma} \Pi^{\prime}(h_0)}$) and contains, therefore, energetic details, namely 
+ the Hamaker constant $A_H$. Consider, for instance, the problem studied in \cite{becker2003complex}: the dewetting of a polystyrene film of thickness $h_0 \approx 4 \, \text{nm}$ deposited on a silicon 
+dioxide substrate, where $A_H  = 2.2 \times 10^{-20} \, \text{J}$ and 
+$\gamma = 0.03 \, \text{N}/\text{m}$. Neglecting the short range part of the interface potential
+(such that $\Pi(h)= - \frac{A_H}{6\pi h^3}$)~\cite{Mecke_2005,becker2003complex}, one gets 
+$q_0^2 \approx \frac{A_H}{4\pi \gamma h_0^4} \approx 2.5 \times 10^{-4} \, \text{nm}^{-2}$.
+The characteristic time of the growth of the instability for these experiments, then, reads \cite{PhysRevLett.99.114503} (the dynamic viscosity of polystyrene is 
+$\mu = 1.2 \times 10^4 \, \text{Pa} \cdot \text{s}$) $t_0 = \frac{3\mu}{\gamma h_0^3 q_0^4} \approx 300 \, \text{s}$ and it can be seen that indeed film rupture occurs within time 
+scales of the order of $t_0$ ($\approx 2 t_0$) \cite{becker2003complex}, as in our 
+simulation for the largest pattern wavelength, $\lambda = L$ (see also our previous work
+with homogeneous substrates~\cite{PhysRevE.104.034801}).} 
+\\
+
+Concerning the values of viscosity and surface tension in lattice Boltzmann units, 
+we acknowledge that giving them in the middle of the discussion on characteristic length and time might  
+have caused confusion. Nevertheless we deem important to provide them, for the sake of readers interested 
+in numerical details of the method as well as for the results reproducibility, therefore we have moved them 
+to a later paragraph, where we added: \\
+\\
+\textcolor{red}{The numerical values in lattice Boltzmann units of the 
+mean film thickness, dynamics viscosity and surface tension are, respectively, $h_0=1$, $\mu=1/6$
+and $\gamma=0.01$.}
 }
 
 
@@ -233,7 +253,7 @@ any kind of interactions among the fluid molecules and the substrate, so
 also those of Van der Waals type. The precursor film is an equilibrium value for the thickness that emerges when the interface potential has also a short 
 range repulsive term. The disjoining pressure is zero there by definition of equilibrium (or, equivalently, because that is a minimum of the interface potential). Concerning comparisons of a thin-film equation approach with 
 experiments, there are tons of examples in the literature, such as 
-\cite{becker2003complex,fetzer2005new,PhysRevLett.99.114503} to name but a few (see also \cite{craster2009dynamics,RevModPhys.81.739} for reviews). 
+\cite{becker2003complex,fetzer2005new,PhysRevLett.99.114503} to name but a few (see also \cite{craster2009dynamics,RevModPhys.81.739} for reviews). All this literature is cited in the paper.
 }
 
 \end{itemize}

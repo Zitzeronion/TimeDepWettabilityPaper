@@ -29,7 +29,7 @@
 
 \title{Controlling the dewetting morphologies of thin liquid films by switchable substrates}
 
-\author{S. Zitz}https://www.overleaf.com/project/633b184a2c25f373c2e9f56c
+\author{S. Zitz}
 \email{zitz@ruc.dk}
  %Changed order: Work done while Stefan worked in Nuremberg
  \affiliation{Helmholtz Institute Erlangen-N\"urnberg for Renewable Energy,\\
@@ -81,9 +81,7 @@ can be observed and we propose a phenomenological argument that justifies the lo
 \end{equation}
 by means of a recently developed method, based on a lattice Boltzmann (LB) scheme~\cite{PhysRevE.100.033313,PhysRevE.104.034801}.
 Eq.~(\ref{eq:thinfilm}) describes, in a lubrication approximation spirit, the evolution of the height field (film thickness) $h(\mathbf{x},t)$, denoting the location of the liquid/air interface. The mobility function 
-\begin{equation}\label{eq:mobility}
-  M_{\delta}(h) = \frac{2h^3 + 6\,\delta\, h^2 + 3\delta^2h}{6\mu},
-\end{equation}  
+$M_{\delta}(h) = \frac{2h^3 + 6\,\delta\, h^2 + 3\delta^2h}{6\mu}$
 depends on the velocity boundary condition at the substrate, parameterized by an effective slip length $\delta$
 (for $\delta \rightarrow 0$ it reduces to the no-slip form $h^3/(3\mu)$). Here, $\mu$ is the fluid dynamic viscosity.
 The film pressure $p(\mathbf{x},t)$ consists of the sum of the Laplace and disjoining pressures, that is $p(\mathbf{x},t) = -\gamma \nabla^2 h - \Pi$~\footnote{\textcolor{red}{The Laplace pressure is the product of the surface tension 
@@ -104,25 +102,27 @@ the general form $\Pi(h) = \gamma(1-\cos \theta)(n-1)(m-1)/(n-m)((h_{\ast}/h)^n 
 are frequently found in the literature, with various combination of exponents $(n,m)$ ($n>m$), depending
 on the type of interactions among fluid molecules and between fluid and substrate~\cite{SCHWARTZ1998173,Mitlin,Teletzke}. A common choice, for instance, is the pair $(9,3)$, which 
 can be derived from molecular interactions of Lennard-Jones type. Here, the use of the $(3,2)$ pair is motivated mainly by the computational advantage of keeping the characteristic dewetting time 
-shorter. We have run also a single case ($\lambda=256$ and $\Gamma=15$) with $(9,3)$ and observed that 
+shorter. We have run also a single case ($\lambda=256 h_0$ and $\Gamma=1.5$) with $(9,3)$ and observed that 
 the dynamics remains essentially the same, but for a shift in the time scale (see also~\cite{PhysRevE.104.034801})}}.
 The time variation of the patterned substrate then enters the model precisely through the disjoining pressure, by making the contact angle space and time dependent, i.e. $\theta = \theta(\mathbf{x},t)$.
+\textcolor{red}{We decorate the substrate with a checkerboard pattern, a common choice that generalizes the broken homogeneity of the stripes to two 
+directions~\cite{KarguptaLangmuir2003,Jalali2018,Nagayama2020,Das2020}.}
 In particular, we employ the sinusoidal form
 \begin{equation}\label{eq:sinetheta}
    \!\! \theta(\mathbf{x},t) = \theta_0 + \delta\theta\left[\sin\left(q_{\theta} (x+v_{\theta x}t)\right)\sin\left(q_{\theta}(y+v_{\theta y}t)\right)\right],\! 
 \end{equation}
-where $q_{\theta} = 2\pi/\lambda$, i.e.~the pattern evolves in time as a plane wave. 
+where $q_{\theta} = 2\pi/\lambda$, i.e.~the pattern evolves in time as a plane wave~\footnote{\textcolor{red}{A laboratory experiment for the here mentioned approach consists of a light switchable substrate with a thin film cast on it~\cite{becker2003complex, IchimuraEtAl_Science2000}. 
+The external stimulus, our moving pattern, can be realized by using a digital multimirror device (DMD)~\cite{doi:10.1021/jp301092y,doi:10.1126/science.aax8760}.}}. 
 We fix the velocity direction to one diagonal, namely $\mathbf{v}_{\theta} = (v_{\theta x},v_{\theta y}) = v_{\theta}(1/\sqrt{2},-1/\sqrt{2})$ (we will return later on the importance of this choice), and we set $\theta_0 = 20^{\circ}$ and $\delta\theta=10^{\circ}$~\footnote{Notice that, since a typical velocity is such that $v_{\theta} \Delta t \ll \Delta x$ (in one LB time step $\Delta t$ the wave would travel a distance much smaller than a lattice spacing $\Delta x$),
 the time update needs to be interpreted in an integer part sense, that is the pattern is shifted by one $\Delta x$ every $1/v_{\theta x}$ time steps (and equivalently in the $y$-direction).}.
 \textcolor{red}{Lengths and time scales will be expressed, respectively, in units of the mean film height, $h_0$ (which is constant in time, due to mass conservation), and of $t_0 = \frac{3\mu}{\gamma h_0^3 q_0^4}$, the inverse growth rate of the most unstable mode, whose wavenumber is $q_0$, of a spinodally dewetting film \cite{Mecke_2005}. On a uniform substrate, with constant contact angle $\theta^{(u)}$, the wavenumber reads 
 $(q^{(u)}_0)^2 = h_{\ast}^{-2}(1-\cos \theta^{(u)})f^{\prime}(h_0/h_{\ast})$ \cite{Mecke_2005,PhysRevE.100.023108}. In our patterned case, we define 
-$q_0^2=h_{\ast}^{-2}(1-\cos\Theta)f^{\prime}(h_0/h_{\ast})$, where 
-$\Theta = \max_{\mathbf{x}} \theta(\mathbf{x}) = \theta_0 + \delta \theta$.
-A velocity scale then also naturally arises, namely $v_0 = h_0/t_0$.}
+  $q_0^2=h_{\ast}^{-2}(1-\cos\theta_0)f^{\prime}(h_0/h_{\ast})$. Correspondingly, we choose as a velocity scale $v_0 = \lambda_s/t_0$, where
+$\lambda_s = 2\pi/q_0$.}
 \begin{figure}
     \centering
     \includegraphics[width=0.45\textwidth]{Figures/No_vel_render2.png}
-    \caption{Stationary film thickness field ($t>20t_0$) showing the formation of droplets. The color map indicates the contact angle pattern 
+    \caption{Stationary film thickness field ($t>4t_0$) showing the formation of droplets. The color map indicates the contact angle pattern 
     (Eq.~(\ref{eq:sinetheta}) with $v_{\theta}=0$), with lower (higher) values coded in light blue (yellow).
     }
     \label{fig:handtheta}
@@ -140,8 +140,7 @@ The characteristic time of the growth of the instability for these experiments, 
 $\mu = 1.2 \times 10^4 \, \text{Pa} \cdot \text{s}$) $t_0 = \frac{3\mu}{\gamma h_0^3 q_0^4} \approx 300 \, \text{s}$ and it can be seen that indeed film rupture occurs within time 
 scales of the order of $t_0$ ($\approx 2 t_0$) \cite{becker2003complex}, as in our 
 simulation for the largest pattern wavelength, $\lambda = L$ (see also our previous work
-with homogeneous substrates~\cite{PhysRevE.104.034801}).}~\footnote{\textcolor{red}{A laboratory experiment for the here mentioned approach consists of a light switchable substrate with a thin film cast on it~\cite{becker2003complex, IchimuraEtAl_Science2000}. 
-The external stimulus, our moving pattern, can be realized by using a digital multimirror device (DMD)~\cite{doi:10.1021/jp301092y,doi:10.1126/science.aax8760}.}}
+with homogeneous substrates~\cite{PhysRevE.104.034801}).}
 %%%%
 All our simulations are run on a bi-periodic square domain of size $L \times L$ with 
 $L/h_0 = 512 $. \textcolor{red}{The numerical values in lattice Boltzmann units of the 
@@ -151,21 +150,21 @@ and $\gamma=0.01$.}
 a value which lies
 within the weak/intermediate slip regime~\cite{peschka2019signatures,fetzer2007quantifying, munch2005lubrication} (we have tried also a value four times smaller, without observing 
 any major qualitative change in the results).} 
-The liquid film is initialized with a height field slightly perturbed around the mean value $h_0$, i.e.
-\begin{equation}\label{eq:hinitial}
-    h(\mathbf{x},0) = h_0 \left[1 + 0.1 \left(\sin\left(\frac{2\pi x}{L}\right)\sin\left(\frac{2\pi y}{L}\right)\right)\right].
-\end{equation}
-Various wavelengths, in the range \textcolor{red}{$\lambda/h_0 \in [50, 512]$}, and velocities, $v_{\theta}/v_0 \in [0, 5 \times 10^3]$, are considered for the wettability pattern, Eq.~(\ref{eq:sinetheta}). 
-\textcolor{red}{A comment on the limits of the wavelengths range is noteworthy at this point. The wavelengths are obviously limited from above by the size of the computational domain. On the other extreme, small values are prevented by
-the limited capability of accomodating droplets of too large height, $h_d$, on too
-small patches, since the local contact angle would possibly exceed the largest substrate contact angle, such that the patterning 
-itself would loose meaning. In fact, if the patches were much smaller than 
-the intrinsic size the droplets would have when formed on a homogeneous substrate
-(fixed by the spinodal characteristic length, $\lambda_s$), the confinement by the 
-pattern would not be effective~\cite{KarguptaPRL2001}
-Besides, the very same lubrication approximation 
-requires small contact angles. 
-We keep, therefore, $\lambda \geq \lambda_s \approx 70 h_0$.}
+The liquid film is initialized with a height field slightly perturbed around the mean value $h_0$, i.e. $h(\mathbf{x},0) = h_0 \left[1 + 0.1 \left(\sin\left(\frac{2\pi x}{L}\right)\sin\left(\frac{2\pi y}{L}\right)\right)\right]$.
+Various wavelengths, in the range \textcolor{red}{$\lambda/h_0 \in [64, 512]$}, and velocities,
+$v_{\theta}/v_0 \in [0, 200]$, are considered for the wettability pattern, Eq.~(\ref{eq:sinetheta}). 
+\textcolor{red}{A few comments on these ranges are noteworthy at this point. The wavelengths are obviously limited from above by the size of the computational domain. On the other extreme, too short wavelengths are prevented by
+the energetic cost of accomodating droplets on too
+small patches, since the local contact angle 
+(that increases with decreasing $\lambda$~\cite{SuppMat}) would possibly exceed the largest substrate contact angle, such that the patterning 
+itself would loose meaning. 
+It has been, in fact, proven, both theoretically and experimentally, that 
+for the confinement to be effective, the pattern characteristic size should 
+not be much smaller than the spinodal length scale on the less wettable substrate
+\cite{KarguptaJCP2002,KarguptaLangmuir2000,Nisato1999,Karim1998}.
+We keep, therefore, $\lambda \stackrel{>}{\sim} \lambda_s \approx 70 h_0$.
+The pattern speeds, on the other hand, are limited by the intrinsic LB bound of the lattice speed of sound
+ \cite{succi}.}\\
 %\textcolor{red}{Hereafter, we will omit 
 %to write explicitly the division by $h_0$, $t_0$ and $v_0$ that will be, then, 
 %surmised, unless else specified.}
@@ -176,10 +175,9 @@ As expected, droplets form in regions of small contact angles (blue) while the r
 
 \noindent {\it Results.} We start our analysis studying, first, how the rupture times depend on the parameters characterising the wettability pattern, namely the wavelength of the contact angle variation, $\lambda$, and wave speed, $v_{\theta}$.
 The film rupture time, $\tau_r$, is defined as the least $t$ such that $h(\mathbf{x},\tau_r)=h_{\ast}$ (that is, when the free surface "touches" the substrate).
-In Fig.~\ref{fig:model_rt} we report the rupture times, as a function of the wavelength, for stationary ($v_{\theta}=0$) and time-dependent ($v_{\theta}=10 v_0$) patterns. 
+In Fig.~\ref{fig:model_rt} we report the rupture times, as a function of the wavelength, for stationary ($v_{\theta}=0$) and time-dependent ($v_{\theta}=20 v_0$) patterns. 
 It is conveyed that, overall, rupture occurs earlier on the static substrate, suggesting that the time variation tends to stabilize the film, in agreement with linear stability analysis results~\cite{suman2006dynamics}.
-In the stationary case we observe that $\tau_r$ grows linearly with $\lambda$, for short wavelengths, and quadratically for longer $\lambda$.
-Also for $v_{\theta}=10$ the rupture times tend to approach the $\lambda^2$ scaling at large $\lambda$, whereas they tend to saturate to a constant value for short wavelengths.
+We observe that $\tau_r$ grows linearly with $\lambda$, for short wavelengths, and quadratically for longer $\lambda$.
 These facts can be explained, qualitatively, as follows. 
 Let us first notice that the film rupture consists of two processes, each with its associated time scale: the growth of unstable interface perturbation with rate $t_{\theta}^{-1}$, and the retraction of liquid from more hydrophobic regions, occurring in a characteristic time $t_R$. For longer pattern wavelengths, the dewetting instability amplifies more slowly, such that it is reasonable to take it as the process determining the rupture time, $\tau_r \sim t_{\theta}$.
 In this case, from the linearized thin-film equation (in one spatial dimension, for simplicity), obtained setting $h=h_0 + \delta h$ with $\delta h \ll h_0$, 
@@ -196,24 +194,23 @@ The latter is related to the time the liquid takes to flow out of regions of hig
 where $U_{\Theta}$ is the retraction speed $U_{\Theta} = \frac{\gamma \Theta^3}{9\mu}$~\cite{Edwards2016}, with $\Theta = \max_{\mathbf{x}}\theta(\mathbf{x})$.
 \begin{figure}
     \centering
-    \includegraphics[width=0.45\textwidth]{Gamma_rupT_with_scaling.pdf}
+    \includegraphics[width=0.45\textwidth]{Rupture_times_Gamma_theta_20.pdf}
     %\includegraphics[width=0.45\textwidth]{Figures/Rupture_times_Gamma.pdf}
     % \includegraphics[width=0.45\textwidth]{Figures/rupture_times_all_lambda_v0v10.pdf}
-    \caption{Rupture times, $\tau_r$, as a function of the pattern wavelength $\lambda$, for $v_{\theta}=0$ (\textcolor{jlblue}{$\bullet$}) and $v_{\theta}=10 v_0$ 
+    \caption{Rupture times, $\tau_r$, as a function of the pattern wavelength $\lambda$, for $v_{\theta}=0$ (\textcolor{jlblue}{$\bullet$}) and $v_{\theta}=20 v_0$ 
     (\textcolor{jlorange}{$\star$}).
     The continuous and dashed lines indicate the linear, $\sim \lambda$, and quadratic, $\sim \lambda^2$, scaling laws, respectively.
         }
     \label{fig:model_rt}
 \end{figure}
-Interestingly, this phenomenology is qualitatively supported also by the time-dependent case, $v_{\theta} = 10v_0$ (reported in Fig.~\ref{fig:model_rt} as orange stars), \textcolor{red}{but for a smaller prefactor in the linear regime, due to the fact that the pattern wave velocity is large enough to dominate over $U_{\Theta}$ and sets the retraction speed, such that the characteristic time becomes $\tau_R \sim \lambda/v_{\theta}$.}
+%Interestingly, this phenomenology is qualitatively supported %also by the time-dependent case, $v_{\theta} = 20 v_0$ (reported %in Fig.~\ref{fig:model_rt} as orange stars), \textcolor{red}{but %for a smaller prefactor in the linear regime, due to the fact %that the pattern wave velocity is large enough to dominate over %$U_{\Theta}$ and sets the retraction speed, such that the %characteristic time becomes $\tau_R \sim \lambda/v_{\theta}$.}
 %\begin{equation}\label{eq:taur_saturation}
 % \tau_r \sim \tau_R \sim \frac{\lambda}{v_{\theta}} \propto %\frac{\lambda}{v_0} = \lambda\frac{t_0}{\lambda} \sim \mbox{const}.
 %\end{equation}
-
 We now focus on the long time dynamics and in particular on the characterization of the dewetting morphologies and how they are affected by the speed of the wettability wave.
 \begin{figure}
     \centering
-    \includegraphics[width=0.45\textwidth]{Figures/static_pattern_test_no_hd.pdf}
+    \includegraphics[width=0.45\textwidth]{Static_new_theta20t0.pdf}
     \caption{MAIN PANEL: Time evolution of the height fluctuations, $\Delta h(t)$, during the dewetting process on the patterned substrate given by       
     Eq.~(\ref{eq:sinetheta})
     with $v_{\theta}= 0$ and $\lambda= 512 h_0$ (blue circles), $\lambda=256 h_0$ (orange squares) and $\lambda=170 h_0$ (green stars).
@@ -227,24 +224,28 @@ We now focus on the long time dynamics and in particular on the characterization
 On the stationary substrate, after rupture all the fluid accumulates in droplets centered at contact angle minima.
 Consequently, as we see from the inset of Fig.~\ref{fig:clusters_v0_sine}, where we plot the number of droplets $N(t)$ in time\footnote{A droplet is identified by the set (``cluster'') of points, in the plane, constituting each of the connected components of the set $\{\mathbf{x} \in [0,L]^2 | h(\mathbf{x},t) \geq h_{\ast}$\}; the clusters are determined by means of an algorithm of Hoshen-Kopelman type~\cite{HK}.}, in the steady state ($t \gg t_0$) $N(t)$ attains the value $N_{\infty} = 2(L/\lambda)^2$ (reported as horizontal lines), which equals the minima of Eq.~(\ref{eq:sinetheta}), for $v_{\theta}=0$.
 Notice that the number of droplets converges faster for smaller pattern wavelengths, in line with the observation reported and justified in the previous section that the characteristic dewetting time decreases with the wavelength.\\
-As a further consistency check, we follow the evolution of the quantity
-\begin{equation}\label{eq:deltah}
-  \Delta h(t) = \max_{\mathbf{x}}\{h(\mathbf{x},t)\}-\min_{\mathbf{x}}\{h(\mathbf{x},t)\}.
-\end{equation}
-In the steady state, since the droplets are essentially monodisperse, this observable represents a measure of the mean droplet height $h_d$. Assuming that the droplet shape is a spherical cap, it can be estimated as $h_d =\left(\frac{3V_d(1-\cos(\theta_d))}{\pi(2+\cos(\theta_d))}\right)^{1/3}$, where $V_d = \frac{h_0 \lambda^2}{2}$ is the droplet volume and $\theta_d$ is the local contact angle (i.e. the value at the contact line). This, in turn, depends on $h_d$, through Eq.~(\ref{eq:sinetheta}), thus making the one above an implicit equation to be solved numerically for $h_d = h_d(\lambda)$. 
-$\Delta h(t)$ is reported in Fig.~\ref{fig:clusters_v0_sine} for three different wavelengths, 
-$\lambda/h_0 = \{170,256,512 \}$, together with the theoretically expected $h_d(\lambda)$ (depicted with lines), showing excellent agreement.\\
+\textcolor{red}{In the main panel of the same figure, we see that the height fluctuations $\Delta h(t) = \max_{\mathbf{x}}\{h(\mathbf{x},t)\}-\min_{\mathbf{x}}\{h(\mathbf{x},t)\}$
+grow in time until film rupture and then settle to a constant value, which represents a measure of the mean droplet height $h_d$ (since
+droplets are essentially monodisperse), decreasing with the pattern wavelength (as expectable, due to the decrease of the droplet volume,
+$V_d = \frac{h_0 \lambda^2}{2}$).}\\
+%In the steady state, since the droplets are essentially monodisperse, this observable . Assuming that the droplet shape is a spherical cap,
+%it can be estimated as $h_d =\left(\frac{3V_d(1-\cos(\theta_d))}{\pi(2+\cos(\theta_d))}\right)^{1/3}$, where  is the droplet volume and
+%$\theta_d$ is the local contact angle (i.e. the value at the contact line). This, in turn, depends on $h_d$,
+%through Eq.~(\ref{eq:sinetheta}), thus making the one above an implicit equation to be solved numerically for $h_d = h_d(\lambda)$. 
+%$\Delta h(t)$ is reported in Fig.~\ref{fig:clusters_v0_sine} for three different wavelengths, 
+%$\lambda/h_0 = \{170,256,512 \}$, together with the theoretically expected $h_d(\lambda)$ (depicted with lines),
+%showing excellent agreement.\\
 \begin{figure}
     \centering
-    \includegraphics[width=0.45\textwidth]{Figures/lam_2_inset.pdf}
-    \caption{Time evolution of the second order Minkowski structure metric, $q_2(t)$ (see text for details), for different $\Gamma$ values (see Eq.~(\ref{eq:vel_ratio})), on a substrate with pattern wavelength $\lambda=256 h_0$.
+    \includegraphics[width=0.45\textwidth]{lam_2_inset_theta20.pdf}
+    \caption{Time evolution of the second order Minkowski structure metric, $q_2(t)$ (see text for details), for different $\Gamma$ values, on a substrate with pattern wavelength $\lambda=256 h_0$.
     The grey-scale insets supply snapshots of the film thickness field associated to the various curves.
     }
     \label{fig:msm_q2}
 \end{figure}
 A time-dependent pattern affects the dewetting morphology quite substantially.
-For $v_{\theta} = 0.1 v_0$ we still observe the formation of droplets, similarly to the stationary case ($v_{\theta} = 0$). However, these are transported with the contact angle minima, reproducing a somehow similar behaviour recently described in a numerical study of a droplet on a moving wettability step~\cite{GrawitterStark1}.
-If the pattern speed is further increased, for $v_{\theta} = v_0$ we observe the development of rivulet-like structures, aligned with $\mathbf{v}_{\theta}$. 
+For $v_{\theta} = 0.2 v_0$ we still observe the formation of droplets, similarly to the stationary case ($v_{\theta} = 0$). However, these are transported with the contact angle minima, reproducing a somehow similar behaviour recently described in a numerical study of a droplet on a moving wettability step~\cite{GrawitterStark1}.
+If the pattern speed is further increased, for $v_{\theta} = 2 v_0$ we observe the development of rivulet-like structures, aligned with $\mathbf{v}_{\theta}$. 
 The film, in fact, while dewetting in the direction normal to the pattern velocity, is exposed, in the direction of the velocity, to a periodic potential with alternating minima and saddle points, which partially (as we will see) stabilizes the film over ``preferential'' lanes along the diagonals. 
 This makes the chosen velocity direction, $(1/\sqrt{2},-1/\sqrt{2})$ (or, equivalently, the orthogonal one $(1/\sqrt{2},1/\sqrt{2})$), optimal for the formation of rivulets. 
 
@@ -258,7 +259,7 @@ Notice, though, that the $q_2$ signal for any $v_{\theta} >0$ always stays above
 \begin{figure}
     \centering
     % \includegraphics[width=0.45\textwidth]{Figures/Lig_stab_inset_delta_h.pdf}
-    \includegraphics[width=0.45\textwidth]{Figures/Gamma_riv_lifetime.pdf}
+    \includegraphics[width=0.45\textwidth]{lig_lifetime_Gamma_theta20.pdf}
     \caption{MAIN PANEL: Rivulets life-times, $\tau_{\text{riv}}$, for various $\Gamma$ values.
     The dashed line is plotted as a guide to the eye to highlight the logarithmic dependence, in agreement with 
     the theoretical prediction, Eq.~(\ref{eq:rivlt}).
@@ -267,7 +268,7 @@ Notice, though, that the $q_2$ signal for any $v_{\theta} >0$ always stays above
     \label{fig:stab_ligs_lam2}
 \end{figure}
 The breakup is the result of a varicose mode of the rivulet~\cite{doi:10.1063/1.3211248, PhysRevE.77.061605}, whose wavelength is $\approx\lambda$, such that only $N_{\infty}/2$ droplets are counted after breakup. 
-These droplets show a peculiar dynamics, characterized by a periodic sequence of spreading and retraction, driven by the pattern, that we dub "pumping state" (see movie file ligament\_formation\_and\_breakup.mp4 in the Supp. Mat.).
+These droplets show a peculiar dynamics, characterized by a periodic sequence of spreading and retraction, driven by the pattern, that we dub "pumping state"~\footnote{see movie file ligament\_formation\_and\_breakup.mp4 in~\cite{SuppMat}.}.
 
 We argue that the emergence of rivulets is controlled by the competition of two characteristic velocities: the pattern wave speed, $v_{\theta}$, and the retraction speed, $U_{\Theta}$, introduced in Eq.~(\ref{eq:taur_l1}). 
 If $U_{\Theta}$ is large as compared to $v_{\theta}$, the film retraction is faster than the transport due to the contact angle field and thus droplets from. However, if $v_{\theta}$ is larger than $U_{\Theta}$, then the retracting film has too little time to form droplets and ends up in the metastable rivulet state. \textcolor{red}{It appears, therefore, natural to consider the ratio of these two velocities, 
@@ -281,10 +282,11 @@ $\Gamma \equiv v_{\theta}/U_{\theta}$, as the discriminating parameter.}
 We see from Fig.~\ref{fig:msm_q2} that indeed rivulets form only for $\Gamma > 1$. 
 Moreover, the larger $\Gamma$, the more stable the rivulets are; in other words, the rivulet life-time, $\tau_{\text{riv}}$, that can be conventionally taken as the time at which the drop of $q_2$ occurs, grows with $v_{\theta}$ (see Fig.~\ref{fig:stab_ligs_lam2}).
 The rivulet itself is, in fact, prone to dewetting, with the liquid accumulating over patches around contact angle minima. However, as the pattern moves, the instability is tamed due to configurations whereby higher contact angle regions underlie height field maxima, thus tending to revert the fluid flow.
-Heuristically speaking, this means that, if we define $\Delta h(t)$ as in Eq.~(\ref{eq:deltah}), but restricted on the rivulet axis, this should grow exponentially (with a certain growth rate) only when the system is in the unstable configuration. Namely, $\Delta h(t) \propto e^{\alpha t}$ (see inset of Fig.~\ref{fig:stab_ligs_lam2}) with a prefactor proportional to the time spent by the rivulet in such a configuration, which goes as $\sim \lambda/v_{\theta}$, therefore $\Delta h(t) \sim \alpha (\lambda/v_{\theta})e^{\alpha t}$. 
+Heuristically speaking, this means that, if we evaluate $\Delta h(t)$ restricted on the rivulet axis, this should grow exponentially (with a certain growth rate $\alpha \propto t_0$) only when the system is in the unstable configuration. Namely, $\Delta h(t)/\Delta h_0 \propto e^{\alpha t}$ (see inset of Fig.~\ref{fig:stab_ligs_lam2}) with a prefactor proportional to the time spent by the rivulet in such a configuration, which goes as $\sim \lambda/v_{\theta}$, therefore 
+$\Delta h(t)/\Delta h_0 \sim \alpha (\lambda/v_{\theta})e^{\alpha t}$. 
 The rivulet life-time can be seen as the rupture time of the structure along its axis, hence such that $\Delta h (\tau_{\text{riv}}) \sim h_0$ \cite{PhysRevE.104.034801}, which yields
 \begin{equation}\label{eq:rivlt}
-    \tau_{\text{riv}} \sim \log(v_{\theta}) \sim \log(\Gamma). 
+    \tau_{\text{riv}} \sim \alpha \log(v_{\theta}) \propto t_0 \log(\Gamma). 
 \end{equation}
 This logarithmic dependence is indeed observed in the numerical data as shown in Fig.~\ref{fig:stab_ligs_lam2}.
 

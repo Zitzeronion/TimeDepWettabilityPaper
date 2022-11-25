@@ -70,30 +70,32 @@ The Referee is right in pointing out that, indeed, the $h^{-3}$ decay
 for the attractive part of the disjoining pressure is more straightforward 
 to understand as it can be derived directly from an intermolecular potential of Lennard-Jones type. Nevertheless, it is also true that other forms
 can be encountered in the literature, depending on the actual interactions
-\cite{PhysRevE.63.011208}. Here, though, our choice of the $(3,2)$ pair of exponents is motivated more by computational reasons rather than by the will of 
+\cite{SCHWARTZ1998173,Mitlin,Teletzke}. Here, though, our choice of the $(3,2)$ pair of exponents is motivated more by computational reasons rather than by the will of 
 simulating a specific liquid with given physical properties.
 With such choice, in fact, the characteristic dewetting time 
 is shorter, thus making the overall computational cost more manageable.
-In fact, we have seen in previous study~\cite{PhysRevE.104.034801} that
+In fact, we have seen in a previous study~\cite{PhysRevE.104.034801} that,
 except for this shift of the time scales, the dewetting dynamics remains 
 qualitatively the same. To confirm this observation, we have run 
 a new simulation (for a single pair of pattern wavelength and speed) 
 with the $(9,3)$ exponents and show the results in figure \ref{fig:rivulets_9_3}.
 \begin{figure}
     \centering
-    \includegraphics[width=0.45\textwidth]{Figures/No_vel_render2.png}
-    \caption{}
-    \label{fig:rivulets9_3}
+    \includegraphics[width=0.7\textwidth]{9-3_3-2_comp_Gamma_1-5.pdf}
+    \caption{Minkowski metric $q_2$ as a function of time for 
+    $\Gamma = 1.5$ and $\lambda = 256 h_0$ from two simulations with different disjoining 
+    pressure exponents, $(9,3)$ and $(3,2)$ (as in the paper) respectively.}
+    \label{fig:rivulets_9_3}
 \end{figure}
-We have also added a footnote in the paper commenting on this aspect.
-%We thank the referee for pointing this out.
-%It is true that there are variations concerning the power law model of %the disjoining pressure.
-%A common one to which the referee refers to is $(n,m) = (9,3)$, the %choice we made for the manuscript is $(n,m) = (3,2)$.
-%Both exponent pairs can be found in the literature with even more %variety~\cite{moulton_lega_2013,SCHWARTZ1998173,doi:10.1063/1.4828721,Br%asjen}.
-%The pair $(9,3)$ is the one that can be motivated from functional %derivatives of a Lennard-Jones potential, understandably this could more %appealing to use.
-%We have used both exponent pairs in previous works, see %e.g.~\cite{PhysRevE.104.034801}.
-%In this manuscript we use $(3,2)$ to keep $t_0$ reasonably small and %thus the overall computational cost manageable.
-%Using the pair $(9,3)$ does not alter the results, it effectively shifts %the value of $t_0$ by $\approx 10$.
+We have added the following footnote in the paper commenting on this aspect:\\
+\\
+\textcolor{red}{Expressions of 
+the general form $\Pi(h) = \gamma(1-\cos \theta)(n-1)(m-1)/(n-m)((h_{\ast}/h)^n - (h_{\ast}/h)^m)/h_{\ast}$
+are frequently found in the literature, with various combination of exponents $(n,m)$ ($n>m$), depending
+on the type of interactions among fluid molecules and between fluid and substrate~\cite{SCHWARTZ1998173,Mitlin,Teletzke}. A common choice, for instance, is the pair $(9,3)$, which 
+can be derived from molecular interactions of Lennard-Jones type. Here, the use of the $(3,2)$ pair is motivated mainly by the computational advantage of keeping the characteristic dewetting time 
+shorter. We have run also a single case ($\lambda=256 h_0$ and $\Gamma=1.5$) with $(9,3)$ and observed that 
+the dynamics remains essentially the same, but for a shift in the time scale (see also~\cite{PhysRevE.104.034801}).}
 }
 
 \item[ \textbf{\underline{Comment 2.}}]
@@ -109,7 +111,7 @@ Could the authors justify this choice?
 As the Referee correctly remarks, indeed small contact angles are typically associated to small slip lengths. From a phenomenological point of view, 
 though, having $\delta \sim h_0$ is still commonly considered in the weak/intermediate slip regime, as proven, for instance, 
 by the formation of satellite 
-droplets following rivulet breakup~\cite{doi:10.1073/pnas.1820487116} or 
+droplets following rivulet breakup~\cite{peschka2019signatures} or 
 in the rim shape in dewetting by hole nucleation~\cite{fetzer2007quantifying, munch2005lubrication} (see also Fig.~\ref{fig:slip}).
 \begin{figure}
     \centering
@@ -120,32 +122,26 @@ in the rim shape in dewetting by hole nucleation~\cite{fetzer2007quantifying, mu
     \label{fig:slip}
 \end{figure}
 Our choice of this slip length value was dictated essentially by the need 
-to keep numerically stability even in the strongly time dependent case 
+to keep numerical stability even in the strongly time dependent case 
 (large pattern speed), yet remaining in a small slip regime. 
 Nevertheless, motivated by the Referee's concern and in order to check that 
 picture remains qualitatively the same, we have run a simulation with 
-a slip length five times smaller. The results from the analysis of the Minkowski metric $q_2$, for two cases with low and high pattern speed, reveal that indeed
+a slip length four times smaller. The results from the analysis of the Minkowski metric $q_2$, for two cases with low and high pattern speed, reveal that indeed
 the droplet-to-rivulet transition is confirmed, with $\Gamma$ as the 
 discriminating parameter (see figure \ref{fig:q2smallslip}).
 \begin{figure}
     \centering
-    %\includegraphics [width=0.6\textwidth]{slip_measure.pdf}
-    \caption{}
+    \includegraphics [width=0.75\textwidth]{small_slip_two_Gammas.pdf}
+    \caption{Minkowski metric $q_2$ as a function of time for two pattern speeds and slip velocity $\delta = 0.25 h_0$, signalling that the emergence of rivulets for $\Gamma>1$
+    is preserved.}
     \label{fig:q2smallslip}
 \end{figure}
-We have commented on this when we give the value of the slip length, just before 
-equation (5) of the revised manuscript.
-%We thank the referee for bringing this up.
-%Slip and disjoining pressure are an essential part of our model -- as for many %other thin film solvers.
-%Here, they allow us to have moving contact lines with imposed wettability %features.
-%We agree that the value may seem large at first glance.
-%However, as Peschka et al. have shown, the generation of satellite droplets %during rivulet breakup, similar to what we observe, is a no-slip %feature~\cite{doi:10.1073/pnas.1820487116}.
-%We observe the occurrence of satellite droplets in the initial dewetting %period.
-%Increasing the slip length makes those droplets disappear.
-%Another point to mention here is the dependency of the dewetting rim on the %slip.
-%Small to vanishing slip induces a dimple behind the front, while for large slip %lengths this dimple vanishes~\cite{fetzer2007quantifying, %munch2005lubrication}.
-%We checked this behaviour in Fig.~\ref{fig:slip} and found only a small %dependency for slip lengths $\delta < 10$.
-%Spots with a thickness $h \leq h_{\ast}$ are considered dry spots, therefore %the term equilibrium thickness maybe exaturated.
+We have commented on this when we give the value of the slip length, saying that:\\
+\\
+\textcolor{red}{To regularize the contact line divergence~\cite{huh1971hydrodynamic} we use a precursor layer thickness $h_{\ast}/h_0=0.07$ and a slip length $\delta/h_0 = 1$, 
+a value which lies
+within the weak/intermediate slip regime~\cite{peschka2019signatures,fetzer2007quantifying, munch2005lubrication} (we have tried also a value four times smaller, without observing 
+any major qualitative change in the results).} 
 }
 
 \item[ \textbf{\underline{Comment 3.}}]
@@ -158,32 +154,49 @@ However, it would be desirable that the authors relate their model of switchable
 
 \item[ \textbf{{Answer}}]
 {
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{simple_exp.pdf}
-    \caption{Schematic realization of the experiment described in the manuscript.}
-    \label{fig:experiment_illustration}
-\end{figure}
-We thank the Referee for bringing this up.
-First, we like to note that experiments are not our field of expertise and therefore our envisioned realization could be flawed.
+This is indeed a very interesting comment.
+Although our approach, as theorists/numericists, can be seen more of {\it theoretical
+engineering} and our picture would be, then, unlikely devoid of flaws, we are glad 
+to try to envisage a potential experiment.
+%We thank the Referee for bringing this up.
+%First, we like to note that experiments are not our field of expertise and therefore %our envisioned realization could be flawed.
 
-The idea we have would be to prepare a thin film ($h_0 \approx 4nm$ PS) on a light responsive substrate.
-Dimensions of the substrate should at least be $2$ microns in $x$ and $y$, but larger is fine.
-Arrange several light sources (diodes) in a lattice with a distance of $\lambda \approx 1\mu m$ between them, as displayed in Fig.~\ref{fig:experiment_illustration}.
-It would be perfect if the structure on which the light sources are mounted can be moved in a periodic manner, e.g. wrapped around rolls.
-On the other hand if the array of diodes is large enough, say $100\lambda$ it should be sufficient to move them continuously in one direction. 
-\JH{Could one do this with a DMD as here https://doi.org/10.1021/jp301092y ? Then, one could use a transparent substrate and just do it from the bottom. I think a DMD + light responsive substrate could be a straightforward implementation of a time dependent wettability pattern.}
+%The two relevant scales are $t_0$ and $q_0$ (or $2\pi/q_0$).
+%Considering the experimental parameters from~\cite{becker2003complex,PhysRevLett.99.114503} %we get, 
+%\begin{align*}
+%    t_0 &\approx 300\,\text{s},\qquad~~~\qquad \frac{2\pi}{q_0}\approx 
+%    400\,\text{nm}.
+%\end{align*}
+%The time scale is in the region of minutes and the wettability pattern wavelengths are %in the interval $(800\,\text{nm}, 4000\,\text{nm})$. 
+A possibility would be to prepare a thin liquid film on a light responsive substrate~\cite{IchimuraEtAl_Science2000}, under the action of controlled 
+external stimuli (a light emitter). 
+An ideal candidate could be a digital multimirror device (DMD).
+%The dimensions of the substrate should be roughly ten times the maximal pattern wavelength %($\approx 40\,\mu \text{m}$) to account for the periodicity.
+%An ideal control of the external stimuli (light) would be a digital multimirror device (DMD).
+This technology has effectively been used for thin film experiments and additive manufacturing~\cite{doi:10.1021/jp301092y, doi:10.1126/science.aax8760}, it allows for fast temporal modulations of the optical signal (with frequencies up to $\approx 16 \, \text{kHz}$)
+with spatial resolution of $\approx 10 \times 10 \, \mu \text{m}^2$ (the size of a pixel).
+%Using low intensity UV light $365\,\text{nm}$ and blue light %$436$nm~\cite{IchimuraEtAl_Science2000}, we assume that the radiation heat is negligible.
+Considering as a reference, for instance, the system studied in ~\cite{becker2003complex,PhysRevLett.99.114503}, namely a $\sim 4 \, \text{nm}$ thick film 
+of polystyrene deposited on an oxidized silicon wafer,  
+we evaluate the retraction speed 
+$U_{\Theta} = \frac{\Theta^3 \gamma}{9 \mu}$ to be 
+$U_{\Theta} \approx 10^{-2} \, \mu \text{m}/\text{s}$. 
+The (minimum) {\it pattern speed} can be 
+estimated, from the pixel size with frame rate $\sim 1 s^{-1}$, as 
+$v_{\theta} \sim 10 \, \mu \text{m}/\text{s}$, that would give $\Gamma \sim 10^3$, i.e. well within 
+the rivulet regime ($\Gamma > 1$). We note, also, that both $U_{\Theta}$ and $v_{\theta}$ can 
+be widely modulated: the former, playing either with the (temperature and molecular weight dependent) viscosity 
+or tailoring the substrate to making it more hydrophobic (i.e. increasing the contact angle); the latter, tuning
+the spatial resolution and frame rate of the DMD. We expect, thus, the range of achievable $\Gamma$'s to 
+be feasibly extended both to very high ($\Gamma \gg 1$) and very low ($\Gamma \ll 1$) values. 
+We have added the following footnote after the introduction of the contact angle pattern (Eq.(3) in the revised
+manuscript) commenting on this aspect:\\
+\\
+\textcolor{red}{A laboratory experiment for the here mentioned approach consists of a light switchable substrate with a thin film cast on it~\cite{becker2003complex, IchimuraEtAl_Science2000}. 
+The external stimulus, our moving pattern, can be realized by using a digital multimirror device (DMD)~\cite{doi:10.1021/jp301092y,doi:10.1126/science.aax8760}.} 
+%\JH{Could one do this with a DMD as here https://doi.org/10.1021/jp301092y ? Then, one could use a transparent substrate and just do it from the bottom. I think a DMD + light responsive substrate could be a straightforward implementation of a time dependent wettability pattern.}
 
-In Eq.~(5) we introduce two scales, $t_0$ and $v_0$.
-From experiments of dewetting thin films we know that $t_0$ correlates with the rupture time~\cite{becker2003complex, PhysRevLett.99.114503}.
-Considering the same experimental parameters as above, 
-\begin{align*}
-    t_0 &\approx 1800s,\qquad~~~\qquad \frac{2\pi}{q_0}\approx 400nm, \\
-    \quad v_0 &= \frac{\lambda}{t_0} \approx \frac{1}{900}\frac{\mu m}{s},\quad \quad v_0^{\ast} = \frac{2\pi}{q_0 t_0} \approx \frac{4}{9}\frac{nm}{s},
-\end{align*}
-where we take into account that the rupture time is overestimated by about a factor of two.
-The experiment therefore reduces to the movement of the diodes with a velocity between $[10^{-7}/900, 10^{-5}/900] m/s$. 
-\JH{We need to comment on the experimental realization in the paper. Can we summarize this idea to 1-2 sentences?}
+%\JH{We need to comment on the experimental realization in the paper. Can we summarize this idea to 1-2 sentences?}
 }
 
 \item[ \textbf{\underline{Comment 4.}}]
@@ -195,43 +208,10 @@ Is there any reason to give the wave-length of modulations in units of the syste
 
 \item[ \textbf{{Answer}}]
 {
-We thank the referee for this comment.
-It is true that we use $q_0$ but never display its actual value.
-Inserting numbers, we have 
-\begin{equation*}
-    q_0 \approx 0.13, \quad \lambda_0 = \frac{2\pi}{q_0} \approx 48.5 \approx \frac{L}{10},  
-\end{equation*}
-therefore $\lambda_0$ is usually smaller than $\lambda$.
-
-No, these simulations do not suffer from finite size effects.
-The honest reason for using multiples of the system size is the ease of the numerical realization.
-Having periodic boundary conditions, a non-multiple wavelength of the system size would induce a discontinuity.
-Given the complexity of the problem, we would like to have as much control of the pattern as possible.
-
-The arbitrary choice we made had however helped us to understand where the boundary between rivulet and droplets appears.
-In Eq.~(11) we use
-\begin{equation*}
-    \Gamma = \frac{v_{\theta}}{U_{\theta}} = \frac{\chi v_0}{U_{\theta}},
-\end{equation*}
-where rivulets appear for $\chi > 1$.
-Substituting the wavelength dependency of $v_0$ with $q_0$,
-\begin{equation*}
-    v_0^{\ast} = \frac{\lambda_0}{t_0} 
-\end{equation*}
-and computing $\Gamma$ in terms of $v_0^{\ast}$ yields
-\begin{equation*}
-    \Gamma = \frac{v_0^{\ast}}{U_{\theta}} = \frac{6\pi h_0^3 q_0^3}{\Theta^3}.
-\end{equation*}
-Relating both with each other yields
-\begin{equation*}
-    \frac{\chi 3\lambda h_0^3 q_0^4}{\Theta^3} = \frac{6\pi h_0^3 q_0^3}{\Theta^3},
-\end{equation*}
-and with most of the terms canceling one obtains
-\begin{equation*}
-    \lambda = \frac{2\pi}{q_0\chi}, 
-\end{equation*}
-which in fact states that if the wavelength $\chi^{-1}2\pi/q_0 < \lambda$ rivulets should form. 
-\JH{Change in paper?}
+We apologize for not giving the value of $q_0 \approx 0.09$ (corresponding to an intrinsic correlation length 
+$\lambda_s = 2\pi/q_0 \approx 70 h_0$), which is now provided in the revised manuscript. We also acknowledge that expressing the wavelength in terms of the size $L$
+was not at all meaningful (no finite size effects are involved). In fact, all the lengths (including $L$) are expressed in units of the mean film thickness $h_0$ (and it was so also in the old version of the paper, as commented in the text below eq. (4)). In order to avoid any confusion, we explicitly write 
+the values of all lengths in terms of $h_0$ in the revised version.
 }
 
 \item[ \textbf{\underline{Comment 5.}}]
@@ -244,14 +224,23 @@ This could be a significant effect in polymer thin films (c.f. Benet et al. jpc-
 
 \item[ \textbf{{Answer}}]
 {
-That is indeed a very interesting point.
-In fact, we know the second reference very well from our own work~\cite{PhysRevE.104.034801}.
-It is an appealing model, and we look forward to discussing it in further details in future publications.
-We therefore added the following to the conclusion 
+We guess that the Referee mentions the fact that the Laplacian of the thickness field, $\nabla^2 h$,
+is just a small gradient approximation of the actual local curvature, such that the Laplace contribution to the film pressure should indeed read $\gamma \nabla^2 h/\sqrt{1+|\nabla h|^2}$. This is of course correct, but 
+the condition $|\nabla h| \ll 1$ holds true in our system, owing to the very same lubrication approximation,
+or, equivalently, to the small contact angles involved; the spinodal wavelength for a homogeneous substrate with
+contact angle $\theta_0$ is $\lambda_s = 2\pi/q_0(\theta_0) \approx 70 h_0$. Therefore, the typical gradients
+of the thickness field can be estimated as $|\nabla h| \sim h_0/\lambda_s \approx 1/70 \ll 1$ (notice 
+that this is, somehow, a worst case scenario since, as we discuss in the text, in the patterned substrates
+$\lambda \stackrel{>}{\sim} \lambda_s$).
+We have added a footnote, when we introduce the film pressure, saying that:\\
 \\
-\textcolor{red}{...}
+\textcolor{red}{The Laplace pressure is the product of the surface tension 
+and the local curvature, therefore its full expression reads $p_L = -\gamma \nabla^2 h/\sqrt{1+|\nabla h|^2}$; 
+since we are in the lubrication regime, though, whereby $|\nabla h| \ll 1$, the denominator can be safely neglected 
+and the pressure reduces to the form involving only the Laplacian of the thickness field~\cite{Benet2014,alizadeh_pahlavan_cueto-felgueroso_hosoi_mckinley_juanes_2018}}, \\
+\\
+citing the related papers as a reference.
 }
-
 \end{itemize}
 
 

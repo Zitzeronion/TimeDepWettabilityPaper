@@ -84,7 +84,6 @@ nanoprinting (including printable electronics).
 This is witnessed by the various publications in PRL on this and closely related problems. To cite but a few recent ones: J.C. Fern\'andez-Toledano et al, "How wettability controls nanoprinting",
 {\it Phys. Rev. Lett.} {\bf 124} 224503 (2020); A.A. Pahlavan et al,
 "Evaporation of binary-mixture liquid droplets: the formation of picoliter pancakelike shapes", {\it Phys. Rev. Lett.} {\bf 127}, 024501 (2021); C. Clavaud et al, "Modification of the fluctuation dynamics of ultrathin wetting films", {\it Phys. Rev. Lett.} {\bf 126}, 228004 (2021).
-\JH{We have to make sure to strongly doubt the competence of Ref C in the letter to the editor! I guess this will be the only chance for us to get the paper through/}
 }
 
 
@@ -104,40 +103,61 @@ The authors focused on the importance of the speed of the pattern and on its wav
 \item[ \textbf{{Answer}}]
 { 
 The Referee is right. Indeed there are of course several parameters 
-that may influence the physics of the problem. In this (first) contribution, though,
-our aim is to single out the factor determining the novel effect found (the 
-droplet-rivulet duality), namely
-the pattern time dependence (and, hence, the 'wave' speed). 
-One may expect of course that there is a dependence on $\delta \theta$ and $\theta_0$, but this would apply to the static case. 
-A systematic study of the full parameter space would then deserve a dedicated, 
-extended, work that goes somehow beyond the goal of the present paper and a typical PRL contribution.
-Nevertheless, we agree with the Referee that it is appropriate to add further details, therefore we commented in the text 
-on the choice of the checkerboard pattern and of $\theta_0$ and we have added 
-results at changing $\delta \theta$ in a Supplemental Material section.
+that may influence the physics of the problem. 
+Most of them, though, determine the dewetting dynamics even on static heterogeneous surfaces and are not specific of switchable substrates, with time-dependent properties.
+For instance, as correctly identified by the Referee, $\delta \theta$ is one of those 
+parameters. Of course, if $\delta \theta \rightarrow 0$ we do not expect to observe rivulets, as much as we do not expect to see arrays of droplets in the static case. Indeed, it is a known fact that if $\delta \theta$ were too small, the pattern driving would become too weak and the spinodal instability would set in as the main dewetting mechanism (see, e.g., \cite{KonnurPRL2000}). 
+In this contribution, our aim is to single out the factor determining the novel effect found (the droplet-rivulet duality), namely the pattern time-dependence (and, hence, the 'wave' speed).  
+Nevertheless, motivated by the Referee's remark, we have run a test case simulation in 
+the expected rivulet-forming regime ($\Gamma=15$, $\lambda = 256 h_0$), reducing 
+the heterogeneity parameter to $\delta \theta = 5^{\circ}$; 
+the corresponding Minkowski's metric $q_2$ is reported 
+in Fig. \ref{fig:dif_contrast} (together with the case $\delta \theta =10^{\circ}$, used throughout the 
+paper, for comparison): we see that the $q_2$ metric attains the value $q_2 \approx 1$, signalling 
+that the emergence of rivulets is preserved.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\textwidth]{gamma15_deltaTheta.pdf}
+    \caption{Comparison of the Minkowski's structure metric $q_2$ for 
+    $\delta\theta = 5^{\circ}, 10^{\circ}$, 
+    $\Gamma = 15$ and $\lambda = 256 h_0$.}
+    \label{fig:dif_contrast}
+\end{figure}
+The rivulets lifetime, though, is shorter than the one for $\delta \theta = 10^{\circ}$.
+We acknowledge, then, that a systematic study of the quantitative dependence of 
+lifetimes on the full parameter space would be important, but we also that such a study
+would deseve a dedicated, extended, work that goes somehow beyond the goal of the present paper and of a typical PRL contribution.
+We have added the new figure and the relative discussion on $\delta \theta$ in the
+Supplementary Material.\\
+We agree, also, that it is appropriate to add further details in the text, therefore we commented in the revised version on the choice of the checkerboard pattern saying that:\\
+\\
+\textcolor{red}{We decorate the substrate with a checkerboard pattern, a common choice that generalizes the broken homogeneity of the stripes to two 
+directions~\cite{KarguptaLangmuir2003,Jalali2018,Nagayama2020,Das2020}.}
 
-{\bf ANDREA: Stefan, we do have these data, right? I think to remember that you ran the simulations}
-
-%The observation of the referee is correct.
-%Indeed, the difference in contact angle amounts to a net force on the liquid.
-%This force can be large enough to actuate %droplets~\cite{doi:10.1021/acs.langmuir.5b02335}.
-
-%The thin film equation is valid only in the regime where $\theta \ll \pi/2$.
-%Choosing $\theta_0 = 20^{\circ}$ and a $\Delta\theta$ of the same magnitude %therefore ensures that we are well within the predictability of our model.
-%Therefore we find that our value of $\theta_0$ is a good compromise to satisfying %the constraints.
-
-%Most of our results are given in terms of $t_0$ and $q_0$.
-%Both contain parameters we choose to set up our numerical experiments. 
-%We supply an equation to calculate them and have no evidence to believe that our theoretical assumptions are incorrect.
-%Could the referee please elaborate why he/she thinks we overlook something?
-
-%\textcolor{pyorange}{Stefan}: I would put the results we have from the x-only %velocity run here.
-%They kind a answer what happens if $\Delta\theta$ becomes larger (rivulets life for %a very short amount of time only).
 }
 
 \item[ \textbf{\underline{Comment 3.}}]
 { 
 Also unclear is how does the substrate patterning scale $2\pi/q_\theta$ compare with the scale of homogeneous dewetting $2\pi/q_0$.
 I tried hard to understand whether the different cases of $\lambda$ discussed in the paper agree with $2\pi/q_0$ but I was unable to do so. 
+}
+
+\item[ \textbf{{Answer}}]
+{
+We apologize for having lacked thoroughness not providing the numerical 
+value of $q_0$ (of which we reported the expression, though) to compare with the 
+other characteristic scales. Plugging in the values of $\theta_0$,
+$h_0$ and $h_{\ast}$ we get $q_0 \approx 0.09 h_0^{-1}$, whence 
+$\lambda_0 = 2\pi/q_0 \approx 70 h_0$, which corresponds approximately to the shortest pattern wavelength considered. 
+In fact, it is known that for a periodic chemical pattern to be effective in 
+confining droplets over the more hydrophilic patches, the pattern wavelength should 
+not be smaller than the spinodal length scale on the less wettable substrate
+($\lambda_l \approx 50$ in our case) \cite{KarguptaJCP2002,KarguptaLangmuir2000,Nisato1999,Karim1998}.
+We have added comments on this important point in the revised manuscript, when discussing the accessible ranges of pattern wavelength (see also the answer to the comment 5).
+}
+
+\item[ \textbf{\underline{Comment 4.}}]
+{  
 How would the film behave if the dynamics of the film were controlled primarily by spinodal dewetting and not by the contact-angle pattern?
 At the same time, if the two characteristic lengthscales ($=$ that of the spinodal dewetting and that of the patterned substrate) are suitably synchronized, perhaps rivulets can be rendered permanent rather than transient? Or is the dewetting, once initiated, immanently irreversible even for a
 time-dependent contact-angle pattern like the one studied in LM17723?
@@ -145,82 +165,24 @@ time-dependent contact-angle pattern like the one studied in LM17723?
 
 \item[ \textbf{{Answer}}]
 {
-We apologize for having lacked thoroughness not providing the numerical 
-value of $q_0$ (of which we reported the expression, though) to compare with the 
-other characteristic scales. Plugging in the values of $\Theta = \theta_0 + \delta \theta$, 
-$h_0$ and $h_{\ast}$ we get $q_0 \approx 0.13 h_0^{-1}$, whence 
-$\lambda_0 = 2\pi/q_0 \approx 50 h_0$, so it corresponds approximately to the 
-shortest pattern wavelength considered. The pattern-driven instability overwhelms the spinodal instability because it is active even on an initially
-flat film 
+The pattern-driven instability overwhelms the spinodal instability because it is active even on an initially flat film 
 (i.e., where the initial perturbation $|\delta h_0| \rightarrow 0$) 
 \cite{KonnurPRL2000,KarguptaLangmuir2000,KarguptaPRL2001}; ideally one would need to have a vanishing 
 contact angle mismatch in order to see the spinodal dewetting, namely $\delta \theta \sim \delta h_0/h_0$,
 which is also somehow obvious, but it would eventually deprive the pattern of meaning. 
-The emergence of rivulets is observed even for $\lambda \approx \lambda_0$, as we show in a new figure
-(in the Supplemental Material), but their nature is still metastable. 
-
-{\bf ANDREA: Stefan your input is needed here, too. Did you make the simulations/figures, with the 
-properly defined $\Gamma$ for $\lambda \approx 2 \pi/q_0$?}
+The emergence of rivulets is observed even for $\lambda \approx \lambda_s$, as we show 
+in Fig. \ref{fig:q2_difflambda}, but their nature is still metastable. 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{lam_256-128-64-51.pdf}
+    \caption{Minkowski's structure metric $q_2$ for three different wavelengths $\lambda=64 h_0$, $\lambda=128 h_0$ and $\lambda=256 h_0$ (as in figure 4 of the main text) and for $\Gamma=1.5$ (all other parameters are as in the main text). The time interval during which $q_2 \approx 1$ signals the emergence of rivulets, also for 
+    $\lambda = 64 h_0$ which is comparable with the spinodal wavelength $\lambda_s \approx 70 h_0$}
+    \label{fig:q2_difflambda}
+\end{figure}
+We have included also this new figure in the Supplementary Material.
 }
-%We are sorry for creating confusion with the choice of our variables.
-%Let us call $\lambda_0 = 2\pi/q_0$ and rephrase Eq.~(11) in terms of $\lambda_0$ %using $v_0^{\ast}$,
-%\begin{equation*}
-%    v_0^{\ast} = \frac{\lambda_0}{t_0}, 
-%\end{equation*}
-%computing $\Gamma$ in terms of $v_0^{\ast}$ yields
-%\begin{equation*}
-%    \Gamma = \frac{v_0^{\ast}}{U_{\theta}} = \frac{6\pi h_0^3 q_0^3}{\Theta^3}.
-%\end{equation*}
-%Setting this result equal with Eq.~(11) in the manuscript we have
-%\begin{equation*}
-%    \frac{\chi 3\lambda h_0^3 q_0^4}{\Theta^3} = \frac{6\pi h_0^3 q_0^3}{\Theta^3},
-%\end{equation*}
-%with most of the terms canceling
-%\begin{equation*}
-%    \lambda = \frac{2\pi}{q_0\chi}, 
-%\end{equation*}
-%which in fact state that if the wavelength $\chi^{-1}2\pi/q_0 < \lambda$ rivulets %should form. 
-%}
 
-%\item[ \textbf{\underline{Comment 4.}}]
-%{ 
-%How would the film behave if the dynamics of the film were controlled primarily by %spinodal dewetting and not by the contact-angle pattern?
-%}
-
-%\item[ \textbf{{Answer}}]
-%{ 
-%We thank the referee for raising this question.
-%The straightforward answer is we can reproduce the structure factor of a spinodally %dewetting thin film which is given by
-%\begin{equation*}
-%    S(q,t) = S_0 e^{2\omega(q)t},
-%\end{equation*}
-%where is $S_0$ is a constant factor and 
-%\begin{equation*}
-%    \omega(q) = \frac{1}{t_0}\left[2\left(\frac{q}{q_0}\right)^2 - %\left(\frac{q}{q_0}\right)^4\right],
-%\end{equation*}
-%}
-%which can be found in ref.~\cite{PhysRevE.104.034801}, Fig~1.
-%After the generation of droplets, we observe a coarsening scaling according to a %powerlaw.
-
-%\item[ \textbf{\underline{Comment 5.}}]
-%{ 
-%At the same time, if the two characteristic lengthscales ($=$ that of the spinodal %dewetting and that of the patterned substrate) are suitably synchronized, perhaps %rivulets can be rendered permanent rather than transient? Or is the dewetting, once %initiated, immanently irreversible even for a
-%time-dependent contact-angle pattern like the one studied in LM17723?
-%}
-
-%\item[ \textbf{{Answer}}]
-%{ 
-%This is an interesting comment.
-%To our understanding, this is not the case as shown in Fig.~5 of the manuscript.
-%We observe a saturation like effect for high pattern velocity.
-%Independent of the velocities, the rivulet admits a varicose instability, which %within our study was not possible to overcome.
-%We hypothesize that another substrate pattern could ensure indefinite rivulet %stability.
-%However as we do not have an intuition, testing N-patterns would be beyond the scope %of this work.
-
-%For further details on the scale synchronization, we would point towards the answer %to Comment 4.
-%}
-
-\item[ \textbf{\underline{Comment 4.}}]
+\item[ \textbf{\underline{Comment 5.}}]
 { 
 Many of the numerical results are supported by scaling estimates. I
 like these arguments, but the agreement is hardly convincing. For
@@ -235,16 +197,28 @@ The same goes for the rivulet lifetime in Fig. 5 where the trend is OK but most 
 We are well aware that the parameter ranges are not too wide, but 
 of course our method (as any other) has to cope with limitations. 
 For example, the range of achievable wavelengths is limited from below 
-by the need to stay in the lubrication regime, and from above by the size of the system (i.e. by computing resources). We could actually increase the system size and thus push further the upper limit of $\lambda$, but this would only extend the $\lambda^2$ scaling range. {\bf ANDREA: May we try one run on a bigger 
-system? Being 1d it shouldn't take too long, should it? It would be also interesting to try a smaller $\Theta$: my handwaving argument on comparing times tells that it should extend a bit the linear, $\sim \lambda$,  scaling range.}
-As for the rivulet lifetimes, analogously, for reasons intrinsic to the stability of the numerical method, much higher pattern speeds cannot be reached 
-(in particular one has to comply with the condition $\Gamma \ll 5 \times 10^2$).
+by the need to stay above the spinodal characteristic length (as explained in the answer to comment 3), and from above by the size of the system (i.e. by computing resources). As for the rivulet lifetimes, analogously, for reasons intrinsic to the stability of the numerical method, much higher pattern speeds cannot be reached 
+(in particular one has to comply with the condition $\Gamma \ll 5 \times 10^2$). We have added the following
+words of caution in the revised manuscript:\\
+\\
+\textcolor{red}{A few comments on the ranges are noteworthy at this point. The wavelengths are obviously limited from above by the size of the computational domain. On the other extreme, too short wavelengths are prevented by
+the energetic cost of accomodating droplets on too
+small patches, since the local contact angle (that increases with decreasing $\lambda$) would possibly exceed the largest substrate contact angle, such that the patterning 
+itself would loose meaning. 
+It has been, in fact, proven, both theoretically and experimentally, that 
+for the confinement to be effective, the pattern characteristic size should 
+not be much smaller than the spinodal length scale on the less wettable substrate
+\cite{KarguptaJCP2002,KarguptaLangmuir2000,Nisato1999,Karim1998}.
+We keep, therefore, $\lambda \stackrel{>}{\sim} \lambda_s \approx 70 h_0$. 
+The pattern speeds, on the other hand, are limited by the intrinsic LB bound of the lattice speed of sound
+ \cite{succi}.}\\
+\\
 We tend to disagree, instead, with the comment that any other scaling 
 law would be equivalently good. Essentially because the logarithm scaling is 
 not a fit, it is the result of a derivation based on plausible theoretical arguments, that 
 is 'OK' with the numerical data.
-We think, anyhow, that the Referees' concerns are legitimate and we have, therefore, added 
-comments of caution about the scaling laws in the revised text.
+%We think, anyhow, that the Referees' concerns are legitimate and we have, therefore, added 
+%comments of caution about the scaling laws in the revised text.
 Let us remark, though, that even in real microfluidic systems, 
 one cannot expect too wild (and wide) variation of lengths and velocities.
 In fact, we would be glad if our pioneering study might motivate further work 
