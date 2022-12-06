@@ -79,7 +79,7 @@ can be observed and we propose a phenomenological argument that justifies the lo
 \begin{equation}\label{eq:thinfilm}
     \partial_t h(\mathbf{x},t) = \nabla\cdot\left(M_{\delta}(h)\nabla p(\mathbf{x},t)\right),
 \end{equation}
-by means of a recently developed method, based on a lattice Boltzmann (LB) scheme~\cite{PhysRevE.100.033313,PhysRevE.104.034801}.
+by means of a recently developed method, based on a lattice Boltzmann (LB) scheme~\cite{PhysRevE.100.033313,PhysRevE.104.034801, Zitz2022}.
 Eq.~(\ref{eq:thinfilm}) describes, in a lubrication approximation spirit, the evolution of the height field (film thickness) $h(\mathbf{x},t)$, denoting the location of the liquid/air interface. The mobility function 
 $M_{\delta}(h) = \frac{2h^3 + 6\,\delta\, h^2 + 3\delta^2h}{6\mu}$
 depends on the velocity boundary condition at the substrate, parameterized by an effective slip length $\delta$
@@ -111,8 +111,9 @@ In particular, we employ the sinusoidal form
 \begin{equation}\label{eq:sinetheta}
    \!\! \theta(\mathbf{x},t) = \theta_0 + \delta\theta\left[\sin\left(q_{\theta} (x+v_{\theta x}t)\right)\sin\left(q_{\theta}(y+v_{\theta y}t)\right)\right],\! 
 \end{equation}
-where $q_{\theta} = 2\pi/\lambda$, i.e.~the pattern evolves in time as a plane wave~\footnote{\textcolor{red}{A laboratory experiment for the here mentioned approach consists of a light switchable substrate with a thin film cast on it~\cite{becker2003complex, IchimuraEtAl_Science2000}. 
-The external stimulus, our moving pattern, can be realized by using a digital multimirror device (DMD)~\cite{doi:10.1021/jp301092y,doi:10.1126/science.aax8760}.}}. 
+where $q_{\theta} = 2\pi/\lambda$, i.e.~the pattern evolves in time as a plane wave.
+\textcolor{red}{A possible laboratory experiment for the here mentioned approach consists of a light switchable substrate with a thin film cast on it~\cite{becker2003complex, IchimuraEtAl_Science2000}. 
+The external stimulus, our moving pattern, can be realized, e.g., by using a digital multimirror device (DMD)~\cite{doi:10.1021/jp301092y,doi:10.1126/science.aax8760}.}
 We fix the velocity direction to one diagonal, namely $\mathbf{v}_{\theta} = (v_{\theta x},v_{\theta y}) = v_{\theta}(1/\sqrt{2},-1/\sqrt{2})$ (we will return later on the importance of this choice), and we set $\theta_0 = 20^{\circ}$ and $\delta\theta=10^{\circ}$~\footnote{Notice that, since a typical velocity is such that $v_{\theta} \Delta t \ll \Delta x$ (in one LB time step $\Delta t$ the wave would travel a distance much smaller than a lattice spacing $\Delta x$),
 the time update needs to be interpreted in an integer part sense, that is the pattern is shifted by one $\Delta x$ every $1/v_{\theta x}$ time steps (and equivalently in the $y$-direction).}.
 \textcolor{red}{Lengths and time scales will be expressed, respectively, in units of the mean film height, $h_0$ (which is constant in time, due to mass conservation), and of $t_0 = \frac{3\mu}{\gamma h_0^3 q_0^4}$, the inverse growth rate of the most unstable mode, whose wavenumber is $q_0$, of a spinodally dewetting film \cite{Mecke_2005}. On a uniform substrate, with constant contact angle $\theta^{(u)}$, the wavenumber reads 
@@ -121,8 +122,8 @@ $(q^{(u)}_0)^2 = h_{\ast}^{-2}(1-\cos \theta^{(u)})f^{\prime}(h_0/h_{\ast})$ \ci
 $\lambda_s = 2\pi/q_0$.}
 \begin{figure}
     \centering
-    \includegraphics[width=0.45\textwidth]{Figures/No_vel_render2.png}
-    \caption{Stationary film thickness field ($t>4t_0$) showing the formation of droplets. The color map indicates the contact angle pattern 
+    \includegraphics[width=0.45\textwidth]{Figure_1.png}
+    \caption{Stationary film thickness field ($t>t_0$) showing the formation of droplets. The color map indicates the contact angle pattern 
     (Eq.~(\ref{eq:sinetheta}) with $v_{\theta}=0$), with lower (higher) values coded in light blue (yellow).
     }
     \label{fig:handtheta}
@@ -194,9 +195,7 @@ The latter is related to the time the liquid takes to flow out of regions of hig
 where $U_{\Theta}$ is the retraction speed $U_{\Theta} = \frac{\gamma \Theta^3}{9\mu}$~\cite{Edwards2016}, with $\Theta = \max_{\mathbf{x}}\theta(\mathbf{x})$.
 \begin{figure}
     \centering
-    \includegraphics[width=0.45\textwidth]{Rupture_times_Gamma_theta_20.pdf}
-    %\includegraphics[width=0.45\textwidth]{Figures/Rupture_times_Gamma.pdf}
-    % \includegraphics[width=0.45\textwidth]{Figures/rupture_times_all_lambda_v0v10.pdf}
+    \includegraphics[width=0.45\textwidth]{Figure_2.pdf}
     \caption{Rupture times, $\tau_r$, as a function of the pattern wavelength $\lambda$, for $v_{\theta}=0$ (\textcolor{jlblue}{$\bullet$}) and $v_{\theta}=20 v_0$ 
     (\textcolor{jlorange}{$\star$}).
     The continuous and dashed lines indicate the linear, $\sim \lambda$, and quadratic, $\sim \lambda^2$, scaling laws, respectively.
@@ -210,7 +209,7 @@ where $U_{\Theta}$ is the retraction speed $U_{\Theta} = \frac{\gamma \Theta^3}{
 We now focus on the long time dynamics and in particular on the characterization of the dewetting morphologies and how they are affected by the speed of the wettability wave.
 \begin{figure}
     \centering
-    \includegraphics[width=0.45\textwidth]{Static_new_theta20t0.pdf}
+    \includegraphics[width=0.45\textwidth]{Figure_3.pdf}
     \caption{MAIN PANEL: Time evolution of the height fluctuations, $\Delta h(t)$, during the dewetting process on the patterned substrate given by       
     Eq.~(\ref{eq:sinetheta})
     with $v_{\theta}= 0$ and $\lambda= 512 h_0$ (blue circles), $\lambda=256 h_0$ (orange squares) and $\lambda=170 h_0$ (green stars).
@@ -237,7 +236,7 @@ $V_d = \frac{h_0 \lambda^2}{2}$).}\\
 %showing excellent agreement.\\
 \begin{figure}
     \centering
-    \includegraphics[width=0.45\textwidth]{lam_2_inset_theta20.pdf}
+    \includegraphics[width=0.45\textwidth]{Figure_4.pdf}
     \caption{Time evolution of the second order Minkowski structure metric, $q_2(t)$ (see text for details), for different $\Gamma$ values, on a substrate with pattern wavelength $\lambda=256 h_0$.
     The grey-scale insets supply snapshots of the film thickness field associated to the various curves.
     }
@@ -259,7 +258,7 @@ Notice, though, that the $q_2$ signal for any $v_{\theta} >0$ always stays above
 \begin{figure}
     \centering
     % \includegraphics[width=0.45\textwidth]{Figures/Lig_stab_inset_delta_h.pdf}
-    \includegraphics[width=0.45\textwidth]{lig_lifetime_Gamma_theta20.pdf}
+    \includegraphics[width=0.45\textwidth]{Figure_5.pdf}
     \caption{MAIN PANEL: Rivulets life-times, $\tau_{\text{riv}}$, for various $\Gamma$ values.
     The dashed line is plotted as a guide to the eye to highlight the logarithmic dependence, in agreement with 
     the theoretical prediction, Eq.~(\ref{eq:rivlt}).
@@ -288,8 +287,25 @@ The rivulet life-time can be seen as the rupture time of the structure along its
 \begin{equation}\label{eq:rivlt}
     \tau_{\text{riv}} \sim \alpha \log(v_{\theta}) \propto t_0 \log(\Gamma). 
 \end{equation}
-This logarithmic dependence is indeed observed in the numerical data as shown in Fig.~\ref{fig:stab_ligs_lam2}.
-
+This logarithmic dependence is indeed observed in the numerical data as shown in Fig.~\ref{fig:stab_ligs_lam2}.\\
+\textcolor{red}{Before concluding, we would like to envisage a possible realization of a 
+dewetting experiment on a switchable substrate of the type modelled by the spatio-temporal 
+contact angle (\ref{eq:sinetheta}). One may think of a thin liquid film cast on a light responsive substrate~\cite{IchimuraEtAl_Science2000}, under the action of controlled 
+external stimuli (a light emitter). 
+An ideal candidate could be a digital multimirror device (DMD).
+This technology has effectively been used for thin film experiments and additive manufacturing~\cite{doi:10.1021/jp301092y, doi:10.1126/science.aax8760}, it allows for fast temporal modulations of the optical signal (with frequencies up to $\approx 16 \, \text{kHz}$)
+with spatial resolution of $\approx 10 \times 10 \, \mu \text{m}^2$ (the size of a pixel).
+Considering as a reference, for instance, the system studied in ~\cite{becker2003complex,PhysRevLett.99.114503}, namely a $\sim 4 \, \text{nm}$ thick film 
+of polystyrene deposited on an oxidized silicon wafer,  
+we evaluate the retraction speed 
+$U_{\Theta} = \frac{\Theta^3 \gamma}{9 \mu}$ to be 
+$U_{\Theta} \approx 10^{-2} \, \mu \text{m}/\text{s}$. 
+The (minimum) {\it pattern speed} can be 
+estimated, from the pixel size with frame rate $\sim 1 s^{-1}$, as 
+$v_{\theta} \sim 10 \, \mu \text{m}/\text{s}$, that would give $\Gamma \sim 10^3$, i.e. well within the rivulet regime ($\Gamma > 1$). We note, also, that both $U_{\Theta}$ and $v_{\theta}$ can be widely modulated: the former, playing either with the (temperature and molecular weight dependent) viscosity 
+or tailoring the substrate to making it more hydrophobic (i.e. increasing the contact angle); the latter, tuning
+the spatial resolution and frame rate of the DMD. We expect, thus, the range of achievable $\Gamma$'s to 
+be feasibly extended both to very high ($\Gamma \gg 1$) and very low ($\Gamma \ll 1$) values.}\\
 \noindent {\it Conclusions.}
 We have presented results, from numerical simulations and theoretical analysis, on the dewetting of thin liquid films on a switchable substrate, modelled with a space and time periodically varying contact angle in the thin-film equation.
 Studying how the stability of the film depends on the underlying static pattern, we found that the rupture times grow linearly with the pattern wavelength, for short wavelengths, and quadratically in the long wavelength limit. 
@@ -301,7 +317,7 @@ The rivulets life-time itself grows with the pattern speed, displaying a logarit
 On a broader perspective, our work suggests that switchable substrates offer a new avenue to control thin film dewetting, with obviously relevant implications, for instance, for open microfluidic devices, and paves the way to future studies in this direction, exploiting more complex and dedicated space-time dependencies.
 
 
-\noindent {\it Acknowledgements}. SZ and JH acknowledge financial support from the Deutsche Forschungsgemeinschaft (DFG) within the priority program SPP2171 ``Dynamic Wetting of Flexible, Adaptive, and Switchable Substrates'', project HA-4382/11.
+\noindent {\it Acknowledgements}. SZ and JH acknowledge financial support from the Deutsche Forschungsgemeinschaft (DFG) within the priority program SPP2171 ``Dynamic Wetting of Flexible, Adaptive, and Switchable Substrates'', project HA-4382/11 and Project-ID 431791331—CRC1452 ``Catalysis at Liquid Interfaces''.
 
 
 \bibliography{Ref}

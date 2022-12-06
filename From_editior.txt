@@ -221,3 +221,16 @@ see whether they really apply. The same goes for the rivulet lifetime
 in Fig. 5 where the trend is OK but most likely a scaling law
 different from log(v\theta) would do as well in the range of \tau_riv
 covered by the numerical data.
+
+
+------------------------------------------------------
+PRL Acceptance Criteria
+-----------------------------------------------------
+
+Submitted manuscripts should substantially advance fundamental or applied physical science by meeting one or more of the following criteria:
+
+  - Open a new research area, or a new avenue within an established area.   X
+  - Solve, or make essential steps towards solving, a critical problem.
+  - Introduce techniques or methods with significant impact.                X
+  - Be of unusual intrinsic interest to PRL's broad audience.              (X)
+
