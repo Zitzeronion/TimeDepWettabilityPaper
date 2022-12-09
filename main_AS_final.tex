@@ -25,6 +25,8 @@
 \definecolor{pyred}{HTML}{D62728}
 \definecolor{jlblue}{rgb}{0.0,0.6056031611752245,0.9786801175696073}
 \definecolor{jlorange}{rgb}{0.8888735002725198,0.43564919034818994,0.2781229361419438}
+\definecolor{jlgreen}{rgb}{0.2422242978521988,0.6432750931576305,0.3044486515341153}
+\definecolor{jlviolet}{rgb}{0.7644401754934356,0.4441117794687767,0.8242975359232758}
 \newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
 
 \title{Controlling the dewetting morphologies of thin liquid films by switchable substrates}
@@ -112,8 +114,8 @@ In particular, we employ the sinusoidal form
    \!\! \theta(\mathbf{x},t) = \theta_0 + \delta\theta\left[\sin\left(q_{\theta} (x+v_{\theta x}t)\right)\sin\left(q_{\theta}(y+v_{\theta y}t)\right)\right],\! 
 \end{equation}
 where $q_{\theta} = 2\pi/\lambda$, i.e.~the pattern evolves in time as a plane wave.
-\textcolor{red}{A possible laboratory experiment for the here mentioned approach consists of a light switchable substrate with a thin film cast on it~\cite{becker2003complex, IchimuraEtAl_Science2000}. 
-The external stimulus, our moving pattern, can be realized, e.g., by using a digital multimirror device (DMD)~\cite{doi:10.1021/jp301092y,doi:10.1126/science.aax8760}.}
+% \textcolor{red}{A possible laboratory experiment for the here mentioned approach consists of a light switchable substrate with a thin film cast on it~\cite{becker2003complex, IchimuraEtAl_Science2000}. 
+% The external stimulus, our moving pattern, can be realized, e.g., by using a digital multimirror device (DMD)~\cite{doi:10.1021/jp301092y,doi:10.1126/science.aax8760}.}
 We fix the velocity direction to one diagonal, namely $\mathbf{v}_{\theta} = (v_{\theta x},v_{\theta y}) = v_{\theta}(1/\sqrt{2},-1/\sqrt{2})$ (we will return later on the importance of this choice), and we set $\theta_0 = 20^{\circ}$ and $\delta\theta=10^{\circ}$~\footnote{Notice that, since a typical velocity is such that $v_{\theta} \Delta t \ll \Delta x$ (in one LB time step $\Delta t$ the wave would travel a distance much smaller than a lattice spacing $\Delta x$),
 the time update needs to be interpreted in an integer part sense, that is the pattern is shifted by one $\Delta x$ every $1/v_{\theta x}$ time steps (and equivalently in the $y$-direction).}.
 \textcolor{red}{Lengths and time scales will be expressed, respectively, in units of the mean film height, $h_0$ (which is constant in time, due to mass conservation), and of $t_0 = \frac{3\mu}{\gamma h_0^3 q_0^4}$, the inverse growth rate of the most unstable mode, whose wavenumber is $q_0$, of a spinodally dewetting film \cite{Mecke_2005}. On a uniform substrate, with constant contact angle $\theta^{(u)}$, the wavenumber reads 
@@ -139,7 +141,7 @@ $\gamma = 0.03 \, \text{N}/\text{m}$. Neglecting the short range part of the int
 $q_0^2 \approx \frac{A_H}{4\pi \gamma h_0^4} \approx 2.5 \times 10^{-4} \, \text{nm}^{-2}$.
 The characteristic time of the growth of the instability for these experiments, then, reads \cite{PhysRevLett.99.114503} (the dynamic viscosity of polystyrene is 
 $\mu = 1.2 \times 10^4 \, \text{Pa} \cdot \text{s}$) $t_0 = \frac{3\mu}{\gamma h_0^3 q_0^4} \approx 300 \, \text{s}$ and it can be seen that indeed film rupture occurs within time 
-scales of the order of $t_0$ ($\approx 2 t_0$) \cite{becker2003complex}, as in our 
+scales of the order of $t_0$~\cite{becker2003complex}, as in our 
 simulation for the largest pattern wavelength, $\lambda = L$ (see also our previous work
 with homogeneous substrates~\cite{PhysRevE.104.034801}).}
 %%%%
@@ -212,8 +214,8 @@ We now focus on the long time dynamics and in particular on the characterization
     \includegraphics[width=0.45\textwidth]{Figure_3.pdf}
     \caption{MAIN PANEL: Time evolution of the height fluctuations, $\Delta h(t)$, during the dewetting process on the patterned substrate given by       
     Eq.~(\ref{eq:sinetheta})
-    with $v_{\theta}= 0$ and $\lambda= 512 h_0$ (blue circles), $\lambda=256 h_0$ (orange squares) and $\lambda=170 h_0$ (green stars).
-    The dashed lines indicate the geometrically expected values of the droplet height $h_d$, assuming monodispersity and a perfect spherical cap shape. 
+    with $v_{\theta}= 0$ and $\lambda= 512 h_0$ (\textcolor{jlblue}{$\bullet$}), $\lambda=256 h_0$ (\textcolor{jlorange}{$\blacksquare$}) and $\lambda=170 h_0$ (\textcolor{jlgreen}{$\star$}).
+    % The dashed lines indicate the geometrically expected values of the droplet height $h_d$, assuming monodispersity and a perfect spherical cap shape. 
     INSET: Number of droplets, $N(t)$, as a function of time. The three horizontal dashed lines indicate the number of minima of Eq.~(\ref{eq:sinetheta}),
       which is $2\left(\frac{L}{\lambda}\right)^2$. In the insets, we display snapshots of the stationary droplet states as grey-scale images
       of the film thickness field, $h(\mathbf{x},t)$.
@@ -243,8 +245,8 @@ $V_d = \frac{h_0 \lambda^2}{2}$).}\\
     \label{fig:msm_q2}
 \end{figure}
 A time-dependent pattern affects the dewetting morphology quite substantially.
-For $v_{\theta} = 0.2 v_0$ we still observe the formation of droplets, similarly to the stationary case ($v_{\theta} = 0$). However, these are transported with the contact angle minima, reproducing a somehow similar behaviour recently described in a numerical study of a droplet on a moving wettability step~\cite{GrawitterStark1}.
-If the pattern speed is further increased, for $v_{\theta} = 2 v_0$ we observe the development of rivulet-like structures, aligned with $\mathbf{v}_{\theta}$. 
+For $v_{\theta} = 1.7 v_0$ we still observe the formation of droplets, similarly to the stationary case ($v_{\theta} = 0$). However, these are transported with the contact angle minima, reproducing a somehow similar behaviour recently described in a numerical study of a droplet on a moving wettability step~\cite{GrawitterStark1}.
+If the pattern speed is further increased, for $v_{\theta} = 17.5 v_0$ we observe the development of rivulet-like structures, aligned with $\mathbf{v}_{\theta}$. 
 The film, in fact, while dewetting in the direction normal to the pattern velocity, is exposed, in the direction of the velocity, to a periodic potential with alternating minima and saddle points, which partially (as we will see) stabilizes the film over ``preferential'' lanes along the diagonals. 
 This makes the chosen velocity direction, $(1/\sqrt{2},-1/\sqrt{2})$ (or, equivalently, the orthogonal one $(1/\sqrt{2},1/\sqrt{2})$), optimal for the formation of rivulets. 
 
@@ -317,7 +319,7 @@ The rivulets life-time itself grows with the pattern speed, displaying a logarit
 On a broader perspective, our work suggests that switchable substrates offer a new avenue to control thin film dewetting, with obviously relevant implications, for instance, for open microfluidic devices, and paves the way to future studies in this direction, exploiting more complex and dedicated space-time dependencies.
 
 
-\noindent {\it Acknowledgements}. SZ and JH acknowledge financial support from the Deutsche Forschungsgemeinschaft (DFG) within the priority program SPP2171 ``Dynamic Wetting of Flexible, Adaptive, and Switchable Substrates'', project HA-4382/11 and Project-ID 431791331—CRC1452 ``Catalysis at Liquid Interfaces''.
+\noindent {\it Acknowledgements}. SZ and JH acknowledge financial support from the Deutsche Forschungsgemeinschaft (DFG) within the priority program SPP2171 ``Dynamic Wetting of Flexible, Adaptive, and Switchable Substrates'', project HA-4382/11 and Project-ID 431791331—CRC1452 ``Catalysis at Liquid Interfaces''. SZ acknowledge financial support from the Independent Research Fund Denmark through a DFF Sapere Aude Research Leader grant (grant number 9063-00018B). 
 
 
 \bibliography{Ref}
