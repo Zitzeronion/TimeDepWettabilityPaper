@@ -1,0 +1,46 @@
+----------------------------------------------------------------------
+Second Report of Referee A -- LM17723/Zitz
+----------------------------------------------------------------------
+
+With the response given to me by the authors, I think that the
+research is probably valid. I still fail to see why I should be very
+excited about the findings, so I think that the manuscript would be
+better suited for a more specialized journal, like Physical Review E.
+The reason for this recommendation is that I can see what the
+patterned substrate does, in the sense that the wavelength competes
+with that of dewetting. That droplets can mode in a wettability
+gradient has also been clear for a long time. I am wondering what is
+there to be gained by combining these ideas, and I find the rationale
+of the manuscript to be not extremely compelling. In my view, this
+would be needed for PRL. I am sorry that I cannot be more positive.
+
+----------------------------------------------------------------------
+Second Report of Referee B -- LM17723/Zitz
+----------------------------------------------------------------------
+
+The authors have responded convincingly to my concerns and addressed
+them sufficiently in the revised manuscript. I have also read the
+responses to the other reports and I feel that the authors have
+addressed these recommendations adequately. In view of this, and my
+original favorable assessment, I recommend this manuscript for
+publication.
+
+I have just two remarks that are related to concern #5 in my original
+report:
+
+1. Most importantly, the authors have added footnote 26, which I find
+to be unnecessary, but notice that the curvature has the denominator
+to the power of 3/2.
+
+2. The film thickness-dependent surface tension referred to in my
+report is not related to the trivial small gradient approximation, and
+appears whether the slope is small or large. It is a second order
+effect which decays according to d Pi(h) / dh, and could be relevant
+for thin films and helpful to address the contact line problem, but
+not likely to change the results qualitatively.
+
+----------------------------------------------------------------------
+Report of Referee D -- LM17723/Zitz
+----------------------------------------------------------------------
+
+See Attachment: lm17723_report_1_d.pdf

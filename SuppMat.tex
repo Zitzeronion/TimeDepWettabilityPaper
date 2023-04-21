@@ -62,7 +62,85 @@ Via dei Taurini 19, 00185 Rome, Italy}%
 \date{\today}
 
 \maketitle
-\section{Minkowski's structure metric $q_2$ in an extended parameter space}
+
+\section{Disjoining pressure}
+
+\noindent A {\it thin film} is a layer of liquid confined between two interfaces. When the two interfaces are brought close enough to each other (i.e. the layer is {\it thin}), they interact.
+The disjoining pressure stems from this interaction. Thermodynamically, it represents minus the derivative of the free energy difference, per unit surface, between 
+the film and the bulk of the same liquid, or, equivalently, the pressure difference inside and outside the film 
+\cite{Deryaguin1940,DeryaguinChuraev1978}.
+In the case of wetting, there can be three types of interfaces: liquid/air, liquid/solid (the substrate) and, 
+if the substrate is only partially wetted, solid/air, thus giving rise to three-phase contact lines. 
+The usually called "surface tension" is the energy cost of forming a liquid/air interface of unit area. 
+The Young's condition \cite{Young1805,DeGennes1985} connects the surface tension with the analogous energies per unit
+area associated with the solid/liquid ($\gamma_{\text{sl}}$) and solid/gas ($\gamma_{\text{sg}}$) interface as
+\begin{equation}
+\cos \theta = \frac{\gamma_{\text{sg}}-\gamma_{\text{sl}}}{\gamma},
+\end{equation}
+where $\theta$ is the contact angle.
+The expression adopted for $\Pi$, namely
+\begin{equation}
+\Pi(h,\theta) = \frac{2\gamma}{h_{\ast}}(1-\cos(\theta(\mathbf{x},t)))
+  f\left(\frac{h}{h_{\ast}}\right),
+\end{equation}
+where $f(\xi)=\xi^{-3} - \xi^{-2}$ and $h_{\ast}$ is the height at which the disjoining pressure vanishes setting the precursor layer thickness, pertains to a general family of expressions of 
+the form 
+\begin{equation}\label{eq:SMDP}
+\Pi(h) = \gamma(1-\cos \theta)\frac{(n-1)(m-1)}{h_{\ast}(n-m)}\left[\left(\frac{h_{\ast}}{h}\right)^n - 
+\left(\frac{h_{\ast}}{h}\right)^m\right].
+\end{equation}
+Equations like (\ref{eq:SMDP}) are frequently found in the literature, 
+with various combination of exponents $(n,m)$ ($n>m$), depending
+on the type of interactions among fluid molecules and between fluid and substrate~\cite{SCHWARTZ1998173,Mitlin,Teletzke}. A common choice, for instance, is the pair $(9,3)$, which 
+can be derived from molecular interactions of Lennard-Jones type. Here, the use of the $(3,2)$ pair is motivated mainly by the computational advantage of keeping the characteristic dewetting time 
+shorter. We have run also a single case ($\lambda=256 h_0$ and $\Gamma=1.5$) with $(9,3)$ and observed that 
+the dynamics remains essentially the same, but for a shift in the time scale (see also~\cite{PhysRevE.104.034801}).
+
+\section{Parameter values and comparison with experiments}\label{sec:SMparam}
+
+\noindent To give a flavour of how to compare with actual experimental systems, let us notice
+first that the expression of $t_0$ depends on the disjoining pressure (through its dependence 
+ $q_0 = \sqrt{\frac{1}{2\gamma} \Pi^{\prime}(h_0)}$) and contains, therefore, energetic details, namely 
+ the Hamaker constant $A_H$. Consider, for instance, the problem studied in \cite{becker2003complex}: the dewetting of a polystyrene film of thickness $h_0 \approx 4 \, \text{nm}$ deposited on a silicon 
+dioxide substrate, where $A_H  = 2.2 \times 10^{-20} \, \text{J}$ and 
+$\gamma = 0.03 \, \text{N}/\text{m}$. Neglecting the short range part of the interface potential
+(such that $\Pi(h)= - \frac{A_H}{6\pi h^3}$)~\cite{Mecke_2005,becker2003complex}, one gets 
+$q_0^2 \approx \frac{A_H}{4\pi \gamma h_0^4} \approx 2.5 \times 10^{-4} \, \text{nm}^{-2}$.
+The characteristic time of the growth of the instability for these experiments then reads $t_0 = \frac{3\mu}{\gamma h_0^3 q_0^4} \approx 300 \, \text{s}$ (the dynamic viscosity of polystyrene is 
+$\mu = 1.2 \times 10^4 \, \text{Pa} \cdot \text{s}$)~\cite{PhysRevLett.99.114503}. It can be seen that indeed film rupture occurs within time 
+scales of the order of $t_0$~\cite{becker2003complex}, as in our 
+simulation for the largest pattern wavelength, $\lambda = L$ (see also our previous work
+with homogeneous substrates~\cite{PhysRevE.104.034801}).\\
+All our simulations are run on a bi-periodic square domain of size $L \times L$ with 
+$L/h_0 = 512 $. The numerical values in lattice Boltzmann units of the 
+mean film thickness, dynamics viscosity and surface tension are, respectively, $h_0=1$, $\mu=1/6$
+and $\gamma=0.01$.
+To regularize the contact line divergence~\cite{huh1971hydrodynamic}
+we use a precursor layer thickness $h_{\ast}/h_0=0.07$ and a slip length $\delta/h_0 = 1$, 
+a value which lies within the weak/intermediate slip regime~\cite{peschka2019signatures,fetzer2007quantifying, munch2005lubrication}
+(we have tried also a value four times smaller, without observing any major qualitative change in the results).
+The liquid film is initialized with a height field slightly perturbed around the mean value $h_0$,
+i.e. $h(\mathbf{x},0) = h_0 \left[1 + 0.1 \left(\sin\left(\frac{2\pi x}{L}\right)\sin\left(\frac{2\pi y}{L}\right)\right)\right]$.
+Various wavelengths in the range $\lambda/h_0 \in [64, 512]$, and velocities,
+$v_{\theta}/v_0 \in [0, 200]$, are considered for the wettability pattern (see main text). 
+A few comments on these ranges are noteworthy at this point. The wavelengths are obviously limited from above by the size of the
+computational domain. On the other extreme, too short wavelengths are prevented by
+the energetic cost of accomodating droplets on too
+small patches, since the local contact angle 
+(that increases with decreasing $\lambda$, see also \ref{sec:SMdroplet}) would possibly exceed the largest substrate contact angle,
+such that the patterning itself would loose meaning. 
+It has been, in fact, proven, both theoretically and experimentally, that 
+for the confinement to be effective, the pattern characteristic size should 
+not be much smaller than the spinodal length scale on the less wettable substrate
+\cite{KarguptaJCP2002,KarguptaLangmuir2000,Nisato1999,Karim1998}.
+We keep, therefore, $\lambda \stackrel{>}{\sim} \lambda_s \approx 70 h_0$.
+The pattern speeds, on the other hand, are limited by the intrinsic LB bound of the lattice speed of sound
+ \cite{succi}.\\
+The Reynolds number, $Re$, is of the order of $Re \sim 10^{-2}$ on the 
+static substrate and never exceeds the value $\approx 0.2$ in the time dependent case.
+
+\section{Minkowski's structure metric $q_2$ in an extended parameter space}\label{sec:SMMinko}
+
 \begin{figure}
     \centering
     \includegraphics[width=0.4\textwidth]{SupMatFig_1.pdf}
@@ -73,13 +151,6 @@ Via dei Taurini 19, 00185 Rome, Italy}%
     $\Gamma = 15$ and $\lambda = 256 h_0$.}
     \label{fig:q2_difflambda}
 \end{figure}
-%\begin{figure}
-%    \centering
-%    \includegraphics[width=0.7\textwidth]{different_contrasts.pdf}
-%    \caption{Comparison of the Minkowski's structure metric $q_2$ for different values of %$\delta\theta$, 
-%    $\Gamma = 1.5$ and $\lambda = 256 h_0$.}
-%    \label{fig:dif_contrast}
-%\end{figure}
 \noindent In this section we test the robustness of the observation of the rivulet 
 state over a wider parameter space and in particular at changing: 1) the 
 pattern wavelength $\lambda$ and 2) the heterogeneity amplitude $\delta \theta$.
@@ -94,10 +165,9 @@ We see that the $q_2$ metric attains the value $q_2 \approx 1$, signalling the r
 a time interval shorter than for $\delta \theta = 10^{\circ}$, i.e. the rivulets lifetime decreases with 
 $\delta \theta$. This was somehow expected, since obviously (and also in the static case) 
 the patterning looses effectiveness as the contact angle mismatch is reduced (see, e.g.~\cite{KonnurPRL2000}).
+%\newpage
 
-\newpage
-
-\section{Droplet shape}
+\section{Droplet shape}\label{sec:SMdroplet}
 
 \noindent We investigate, here, how the local contact angle of droplets, formed on the more
 hydrophilic patches after dewetting, depends on the pattern wavelength. We recall, in fact,
@@ -109,7 +179,7 @@ E = \gamma_{\text{lg}} A_{\text{lg}} + \int_{A_{\text{sl}}} (\gamma_{\text{sl}} 
 \end{equation}
 where $A_{\text{lg}}$ and $A_{\text{sl}}$ are the liquid/gas and solid/liquid interface areas, and $\gamma_{\text{lg}}$, $\gamma_{\text{sl}}$,
 $\gamma_{\text{sg}}$ are the liquid/gas, solid/liquid and solid/gas interface energies 
-per unit area \cite{WuSM2020}. 
+per unit area \cite{Wu2020}. 
 In particular, $\gamma_{\text{lg}} \equiv \gamma$ is the surface tension.
 Setting $A_{\text{lg}} \equiv A$ and $A_{\text{sl}} \equiv S$, by Young's equation 
 $\cos \theta = \frac{\gamma_{\text{sg}} - \gamma_{\text{sl}}}{\gamma}$,
@@ -165,7 +235,8 @@ energy is first order) and we finally get
   E(a) \approx  \pi \left((1-\cos \theta_m) a^2 + \frac{h_0^2 \lambda^4}{\pi^2 a^4} \right)
   + \delta \theta \frac{\pi}{4}\sin \theta_m q_{\theta}^2 a^4 \equiv E_0(a) + \delta \theta E_1(a).
 \end{equation}  
-The minimum condition $\frac{\partial E}{\partial a} = 0$ \cite{footnote} yields
+The minimum condition $\frac{\partial E}{\partial a} = 0$~\footnote{It can be easily checked that 
+$\frac{\partial^2 E}{\partial a^2} > 0$.} yields  
 \begin{equation}\label{eq:minim}
 2\pi (1-\cos \theta_m)a^6 - 4h_0 \lambda^4 + \delta \theta \pi^2 \sin \theta_m q_{\theta}^2 a^8 =0.
 \end{equation}  
@@ -195,13 +266,15 @@ such that the correction to the droplet contact angle provides
 where $b = \left(\frac{32 h_0^2 \pi^4}{27 \theta_m^5}\right)^{1/3}$,
 i.e. the droplet contact angle grows at decreasing pattern wavelength as $\theta_d \sim \lambda^{-2/3}$.
 
-\begin{thebibliography}{99}
+\bibliography{Ref}
 
-\bibitem{KonnurPRL2000} R. Konnur, K. Kargupta and A. Sharma, {\it Phys. Rev. Lett.} {\bf 84}, 931--934 (2000).
-\bibitem{WuSM2020} Y. Wu, F. Wang, S. Ma, M. Selzer and B. Nestler,
-{\it Soft Matter} {\bf 16}, 6115--6127 (2020).
-\bibitem{footnote} It can be easily checked that $\frac{\partial^2 E}{\partial a^2} > 0$ for $a>0$.
+%\begin{thebibliography}{99}
+
+%\bibitem{KonnurPRL2000} R. Konnur, K. Kargupta and A. Sharma, {\it Phys. Rev. Lett.} {\bf %84}, 931--934 (2000).
+%\bibitem{WuSM2020} Y. Wu, F. Wang, S. Ma, M. Selzer and B. Nestler,
+%{\it Soft Matter} {\bf 16}, 6115--6127 (2020).
+%\bibitem{footnote} It can be easily checked that $\frac{\partial^2 E}{\partial a^2} > 0$ %for $a>0$.
   
-\end{thebibliography}
+%\end{thebibliography}
 
 \end{document}
