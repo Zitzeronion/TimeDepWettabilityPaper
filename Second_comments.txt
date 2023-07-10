@@ -39,6 +39,17 @@ effect which decays according to d Pi(h) / dh, and could be relevant
 for thin films and helpful to address the contact line problem, but
 not likely to change the results qualitatively.
 
+ANSWERS: We thank the Referee for clarifying his/her question and we apologize for 
+our misunderstanding (we have removed the footnote and the comment on 
+the small gradient expansion of the curvature). 
+We agree that, when thermal fluctuations are relevant,
+it is important to consider the renormalized (i.e., height dependent) surface tension,
+especially when it comes to the initial growth of the instability. It is, on the other 
+hand, reasonable to expect, as the Referee remarks, that in terms of the dewetting 
+morphology (and its relation to the time-dependence of the substrate) the phenomenology
+should not be particularly affected, at least qualitatively.
+
+
 ----------------------------------------------------------------------
 Report of Referee D -- LM17723/Zitz
 ----------------------------------------------------------------------

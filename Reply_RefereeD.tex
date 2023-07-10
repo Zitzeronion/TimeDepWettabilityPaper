@@ -1,0 +1,146 @@
+\documentclass[12pt,english]{article}
+
+\usepackage{natbib}
+
+\usepackage{graphics,graphicx,dcolumn,bm,fleqn,epic,eepic,float}
+\usepackage{amssymb,amsmath,multirow,rotate,rotating,color}
+\usepackage[utf8]{inputenc}
+
+\usepackage[english]{babel}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+%\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\tikzset{fontscale/.style = {font=\relsize{#1}}}
+\usetikzlibrary{calc}
+\makeatother
+
+\newcommand{\figref}[1]{Fig.~\ref{fig:#1}}
+\newcommand{\eqnref}[1]{Eq.~(\ref{eq:#1})}
+\newcommand{\ts}{\textsuperscript}
+
+\definecolor{tuered}{RGB}{214,0,74}
+
+\newcommand{\todo}[1]{\textbf{\textcolor{tuered}{ TODO: #1}}}
+
+\newcommand{\vectornorm}[1]{\left|\left|#1\right|\right|}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\hat{\vec{#1}}}
+\newcommand{\tensor}[1]{\mathbf{#1}}
+
+\definecolor{pyblue}{HTML}{1F77B4}
+\definecolor{pyorange}{HTML}{FF7F0C}
+\definecolor{pygreen}{HTML}{2CA02C}
+\definecolor{pyred}{HTML}{D62728}
+
+\newcommand{\JH}[1]{\textcolor{blue}{JH: #1}}
+\begin{document}
+
+% The referee PDF has been generated from r239 -- 'make referee' command.
+
+\section*{Reply to Referee D}
+We thank the new Referee for his/her report on our manuscript. 
+We are glad to read that he/she acknowledges the systematic approach we have taken and are happy to see that he/she finds our results interesting. 
+We understand the concerns raised by the referee and wonder why the recommendation is negative.
+Hereafter, we provide answers to the various questions/comments raised. 
+All changes in the revised version are reported in red color.
+
+\begin{itemize}
+
+\item[ \textbf{\underline{Comment 1.}}]
+{ 
+It seems impossible to construct the patterns described by Equation (3) in a real experiment, making the current research less attractive.
+}
+
+\item[ \textbf{{Answer}}]
+{
+We are very surprised by this comment and do not agree with the assessment of the referee. 
+% For static patterns it is well known how to pattern substrates in a precise and controlled way using, e.g. lithography. 
+It is true that the novelty of the here presented work is strongly coupled to both the temporal and spatial component of the wettability and as such to equation (3).
+We are certain that switchable substrates offer this kind of control, and for photoswitchable materials spiropyran should be a perfect candidate~\cite{keyvanradSpiropyranbasedAdvancedPhotoswitchable2022}. 
+
+Not only do we present our numerical and analytical results in this letter, but we also supply a potential realization for a lab experiment. 
+We provide a schematic setup using a photoswitchable substrate and a digital multimirror device. 
+As we are well aware that this is not sufficient for an experiment we further identify the relevant length and time scales for both the film and the apparatus.
+% Hoping that experimentalist confirm transition we supply a way to construct pattern Eq. (3).
+%We therefore have a hard time understanding why it seems impossible to the referee to construct the pattern equation %(3), as he/she does not give us a single increment of information in his/her comment.
+}
+
+\item[ \textbf{\underline{Comment 2.}}] 
+{
+This work is completed based on the lubrication equation for the thin film flows.
+From theoretical/mathematical aspects, the novelty of this work, in my opinion, is not strong enough. 
+This lubrication model employed here was proposed about 40 years ago and has been thoroughly investigated~\cite{RevModPhys.69.931, RevModPhys.81.1131}. 
+There are no improvements or modifications to the model in this work. 
+Additionally, the model for the rupture time comes from a simple scaling analysis, which is not very convincing when considering other classical mathematical approaches, such as linear instability analysis, similarity transformation, etc.
+}
+
+\item[ \textbf{{Answer}}]
+{
+We find it puzzling that the referee arrives at the conclusion that working on a theory which is 40 years old does not allow for the novelty attributed to PRL.
+A good counter example is: M. Wilczek et al,
+"Sliding drops – ensemble statistics from single drop bifurcations", {\it Phys. Rev. Lett.} {\bf 119}, 204501 (2017), in which Wilczek et al. use the thin film equation on an inclined plane.
+Similar arguments can be constructed about the Navier-Stokes equation which is 180 years old, still there is a lot of research dedicated towards, e.g., turbulence.
+
+We agree with the referee that from a purely mathematical point of view lubrication theory is untouched.
+There is no reason or advantage to add artificial complexity to a well working theory which has been developed for this singular purpose.
+However, when it comes to dynamical effects and non-linear behaviour of thin films, the topic this letter revolves around, mathematics falls short and only numerical simulation or experiments offer deeper insights.
+To this end we use a novel lattice Boltzmann method to solve the thin film equation at time scales where initial small perturbations have grown to similar sizes as $h_0$.
+It is well known that the rupture time marks the end of the linear regime and linear instability theory as suggested by the referee, which has been used in our previous work~\cite{PhysRevE.104.034801}. 
+However, it is simply not able to explain our observations, as $\tau_r$ is dependent on $\Gamma$. 
+Observing the morphological transition during dewetting from a droplet to a rivulet state is by no means covered by linear analysis. 
+It is a dynamic competition of relevant velocities which to the best knowledge of the authors has not been discussed or shown before.
+}
+
+\item[ \textbf{\underline{Comment 3.}}]
+{
+The mobility function in Equation (1) contains the slip length $\delta$. 
+But there is no further information in this work. 
+Is the slip length of a patterned substrate constant? 
+If so, it is quite unreasonable because a hydrophobic substrate is usually more slippery than a hydrophilic one. 
+Moreover, previous works had showed that the slip is crucial to the interface dynamics~\cite{zhang_sprittles_lockerby_2021, zhao_zhang_si_2023}, which should be taken into account.
+}
+
+\item[ \textbf{{Answer}}]
+{
+We thank the Referee for this remark. It is of course true that the slip length 
+should grow with the contact angle, on the other hand it is also well known that for low contact angle (actually up to $\sim 100^{\circ}$) such dependence is relatively weak, 
+as it is expected to follow the relation $\lambda \propto (1+\cos \theta)^{-2}$
+(see Huang et al, {\it Phys. Rev. Lett.} {\bf 101}, 226101 (2008)). The ratio 
+of the slip lengths on patches of contanct angles $10^{\circ}$ and $30^{\circ}$
+(which is the case of our simulations), for instance, would then be $\approx 0.9$,
+such that the slip length should have been varied between $0.95$ and $1.05$ lbu. We deemed, then, reasonable to consider it approximately constant. 
+To provide an idea, in reference~\cite{zhang_sprittles_lockerby_2021}, for instance, effects were appreciated 
+when slip lengths were two to five times larger than each other. 
+}
+
+\item[ \textbf{\underline{Comment 4.}}]
+{ 
+According to the fluid parameters displayed in the supplemental material, the initial thickness of the film is about 4 nm. 
+Thermal fluctuations had been shown to play a key role at this scale~\cite{PhysRevLett.99.114503, PhysRevLett.126.228004}, which might affect the dynamics seriously.
+}
+
+\item[ \textbf{{Answer}}]
+{
+We do not say that the initial film thickness is $4 \, \text{nm}$, we just considered the experiments of Becker et al (where the initial film thickness is $\sim 4 \, \text{nm}$) as a reference, since they provide experimental values of quantities (such as the Hamaker constant) that enable the comparison 
+with the numerics. The effect of thermal fluctuations, though, is known to essentially show up as 
+a speed up of the growth of the instability, but it does not affect particularly the dewetting morphology (as shown in Becker et al, {\it Nat. Mater.} {\bf 2}, 59--63, who made direct comparison 
+of the numerical simulation of a lubrication model with experiments).
+}
+
+
+\end{itemize}
+
+
+\bibliographystyle{abbrv}
+\bibliography{Ref}
+
+\end{document}
