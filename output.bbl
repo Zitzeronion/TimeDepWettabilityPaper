@@ -1,12 +1,12 @@
 %merlin.mbs apsrev4-1.bst 2010-07-25 4.21a (PWD, AO, DPC) hacked
 %Control: key (0)
-%Control: author (8) initials jnrlst
+%Control: author (0) dotless jnrlst
 %Control: editor formatted (1) identically to author
-%Control: production of article title (-1) disabled
-%Control: page (0) single
-%Control: year (1) truncated
+%Control: production of article title (0) allowed
+%Control: page (1) range
+%Control: year (0) verbatim
 %Control: production of eprint (0) enabled
-\begin{thebibliography}{50}%
+\begin{thebibliography}{47}%
 \makeatletter
 \providecommand \@ifxundefined [1]{%
  \@ifx{#1\undefined}
@@ -52,338 +52,275 @@
 %</preamble>
 \bibitem [{\citenamefont {Gross}\ \emph {et~al.}(1980)\citenamefont {Gross},
   \citenamefont {Matsch}, \citenamefont {Castelli}, \citenamefont {Eshel},
-  \citenamefont {Vohr},\ and\ \citenamefont {Wildmann}}]{gross1980fluid}%
+  \citenamefont {Vohr},\ and\ \citenamefont
+  {Wildmann}}]{grossFluidFilmLubrication1980a}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {W.~A.}\ \bibnamefont
   {Gross}}, \bibinfo {author} {\bibfnamefont {L.~A.}\ \bibnamefont {Matsch}},
   \bibinfo {author} {\bibfnamefont {V.}~\bibnamefont {Castelli}}, \bibinfo
   {author} {\bibfnamefont {A.}~\bibnamefont {Eshel}}, \bibinfo {author}
-  {\bibfnamefont {J.}~\bibnamefont {Vohr}}, \ and\ \bibinfo {author}
+  {\bibfnamefont {J.~H.}\ \bibnamefont {Vohr}}, \ and\ \bibinfo {author}
   {\bibfnamefont {M.}~\bibnamefont {Wildmann}},\ }\href@noop {} {\emph
-  {\bibinfo {title} {Fluid film lubrication}}},\ \bibinfo {type} {Tech. Rep.}\
-  (\bibinfo  {institution} {John Wiley and Sons, Inc., New York, NY},\ \bibinfo
-  {year} {1980})\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Szeri}(2010)}]{szeri2010fluid}%
+  {\bibinfo {title} {Fluid {{Film Lubrication}}}}}\ (\bibinfo  {publisher}
+  {{John Wiley \& Sons}},\ \bibinfo {address} {{New York}},\ \bibinfo {year}
+  {1980})\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Szeri}(2010)}]{szeriFluidFilmLubrication2010}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.~Z.}\ \bibnamefont
-  {Szeri}},\ }\href@noop {} {\emph {\bibinfo {title} {Fluid film
-  lubrication}}}\ (\bibinfo  {publisher} {Cambridge university press},\
-  \bibinfo {year} {2010})\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {de~Ryck}\ and\ \citenamefont
-  {Quéré}(1998)}]{DERYCK1998278}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.}~\bibnamefont
-  {de~Ryck}}\ and\ \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont
-  {Quéré}},\ }\href {\doibase 10.1006/jcis.1998.5444} {\bibfield  {journal}
-  {\bibinfo  {journal} {J. Colloid Interface Sci.}\ }\textbf {\bibinfo {volume}
-  {203}},\ \bibinfo {pages} {278 } (\bibinfo {year} {1998})}\BibitemShut
-  {NoStop}%
-\bibitem [{\citenamefont {Quéré}(1999)}]{doi:10.1146/annurev.fluid.31.1.347}%
+  {Szeri}},\ }\href {\doibase 10.1017/CBO9780511782022} {\emph {\bibinfo
+  {title} {Fluid {{Film Lubrication}}}}},\ \bibinfo {edition} {2nd}\ ed.\
+  (\bibinfo  {publisher} {{Cambridge University Press}},\ \bibinfo {address}
+  {{Cambridge}},\ \bibinfo {year} {2010})\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Qu{\'e}r{\'e}}(1999)}]{quereFluidCoatingFiber1999}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {D.}~\bibnamefont
-  {Quéré}},\ }\href {\doibase 10.1146/annurev.fluid.31.1.347} {\bibfield
-  {journal} {\bibinfo  {journal} {Annu. Rev. Fluid Mech.}\ }\textbf {\bibinfo
-  {volume} {31}},\ \bibinfo {pages} {347} (\bibinfo {year} {1999})}\BibitemShut
-  {NoStop}%
-\bibitem [{\citenamefont {da~Silva~Sobrinho}\ \emph {et~al.}(1999)\citenamefont
-  {da~Silva~Sobrinho}, \citenamefont {Czeremuszkin}, \citenamefont {Latrèche},
-  \citenamefont {Dennler},\ and\ \citenamefont
-  {Wertheimer}}]{DASILVASOBRINHO19991204}%
+  {Qu{\'e}r{\'e}}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Fluid
+  {{Coating}} on a {{Fiber}}},}\ }\href {\doibase
+  10.1146/annurev.fluid.31.1.347} {\bibfield  {journal} {\bibinfo  {journal}
+  {Annu. Rev. Fluid Mech.}\ }\textbf {\bibinfo {volume} {31}},\ \bibinfo
+  {pages} {347--384} (\bibinfo {year} {1999})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {{da Silva Sobrinho}}\ \emph
+  {et~al.}(1999)\citenamefont {{da Silva Sobrinho}}, \citenamefont
+  {Czeremuszkin}, \citenamefont {Latr{\`e}che}, \citenamefont {Dennler},\ and\
+  \citenamefont {Wertheimer}}]{dasilvasobrinhoStudyDefectsUltrathin1999}%
   \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.}~\bibnamefont
-  {da~Silva~Sobrinho}}, \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.~S.}\ \bibnamefont
+  {{da Silva Sobrinho}}}, \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont
   {Czeremuszkin}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont
-  {Latrèche}}, \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont {Dennler}},
-  \ and\ \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Wertheimer}},\
-  }\href {\doibase 10.1016/S0257-8972(99)00152-8} {\bibfield  {journal}
-  {\bibinfo  {journal} {Surf. Coat. Technol.}\ }\textbf {\bibinfo {volume}
-  {116-119}},\ \bibinfo {pages} {1204 } (\bibinfo {year} {1999})}\BibitemShut
-  {NoStop}%
+  {Latr{\`e}che}}, \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont
+  {Dennler}}, \ and\ \bibinfo {author} {\bibfnamefont {M.~R.}\ \bibnamefont
+  {Wertheimer}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {A study of
+  defects in ultra-thin transparent coatings on polymers},}\ }\href {\doibase
+  10.1016/S0257-8972(99)00152-8} {\bibfield  {journal} {\bibinfo  {journal}
+  {Surface and Coatings Technology}\ }\textbf {\bibinfo {volume} {116--119}},\
+  \bibinfo {pages} {1204--1210} (\bibinfo {year} {1999})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Singh}\ \emph {et~al.}(2010)\citenamefont {Singh},
   \citenamefont {Haverinen}, \citenamefont {Dhagat},\ and\ \citenamefont
-  {Jabbour}}]{singh2010inkjet}%
+  {Jabbour}}]{singhInkjetPrintingProcess2010}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {M.}~\bibnamefont
   {Singh}}, \bibinfo {author} {\bibfnamefont {H.~M.}\ \bibnamefont
   {Haverinen}}, \bibinfo {author} {\bibfnamefont {P.}~\bibnamefont {Dhagat}}, \
   and\ \bibinfo {author} {\bibfnamefont {G.~E.}\ \bibnamefont {Jabbour}},\
-  }\href {\doibase 10.1002/adma.200901141} {\bibfield  {journal} {\bibinfo
-  {journal} {Adv. Mater.}\ }\textbf {\bibinfo {volume} {22}},\ \bibinfo {pages}
-  {673} (\bibinfo {year} {2010})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Jo}\ \emph {et~al.}(2009)\citenamefont {Jo},
-  \citenamefont {Lee}, \citenamefont {Ahn},\ and\ \citenamefont
-  {Lee}}]{jo2009evaluation}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {B.~W.}\ \bibnamefont
-  {Jo}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Lee}}, \bibinfo
-  {author} {\bibfnamefont {K.~H.}\ \bibnamefont {Ahn}}, \ and\ \bibinfo
-  {author} {\bibfnamefont {S.~J.}\ \bibnamefont {Lee}},\ }\href {\doibase
-  10.1007/s11814-009-0057-2} {\bibfield  {journal} {\bibinfo  {journal} {Korean
-  J. Chem. Eng.}\ }\textbf {\bibinfo {volume} {26}},\ \bibinfo {pages} {339}
-  (\bibinfo {year} {2009})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Wijshoff}(2010)}]{Wijshoff2010}%
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Inkjet
+  {{Printing}}\textemdash{{Process}} and {{Its Applications}}},}\ }\href
+  {\doibase 10.1002/adma.200901141} {\bibfield  {journal} {\bibinfo  {journal}
+  {Adv. Mater.}\ }\textbf {\bibinfo {volume} {22}},\ \bibinfo {pages}
+  {673--685} (\bibinfo {year} {2010})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Wijshoff}(2010)}]{wijshoffDynamicsPiezoInkjet2010}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {H.}~\bibnamefont
-  {Wijshoff}},\ }\href {\doibase 10.1016/j.physrep.2010.03.003} {\bibfield
-  {journal} {\bibinfo  {journal} {Phys. Rep.}\ }\textbf {\bibinfo {volume}
-  {491}},\ \bibinfo {pages} {77} (\bibinfo {year} {2010})}\BibitemShut
-  {NoStop}%
+  {Wijshoff}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {The dynamics
+  of the piezo inkjet printhead operation},}\ }\href {\doibase
+  10.1016/j.physrep.2010.03.003} {\bibfield  {journal} {\bibinfo  {journal}
+  {Physics Reports}\ }\textbf {\bibinfo {volume} {491}},\ \bibinfo {pages}
+  {77--177} (\bibinfo {year} {2010})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Samiei}\ \emph {et~al.}(2016)\citenamefont {Samiei},
-  \citenamefont {Tabrizian},\ and\ \citenamefont {Hoorfar}}]{C6LC00387G}%
+  \citenamefont {Tabrizian},\ and\ \citenamefont
+  {Hoorfar}}]{samieiReviewDigitalMicrofluidics2016}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {E.}~\bibnamefont
   {Samiei}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Tabrizian}}, \
-  and\ \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Hoorfar}},\ }\href
+  and\ \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Hoorfar}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {A review of digital
+  microfluidics as portable platforms for lab-on a-chip applications},}\ }\href
   {\doibase 10.1039/C6LC00387G} {\bibfield  {journal} {\bibinfo  {journal} {Lab
-  Chip}\ }\textbf {\bibinfo {volume} {16}},\ \bibinfo {pages} {2376} (\bibinfo
-  {year} {2016})}\BibitemShut {NoStop}%
+  Chip}\ }\textbf {\bibinfo {volume} {16}},\ \bibinfo {pages} {2376--2396}
+  (\bibinfo {year} {2016})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Focke}\ \emph {et~al.}(2010)\citenamefont {Focke},
-  \citenamefont {Kosse}, \citenamefont {M\"uller}, \citenamefont {Reinecke},\
-  and\ \citenamefont {von Stetten}}]{Focke}%
+  \citenamefont {Kosse}, \citenamefont {M{\"u}ller}, \citenamefont {Reinecke},
+  \citenamefont {Zengerle},\ and\ \citenamefont {von
+  Stetten}}]{fockeLabonaFoilMicrofluidicsThin2010}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {M.}~\bibnamefont
   {Focke}}, \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont {Kosse}},
-  \bibinfo {author} {\bibfnamefont {C.}~\bibnamefont {M\"uller}}, \bibinfo
-  {author} {\bibfnamefont {H.}~\bibnamefont {Reinecke}}, \ and\ \bibinfo
-  {author} {\bibfnamefont {F.}~\bibnamefont {von Stetten}},\ }\href {\doibase
-  10.1039/C001195A} {\bibfield  {journal} {\bibinfo  {journal} {Lab Chip}\
-  }\textbf {\bibinfo {volume} {10}},\ \bibinfo {pages} {1365} (\bibinfo {year}
-  {2010})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Kim}\ and\ \citenamefont {Moon}(2005)}]{Kim_2005}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {D.}~\bibnamefont
-  {Kim}}\ and\ \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Moon}},\
-  }\href {\doibase 10.1149/1.2073670} {\bibfield  {journal} {\bibinfo
-  {journal} {Electrochem. Solid-State Lett.}\ }\textbf {\bibinfo {volume}
-  {8}},\ \bibinfo {pages} {J30} (\bibinfo {year} {2005})}\BibitemShut {NoStop}%
+  \bibinfo {author} {\bibfnamefont {C.}~\bibnamefont {M{\"u}ller}}, \bibinfo
+  {author} {\bibfnamefont {H.}~\bibnamefont {Reinecke}}, \bibinfo {author}
+  {\bibfnamefont {R.}~\bibnamefont {Zengerle}}, \ and\ \bibinfo {author}
+  {\bibfnamefont {F.}~\bibnamefont {von Stetten}},\ }\bibfield  {title}
+  {\enquote {\bibinfo {title} {Lab-on-a-{{Foil}}: Microfluidics on thin and
+  flexible films},}\ }\href {\doibase 10.1039/C001195A} {\bibfield  {journal}
+  {\bibinfo  {journal} {Lab Chip}\ }\textbf {\bibinfo {volume} {10}},\ \bibinfo
+  {pages} {1365--1386} (\bibinfo {year} {2010})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Luechinger}\ \emph {et~al.}(2008)\citenamefont
   {Luechinger}, \citenamefont {Athanassiou},\ and\ \citenamefont
-  {Stark}}]{Luechinger_2008}%
+  {Stark}}]{luechingerGraphenestabilizedCopperNanoparticles2008}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {N.~A.}\ \bibnamefont
   {Luechinger}}, \bibinfo {author} {\bibfnamefont {E.~K.}\ \bibnamefont
   {Athanassiou}}, \ and\ \bibinfo {author} {\bibfnamefont {W.~J.}\ \bibnamefont
-  {Stark}},\ }\href {\doibase 10.1088/0957-4484/19/44/445201} {\bibfield
-  {journal} {\bibinfo  {journal} {Nanotechnology}\ }\textbf {\bibinfo {volume}
-  {19}},\ \bibinfo {pages} {445201} (\bibinfo {year} {2008})}\BibitemShut
-  {NoStop}%
-\bibitem [{\citenamefont {Brabec}\ \emph {et~al.}(2001)\citenamefont {Brabec},
-  \citenamefont {Sariciftci},\ and\ \citenamefont {Hummelen}}]{Brabec2001}%
+  {Stark}},\ }\bibfield  {title} {\enquote {\bibinfo {title}
+  {Graphene-stabilized copper nanoparticles as an air-stable substitute for
+  silver and gold in low-cost ink-jet printable electronics},}\ }\href
+  {\doibase 10.1088/0957-4484/19/44/445201} {\bibfield  {journal} {\bibinfo
+  {journal} {Nanotechnology}\ }\textbf {\bibinfo {volume} {19}},\ \bibinfo
+  {pages} {445201} (\bibinfo {year} {2008})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Ronsin}\ and\ \citenamefont
+  {Harting}(2022)}]{ronsinFormationCrystallineBulk2022}%
   \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {C.}~\bibnamefont
-  {Brabec}}, \bibinfo {author} {\bibfnamefont {N.}~\bibnamefont {Sariciftci}},
-  \ and\ \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Hummelen}},\
-  }\href {\doibase 10.1002/1616-3028(200102)11:1<15::AID-ADFM15>3.0.CO;2-A}
-  {\bibfield  {journal} {\bibinfo  {journal} {Adv. Funct. Mater.}\ }\textbf
-  {\bibinfo {volume} {11}},\ \bibinfo {pages} {15} (\bibinfo {year}
-  {2001})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Ronsin}\ and\ \citenamefont {Harting}(2020)}]{RH20}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {O.}~\bibnamefont
-  {Ronsin}}\ and\ \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont
-  {Harting}},\ }\href {\doibase 10.1002/ente.201901468} {\bibfield  {journal}
-  {\bibinfo  {journal} {Energy Technol.}\ }\textbf {\bibinfo {volume} {2020}},\
-  \bibinfo {pages} {1901468} (\bibinfo {year} {2020})}\BibitemShut {NoStop}%
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {O.~J.~J.}\
+  \bibnamefont {Ronsin}}\ and\ \bibinfo {author} {\bibfnamefont
+  {J.}~\bibnamefont {Harting}},\ }\bibfield  {title} {\enquote {\bibinfo
+  {title} {Formation of {{Crystalline Bulk Heterojunctions}} in {{Organic Solar
+  Cells}}: {{Insights}} from {{Phase-Field Simulations}}},}\ }\href {\doibase
+  10.1021/acsami.2c14319} {\bibfield  {journal} {\bibinfo  {journal} {ACS Appl.
+  Mater. Interfaces}\ }\textbf {\bibinfo {volume} {14}},\ \bibinfo {pages}
+  {49785--49800} (\bibinfo {year} {2022})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Butt}\ \emph {et~al.}(2018)\citenamefont {Butt},
-  \citenamefont {Berger}, \citenamefont {Steffen}, \citenamefont {Voller},\
-  and\ \citenamefont {Weber}}]{ButtEtAl_Langmuir2018}%
+  \citenamefont {Berger}, \citenamefont {Steffen}, \citenamefont {Vollmer},\
+  and\ \citenamefont {Weber}}]{buttAdaptiveWettingAdaptation2018}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {H.-J.}\ \bibnamefont
   {Butt}}, \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont {Berger}},
   \bibinfo {author} {\bibfnamefont {W.}~\bibnamefont {Steffen}}, \bibinfo
-  {author} {\bibfnamefont {D.}~\bibnamefont {Voller}}, \ and\ \bibinfo {author}
-  {\bibfnamefont {S.}~\bibnamefont {Weber}},\ }\href {\doibase
+  {author} {\bibfnamefont {D.}~\bibnamefont {Vollmer}}, \ and\ \bibinfo
+  {author} {\bibfnamefont {S.~A.~L.}\ \bibnamefont {Weber}},\ }\bibfield
+  {title} {\enquote {\bibinfo {title} {Adaptive
+  {{Wetting}}\textemdash{{Adaptation}} in {{Wetting}}},}\ }\href {\doibase
   10.1021/acs.langmuir.8b01783} {\bibfield  {journal} {\bibinfo  {journal}
-  {Langmuir}\ }\textbf {\bibinfo {volume} {34}},\ \bibinfo {pages} {11292}
-  (\bibinfo {year} {2018})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Guo}\ and\ \citenamefont
-  {Guo}(2016)}]{GuoGuo_RSCAdv2016}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {F.}~\bibnamefont
-  {Guo}}\ and\ \bibinfo {author} {\bibfnamefont {Z.}~\bibnamefont {Guo}},\
-  }\href {\doibase 10.1039/C6RA04079A} {\bibfield  {journal} {\bibinfo
-  {journal} {RSC Adv.}\ }\textbf {\bibinfo {volume} {6}},\ \bibinfo {pages}
-  {36623} (\bibinfo {year} {2016})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Liu}\ \emph {et~al.}(2005)\citenamefont {Liu},
-  \citenamefont {Mu}, \citenamefont {Liu},\ and\ \citenamefont
-  {Kong}}]{LiuChem2005}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont
-  {Liu}}, \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont {Mu}}, \bibinfo
-  {author} {\bibfnamefont {B.}~\bibnamefont {Liu}}, \ and\ \bibinfo {author}
-  {\bibfnamefont {J.}~\bibnamefont {Kong}},\ }\href {\doibase
-  10.1002/chem.200400931} {\bibfield  {journal} {\bibinfo  {journal} {Chem.
-  Eur. J.}\ }\textbf {\bibinfo {volume} {11}},\ \bibinfo {pages} {2622}
-  (\bibinfo {year} {2005})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Xin}\ and\ \citenamefont {Hao}(2010)}]{XiCSR2010}%
+  {Langmuir}\ }\textbf {\bibinfo {volume} {34}},\ \bibinfo {pages}
+  {11292--11304} (\bibinfo {year} {2018})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Xin}\ and\ \citenamefont
+  {Hao}(2010)}]{xinReversiblySwitchableWettability2010}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {B.}~\bibnamefont
   {Xin}}\ and\ \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Hao}},\
-  }\href {\doibase 10.1039/b913622c} {\bibfield  {journal} {\bibinfo  {journal}
-  {Chem. Soc. Rev.}\ }\textbf {\bibinfo {volume} {39}},\ \bibinfo {pages} {769}
-  (\bibinfo {year} {2010})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Cohen~Stuart}\ \emph {et~al.}(2010)\citenamefont
-  {Cohen~Stuart}, \citenamefont {Huck}, \citenamefont {Genzer}, \citenamefont
-  {M\"uller}, \citenamefont {Ober}, \citenamefont {Stamm}, \citenamefont
-  {Sukhorukov}, \citenamefont {Szleifer}, \citenamefont {Tsukruk},
-  \citenamefont {Urban}, \citenamefont {Winnik}, \citenamefont {Zauscher},
-  \citenamefont {Luzinov},\ and\ \citenamefont
-  {Minko}}]{CohenStuartEtAl_NatMat2010}%
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Reversibly switchable
+  wettability},}\ }\href {\doibase 10.1039/B913622C} {\bibfield  {journal}
+  {\bibinfo  {journal} {Chem. Soc. Rev.}\ }\textbf {\bibinfo {volume} {39}},\
+  \bibinfo {pages} {769--782} (\bibinfo {year} {2010})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Stuart}\ \emph {et~al.}(2010)\citenamefont {Stuart},
+  \citenamefont {Huck}, \citenamefont {Genzer}, \citenamefont {M{\"u}ller},
+  \citenamefont {Ober}, \citenamefont {Stamm}, \citenamefont {Sukhorukov},
+  \citenamefont {Szleifer}, \citenamefont {Tsukruk}, \citenamefont {Urban},
+  \citenamefont {Winnik}, \citenamefont {Zauscher}, \citenamefont {Luzinov},\
+  and\ \citenamefont
+  {Minko}}]{stuartEmergingApplicationsStimuliresponsive2010}%
   \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {M.}~\bibnamefont
-  {Cohen~Stuart}}, \bibinfo {author} {\bibfnamefont {W.}~\bibnamefont {Huck}},
-  \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Genzer}}, \bibinfo
-  {author} {\bibfnamefont {M.}~\bibnamefont {M\"uller}}, \bibinfo {author}
-  {\bibfnamefont {C.}~\bibnamefont {Ober}}, \bibinfo {author} {\bibfnamefont
-  {M.}~\bibnamefont {Stamm}}, \bibinfo {author} {\bibfnamefont
-  {G.}~\bibnamefont {Sukhorukov}}, \bibinfo {author} {\bibfnamefont
-  {I.}~\bibnamefont {Szleifer}}, \bibinfo {author} {\bibfnamefont
-  {V.}~\bibnamefont {Tsukruk}}, \bibinfo {author} {\bibfnamefont
-  {M.}~\bibnamefont {Urban}}, \bibinfo {author} {\bibfnamefont
-  {F.}~\bibnamefont {Winnik}}, \bibinfo {author} {\bibfnamefont
-  {S.}~\bibnamefont {Zauscher}}, \bibinfo {author} {\bibfnamefont
-  {I.}~\bibnamefont {Luzinov}}, \ and\ \bibinfo {author} {\bibfnamefont
-  {S.}~\bibnamefont {Minko}},\ }\href {\doibase 10.1038/nmat2614} {\bibfield
-  {journal} {\bibinfo  {journal} {Nat. Mater.}\ }\textbf {\bibinfo {volume}
-  {9}},\ \bibinfo {pages} {101} (\bibinfo {year} {2010})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Ayres}\ \emph {et~al.}(2007)\citenamefont {Ayres},
-  \citenamefont {Boyes},\ and\ \citenamefont {Brittain}}]{ayres2007stimuli}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {N.}~\bibnamefont
-  {Ayres}}, \bibinfo {author} {\bibfnamefont {S.~G.}\ \bibnamefont {Boyes}}, \
-  and\ \bibinfo {author} {\bibfnamefont {W.~J.}\ \bibnamefont {Brittain}},\
-  }\href {\doibase 10.1021/la061526l} {\bibfield  {journal} {\bibinfo
-  {journal} {Langmuir}\ }\textbf {\bibinfo {volume} {23}},\ \bibinfo {pages}
-  {182} (\bibinfo {year} {2007})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Yong}\ \emph {et~al.}(2018)\citenamefont {Yong},
-  \citenamefont {Rauch}, \citenamefont {Eichhorn}, \citenamefont {Uhlmann},
-  \citenamefont {Fery},\ and\ \citenamefont {Sommer}}]{YongEtAl_Mat2018}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {H.}~\bibnamefont
-  {Yong}}, \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Rauch}},
-  \bibinfo {author} {\bibfnamefont {K.-J.}\ \bibnamefont {Eichhorn}}, \bibinfo
-  {author} {\bibfnamefont {P.}~\bibnamefont {Uhlmann}}, \bibinfo {author}
-  {\bibfnamefont {A.}~\bibnamefont {Fery}}, \ and\ \bibinfo {author}
-  {\bibfnamefont {J.-U.}\ \bibnamefont {Sommer}},\ }\href {\doibase
-  10.3390/ma11060991} {\bibfield  {journal} {\bibinfo  {journal} {Materials}\
-  }\textbf {\bibinfo {volume} {11}},\ \bibinfo {pages} {911} (\bibinfo {year}
-  {2018})}\BibitemShut {NoStop}%
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {M.~A.~C.}\
+  \bibnamefont {Stuart}}, \bibinfo {author} {\bibfnamefont {W.~T.~S.}\
+  \bibnamefont {Huck}}, \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont
+  {Genzer}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {M{\"u}ller}},
+  \bibinfo {author} {\bibfnamefont {C.}~\bibnamefont {Ober}}, \bibinfo {author}
+  {\bibfnamefont {M.}~\bibnamefont {Stamm}}, \bibinfo {author} {\bibfnamefont
+  {G.~B.}\ \bibnamefont {Sukhorukov}}, \bibinfo {author} {\bibfnamefont
+  {I.}~\bibnamefont {Szleifer}}, \bibinfo {author} {\bibfnamefont {V.~V.}\
+  \bibnamefont {Tsukruk}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont
+  {Urban}}, \bibinfo {author} {\bibfnamefont {F.}~\bibnamefont {Winnik}},
+  \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Zauscher}}, \bibinfo
+  {author} {\bibfnamefont {I.}~\bibnamefont {Luzinov}}, \ and\ \bibinfo
+  {author} {\bibfnamefont {S.}~\bibnamefont {Minko}},\ }\bibfield  {title}
+  {\enquote {\bibinfo {title} {Emerging applications of stimuli-responsive
+  polymer materials},}\ }\href {\doibase 10.1038/nmat2614} {\bibfield
+  {journal} {\bibinfo  {journal} {Nature Mater}\ }\textbf {\bibinfo {volume}
+  {9}},\ \bibinfo {pages} {101--113} (\bibinfo {year} {2010})}\BibitemShut
+  {NoStop}%
 \bibitem [{\citenamefont {Chen}\ \emph {et~al.}(2010)\citenamefont {Chen},
   \citenamefont {Liu}, \citenamefont {Lin}, \citenamefont {Zhang},
-  \citenamefont {Ma}, \citenamefont {Songa},\ and\ \citenamefont
-  {Jiang}}]{ChenEtAl_SM2010}%
+  \citenamefont {Ma}, \citenamefont {Song},\ and\ \citenamefont
+  {Jiang}}]{chenThermalresponsiveHydrogelSurface2010}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {L.}~\bibnamefont
   {Chen}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Liu}}, \bibinfo
   {author} {\bibfnamefont {L.}~\bibnamefont {Lin}}, \bibinfo {author}
   {\bibfnamefont {T.}~\bibnamefont {Zhang}}, \bibinfo {author} {\bibfnamefont
   {J.}~\bibnamefont {Ma}}, \bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont
-  {Songa}}, \ and\ \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont
-  {Jiang}},\ }\href {\doibase 10.1039/C002543G} {\bibfield  {journal} {\bibinfo
-   {journal} {Soft Matter}\ }\textbf {\bibinfo {volume} {6}},\ \bibinfo {pages}
-  {2708} (\bibinfo {year} {2010})}\BibitemShut {NoStop}%
+  {Song}}, \ and\ \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont {Jiang}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Thermal-responsive hydrogel
+  surface: Tunable wettability and adhesion to oil at the water/solid
+  interface},}\ }\href {\doibase 10.1039/C002543G} {\bibfield  {journal}
+  {\bibinfo  {journal} {Soft Matter}\ }\textbf {\bibinfo {volume} {6}},\
+  \bibinfo {pages} {2708--2712} (\bibinfo {year} {2010})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Ichimura}\ \emph {et~al.}(2000)\citenamefont
   {Ichimura}, \citenamefont {Oh},\ and\ \citenamefont
-  {Nakagawa}}]{IchimuraEtAl_Science2000}%
+  {Nakagawa}}]{ichimuraLightDrivenMotionLiquids2000}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {K.}~\bibnamefont
   {Ichimura}}, \bibinfo {author} {\bibfnamefont {S.-K.}\ \bibnamefont {Oh}}, \
-  and\ \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Nakagawa}},\ }\href
-  {\doibase 10.1126/science.288.5471.1624} {\bibfield  {journal} {\bibinfo
-  {journal} {Science}\ }\textbf {\bibinfo {volume} {288}},\ \bibinfo {pages}
-  {1624} (\bibinfo {year} {2000})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Delorme}\ \emph {et~al.}(2005)\citenamefont
-  {Delorme}, \citenamefont {Bardeau}, \citenamefont {Bulou},\ and\
-  \citenamefont {Poncin-Epaillard}}]{DelormeEtAl_Langmuir2005}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {N.}~\bibnamefont
-  {Delorme}}, \bibinfo {author} {\bibfnamefont {J.-F.}\ \bibnamefont
-  {Bardeau}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Bulou}}, \
-  and\ \bibinfo {author} {\bibfnamefont {F.}~\bibnamefont {Poncin-Epaillard}},\
-  }\href {\doibase 10.1021/la051517x} {\bibfield  {journal} {\bibinfo
-  {journal} {Langmuir}\ }\textbf {\bibinfo {volume} {21}},\ \bibinfo {pages}
-  {12278–12282} (\bibinfo {year} {2005})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Oscurato}\ \emph {et~al.}(2017)\citenamefont
-  {Oscurato}, \citenamefont {Borbone}, \citenamefont {Maddalena},\ and\
-  \citenamefont {Ambrosio}}]{OscuratoEtAl_AAMI2017}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
-  {Oscurato}}, \bibinfo {author} {\bibfnamefont {F.}~\bibnamefont {Borbone}},
-  \bibinfo {author} {\bibfnamefont {P.}~\bibnamefont {Maddalena}}, \ and\
-  \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Ambrosio}},\ }\href
-  {\doibase 10.1021/acsami.7b08025} {\bibfield  {journal} {\bibinfo  {journal}
-  {ACS Appl. Mater. Interfaces}\ }\textbf {\bibinfo {volume} {9}},\ \bibinfo
-  {pages} {30133} (\bibinfo {year} {2017})}\BibitemShut {NoStop}%
+  and\ \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Nakagawa}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Light-{{Driven Motion}} of
+  {{Liquids}} on a {{Photoresponsive Surface}}},}\ }\href {\doibase
+  10.1126/science.288.5471.1624} {\bibfield  {journal} {\bibinfo  {journal}
+  {Science}\ }\textbf {\bibinfo {volume} {288}},\ \bibinfo {pages} {1624--1626}
+  (\bibinfo {year} {2000})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Mugele}\ \emph {et~al.}(2005)\citenamefont {Mugele},
   \citenamefont {Klingner}, \citenamefont {Buehrle}, \citenamefont
-  {Steinhauser},\ and\ \citenamefont {Herminghaus}}]{MugeleEtAl_JPCM2005}%
+  {Steinhauser},\ and\ \citenamefont
+  {Herminghaus}}]{mugeleElectrowettingConvenientWay2005}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {F.}~\bibnamefont
   {Mugele}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Klingner}},
   \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Buehrle}}, \bibinfo
   {author} {\bibfnamefont {D.}~\bibnamefont {Steinhauser}}, \ and\ \bibinfo
-  {author} {\bibfnamefont {S.}~\bibnamefont {Herminghaus}},\ }\href {\doibase
+  {author} {\bibfnamefont {S.}~\bibnamefont {Herminghaus}},\ }\bibfield
+  {title} {\enquote {\bibinfo {title} {Electrowetting: A convenient way to
+  switchable wettability patterns},}\ }\href {\doibase
   10.1088/0953-8984/17/9/016} {\bibfield  {journal} {\bibinfo  {journal} {J.
   Phys.: Condens. Matter}\ }\textbf {\bibinfo {volume} {17}},\ \bibinfo {pages}
   {S559} (\bibinfo {year} {2005})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Grawitter}\ and\ \citenamefont
-  {Stark}(2021{\natexlab{a}})}]{GrawitterStark1}%
+  {Stark}(2021{\natexlab{a}})}]{grawitterSteeringDropletsSubstrates2021}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.}~\bibnamefont
   {Grawitter}}\ and\ \bibinfo {author} {\bibfnamefont {H.}~\bibnamefont
-  {Stark}},\ }\href {\doibase 10.1039/D0SM02082F} {\bibfield  {journal}
-  {\bibinfo  {journal} {Soft Matter}\ }\textbf {\bibinfo {volume} {17}},\
-  \bibinfo {pages} {2454} (\bibinfo {year} {2021}{\natexlab{a}})}\BibitemShut
-  {NoStop}%
+  {Stark}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Steering droplets
+  on substrates using moving steps in wettability},}\ }\href {\doibase
+  10.1039/D0SM02082F} {\bibfield  {journal} {\bibinfo  {journal} {Soft Matter}\
+  }\textbf {\bibinfo {volume} {17}},\ \bibinfo {pages} {2454--2467} (\bibinfo
+  {year} {2021}{\natexlab{a}})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Grawitter}\ and\ \citenamefont
-  {Stark}(2021{\natexlab{b}})}]{GrawitterStark2}%
+  {Stark}(2021{\natexlab{b}})}]{grawitterDropletsSubstratesOscillating2021}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.}~\bibnamefont
   {Grawitter}}\ and\ \bibinfo {author} {\bibfnamefont {H.}~\bibnamefont
-  {Stark}},\ }\href {\doibase 10.1039/D0SM02082F} {\bibfield  {journal}
-  {\bibinfo  {journal} {Soft Matter}\ }\textbf {\bibinfo {volume} {17}},\
-  \bibinfo {pages} {9469} (\bibinfo {year} {2021}{\natexlab{b}})}\BibitemShut
-  {NoStop}%
+  {Stark}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Droplets on
+  substrates with oscillating wettability},}\ }\href {\doibase
+  10.1039/D1SM01113H} {\bibfield  {journal} {\bibinfo  {journal} {Soft Matter}\
+  }\textbf {\bibinfo {volume} {17}},\ \bibinfo {pages} {9469--9479} (\bibinfo
+  {year} {2021}{\natexlab{b}})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Thiele}\ and\ \citenamefont
-  {Hartmann}(2020)}]{ThieleHartmann}%
+  {Hartmann}(2020)}]{thieleGradientDynamicsModel2020}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {U.}~\bibnamefont
   {Thiele}}\ and\ \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
-  {Hartmann}},\ }\href {\doibase 10.1140/epjst/e2020-900231-2} {\bibfield
-  {journal} {\bibinfo  {journal} {Eur. Phys. J. Special Topics}\ }\textbf
-  {\bibinfo {volume} {229}},\ \bibinfo {pages} {1819} (\bibinfo {year}
-  {2020})}\BibitemShut {NoStop}%
+  {Hartmann}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Gradient
+  dynamics model for drops spreading on polymer brushes},}\ }\href {\doibase
+  10.1140/epjst/e2020-900231-2} {\bibfield  {journal} {\bibinfo  {journal}
+  {Eur. Phys. J. Spec. Top.}\ }\textbf {\bibinfo {volume} {229}},\ \bibinfo
+  {pages} {1819--1832} (\bibinfo {year} {2020})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Suman}\ and\ \citenamefont
-  {Kumar}(2006)}]{suman2006dynamics}%
+  {Kumar}(2006)}]{sumanDynamicsThinLiquid2006}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {B.}~\bibnamefont
   {Suman}}\ and\ \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Kumar}},\
-  }\href {\doibase 10.1016/j.jcis.2006.08.061} {\bibfield  {journal} {\bibinfo
-  {journal} {J. Colloid Interface Sci.}\ }\textbf {\bibinfo {volume} {304}},\
-  \bibinfo {pages} {208} (\bibinfo {year} {2006})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Reynolds}(1886)}]{ReynoldsLubr}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {O.}~\bibnamefont
-  {Reynolds}},\ }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal}
-  {Philos. Trans. R. Soc. London}\ }\textbf {\bibinfo {volume} {177}},\
-  \bibinfo {pages} {157} (\bibinfo {year} {1886})}\BibitemShut {NoStop}%
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Dynamics of thin liquid
+  films on surfaces with a time-periodic wettability},}\ }\href {\doibase
+  10.1016/j.jcis.2006.08.061} {\bibfield  {journal} {\bibinfo  {journal}
+  {Journal of Colloid and Interface Science}\ }\textbf {\bibinfo {volume}
+  {304}},\ \bibinfo {pages} {208--213} (\bibinfo {year} {2006})}\BibitemShut
+  {NoStop}%
 \bibitem [{\citenamefont {Oron}\ \emph {et~al.}(1997)\citenamefont {Oron},
-  \citenamefont {Davis},\ and\ \citenamefont {Bankoff}}]{RevModPhys.69.931}%
+  \citenamefont {Davis},\ and\ \citenamefont
+  {Bankoff}}]{oronLongscaleEvolutionThin1997}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.}~\bibnamefont
   {Oron}}, \bibinfo {author} {\bibfnamefont {S.~H.}\ \bibnamefont {Davis}}, \
   and\ \bibinfo {author} {\bibfnamefont {S.~G.}\ \bibnamefont {Bankoff}},\
-  }\href {\doibase 10.1103/RevModPhys.69.931} {\bibfield  {journal} {\bibinfo
-  {journal} {Rev. Mod. Phys.}\ }\textbf {\bibinfo {volume} {69}},\ \bibinfo
-  {pages} {931} (\bibinfo {year} {1997})}\BibitemShut {NoStop}%
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Long-scale evolution of thin
+  liquid films},}\ }\href {\doibase 10.1103/RevModPhys.69.931} {\bibfield
+  {journal} {\bibinfo  {journal} {Rev. Mod. Phys.}\ }\textbf {\bibinfo {volume}
+  {69}},\ \bibinfo {pages} {931--980} (\bibinfo {year} {1997})}\BibitemShut
+  {NoStop}%
 \bibitem [{\citenamefont {Craster}\ and\ \citenamefont
-  {Matar}(2009)}]{RevModPhys.81.1131}%
+  {Matar}(2009)}]{crasterDynamicsStabilityThin2009}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.~V.}\ \bibnamefont
   {Craster}}\ and\ \bibinfo {author} {\bibfnamefont {O.~K.}\ \bibnamefont
-  {Matar}},\ }\href {\doibase 10.1103/RevModPhys.81.1131} {\bibfield  {journal}
-  {\bibinfo  {journal} {Rev. Mod. Phys.}\ }\textbf {\bibinfo {volume} {81}},\
-  \bibinfo {pages} {1131} (\bibinfo {year} {2009})}\BibitemShut {NoStop}%
+  {Matar}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Dynamics and
+  stability of thin liquid films},}\ }\href {\doibase
+  10.1103/RevModPhys.81.1131} {\bibfield  {journal} {\bibinfo  {journal} {Rev.
+  Mod. Phys.}\ }\textbf {\bibinfo {volume} {81}},\ \bibinfo {pages}
+  {1131--1198} (\bibinfo {year} {2009})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Zitz}\ \emph {et~al.}(2019)\citenamefont {Zitz},
   \citenamefont {Scagliarini}, \citenamefont {Maddu}, \citenamefont
   {Darhuber},\ and\ \citenamefont {Harting}}]{PhysRevE.100.033313}%
@@ -392,122 +329,186 @@
   {Zitz}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Scagliarini}},
   \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Maddu}}, \bibinfo
   {author} {\bibfnamefont {A.~A.}\ \bibnamefont {Darhuber}}, \ and\ \bibinfo
-  {author} {\bibfnamefont {J.}~\bibnamefont {Harting}},\ }\href {\doibase
+  {author} {\bibfnamefont {J.}~\bibnamefont {Harting}},\ }\bibfield  {title}
+  {\enquote {\bibinfo {title} {Lattice {{Boltzmann}} method for
+  thin-liquid-film hydrodynamics},}\ }\href {\doibase
   10.1103/PhysRevE.100.033313} {\bibfield  {journal} {\bibinfo  {journal}
   {Phys. Rev. E}\ }\textbf {\bibinfo {volume} {100}},\ \bibinfo {pages}
   {033313} (\bibinfo {year} {2019})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Zitz}\ \emph {et~al.}(2021)\citenamefont {Zitz},
   \citenamefont {Scagliarini},\ and\ \citenamefont
-  {Harting}}]{PhysRevE.104.034801}%
+  {Harting}}]{zitzLatticeBoltzmannSimulations2021}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
   {Zitz}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Scagliarini}}, \
-  and\ \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Harting}},\ }\href
-  {\doibase 10.1103/PhysRevE.104.034801} {\bibfield  {journal} {\bibinfo
-  {journal} {Phys. Rev. E}\ }\textbf {\bibinfo {volume} {104}},\ \bibinfo
-  {pages} {034801} (\bibinfo {year} {2021})}\BibitemShut {NoStop}%
+  and\ \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Harting}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Lattice {{Boltzmann}}
+  simulations of stochastic thin film dewetting},}\ }\href {\doibase
+  10.1103/PhysRevE.104.034801} {\bibfield  {journal} {\bibinfo  {journal}
+  {Phys. Rev. E}\ }\textbf {\bibinfo {volume} {104}},\ \bibinfo {pages}
+  {034801} (\bibinfo {year} {2021})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Zitz}\ \emph {et~al.}(2022)\citenamefont {Zitz},
+  \citenamefont {Zellh{\"o}fer}, \citenamefont {Scagliarini},\ and\
+  \citenamefont {Harting}}]{zitzSwalbeJlLattice2022a}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
+  {Zitz}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Zellh{\"o}fer}},
+  \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Scagliarini}}, \ and\
+  \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Harting}},\ }\bibfield
+  {title} {\enquote {\bibinfo {title} {Swalbe.jl: {{A}} lattice {{Boltzmann}}
+  solver for thin film hydrodynamics},}\ }\href {\doibase 10.21105/joss.04312}
+  {\bibfield  {journal} {\bibinfo  {journal} {J. Open Source Softw.}\ }\textbf
+  {\bibinfo {volume} {7}},\ \bibinfo {pages} {4312} (\bibinfo {year}
+  {2022})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Bonn}\ \emph {et~al.}(2009)\citenamefont {Bonn},
   \citenamefont {Eggers}, \citenamefont {Indekeu}, \citenamefont {Meunier},\
-  and\ \citenamefont {Rolley}}]{RevModPhys.81.739}%
+  and\ \citenamefont {Rolley}}]{bonnWettingSpreading2009}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {D.}~\bibnamefont
   {Bonn}}, \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Eggers}},
   \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Indekeu}}, \bibinfo
   {author} {\bibfnamefont {J.}~\bibnamefont {Meunier}}, \ and\ \bibinfo
-  {author} {\bibfnamefont {E.}~\bibnamefont {Rolley}},\ }\href {\doibase
+  {author} {\bibfnamefont {E.}~\bibnamefont {Rolley}},\ }\bibfield  {title}
+  {\enquote {\bibinfo {title} {Wetting and spreading},}\ }\href {\doibase
   10.1103/RevModPhys.81.739} {\bibfield  {journal} {\bibinfo  {journal} {Rev.
-  Mod. Phys.}\ }\textbf {\bibinfo {volume} {81}},\ \bibinfo {pages} {739}
+  Mod. Phys.}\ }\textbf {\bibinfo {volume} {81}},\ \bibinfo {pages} {739--805}
   (\bibinfo {year} {2009})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Schwartz}\ and\ \citenamefont
-  {Eley}(1998)}]{SCHWARTZ1998173}%
+  {Eley}(1998)}]{schwartzSimulationDropletMotion1998}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {L.~W.}\ \bibnamefont
   {Schwartz}}\ and\ \bibinfo {author} {\bibfnamefont {R.~R.}\ \bibnamefont
-  {Eley}},\ }\href {\doibase https://doi.org/10.1006/jcis.1998.5448} {\bibfield
-   {journal} {\bibinfo  {journal} {J. Colloid Interface Sci.}\ }\textbf
-  {\bibinfo {volume} {202}},\ \bibinfo {pages} {173} (\bibinfo {year}
+  {Eley}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Simulation of
+  {{Droplet Motion}} on {{Low-Energy}} and {{Heterogeneous Surfaces}}},}\
+  }\href {\doibase 10.1006/jcis.1998.5448} {\bibfield  {journal} {\bibinfo
+  {journal} {Journal of Colloid and Interface Science}\ }\textbf {\bibinfo
+  {volume} {202}},\ \bibinfo {pages} {173--188} (\bibinfo {year}
   {1998})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Zitz}\ \emph {et~al.}(2023)\citenamefont {Zitz},
+  \citenamefont {Scagliarini},\ and\ \citenamefont {Harting}}]{SuppMat}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
+  {Zitz}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Scagliarini}}, \
+  and\ \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Harting}},\
+  }\href@noop {} {\bibfield  {journal} {\bibinfo  {journal} {Supplemental
+  Material}\ } (\bibinfo {year} {2023})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Jalali}\ \emph {et~al.}(2018)\citenamefont {Jalali},
+  \citenamefont {White}, \citenamefont {Marti},\ and\ \citenamefont
+  {Sheng}}]{jalaliFabricationCharacterizationScalable2018}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {M.}~\bibnamefont
+  {Jalali}}, \bibinfo {author} {\bibfnamefont {A.~R.}\ \bibnamefont {White}},
+  \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Marti}}, \ and\ \bibinfo
+  {author} {\bibfnamefont {J.}~\bibnamefont {Sheng}},\ }\bibfield  {title}
+  {\enquote {\bibinfo {title} {Fabrication and characterization of a scalable
+  surface textured with pico-liter oil drops for mechanistic studies of
+  bacteria-oil interactions},}\ }\href {\doibase 10.1038/s41598-018-25812-y}
+  {\bibfield  {journal} {\bibinfo  {journal} {Sci Rep}\ }\textbf {\bibinfo
+  {volume} {8}},\ \bibinfo {pages} {7612} (\bibinfo {year} {2018})}\BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {Nagayama}\ and\ \citenamefont
+  {Zhang}(2020)}]{nagayamaIntermediateWettingState2020}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {G.}~\bibnamefont
+  {Nagayama}}\ and\ \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont
+  {Zhang}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Intermediate
+  wetting state at nano/microstructured surfaces},}\ }\href {\doibase
+  10.1039/C9SM02513H} {\bibfield  {journal} {\bibinfo  {journal} {Soft Matter}\
+  }\textbf {\bibinfo {volume} {16}},\ \bibinfo {pages} {3514--3521} (\bibinfo
+  {year} {2020})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Das}\ \emph {et~al.}(2020)\citenamefont {Das},
+  \citenamefont {Jaiswal},\ and\ \citenamefont
+  {Puri}}]{dasSurfacedirectedSpinodalDecomposition2020}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {P.}~\bibnamefont
+  {Das}}, \bibinfo {author} {\bibfnamefont {P.~K.}\ \bibnamefont {Jaiswal}}, \
+  and\ \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Puri}},\ }\bibfield
+  {title} {\enquote {\bibinfo {title} {Surface-directed spinodal decomposition
+  on chemically patterned substrates},}\ }\href {\doibase
+  10.1103/PhysRevE.102.012803} {\bibfield  {journal} {\bibinfo  {journal}
+  {Phys. Rev. E}\ }\textbf {\bibinfo {volume} {102}},\ \bibinfo {pages}
+  {012803} (\bibinfo {year} {2020})}\BibitemShut {NoStop}%
 \bibitem [{Note1()}]{Note1}%
   \BibitemOpen
-  \bibinfo {note} {Notice that, since a typical velocity is such that
-  $v_{\theta } \Delta t \ll \Delta x$ (in one LB time step $\Delta t$ the wave
-  would travel a distance much smaller than a lattice spacing $\Delta x$), the
-  time update needs to be interpreted in an integer part sense, that is the
-  pattern is shifted by one $\Delta x$ every $1/v_{\theta x}$ time steps (and
-  equivalently in the $y$-direction).}\BibitemShut {Stop}%
+  \bibinfo {note} {Since a typical velocity is such that $v_{\theta } \Delta t
+  \ll \Delta x$ (in one time step $\Delta t$ the wave would travel a distance
+  much smaller than a lattice spacing $\Delta x$), the time update needs to be
+  interpreted in an integer part sense, that is the pattern is shifted by
+  $\Delta x$ every $1/v_{\theta x}$ $\Delta t$ (equivalently in
+  $y$-direction).}\BibitemShut {Stop}%
 \bibitem [{\citenamefont {Mecke}\ and\ \citenamefont
-  {Rauscher}(2005)}]{Mecke_2005}%
+  {Rauscher}(2005)}]{meckeThermalFluctuationsThin2005}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {K.}~\bibnamefont
   {Mecke}}\ and\ \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont
-  {Rauscher}},\ }\href {\doibase 10.1088/0953-8984/17/45/042} {\bibfield
-  {journal} {\bibinfo  {journal} {J. Phys. Condens. Matter}\ }\textbf {\bibinfo
-  {volume} {17}},\ \bibinfo {pages} {S3515} (\bibinfo {year}
-  {2005})}\BibitemShut {NoStop}%
+  {Rauscher}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {On thermal
+  fluctuations in thin film flow},}\ }\href {\doibase
+  10.1088/0953-8984/17/45/042} {\bibfield  {journal} {\bibinfo  {journal} {J.
+  Phys.: Condens. Matter}\ }\textbf {\bibinfo {volume} {17}},\ \bibinfo {pages}
+  {S3515} (\bibinfo {year} {2005})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Zhang}\ \emph {et~al.}(2019)\citenamefont {Zhang},
   \citenamefont {Sprittles},\ and\ \citenamefont
-  {Lockerby}}]{PhysRevE.100.023108}%
+  {Lockerby}}]{zhangMolecularSimulationThin2019}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont
   {Zhang}}, \bibinfo {author} {\bibfnamefont {J.~E.}\ \bibnamefont
   {Sprittles}}, \ and\ \bibinfo {author} {\bibfnamefont {D.~A.}\ \bibnamefont
-  {Lockerby}},\ }\href {\doibase 10.1103/PhysRevE.100.023108} {\bibfield
-  {journal} {\bibinfo  {journal} {Phys. Rev. E}\ }\textbf {\bibinfo {volume}
-  {100}},\ \bibinfo {pages} {023108} (\bibinfo {year} {2019})}\BibitemShut
-  {NoStop}%
-\bibitem [{\citenamefont {Huh}\ and\ \citenamefont
-  {Scriven}(1971)}]{huh1971hydrodynamic}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {C.}~\bibnamefont
-  {Huh}}\ and\ \bibinfo {author} {\bibfnamefont {L.~E.}\ \bibnamefont
-  {Scriven}},\ }\href {\doibase https://doi.org/10.1016/0021-9797(71)90188-3}
-  {\bibfield  {journal} {\bibinfo  {journal} {J. Colloid Interface Sci.}\
-  }\textbf {\bibinfo {volume} {35}},\ \bibinfo {pages} {85} (\bibinfo {year}
-  {1971})}\BibitemShut {NoStop}%
+  {Lockerby}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Molecular
+  simulation of thin liquid films: {{Thermal}} fluctuations and instability},}\
+  }\href {\doibase 10.1103/PhysRevE.100.023108} {\bibfield  {journal} {\bibinfo
+   {journal} {Phys. Rev. E}\ }\textbf {\bibinfo {volume} {100}},\ \bibinfo
+  {pages} {023108} (\bibinfo {year} {2019})}\BibitemShut {NoStop}%
 \bibitem [{Note2()}]{Note2}%
   \BibitemOpen
-  \bibinfo {note} {For a better visualization we take twice the domain length
-  $L$ and periodically continue the image.}\BibitemShut {Stop}%
+  \bibinfo {note} {For a better visualization double the domain length $L$ and
+  periodically continue the image.}\BibitemShut {Stop}%
 \bibitem [{\citenamefont {Edwards}\ \emph {et~al.}(2016)\citenamefont
-  {Edwards}, \citenamefont {Ledesma-Aguilar}, \citenamefont {Newton},
-  \citenamefont {Brown},\ and\ \citenamefont {McHale}}]{Edwardse1600183}%
+  {Edwards}, \citenamefont {{Ledesma-Aguilar}}, \citenamefont {Newton},
+  \citenamefont {Brown},\ and\ \citenamefont
+  {McHale}}]{edwardsNotSpreadingReverse2016a}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.~M.~J.}\
   \bibnamefont {Edwards}}, \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
-  {Ledesma-Aguilar}}, \bibinfo {author} {\bibfnamefont {M.~I.}\ \bibnamefont
+  {{Ledesma-Aguilar}}}, \bibinfo {author} {\bibfnamefont {M.~I.}\ \bibnamefont
   {Newton}}, \bibinfo {author} {\bibfnamefont {C.~V.}\ \bibnamefont {Brown}}, \
-  and\ \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont {McHale}},\ }\href
-  {\doibase 10.1126/sciadv.1600183} {\bibfield  {journal} {\bibinfo  {journal}
-  {Sci. Adv.}\ }\textbf {\bibinfo {volume} {2}},\ \bibinfo {pages} {e1600183}
+  and\ \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont {McHale}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Not spreading in reverse:
+  {{The}} dewetting of a liquid film into a single drop},}\ }\href {\doibase
+  10.1126/sciadv.1600183} {\bibfield  {journal} {\bibinfo  {journal} {Sci.
+  Adv.}\ }\textbf {\bibinfo {volume} {2}},\ \bibinfo {pages} {e1600183}
   (\bibinfo {year} {2016})}\BibitemShut {NoStop}%
 \bibitem [{Note3()}]{Note3}%
   \BibitemOpen
   \bibinfo {note} {A droplet is identified by the set (``cluster'') of points,
   in the plane, constituting each of the connected components of the set
   $\{\protect \mathbf {x} \in [0,L]^2 | h(\protect \mathbf {x},t) \geq h_{\ast
-  }$\}; the clusters are determined by means of an algorithm of Hoshen-Kopelman
-  type~\cite {HK}.}\BibitemShut {Stop}%
+  }$\}.}\BibitemShut {Stop}%
 \bibitem [{\citenamefont {Mickel}\ \emph {et~al.}(2013)\citenamefont {Mickel},
-  \citenamefont {Kapfer}, \citenamefont {Schröder-Turk},\ and\ \citenamefont
-  {Mecke}}]{doi:10.1063/1.4774084}%
+  \citenamefont {Kapfer}, \citenamefont {{Schr{\"o}der-Turk}},\ and\
+  \citenamefont {Mecke}}]{mickelShortcomingsBondOrientational2013}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {W.}~\bibnamefont
   {Mickel}}, \bibinfo {author} {\bibfnamefont {S.~C.}\ \bibnamefont {Kapfer}},
-  \bibinfo {author} {\bibfnamefont {G.~E.}\ \bibnamefont {Schröder-Turk}}, \
-  and\ \bibinfo {author} {\bibfnamefont {K.}~\bibnamefont {Mecke}},\ }\href
-  {\doibase 10.1063/1.4774084} {\bibfield  {journal} {\bibinfo  {journal} {J.
-  Chem. Phys.}\ }\textbf {\bibinfo {volume} {138}},\ \bibinfo {pages} {044501}
-  (\bibinfo {year} {2013})}\BibitemShut {NoStop}%
+  \bibinfo {author} {\bibfnamefont {G.~E.}\ \bibnamefont
+  {{Schr{\"o}der-Turk}}}, \ and\ \bibinfo {author} {\bibfnamefont
+  {K.}~\bibnamefont {Mecke}},\ }\bibfield  {title} {\enquote {\bibinfo {title}
+  {Shortcomings of the bond orientational order parameters for the analysis of
+  disordered particulate matter},}\ }\href {\doibase 10.1063/1.4774084}
+  {\bibfield  {journal} {\bibinfo  {journal} {The Journal of Chemical Physics}\
+  }\textbf {\bibinfo {volume} {138}},\ \bibinfo {pages} {044501} (\bibinfo
+  {year} {2013})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Schaller}\ \emph {et~al.}(2020)\citenamefont
   {Schaller}, \citenamefont {Wagner},\ and\ \citenamefont
-  {Kapfer}}]{Schaller2020}%
+  {Kapfer}}]{schallerPapaya22DIrreducible2020}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {F.~M.}\ \bibnamefont
   {Schaller}}, \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Wagner}}, \
   and\ \bibinfo {author} {\bibfnamefont {S.~C.}\ \bibnamefont {Kapfer}},\
-  }\href {\doibase 10.21105/joss.02538} {\bibfield  {journal} {\bibinfo
-  {journal} {JOSS}\ }\textbf {\bibinfo {volume} {5}},\ \bibinfo {pages} {2538}
-  (\bibinfo {year} {2020})}\BibitemShut {NoStop}%
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Papaya2: {{2D Irreducible
+  Minkowski Tensor}} computation},}\ }\href {\doibase 10.21105/joss.02538}
+  {\bibfield  {journal} {\bibinfo  {journal} {J. Open Source Softw.}\ }\textbf
+  {\bibinfo {volume} {5}},\ \bibinfo {pages} {2538} (\bibinfo {year}
+  {2020})}\BibitemShut {NoStop}%
 \bibitem [{Note4()}]{Note4}%
   \BibitemOpen
   \bibinfo {note} {The expression is: $q_2 = \protect \frac {1}{N}\DOTSB \sum@
@@ -518,31 +519,90 @@
   represents an ensemble average over the $N$ points in the set.}\BibitemShut
   {Stop}%
 \bibitem [{\citenamefont {Diez}\ \emph {et~al.}(2009)\citenamefont {Diez},
-  \citenamefont {González},\ and\ \citenamefont
-  {Kondic}}]{doi:10.1063/1.3211248}%
+  \citenamefont {Gonz{\'a}lez},\ and\ \citenamefont
+  {Kondic}}]{diezBreakupFluidRivulets2009a}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.~A.}\ \bibnamefont
-  {Diez}}, \bibinfo {author} {\bibfnamefont {A.~G.}\ \bibnamefont {González}},
-  \ and\ \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont {Kondic}},\ }\href
-  {\doibase 10.1063/1.3211248} {\bibfield  {journal} {\bibinfo  {journal}
-  {Phys. Fluids}\ }\textbf {\bibinfo {volume} {21}},\ \bibinfo {pages} {082105}
-  (\bibinfo {year} {2009})}\BibitemShut {NoStop}%
+  {Diez}}, \bibinfo {author} {\bibfnamefont {A.~G.}\ \bibnamefont
+  {Gonz{\'a}lez}}, \ and\ \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont
+  {Kondic}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {On the breakup
+  of fluid rivulets},}\ }\href {\doibase 10.1063/1.3211248} {\bibfield
+  {journal} {\bibinfo  {journal} {Physics of Fluids}\ }\textbf {\bibinfo
+  {volume} {21}},\ \bibinfo {pages} {082105} (\bibinfo {year}
+  {2009})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Mechkov}\ \emph {et~al.}(2008)\citenamefont
   {Mechkov}, \citenamefont {Rauscher},\ and\ \citenamefont
-  {Dietrich}}]{PhysRevE.77.061605}%
+  {Dietrich}}]{mechkovStabilityLiquidRidges2008}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
   {Mechkov}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Rauscher}}, \
-  and\ \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Dietrich}},\ }\href
-  {\doibase 10.1103/PhysRevE.77.061605} {\bibfield  {journal} {\bibinfo
-  {journal} {Phys. Rev. E}\ }\textbf {\bibinfo {volume} {77}},\ \bibinfo
-  {pages} {061605} (\bibinfo {year} {2008})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Hoshen}\ and\ \citenamefont {Kopelman}(1976)}]{HK}%
+  and\ \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Dietrich}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Stability of liquid ridges
+  on chemical micro- and nanostripes},}\ }\href {\doibase
+  10.1103/PhysRevE.77.061605} {\bibfield  {journal} {\bibinfo  {journal} {Phys.
+  Rev. E}\ }\textbf {\bibinfo {volume} {77}},\ \bibinfo {pages} {061605}
+  (\bibinfo {year} {2008})}\BibitemShut {NoStop}%
+\bibitem [{Note5()}]{Note5}%
+  \BibitemOpen
+  \bibinfo {note} {See movie ligament\protect \_formation\protect \_and\protect
+  \_breakup.mp4 in~\cite {SuppMat}.}\BibitemShut {Stop}%
+\bibitem [{\citenamefont {Vieyra~Salas}\ \emph {et~al.}(2012)\citenamefont
+  {Vieyra~Salas}, \citenamefont {{van der Veen}}, \citenamefont {Michels},\
+  and\ \citenamefont {Darhuber}}]{vieyrasalasActiveControlEvaporative2012}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.~A.}\ \bibnamefont
+  {Vieyra~Salas}}, \bibinfo {author} {\bibfnamefont {J.~M.}\ \bibnamefont {{van
+  der Veen}}}, \bibinfo {author} {\bibfnamefont {J.~J.}\ \bibnamefont
+  {Michels}}, \ and\ \bibinfo {author} {\bibfnamefont {A.~A.}\ \bibnamefont
+  {Darhuber}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Active
+  {{Control}} of {{Evaporative Solution Deposition}} by {{Modulated Infrared
+  Illumination}}},}\ }\href {\doibase 10.1021/jp301092y} {\bibfield  {journal}
+  {\bibinfo  {journal} {J. Phys. Chem. C}\ }\textbf {\bibinfo {volume} {116}},\
+  \bibinfo {pages} {12038--12047} (\bibinfo {year} {2012})}\BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {Saha}\ \emph {et~al.}(2019)\citenamefont {Saha},
+  \citenamefont {Wang}, \citenamefont {Nguyen}, \citenamefont {Chang},
+  \citenamefont {Oakdale},\ and\ \citenamefont
+  {Chen}}]{sahaScalableSubmicrometerAdditive2019}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.~K.}\ \bibnamefont
+  {Saha}}, \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont {Wang}}, \bibinfo
+  {author} {\bibfnamefont {V.~H.}\ \bibnamefont {Nguyen}}, \bibinfo {author}
+  {\bibfnamefont {Y.}~\bibnamefont {Chang}}, \bibinfo {author} {\bibfnamefont
+  {J.~S.}\ \bibnamefont {Oakdale}}, \ and\ \bibinfo {author} {\bibfnamefont
+  {S.-C.}\ \bibnamefont {Chen}},\ }\bibfield  {title} {\enquote {\bibinfo
+  {title} {Scalable submicrometer additive manufacturing},}\ }\href {\doibase
+  10.1126/science.aax8760} {\bibfield  {journal} {\bibinfo  {journal}
+  {Science}\ }\textbf {\bibinfo {volume} {366}},\ \bibinfo {pages} {105--109}
+  (\bibinfo {year} {2019})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Becker}\ \emph {et~al.}(2003)\citenamefont {Becker},
+  \citenamefont {Gr{\"u}n}, \citenamefont {Seemann}, \citenamefont {Mantz},
+  \citenamefont {Jacobs}, \citenamefont {Mecke},\ and\ \citenamefont
+  {Blossey}}]{beckerComplexDewettingScenarios2003}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.}~\bibnamefont
-  {Hoshen}}\ and\ \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
-  {Kopelman}},\ }\href {\doibase 10.1103/PhysRevB.14.3438} {\bibfield
-  {journal} {\bibinfo  {journal} {Phys. Rev. B}\ }\textbf {\bibinfo {volume}
-  {14}},\ \bibinfo {pages} {3438} (\bibinfo {year} {1976})}\BibitemShut
-  {NoStop}%
+  {Becker}}, \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont {Gr{\"u}n}},
+  \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont {Seemann}}, \bibinfo
+  {author} {\bibfnamefont {H.}~\bibnamefont {Mantz}}, \bibinfo {author}
+  {\bibfnamefont {K.}~\bibnamefont {Jacobs}}, \bibinfo {author} {\bibfnamefont
+  {K.~R.}\ \bibnamefont {Mecke}}, \ and\ \bibinfo {author} {\bibfnamefont
+  {R.}~\bibnamefont {Blossey}},\ }\bibfield  {title} {\enquote {\bibinfo
+  {title} {Complex dewetting scenarios captured by thin-film models},}\ }\href
+  {\doibase 10.1038/nmat788} {\bibfield  {journal} {\bibinfo  {journal} {Nature
+  Mater}\ }\textbf {\bibinfo {volume} {2}},\ \bibinfo {pages} {59--63}
+  (\bibinfo {year} {2003})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Fetzer}\ \emph {et~al.}(2007)\citenamefont {Fetzer},
+  \citenamefont {Rauscher}, \citenamefont {Seemann}, \citenamefont {Jacobs},\
+  and\ \citenamefont {Mecke}}]{fetzerThermalNoiseInfluences2007}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
+  {Fetzer}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Rauscher}},
+  \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont {Seemann}}, \bibinfo
+  {author} {\bibfnamefont {K.}~\bibnamefont {Jacobs}}, \ and\ \bibinfo {author}
+  {\bibfnamefont {K.}~\bibnamefont {Mecke}},\ }\bibfield  {title} {\enquote
+  {\bibinfo {title} {Thermal {{Noise Influences Fluid Flow}} in {{Thin Films}}
+  during {{Spinodal Dewetting}}},}\ }\href {\doibase
+  10.1103/PhysRevLett.99.114503} {\bibfield  {journal} {\bibinfo  {journal}
+  {Phys. Rev. Lett.}\ }\textbf {\bibinfo {volume} {99}},\ \bibinfo {pages}
+  {114503} (\bibinfo {year} {2007})}\BibitemShut {NoStop}%
 \end{thebibliography}%

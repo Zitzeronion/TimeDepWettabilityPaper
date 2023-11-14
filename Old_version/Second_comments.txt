@@ -8,11 +8,33 @@ excited about the findings, so I think that the manuscript would be
 better suited for a more specialized journal, like Physical Review E.
 The reason for this recommendation is that I can see what the
 patterned substrate does, in the sense that the wavelength competes
-with that of dewetting. That droplets can mode in a wettability
+with that of dewetting. That droplets can mode (move?) in a wettability
 gradient has also been clear for a long time. I am wondering what is
 there to be gained by combining these ideas, and I find the rationale
 of the manuscript to be not extremely compelling. In my view, this
 would be needed for PRL. I am sorry that I cannot be more positive.
+
+ANSWERS: We thank the Referee for taking his/her time to read our 
+manuscript once more and his/her subjective opinion. It is good to read 
+that he/she thinks that our research is valid and that he/she finds the 
+manuscript compelling to some extent. 
+We would like to stress once more that 
+the main focus of the paper is not dewetting or droplet movement in a {\it stationary} wettability gradient, but dewetting 
+morphologies over a {\it switchable substrate}, i.e. whose wettability pattern 
+is {\it time-dependent}, whence the title 'Controlling dewetting morphologies of 
+thin liquid films by switchable substrates'.
+In this context we have discovered a new morphological transition which we have fully characterized 
+and theoretically interpreted in terms of the control parameter $\Gamma$.
+This said, even in the static pattern case, although the dewetting problem was previously studied, we 
+reported for the first time, together with a theoretical explanation, the absolutely non-trivial dependence of the rupture times on the pattern wavelength.
+Let us remark again that a precise control of the liquid-vapour interface during a dynamic process is a highly desired feature for many applications. We did show that the liquid-vapour 
+interface even after dewetting can be increased significantly due to
+the discussed morphological transition. 
+More in general wetting, dewetting and the dynamics of droplets on complex substrates 
+are state-of-the-art topics of interest to a broad audience, both in experimental and 
+theoretical fluid physics. 
+We also believe that a deeper understanding of the dynamics of thin liquid films on switchable 
+substrates, which this paper contributes to, is essential to push forward the current reach of microfluidic technology.
 
 ----------------------------------------------------------------------
 Second Report of Referee B -- LM17723/Zitz
@@ -48,7 +70,6 @@ especially when it comes to the initial growth of the instability. It is, on the
 hand, reasonable to expect, as the Referee remarks, that in terms of the dewetting 
 morphology (and its relation to the time-dependence of the substrate) the phenomenology
 should not be particularly affected, at least qualitatively.
-
 
 ----------------------------------------------------------------------
 Report of Referee D -- LM17723/Zitz
