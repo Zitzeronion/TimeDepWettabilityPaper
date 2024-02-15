@@ -1,0 +1,316 @@
+%merlin.mbs apsrev4-1.bst 2010-07-25 4.21a (PWD, AO, DPC) hacked
+%Control: key (0)
+%Control: author (0) dotless jnrlst
+%Control: editor formatted (1) identically to author
+%Control: production of article title (0) allowed
+%Control: page (1) range
+%Control: year (0) verbatim
+%Control: production of eprint (0) enabled
+\begin{thebibliography}{23}%
+\makeatletter
+\providecommand \@ifxundefined [1]{%
+ \@ifx{#1\undefined}
+}%
+\providecommand \@ifnum [1]{%
+ \ifnum #1\expandafter \@firstoftwo
+ \else \expandafter \@secondoftwo
+ \fi
+}%
+\providecommand \@ifx [1]{%
+ \ifx #1\expandafter \@firstoftwo
+ \else \expandafter \@secondoftwo
+ \fi
+}%
+\providecommand \natexlab [1]{#1}%
+\providecommand \enquote  [1]{``#1''}%
+\providecommand \bibnamefont  [1]{#1}%
+\providecommand \bibfnamefont [1]{#1}%
+\providecommand \citenamefont [1]{#1}%
+\providecommand \href@noop [0]{\@secondoftwo}%
+\providecommand \href [0]{\begingroup \@sanitize@url \@href}%
+\providecommand \@href[1]{\@@startlink{#1}\@@href}%
+\providecommand \@@href[1]{\endgroup#1\@@endlink}%
+\providecommand \@sanitize@url [0]{\catcode `\\12\catcode `\$12\catcode
+  `\&12\catcode `\#12\catcode `\^12\catcode `\_12\catcode `\%12\relax}%
+\providecommand \@@startlink[1]{}%
+\providecommand \@@endlink[0]{}%
+\providecommand \url  [0]{\begingroup\@sanitize@url \@url }%
+\providecommand \@url [1]{\endgroup\@href {#1}{\urlprefix }}%
+\providecommand \urlprefix  [0]{URL }%
+\providecommand \Eprint [0]{\href }%
+\providecommand \doibase [0]{http://dx.doi.org/}%
+\providecommand \selectlanguage [0]{\@gobble}%
+\providecommand \bibinfo  [0]{\@secondoftwo}%
+\providecommand \bibfield  [0]{\@secondoftwo}%
+\providecommand \translation [1]{[#1]}%
+\providecommand \BibitemOpen [0]{}%
+\providecommand \bibitemStop [0]{}%
+\providecommand \bibitemNoStop [0]{.\EOS\space}%
+\providecommand \EOS [0]{\spacefactor3000\relax}%
+\providecommand \BibitemShut  [1]{\csname bibitem#1\endcsname}%
+\let\auto@bib@innerbib\@empty
+%</preamble>
+\bibitem [{\citenamefont {Deryaguin}(1940)}]{Deryaguin1940}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {B.V.}\ \bibnamefont
+  {Deryaguin}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Theory of
+  capillary condensation and related capillary effects. calculation of
+  spreading action of polymolecular liquid films.}}\ }\href@noop {} {\bibfield
+  {journal} {\bibinfo  {journal} {Zhurn. Fiz. Khim.}\ }\textbf {\bibinfo
+  {volume} {14}},\ \bibinfo {pages} {137} (\bibinfo {year} {1940})}\BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {Deryaguin}\ and\ \citenamefont
+  {Churaev}(1978)}]{DeryaguinChuraev1978}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {B.V.}\ \bibnamefont
+  {Deryaguin}}\ and\ \bibinfo {author} {\bibfnamefont {N.V.}\ \bibnamefont
+  {Churaev}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {On the question
+  of determining the concept of disjoining pressure and its role in the
+  equilibrium and flow of thin films},}\ }\href@noop {} {\bibfield  {journal}
+  {\bibinfo  {journal} {J. Colloid Interface Sci.}\ }\textbf {\bibinfo {volume}
+  {66}},\ \bibinfo {pages} {389--398} (\bibinfo {year} {1978})}\BibitemShut
+  {NoStop}%
+\bibitem [{\citenamefont {Young}(1805)}]{youngIIIEssayCohesion1805}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {T.}~\bibnamefont
+  {Young}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {{{III}}. {{An}}
+  essay on the cohesion of fluids},}\ }\href {\doibase 10.1098/rstl.1805.0005}
+  {\bibfield  {journal} {\bibinfo  {journal} {Philos. Trans. R. Soc. Lond.}\
+  }\textbf {\bibinfo {volume} {95}},\ \bibinfo {pages} {65--87} (\bibinfo
+  {year} {1805})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {{de
+  Gennes}}(1985)}]{degennesWettingStaticsDynamics1985}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {P.~G.}\ \bibnamefont
+  {{de Gennes}}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Wetting:
+  Statics and dynamics},}\ }\href {\doibase 10.1103/RevModPhys.57.827}
+  {\bibfield  {journal} {\bibinfo  {journal} {Rev. Mod. Phys.}\ }\textbf
+  {\bibinfo {volume} {57}},\ \bibinfo {pages} {827--863} (\bibinfo {year}
+  {1985})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Schwartz}\ and\ \citenamefont
+  {Eley}(1998)}]{schwartzSimulationDropletMotion1998}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {L.~W.}\ \bibnamefont
+  {Schwartz}}\ and\ \bibinfo {author} {\bibfnamefont {R.~R.}\ \bibnamefont
+  {Eley}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Simulation of
+  {{Droplet Motion}} on {{Low-Energy}} and {{Heterogeneous Surfaces}}},}\
+  }\href {\doibase 10.1006/jcis.1998.5448} {\bibfield  {journal} {\bibinfo
+  {journal} {Journal of Colloid and Interface Science}\ }\textbf {\bibinfo
+  {volume} {202}},\ \bibinfo {pages} {173--188} (\bibinfo {year}
+  {1998})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Mitlin}(1993)}]{mitlinDewettingSolidSurface1993}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Vladimir~S.}\
+  \bibnamefont {Mitlin}},\ }\bibfield  {title} {\enquote {\bibinfo {title}
+  {Dewetting of {{Solid Surface}}: {{Analogy}} with {{Spinodal
+  Decomposition}}},}\ }\href {\doibase 10.1006/jcis.1993.1142} {\bibfield
+  {journal} {\bibinfo  {journal} {J. Colloid Interface Sci.}\ }\textbf
+  {\bibinfo {volume} {156}},\ \bibinfo {pages} {491--497} (\bibinfo {year}
+  {1993})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Teletzke}\ \emph {et~al.}(1987)\citenamefont
+  {Teletzke}, \citenamefont {Davis},\ and\ \citenamefont
+  {Scriven}}]{teletzkeHowLiquidsSpread1987}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {G.~F.}\ \bibnamefont
+  {Teletzke}}, \bibinfo {author} {\bibfnamefont {H.~T.}\ \bibnamefont {Davis}},
+  \ and\ \bibinfo {author} {\bibfnamefont {L.E.}\ \bibnamefont {Scriven}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {How {{Liquids Spread}} on
+  {{Solids}}},}\ }\href {\doibase 10.1080/00986448708911919} {\bibfield
+  {journal} {\bibinfo  {journal} {Chem. Eng. Commun.}\ }\textbf {\bibinfo
+  {volume} {55}},\ \bibinfo {pages} {41--82} (\bibinfo {year}
+  {1987})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Zitz}\ \emph {et~al.}(2021)\citenamefont {Zitz},
+  \citenamefont {Scagliarini},\ and\ \citenamefont
+  {Harting}}]{zitzLatticeBoltzmannSimulations2021}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
+  {Zitz}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Scagliarini}}, \
+  and\ \bibinfo {author} {\bibfnamefont {J.}~\bibnamefont {Harting}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Lattice {{Boltzmann}}
+  simulations of stochastic thin film dewetting},}\ }\href {\doibase
+  10.1103/PhysRevE.104.034801} {\bibfield  {journal} {\bibinfo  {journal}
+  {Phys. Rev. E}\ }\textbf {\bibinfo {volume} {104}},\ \bibinfo {pages}
+  {034801} (\bibinfo {year} {2021})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Becker}\ \emph {et~al.}(2003)\citenamefont {Becker},
+  \citenamefont {Gr{\"u}n}, \citenamefont {Seemann}, \citenamefont {Mantz},
+  \citenamefont {Jacobs}, \citenamefont {Mecke},\ and\ \citenamefont
+  {Blossey}}]{beckerComplexDewettingScenarios2003}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {J.}~\bibnamefont
+  {Becker}}, \bibinfo {author} {\bibfnamefont {G.}~\bibnamefont {Gr{\"u}n}},
+  \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont {Seemann}}, \bibinfo
+  {author} {\bibfnamefont {H.}~\bibnamefont {Mantz}}, \bibinfo {author}
+  {\bibfnamefont {K.}~\bibnamefont {Jacobs}}, \bibinfo {author} {\bibfnamefont
+  {K.~R.}\ \bibnamefont {Mecke}}, \ and\ \bibinfo {author} {\bibfnamefont
+  {R.}~\bibnamefont {Blossey}},\ }\bibfield  {title} {\enquote {\bibinfo
+  {title} {Complex dewetting scenarios captured by thin-film models},}\ }\href
+  {\doibase 10.1038/nmat788} {\bibfield  {journal} {\bibinfo  {journal} {Nature
+  Mater}\ }\textbf {\bibinfo {volume} {2}},\ \bibinfo {pages} {59--63}
+  (\bibinfo {year} {2003})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Mecke}\ and\ \citenamefont
+  {Rauscher}(2005)}]{meckeThermalFluctuationsThin2005}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {K.}~\bibnamefont
+  {Mecke}}\ and\ \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont
+  {Rauscher}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {On thermal
+  fluctuations in thin film flow},}\ }\href {\doibase
+  10.1088/0953-8984/17/45/042} {\bibfield  {journal} {\bibinfo  {journal} {J.
+  Phys.: Condens. Matter}\ }\textbf {\bibinfo {volume} {17}},\ \bibinfo {pages}
+  {S3515} (\bibinfo {year} {2005})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Fetzer}\ \emph
+  {et~al.}(2007{\natexlab{a}})\citenamefont {Fetzer}, \citenamefont {Rauscher},
+  \citenamefont {Seemann}, \citenamefont {Jacobs},\ and\ \citenamefont
+  {Mecke}}]{fetzerThermalNoiseInfluences2007}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
+  {Fetzer}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont {Rauscher}},
+  \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont {Seemann}}, \bibinfo
+  {author} {\bibfnamefont {K.}~\bibnamefont {Jacobs}}, \ and\ \bibinfo {author}
+  {\bibfnamefont {K.}~\bibnamefont {Mecke}},\ }\bibfield  {title} {\enquote
+  {\bibinfo {title} {Thermal {{Noise Influences Fluid Flow}} in {{Thin Films}}
+  during {{Spinodal Dewetting}}},}\ }\href {\doibase
+  10.1103/PhysRevLett.99.114503} {\bibfield  {journal} {\bibinfo  {journal}
+  {Phys. Rev. Lett.}\ }\textbf {\bibinfo {volume} {99}},\ \bibinfo {pages}
+  {114503} (\bibinfo {year} {2007}{\natexlab{a}})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Huh}\ and\ \citenamefont
+  {Scriven}(1971)}]{huhHydrodynamicModelSteady1971}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {C.}~\bibnamefont
+  {Huh}}\ and\ \bibinfo {author} {\bibfnamefont {L.~E}\ \bibnamefont
+  {Scriven}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Hydrodynamic
+  model of steady movement of a solid/liquid/fluid contact line},}\ }\href
+  {\doibase 10.1016/0021-9797(71)90188-3} {\bibfield  {journal} {\bibinfo
+  {journal} {J. Colloid Interface Sci.}\ }\textbf {\bibinfo {volume} {35}},\
+  \bibinfo {pages} {85--101} (\bibinfo {year} {1971})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Peschka}\ \emph {et~al.}(2019)\citenamefont
+  {Peschka}, \citenamefont {Haefner}, \citenamefont {Marquant}, \citenamefont
+  {Jacobs}, \citenamefont {M{\"u}nch},\ and\ \citenamefont
+  {Wagner}}]{peschkaSignaturesSlipDewetting2019}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {D.}~\bibnamefont
+  {Peschka}}, \bibinfo {author} {\bibfnamefont {S.}~\bibnamefont {Haefner}},
+  \bibinfo {author} {\bibfnamefont {L.}~\bibnamefont {Marquant}}, \bibinfo
+  {author} {\bibfnamefont {K.}~\bibnamefont {Jacobs}}, \bibinfo {author}
+  {\bibfnamefont {A.}~\bibnamefont {M{\"u}nch}}, \ and\ \bibinfo {author}
+  {\bibfnamefont {B.}~\bibnamefont {Wagner}},\ }\bibfield  {title} {\enquote
+  {\bibinfo {title} {Signatures of slip in dewetting polymer films},}\ }\href
+  {\doibase 10.1073/pnas.1820487116} {\bibfield  {journal} {\bibinfo  {journal}
+  {Proc. Natl. Acad. Sci.}\ }\textbf {\bibinfo {volume} {116}},\ \bibinfo
+  {pages} {9275--9284} (\bibinfo {year} {2019})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Fetzer}\ \emph
+  {et~al.}(2007{\natexlab{b}})\citenamefont {Fetzer}, \citenamefont
+  {M{\"u}nch}, \citenamefont {Wagner}, \citenamefont {Rauscher},\ and\
+  \citenamefont {Jacobs}}]{fetzerQuantifyingHydrodynamicSlip2007}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
+  {Fetzer}}, \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {M{\"u}nch}},
+  \bibinfo {author} {\bibfnamefont {B.}~\bibnamefont {Wagner}}, \bibinfo
+  {author} {\bibfnamefont {M.}~\bibnamefont {Rauscher}}, \ and\ \bibinfo
+  {author} {\bibfnamefont {K.}~\bibnamefont {Jacobs}},\ }\bibfield  {title}
+  {\enquote {\bibinfo {title} {Quantifying {{Hydrodynamic Slip}}:\, {{A
+  Comprehensive Analysis}} of {{Dewetting Profiles}}},}\ }\href {\doibase
+  10.1021/la7010698} {\bibfield  {journal} {\bibinfo  {journal} {Langmuir}\
+  }\textbf {\bibinfo {volume} {23}},\ \bibinfo {pages} {10559--10566} (\bibinfo
+  {year} {2007}{\natexlab{b}})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {M{\"u}nch}\ \emph {et~al.}(2005)\citenamefont
+  {M{\"u}nch}, \citenamefont {Wagner},\ and\ \citenamefont
+  {Witelski}}]{munchLubricationModelsSmall2005a}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.}~\bibnamefont
+  {M{\"u}nch}}, \bibinfo {author} {\bibfnamefont {B.~A.}\ \bibnamefont
+  {Wagner}}, \ and\ \bibinfo {author} {\bibfnamefont {T.~P.}\ \bibnamefont
+  {Witelski}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Lubrication
+  {{Models}} with {{Small}} to {{Large Slip Lengths}}},}\ }\href {\doibase
+  10.1007/s10665-005-9020-3} {\bibfield  {journal} {\bibinfo  {journal} {J.
+  Eng. Math.}\ }\textbf {\bibinfo {volume} {53}},\ \bibinfo {pages} {359--383}
+  (\bibinfo {year} {2005})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Kargupta}\ and\ \citenamefont
+  {Sharma}(2002)}]{karguptaMorphologicalSelforganizationDewetting2002}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {K.}~\bibnamefont
+  {Kargupta}}\ and\ \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont
+  {Sharma}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Morphological
+  self-organization by dewetting in thin films on chemically patterned
+  substrates},}\ }\href {\doibase 10.1063/1.1434949} {\bibfield  {journal}
+  {\bibinfo  {journal} {J. Chem. Phys.}\ }\textbf {\bibinfo {volume} {116}},\
+  \bibinfo {pages} {3042--3051} (\bibinfo {year} {2002})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Kargupta}\ \emph {et~al.}(2000)\citenamefont
+  {Kargupta}, \citenamefont {Konnur},\ and\ \citenamefont
+  {Sharma}}]{karguptaInstabilityPatternFormation2000}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {K.}~\bibnamefont
+  {Kargupta}}, \bibinfo {author} {\bibfnamefont {R.}~\bibnamefont {Konnur}}, \
+  and\ \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Sharma}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Instability and {{Pattern
+  Formation}} in {{Thin Liquid Films}} on {{Chemically Heterogeneous
+  Substrates}}},}\ }\href {\doibase 10.1021/la000759o} {\bibfield  {journal}
+  {\bibinfo  {journal} {Langmuir}\ }\textbf {\bibinfo {volume} {16}},\ \bibinfo
+  {pages} {10243--10253} (\bibinfo {year} {2000})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Nisato}\ \emph {et~al.}(1999)\citenamefont {Nisato},
+  \citenamefont {Ermi}, \citenamefont {Douglas},\ and\ \citenamefont
+  {Karim}}]{nisatoExcitationSurfaceDeformation1999}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {G.}~\bibnamefont
+  {Nisato}}, \bibinfo {author} {\bibfnamefont {B.~D.}\ \bibnamefont {Ermi}},
+  \bibinfo {author} {\bibfnamefont {J.~F.}\ \bibnamefont {Douglas}}, \ and\
+  \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Karim}},\ }\bibfield
+  {title} {\enquote {\bibinfo {title} {Excitation of {{Surface Deformation
+  Modes}} of a {{Phase-Separating Polymer Blend}} on a {{Patterned
+  Substrate}}},}\ }\href {\doibase 10.1021/ma981546x} {\bibfield  {journal}
+  {\bibinfo  {journal} {Macromolecules}\ }\textbf {\bibinfo {volume} {32}},\
+  \bibinfo {pages} {2356--2364} (\bibinfo {year} {1999})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Karim}\ \emph {et~al.}(1998)\citenamefont {Karim},
+  \citenamefont {Douglas}, \citenamefont {Lee}, \citenamefont {Glotzer},
+  \citenamefont {Rogers}, \citenamefont {Jackman}, \citenamefont {Amis},\ and\
+  \citenamefont {Whitesides}}]{karimPhaseSeparationUltrathin1998}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {A.}~\bibnamefont
+  {Karim}}, \bibinfo {author} {\bibfnamefont {J.~F.}\ \bibnamefont {Douglas}},
+  \bibinfo {author} {\bibfnamefont {B.~P.}\ \bibnamefont {Lee}}, \bibinfo
+  {author} {\bibfnamefont {S.~C.}\ \bibnamefont {Glotzer}}, \bibinfo {author}
+  {\bibfnamefont {J.~A.}\ \bibnamefont {Rogers}}, \bibinfo {author}
+  {\bibfnamefont {R.~J.}\ \bibnamefont {Jackman}}, \bibinfo {author}
+  {\bibfnamefont {E.~J.}\ \bibnamefont {Amis}}, \ and\ \bibinfo {author}
+  {\bibfnamefont {G.~M.}\ \bibnamefont {Whitesides}},\ }\bibfield  {title}
+  {\enquote {\bibinfo {title} {Phase separation of ultrathin polymer-blend
+  films on patterned substrates},}\ }\href {\doibase 10.1103/PhysRevE.57.R6273}
+  {\bibfield  {journal} {\bibinfo  {journal} {Phys. Rev. E}\ }\textbf {\bibinfo
+  {volume} {57}},\ \bibinfo {pages} {R6273--R6276} (\bibinfo {year}
+  {1998})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Succi}(2001)}]{succiLatticeBoltzmannEquation2001}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {S.}~\bibnamefont
+  {Succi}},\ }\href@noop {} {\emph {\bibinfo {title} {The {{Lattice Boltzmann
+  Equation}}: {{For Fluid Dynamics}} and {{Beyond}}}}}\ (\bibinfo  {publisher}
+  {{Clarendon Press}},\ \bibinfo {year} {2001})\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Konnur}\ \emph {et~al.}(2000)\citenamefont {Konnur},
+  \citenamefont {Kargupta},\ and\ \citenamefont
+  {Sharma}}]{konnurInstabilityMorphologyThin2000}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {R.}~\bibnamefont
+  {Konnur}}, \bibinfo {author} {\bibfnamefont {K.}~\bibnamefont {Kargupta}}, \
+  and\ \bibinfo {author} {\bibfnamefont {A.}~\bibnamefont {Sharma}},\
+  }\bibfield  {title} {\enquote {\bibinfo {title} {Instability and
+  {{Morphology}} of {{Thin Liquid Films}} on {{Chemically Heterogeneous
+  Substrates}}},}\ }\href {\doibase 10.1103/PhysRevLett.84.931} {\bibfield
+  {journal} {\bibinfo  {journal} {Phys. Rev. Lett.}\ }\textbf {\bibinfo
+  {volume} {84}},\ \bibinfo {pages} {931--934} (\bibinfo {year}
+  {2000})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Wu}\ \emph {et~al.}(2020)\citenamefont {Wu},
+  \citenamefont {Wang}, \citenamefont {Ma}, \citenamefont {Selzer},\ and\
+  \citenamefont {Nestler}}]{wuHowChemicalPatterns2020}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Y.}~\bibnamefont
+  {Wu}}, \bibinfo {author} {\bibfnamefont {F.}~\bibnamefont {Wang}}, \bibinfo
+  {author} {\bibfnamefont {S.}~\bibnamefont {Ma}}, \bibinfo {author}
+  {\bibfnamefont {M.}~\bibnamefont {Selzer}}, \ and\ \bibinfo {author}
+  {\bibfnamefont {B.}~\bibnamefont {Nestler}},\ }\bibfield  {title} {\enquote
+  {\bibinfo {title} {How do chemical patterns affect equilibrium droplet
+  shapes?}}\ }\href {\doibase 10.1039/D0SM00196A} {\bibfield  {journal}
+  {\bibinfo  {journal} {Soft Matter}\ }\textbf {\bibinfo {volume} {16}},\
+  \bibinfo {pages} {6115--6127} (\bibinfo {year} {2020})}\BibitemShut {NoStop}%
+\bibitem [{Note1()}]{Note1}%
+  \BibitemOpen
+  \bibinfo {note} {It can be easily checked that $\protect \frac {\partial ^2
+  E}{\partial a^2} > 0$.}\BibitemShut {Stop}%
+\end{thebibliography}%

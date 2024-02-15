@@ -75,10 +75,10 @@ Via dei Taurini 19, 00185 Rome, Italy}%
 \noindent {\it Introduction}. Wet surfaces and droplets are part of our every-day experience and of numerous industrial processes including coating, tribology, painting and printing, to name but a few~\cite{grossFluidFilmLubrication1980a,szeriFluidFilmLubrication2010,quereFluidCoatingFiber1999,dasilvasobrinhoStudyDefectsUltrathin1999,singhInkjetPrintingProcess2010,wijshoffDynamicsPiezoInkjet2010}. 
 Moreover, the continuously growing interest for lab-on-a-chip devices~\cite{samieiReviewDigitalMicrofluidics2016,fockeLabonaFoilMicrofluidicsThin2010} as well as for printable electronics or printable photovoltaics~\cite{luechingerGraphenestabilizedCopperNanoparticles2008,ronsinFormationCrystallineBulk2022}, whose efficiency relies crucially on a precise control of material deposition upon (de-)wetting of liquid films, drew the attention to applications where the substrate is adaptive or switchable, i.e. it is not inert but responds dynamically to external stimuli or to the evolution of the coating liquid film itself~\cite{buttAdaptiveWettingAdaptation2018}. 
 Several realizations of switchable and adaptive substrates have been proposed~\cite{xinReversiblySwitchableWettability2010}, involving smart materials such as polymer brushes~\cite{stuartEmergingApplicationsStimuliresponsive2010}, thermal-responsive hydrogels~\cite{chenThermalresponsiveHydrogelSurface2010}, light-responsive molecules and microstructures~\cite{ichimuraLightDrivenMotionLiquids2000} or processes such as electrowetting~\cite{mugeleElectrowettingConvenientWay2005}.
-\REV{Modelling the coupled problem of a thin film on a switchable substrate and as such the dynamics of the substarte as well as the film is far from being trivial but can be realized by a space and time dependent wettability pattern~\cite{grawitterSteeringDropletsSubstrates2021}}. 
+\REV{Modelling the coupled problem of a thin film on a switchable substrate and as such the dynamics of the substrate as well as the film is far from being trivial but can be realized by a space and time dependent wettability pattern~\cite{grawitterSteeringDropletsSubstrates2021}}. 
 While a consistent body of theoretical/computational work was devoted to processes on static heterogeneous substrates, the time dependent case is still almost unexplored, with few exceptions focusing on single droplet spreading and sliding~\cite{grawitterSteeringDropletsSubstrates2021,grawitterDropletsSubstratesOscillating2021,thieleGradientDynamicsModel2020} or limited to analysing the linear regime~\cite{sumanDynamicsThinLiquid2006}.
 
-Here, we study by means of numerical simulations the full dewetting dynamics of a thin liquid film deposited on a substrate with a time varying wettability pattern, starting from \REV{a slightly perturbed film to film} rupture \REV{and} long time morphology. 
+Here, we study by means of numerical simulations the full dewetting dynamics of a thin liquid film deposited on a substrate with a time varying wettability pattern, starting from \REV{a slightly perturbed film to film} rupture \REV{and} long time morphology~\cite{konnurInstabilityMorphologyThin2000}. 
 We identify two regimes where the rupture times grow with the pattern wavelength either linearly (on a static pattern) or attain a constant value (in the time dependent case), for short wavelengths, and approach a quadratic law as the wavelength increases. 
 These observations are then explained theoretically. 
 \REV{We show that, by tuning the rate of change of the underlying pattern, one can control the dewetting morphology, which is often desired in microfluidic applications.} 
@@ -86,27 +86,26 @@ In particular, for large enough pattern speeds, we detect a \REV{novel} state, w
 We introduce a control parameter to discriminate whether rivulets or just droplets (as in the static situation)
 can be observed and propose a phenomenological argument to justify the logarithmic dependence of the rivulets life time on the pattern speed.\\
 \\
-\noindent {\it Method.} In order to simulate the dewetting dynamics on patterned, ``switchable'', substrates, we integrate numerically the thin-film equation~\cite{oronLongscaleEvolutionThin1997,crasterDynamicsStabilityThin2009} 
+\noindent {\it Method.} In order to simulate the dewetting dynamics on patterned, ``switchable'', substrates, we integrate numerically the thin-film equation~\cite{oronLongscaleEvolutionThin1997, crasterDynamicsStabilityThin2009} 
 \begin{equation}\label{eq:thinfilm}
     \partial_t h(\mathbf{x},t) = \nabla\cdot\left(M_{\delta}(h)\nabla p(\mathbf{x},t)\right)
 \end{equation}
-by means of a recently developed lattice Boltzmann (LB) scheme~\cite{PhysRevE.100.033313,zitzLatticeBoltzmannSimulations2021, zitzSwalbeJlLattice2022a}.
-Eq.~(\ref{eq:thinfilm}) describes, in a lubrication approximation spirit, the evolution of the height field (film thickness) $h(\mathbf{x},t)$, denoting the location of the liquid/air interface. The mobility function 
-$M_{\delta}(h) = \frac{2h^3 + 6\,\delta\, h^2 + 3\delta^2h}{6\mu}$
-depends on the velocity boundary condition at the substrate, parameterized by an effective slip length $\delta$
-(for $\delta \rightarrow 0$ it reduces to the no-slip form $h^3/(3\mu)$). Here, $\mu$ is the fluid dynamic viscosity.
-The film pressure $p(\mathbf{x},t)$ consists of the sum of the Laplace and disjoining pressures, that is $p(\mathbf{x},t) = -\gamma \nabla^2 h - \Pi$ ($\gamma$ is the surface tension)
-The disjoining pressure $\Pi$ can be seen as (minus) the derivative, with respect to the film thickness, of an effective interfacial potential.
-As such, it contains the information on the liquid/solid and solid/gas interactions and, hence, on the wettability, which is parameterized in terms of the contact angle $\theta$~\cite{bonnWettingSpreading2009, schwartzSimulationDropletMotion1998}. 
+by means of a recently developed lattice Boltzmann (LB) scheme~\cite{zitzLatticeBoltzmannMethod2019,zitzLatticeBoltzmannSimulations2021, zitzSwalbeJlLattice2022a}.
+Eq.~(\ref{eq:thinfilm}) describes, in a lubrication approximation spirit, the evolution of the height field (film thickness) $h(\mathbf{x},t)$, denoting the location of the liquid/air interface. 
+The mobility function $M_{\delta}(h) = \frac{2h^3 + 6\,\delta\, h^2 + 3\delta^2h}{6\mu}$ depends on the velocity boundary condition at the substrate, parameterized by an effective slip length $\delta$ (for $\delta \rightarrow 0$ it reduces to the no-slip form $h^3/(3\mu)$)~\cite{huhHydrodynamicModelSteady1971, peschkaSignaturesSlipDewetting2019, fetzerQuantifyingHydrodynamicSlip2007, munchLubricationModelsSmall2005a}. 
+Here, $\mu$ is the fluid dynamic viscosity.
+The film pressure $p(\mathbf{x},t)$ consists of the sum of the Laplace and disjoining pressures, that is $p(\mathbf{x},t) = -\gamma \nabla^2 h - \Pi$ ($\gamma$ is the surface tension~\cite{wuHowChemicalPatterns2020}).
+The disjoining pressure $\Pi$ can be seen as (minus) the derivative, with respect to the film thickness, of an effective interfacial potential~\cite{Deryaguin1940, DeryaguinChuraev1978}.
+As such, it contains the information on the liquid/solid and solid/gas interactions and, hence, on the wettability, which is parameterized in terms of the contact angle $\theta$~\cite{bonnWettingSpreading2009, schwartzSimulationDropletMotion1998, youngIIIEssayCohesion1805, degennesWettingStaticsDynamics1985}. 
 The expression adopted for $\Pi$ is
 \begin{equation}\label{eq:disjoinpressure}
 \Pi(h,\theta) = \frac{2\gamma}{h_{\ast}}(1-\cos(\theta(\mathbf{x},t)))
   f\left(\frac{h}{h_{\ast}}\right),
 \end{equation}
-where $f(\xi)=\xi^{-3} - \xi^{-2}$. $h_{\ast}$ is the height at which $\Pi$ vanishes and sets the precursor layer thickness~\cite{SuppMat}.
+where $f(\xi)=\xi^{-3} - \xi^{-2}$. $h_{\ast}$ is the height at which $\Pi$ vanishes and sets the precursor layer thickness~\cite{SuppMat, schwartzSimulationDropletMotion1998, mitlinDewettingSolidSurface1993, teletzkeHowLiquidsSpread1987}.
 The time variation of the patterned substrate enters the model through the disjoining pressure, by making the contact angle space and time dependent, i.e.~$\theta = \theta(\mathbf{x},t)$.
 We decorate the substrate with a checkerboard pattern, a common choice that generalizes the broken homogeneity of the stripes to two 
-directions~\cite{jalaliFabricationCharacterizationScalable2018,nagayamaIntermediateWettingState2020,dasSurfacedirectedSpinodalDecomposition2020}.
+directions~\cite{jalaliFabricationCharacterizationScalable2018, nagayamaIntermediateWettingState2020, dasSurfacedirectedSpinodalDecomposition2020}.
 In particular, we employ the sinusoidal form
 \begin{equation}\label{eq:sinetheta}
    \!\! \theta(\mathbf{x},t) = \theta_0 + \delta\theta\left[\sin\left(q_{\theta} (x+v_{\theta x}t)\right)\sin\left(q_{\theta}(y+v_{\theta y}t)\right)\right],\! 
@@ -115,7 +114,7 @@ where $q_{\theta} = 2\pi/\lambda$, i.e.~the pattern evolves in time as a plane w
 We fix the velocity direction to one diagonal, namely $\mathbf{v}_{\theta} = (v_{\theta x},v_{\theta y}) = v_{\theta}(1/\sqrt{2},-1/\sqrt{2})$ (we will return later on the importance of this choice), and we set $\theta_0 = 20^{\circ}$ and $\delta\theta=10^{\circ}$~\footnote{Since a typical velocity is such that $v_{\theta} \Delta t \ll \Delta x$ (in one time step $\Delta t$ the wave would travel a distance much smaller than a lattice spacing $\Delta x$),
 the time update needs to be interpreted in an integer part sense, that is the pattern is shifted by $\Delta x$ every $1/v_{\theta x}$ $\Delta t$ (equivalently in $y$-direction).}.
 Lengths and time scales will be expressed, respectively, in units of the mean film height, $h_0$ (which is constant in time, due to mass conservation), and of $t_0 = \frac{3\mu}{\gamma h_0^3 q_0^4}$, the inverse growth rate of the most unstable mode, whose wavenumber is $q_0$, of a spinodally dewetting film~\cite{meckeThermalFluctuationsThin2005}. 
-On a uniform substrate, with constant contact angle $\theta^{(u)}$, the wavenumber reads $(q^{(u)}_0)^2 = h_{\ast}^{-2}(1-\cos \theta^{(u)})f^{\prime}(h_0/h_{\ast})$~\cite{meckeThermalFluctuationsThin2005,zhangMolecularSimulationThin2019}. 
+On a uniform substrate, with constant contact angle $\theta^{(u)}$, the wavenumber reads $(q^{(u)}_0)^2 = h_{\ast}^{-2}(1-\cos \theta^{(u)})f^{\prime}(h_0/h_{\ast})$~\cite{meckeThermalFluctuationsThin2005, zhangMolecularSimulationThin2019}. 
 In our patterned case, we define 
   $q_0^2=h_{\ast}^{-2}(1-\cos\theta_0)f^{\prime}(h_0/h_{\ast})$. Correspondingly, we choose as a velocity scale $v_0 = \lambda_s/t_0$, where
 $\lambda_s = 2\pi/q_0$.
@@ -131,7 +130,7 @@ $\lambda_s = 2\pi/q_0$.
 Fig.~\ref{fig:handtheta} shows $h(\mathbf{x},t)$ (droplets) and $\theta(\mathbf{x})$ (color coded) for $v_{\theta} = 0$ (i.e. the static case) and $\lambda = 256 h_0$~\footnote{For a better visualization double the domain length $L$ and periodically continue the image.}, in late stages of dewetting.
 As expected, droplets form in regions of small contact angles (blue) while the regions of high contact angles (yellow) dewet.
 
-\noindent {\it Results.} We first investigate how the rupture times depend on the parameters characterizing the wettability pattern, namely the wavelength of the contact angle variation, $\lambda$, and wave speed, $v_{\theta}$.
+\noindent {\it Results.} We first investigate how the rupture times depend on the parameters characterizing the wettability pattern, namely the wavelength of the contact angle variation, $\lambda$, and wave speed, $v_{\theta}$~\cite{karguptaMorphologicalSelforganizationDewetting2002,karguptaInstabilityPatternFormation2000,nisatoExcitationSurfaceDeformation1999,karimPhaseSeparationUltrathin1998, succiLatticeBoltzmannEquation2001}.
 The film rupture time, $\tau_r$, is defined as the least $t$ such that $h(\mathbf{x},\tau_r)=h_{\ast}$ (i.e., when the free surface "touches" the substrate).
 In Fig.~\ref{fig:model_rt} we report the rupture times as a function of the wavelength, for stationary ($v_{\theta}=0$) and time-dependent ($v_{\theta}=20 v_0$) patterns. 
 It is conveyed that, overall, rupture occurs earlier on the static substrate, suggesting that the time variation tends to stabilize the film, in agreement with linear stability analysis results~\cite{sumanDynamicsThinLiquid2006}.
@@ -143,7 +142,8 @@ we can easily see that the exponential growth of the height perturbation is affe
     \tau_r \sim t_{\theta} \sim  \delta h/\dot{(\delta h)} \propto \frac{3\mu}{h_0^3}(\partial_x^2 (\partial_h\Pi (h_0)))^{-1} \sim t_0 \left(\frac{q_{\theta}}{q_0}\right)^{-2} \propto t_0 q_0^2 \lambda^2.
 \end{equation}
 Conversely, for fast growths ($t_{\theta} \ll t_R$), retraction dominates and fixes the time scale, $\tau_r \sim t_R$. 
-The latter is related to the time the liquid takes to flow out of regions of high contact angle, whose size is $\sim \lambda$. Hence we have 
+The latter is related to the time the liquid takes to flow out of regions of high contact angle, whose size is $\sim \lambda$. 
+Hence we have 
 \begin{equation}\label{eq:taur_l1}
  \tau_r \sim \tau_R \propto U_{\Theta}^{-1}\lambda,
 \end{equation}
